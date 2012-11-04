@@ -18,7 +18,7 @@ Hoare's student [Bill Roscoe](http://web.comlab.ox.ac.uk/people/Bill.Roscoe/) de
 the ideas further, and published a new book in 1997 (revised through 2005) called 
 *The Theory and Practice of Concurrency.* In this revised version of my CSP article, 
 I factor in my notes on reading Roscoe. Roscoe's book is available online at 
-[this location(http://web.comlab.ox.ac.uk/oucl/work/bill.roscoe/publications/68b.pdf). 
+[this location](http://web.comlab.ox.ac.uk/oucl/work/bill.roscoe/publications/68b.pdf). 
 
 Introduction
 ============
