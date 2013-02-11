@@ -1,0 +1,78 @@
+
+/* ERIC MEYER RESET
+v1.0 | 20080212 revised dp 2011. */
+ 
+html, a, abbr, acronym, address, applet, b, bdo, big, blockquote, body, br, button, 
+caption, center, cite, code, del, dfn, div, em, fieldset, font, form, img, ins, kbd, 
+h1, h2, h3, h4, h5, h6, i, iframe, label, legend, map, object, 
+p, pre, q, s, samp, small, span, strike, strong, sub,
+sup, tt, u, var, i, dl, dt, dd, ol, ul, li, 
+table, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+/* set html5 elements to block */
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { 
+    display: block;
+}
+
+body {
+	line-height: 1;
+    background-attachment: fixed;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+ 
+:focus {
+	outline: 0;
+}
+ 
+ins {
+	text-decoration: none;
+}
+del {
+	text-decoration: line-through;
+}
+ 
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+img, fieldset {
+	border: 0;
+}
+
+/* set image max width to 100% */
+img {
+	max-width: 100%;
+	height: auto;
+	width: auto\9; /* ie8 */
+}
+
+/* additions to the original reset script */
+
+/* reset webkit search input styles */
+input[type=search] {
+	-webkit-appearance: none;
+	outline: none;
+}
+input[type="search"]::-webkit-search-decoration, 
+input[type="search"]::-webkit-search-cancel-button {
+	display: none;
+}

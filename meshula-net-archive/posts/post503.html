@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+TextScanner, now in C
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2010-03-24 01:16:40</h3>
+<H1 class="title">TextScanner, now in C</H1>
+</DIV>
+<div id="content">
+<article class="post">
+<P>A long time ago, I posted a text scanner on flipcode (<a href="http://www.flipcode.com/archives/Versatile_Text_Scanner.shtml">link</a>). 
+A couple of years later, I <a href="post150.html">posted an update</a> 
+with all kinds of snazzy new features, a namespace, and what not. Today, I'm reposting, now with a 
+hardcore regression to C. -> <a href="http://meshula.net/download/23Mar10/TextScanner.h">TextScanner.h</a> -> 
+<a href="http://meshula.net/download/23Mar10/TextScanner.c">TextScanner.c</a> This version has 
+fewer fancy features, fewer lines of code, and more straight up dealing with text. It has the 
+functions that proved most useful and robust over the years. It has no internal state, making it 
+first of all threadsafe, and secondly data-oriented. Here's a preview of the public API. Give it a 
+try if you need this sort of thing.
+<P><BR>
+<PRE> 
+// Get Token 
+EXTERNC char const* tsGetToken(char const* pCurr, char const* pEnd, 
+                               char delim, 
+                               char const** resultStringBegin,
+                               uint32_t* stringLength); 
+EXTERNC char const* tsGetTokenWSDelimited(char const* pCurr, char const* pEnd, 
+                                          char const** resultStringBegin, 
+                                          uint32_t* stringLength); 
+EXTERNC char const* tsGetTokenAlphaNumeric(char const* pCurr, char const* pEnd, 
+                                           char const** resultStringBegin, 
+                                           uint32_t* stringLength);
+EXTERNC char const* tsGetNameSpacedTokenAlphaNumeric(char const* pCurr, char const* pEnd, 
+                                                     char namespaceChar, 
+                                                     char const** resultStringBegin, 
+                                                     uint32_t* stringLength); 
+
+// Get Value 
+EXTERNC char const* tsGetString(char const* pCurr, char const* pEnd, 
+                                char const** resultStringBegin, 
+                                uint32_t* stringLength);
+EXTERNC char const* tsGetInt16(char const* pCurr, char const* pEnd, 
+                               int16_t* result);
+EXTERNC char const* tsGetInt32(char const* pCurr, char const* pEnd, 
+                               int32_t* result);
+EXTERNC char const* tsGetUInt32(char const* pCurr, char const* pEnd, 
+                                uint32_t* result);
+EXTERNC char const* tsGetHex(char const* pCurr, char const* pEnd, 
+                             uint32_t* result);
+EXTERNC char const* tsGetFloat(char const* pcurr, char const* pEnd, 
+                               float* result);
+
+// Scan for a character
+EXTERNC char const* tsScanForCharacter(char const* pCurr, char const* pEnd, 
+                                       char delim);
+EXTERNC char const* tsScanBackwardsForCharacter(char const* pCurr, char const* pEnd, 
+                                                char delim);
+EXTERNC char const* tsScanForQuote(char const* pCurr, char const* pEnd);
+EXTERNC char const* tsScanForEndOfLine(char const* pCurr, char const* pEnd);
+EXTERNC char const* tsScanForLastCharacterOnLine(char const* pCurr, char const* pEnd);
+EXTERNC char const* tsScanForBeginningOfNextLine(char const* pCurr, char const* pEnd);
+
+// Skip comments and whitespace
+EXTERNC char const* tsScanPastCPPComments(char const* pCurr, char const* pEnd);
+EXTERNC char const* tsSkipCommentsAndWhitespace(char const* pCurr, char const*const pEnd);
+EXTERNC char const* tsScanForWhiteSpace(char const* pCurr, char const* pEnd);
+EXTERNC char const* tsScanBackwardsForWhiteSpace(char const* pCurr, char const* pStart);
+EXTERNC char const* tsScanForNonWhiteSpace(char const* pCurr, char const* pEnd);
+EXTERNC char const* tsScanForTrailingNonWhiteSpace(char const* pCurr, char const* pEnd);
+
+// Identify the kind of character
+EXTERNC _Bool tsIsWhiteSpace(char test);
+EXTERNC _Bool tsIsNumeric(char test);
+EXTERNC _Bool tsIsAlpha(char test);
+EXTERNC _Bool tsIsIn(const char* testString, char test);
+</PRE>
+</article>
+</div>
+<div id="tags">
+programming/code/textscanner</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

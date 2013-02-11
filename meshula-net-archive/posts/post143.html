@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+Siggraph 1981
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2007-11-19 01:31:24</h3>
+<H1 class="title">Siggraph 1981</H1>
+</DIV>
+<div id="content">
+<article class="post">
+<p>Siggraph 1981 was a corker. Not only was the cover the memorable Monument to Recursion by Craig Reynolds, but many algorithms were elucidated that today would be appropriate for handheld devices.</p> <p><strong>Filtering Edges for Gray-Scale Displays,</strong> Satish Gupta, <a href="http://research.sun.com/people/mybio.php?c=204">Robert F. Sproull</a>, pp. 1-5. A simple modification of Bresenham's algorithm utilizes a coverage table to generate anti-aliased edges at very little additional complexity.</p> <p><strong>Shading of Regions on Vector Display Devices</strong>, D.T. Lee, pp. 37-44. This algorithm takes an arbitrarily complex polygon and decomposes it into convex regions that can be easily scan converted. I used this algorithm once for a Postscript rasterizer.</p> <p><strong>Frame-To-Frame Coherence and the Hidden Surface Computation Constraints for a Convex World, </strong>Harold Hubschman, <a href="http://www.cs.yale.edu/homes/vision/zucker/">Steve W. Zucker</a>, pp. 45-54. An interesting approach to incrementally updating a visibility cache for convex objects. This technique could easily be useful today when most movable objects in a scene have got one or more convex physics hulls associated with them.</p> <p><strong>Variational Geometry in Computer-Aided Design,</strong> V.C. Lin, D.C. Gossard, R.A. Light, pp. 171-177. This is one of the earliest presentations of parametric user interfaces for CAD.<strong>&nbsp;</strong></p> <p><strong>Creating Repeating Hyperbolic Patterns, </strong><a href="http://www.d.umn.edu/~ddunham/">Douglas Dunham</a>, John Lindgren, David Witte, pp. 215-223. This remains one of my favorite Siggraph papers.&nbsp; M.C. Escher played with this tesselation, and more recently, hyperbolic trees have been proposed as a user interface metaphor. A newer version of the paper is available <a href="http://www.d.umn.edu/~ddunham/md07tlk.pdf">here</a>.</p> <p><strong>Animating Facial Expressions</strong>, Stephen M. Platt, <a href="http://www.cis.upenn.edu/~badler/">Norman I. Badler</a>, pp. 245-252. The earliest reference I have found so far to using the FACS system to drive a physics based facial model. They model skin and muscle. For more on this subject, see the book <a href="http://www.cis.upenn.edu/~badler/book/SimulatingHumans.pdf">Simulating Humans</a>, by Badler, Cary Phillips, and Bonny Weber. Greetz to Cary!</p> <p><strong><a href="http://www.frc.ri.cmu.edu/~hpm/project.archive/1981.wave/paper/siggra.mss">3D Graphics and the Wave Theory</a></strong>, <a href="http://www.frc.ri.cmu.edu/~hpm/">Hans P. Moravec</a>, pp. 289-296. This paper is <em>way</em> ahead of its time, just about like everything Moravec does! Moravec proposes in this paper that propagating wavefronts can be used to model light in a scene. The results are very impressive, showing refringent behavior. Unfortunately, due to the massive amount of memory required, objects on the order of angstroms in size were the largest that could be rendered. Interestingly, the lens was modeled as well in order to focus the waves. This feat has not been replicated until Siggraph 2007, where a more practical approach shows up as <a href="http://www.mpi-inf.mpg.de/resources/EikonalRendering/index.html">Eikonal rendering</a>. Still, I love this paper for its sheer audacity.</p> <p><strong>A Lens and Aperture Model for Synthetic Image Generation,</strong> Michael Potmesil, Indranil Charkavarty, pp. 297-305. This is still a practical and frequently cited reference to lens modeling covering such things as the relationship between aperture and focal length, the circle of confusion, and more.</p> <p><strong><a href="http://graphics.pixar.com/ReflectanceModel/paper.pdf">A Reflectance Model for Computer Graphics</a></strong>, <a href="http://graphics.pixar.com/indexAuthorCook.html">Robert L. Cook</a>, <a href="http://graphics.pixar.com/indexAuthorTorrance.html">Kenneth E. Torrance</a>, pp. 307-315. The introduction of the lovely and still commonly used Cook-Torrance reflectance model. This paper introduced the now well-known bi-directional reflectance function.</p> <p><strong>Vectorized Procedural Models for Natural Terrain: Waves and Islands in the Sunset,</strong> <a href="http://www.llnl.gov/CASC/people/max/">Nelson L. Max</a>, pp. 317-324. One of the earliest models showing a sky-light illumination model. The method is very lightweight by today's standards, and bears a look at.</p>
+</article>
+</div>
+<div id="tags">
+CG/siggraph/1981</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

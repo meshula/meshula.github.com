@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+Coal, Glitchy Update Loops, and Waiting
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2008-07-27 17:52:12</h3>
+<H1 class="title">Coal, Glitchy Update Loops, and Waiting</H1>
+</DIV>
+<div id="content">
+<article class="post">
+<p align="center"><img src="http://i148.photobucket.com/albums/s29/meshula/coalburning.jpg"> </p> <p align="center"><em><font size="1">Image licensed under CC Share Alike, found </font></em><a href="http://commons.wikimedia.org/wiki/Image:Coals_on_fire_in_my_oven.JPG"><em><font size="1">here</font></em></a></p> <p>I've been fighting a glitchy update loop on Windows that I don't see on the equivalent update loop running on Linux. After a fair bit of digging, I narrowed it down to a call to Sleep in the Windows main loop. Eliminating the Sleep made the frame update buttery smooth like it is on Linux, but it shot my CPU usage to 100%, and the computer's fans roar like a vacuum cleaner.</p> <p>Some research into this issue got me a good answer: a smooth framerate, a cool CPU, and quiet fans. Before the solution is revealed though, I wanted to bring some <strong>game programmer dark wisdom</strong> into the light where it may shrivel to a crisp and blow away.</p> <h3>Game Programmer Dark Side Wisdom</h3> <p>The most common advice people seem to give on the web is that it's fine to run the CPU at 100%, let the fans blow, what other use is your computer any way, especially when you have a game going? A cowed minority mentions that they're on a laptop, and grudgingly it's admitted that maybe an option for laptop users to run at less than 100% would be an admissible but sad concession.</p> <h3>CPU at 100% is <em>not </em>fine</h3> <p>Forget that! Anyone who thinks running at max power is a good idea should re-watch The Day After Tomorrow, and the compare and contrast the weather report on your evening news. News flash, it's very likely that the energy you consume to run your game at 100% came from burning something.</p> <h3>Game Programmer Light Side Wisdom</h3> <p>Luckily, the right answer does exist, and thanks to Christian Weis for <a href="http://www.gamedev.net/community/forums/topic.asp?topic_id=445787&amp;whichpage=2&amp;#2960603">working it out</a>. The code debugged is posted here for posterity. This version is way stripped down from the original post, but accomplishes what I want; CPU loading is very light, the fans aren't going, and I've got no stuttering. I've calculated the wait delay I want in my main loop based on the time remaining to achieve my desired framerate (in my case, 60Hz).</p> <blockquote><pre class="code"><span style="color: rgb(0,128,0)">// due to: http://www.gamedev.net/community/forums/topic.asp?topic_id=445787&amp;whichpage=2&amp;#2960603 // allows sleep at fine granularity with no stuttering, and not pegging CPU to 100% </span><span style="color: rgb(0,0,255)">void</span> MySleep( <span style="color: rgb(0,0,255)">float</span> Seconds ) { <span style="color: rgb(0,0,255)">static</span> HANDLE Timer = CreateWaitableTimer( NULL, FALSE, NULL ); <span style="color: rgb(0,128,0)">// Determine time to wait. </span> LARGE_INTEGER WaitTime; WaitTime.QuadPart = (LONGLONG)(Seconds * -10000000); <span style="color: rgb(0,0,255)">if</span> ( WaitTime.QuadPart &gt;= 0 ) <span style="color: rgb(0,0,255)">return</span>; <span style="color: rgb(0,128,0)">// Give up the rest of the frame. </span> <span style="color: rgb(0,0,255)">if</span> ( !SetWaitableTimer( Timer, &amp;WaitTime, 0, NULL, NULL, FALSE ) ) <span style="color: rgb(0,0,255)">return</span>; DWORD Result = MsgWaitForMultipleObjects ( 1, &amp;Timer, FALSE, INFINITE, QS_ALLINPUT ); } </pre></blockquote> <h3>Consequences!</h3> <p>Please consider adding this or something like it to your main loop. Minimally your fans are going to run less, and your workspace will be a little quieter.</p> <p>I ask you all to consider carefully the consequences of the choices you make every day, even while you code. </p> <ul> <li>That shader is really gorgeous, and I'm personally first in line for the latest and greatest, but could you do it in a lighter way? </li> <li>Do you really need a full rebuild? </li> <li>Would a better search algorithm burn less coal? </li> <li>It's cool that some ancient clunker still runs and can serve files, but if you turned it off could you buy a newer-faster-bigger server with the power you saved in one year?</li> <li>Did you turn off your monitor before you went home? </li></ul> <p>Seriously, we're all in this together.</p>
+</article>
+</div>
+<div id="tags">
+programming/manifesto/philosophy/code</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

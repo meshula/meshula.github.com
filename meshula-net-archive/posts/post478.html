@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+
+
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/gallery.css" type="text/css" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" />
+
+<TITLE>
+Abandoned Nike base
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2010-01-04 03:04:39</h3>
+<H1 class="title">Abandoned Nike base</H1>
+</DIV>
+<div id="content">
+<article class="post">
+
+
+<div class="horizontal-row">
+	<div class="left-column">
+		<div class="vertical-column-el">
+		<img src='../img/up-arrow-black-64.jpg' id="up-scroll">
+		</div>
+		<div class="vertical-column-el">
+		<div id="gallery-index"></div>
+		</div>
+		<div class="vertical-column-el">
+		<img src='../img/dn-arrow-black-64.jpg' id="dn-scroll">
+		</div>
+	</div>
+
+    <div class="gallery">
+		<P>
+		Out on a recent hike, I stumbled across an abandoned Nike missile base. 
+		Three silos welded shut, rusting, filling with water in the rain. 
+		An apocalypse that might have been, abandoned to ruin. 
+		Mushrooms dotted the site, and the rocks were cleaved through 
+		by planes of quartz, giving the whole a mythic feel.</P>
+	    <div class="photo"></div>
+	</div>
+</div>
+
+
+
+
+</article>
+</div>
+<div id="tags">
+gallery/photography/nike</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+
+<script src='../js/jquery-1.5.1.min.js'></script> 
+<script src='../js/gallery.js'></script> 
+<script>
+
+function adjustVisiblity()
+{
+	var el = document.getElementById('gallery-index');
+	if (el.scrollTop > 0)
+		$("#up-scroll").show();
+	else
+		$("#up-scroll").hide();
+		
+	if (el.scrollTop < el.scrollHeight - el.clientHeight)
+		$("#dn-scroll").show();
+	else
+		$("#dn-scroll").hide();
+}
+
+$(document).ready(function() {
+
+    FlickrPhotoSet('72157623008793733');
+    $("#up-scroll").hide();
+        
+    $("#gallery-index").scroll(function() { adjustVisiblity(); });
+    
+
+});
+
+</script> 
+
+
+</BODY>
+</HTML>

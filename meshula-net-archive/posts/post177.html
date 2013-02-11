@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+A simple Type mechanism for the Smallest Attribute System
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2008-06-14 01:55:12</h3>
+<H1 class="title">A simple Type mechanism for the Smallest Attribute System</H1>
+</DIV>
+<div id="content">
+<article class="post">
+<p>The Smallest Attribute System (<a href="http://meshula.net/wordpress/?p=172">part 1</a>, <a href="http://meshula.net/wordpress/?p=174">part 2</a>) is almost done. This article presents a simple type mechanism that for eliminating the need for using C++ run time type information (RTTI). This modification is necessary because some compilers, especially on game consoles and embedded systems, don't generate RTTI. The last piece, still to come, is reading and writing attributes from a file.</p> <p>An int or short can be substituted for the typeid in the Smallest Attribute System. The version presented here is self-priming; an identifier for a type is generated whenever a type is first requested by name. The next time the same type is requested, the generated id will be returned.</p><pre class="code"><span style="color: rgb(0,0,255)">class</span> CharPtrPredicate { <span style="color: rgb(0,0,255)">public</span>: <span style="color: rgb(0,0,255)">bool</span> <span style="color: rgb(0,0,255)">operator</span>()(<span style="color: rgb(0,0,255)">char</span> <span style="color: rgb(0,0,255)">const</span>*<span style="color: rgb(0,0,255)">const</span>&amp; lhs, <span style="color: rgb(0,0,255)">char</span> <span style="color: rgb(0,0,255)">const</span>*<span style="color: rgb(0,0,255)">const</span>&amp; rhs) <span style="color: rgb(0,0,255)">const </span> { <span style="color: rgb(0,0,255)">return</span> strcmp(lhs, rhs) &lt; 0; } }; <span style="color: rgb(0,0,255)">static</span> std::map&lt;<span style="color: rgb(0,0,255)">const</span> <span style="color: rgb(0,0,255)">char</span>*, <span style="color: rgb(0,0,255)">int</span>, CharPtrPredicate&gt; typeIds; <span style="color: rgb(0,0,255)">static</span> std::map&lt;<span style="color: rgb(0,0,255)">int</span>, <span style="color: rgb(0,0,255)">const</span> <span style="color: rgb(0,0,255)">char</span>*&gt; typeNames; <span style="color: rgb(0,128,0)">// If a type hasn't been seen before, enumerate it, otherwise return // the enumerant generated the first time it was seen </span><span style="color: rgb(0,0,255)">int</span> GetTypeId(<span style="color: rgb(0,0,255)">const</span> <span style="color: rgb(0,0,255)">char</span>* type) { <span style="color: rgb(0,0,255)">static</span> <span style="color: rgb(0,0,255)">int</span> unique = 0; std::map&lt;<span style="color: rgb(0,0,255)">const</span> <span style="color: rgb(0,0,255)">char</span>*, <span style="color: rgb(0,0,255)">int</span>, CharPtrPredicate&gt;::const_iterator i = typeIds.find(type); <span style="color: rgb(0,0,255)">int</span> result; <span style="color: rgb(0,0,255)">if</span> (i == typeIds.end()) { typeIds[type] = unique; typeNames[unique] = type; result = unique; ++unique; } <span style="color: rgb(0,0,255)">else </span> { result = i-&gt;second; } <span style="color: rgb(0,0,255)">return</span> result; } <span style="color: rgb(0,128,0)">// GetTypeId must have been called for every type for this to return a useful value. </span><span style="color: rgb(0,0,255)">const</span> <span style="color: rgb(0,0,255)">char</span>* GetTypeName(<span style="color: rgb(0,0,255)">int</span> i) { std::map&lt;<span style="color: rgb(0,0,255)">int</span>, <span style="color: rgb(0,0,255)">const</span> <span style="color: rgb(0,0,255)">char</span>*&gt;::const_iterator j = typeNames.find(i); <span style="color: rgb(0,0,255)">return</span> j == typeNames.end() ? 0 : j-&gt;second; } </pre><a href="http://11011.net/software/vspaste"></a> <p>The TypeName method needs to be updated.</p><pre class="code">std::string AttributeBinder::AttributeDescriptor::TypeName() <span style="color: rgb(0,0,255)">const </span>{ <span style="color: rgb(0,0,255)">return</span> GetTypeName(typeId); }</pre><a href="http://11011.net/software/vspaste"></a> <p>Routines that use a particular type should statically initialize their variables to avoid map lookups later. For example:</p><pre class="code"> <span style="color: rgb(0,0,255)">static</span> <span style="color: rgb(0,0,255)">int</span> stringType = GetTypeId(<span style="color: rgb(163,21,21)">"std::string"</span>); <span style="color: rgb(0,128,0)"> </span> <span style="color: rgb(0,0,255)">if</span> (typeId == intType) o &lt;&lt; "Found an int";</pre> <p>Finally modify the AttributeBinder to store an int as a typeId, instead of the type_info of the original class. The BIND macro needs to be modified as follows, everything else is pretty much the same.</p><pre class="code"><span style="color: rgb(0,0,255)">#define</span> BIND(className, val, vartype) \ binding.bind(#val, #vartype, (ptrdiff_t)&amp;((className*)0)-&gt;val)</pre><a href="http://11011.net/software/vspaste"></a>
+</article>
+</div>
+<div id="tags">
+programming/code/rtti</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

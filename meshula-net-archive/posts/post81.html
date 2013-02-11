@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+Atom micro imposter engine
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2007-08-25 19:51:54</h3>
+<H1 class="title">Atom micro imposter engine</H1>
+</DIV>
+<div id="content">
+<article class="post">
+There's a game here too, although it's difficult to read what it might be from <a href="http://www.farrarfocus.com/atom/">Timothy Farrar's</a> development blog. Amazing eye candy, worth a visit! I gather from <a href="http://www.farrarfocus.com/atom/070822.htm">this description</a> he is generating a world using L-Systems, depth sorting tiny imposter billboards, doing a ton of hidden surface removal, then passing everything to a DirectX 10 geometry shader to blast everything into an HDR frame buffer. Somewhere some CFD signifies, but I'm not sure where yet. Wish there was a movie of this image, it's stunning. <img src="http://i148.photobucket.com/albums/s29/meshula/hdr.jpg" /> The images are drawn in back to front order, allowing local lighting effects and backlighting during the rendering of subsequent layers. Timothy mentions that every object can illuminate every other, although I wonder if it is more precise to say that every object can illuminate every other object that lies closer to the camera? Here's a few key tricks I glean from the description: <ol> <li class="EC_MsoNormal" style="color: navy"><font face="Arial" color="#000080" size="2"><span style="font-size: 10pt; font-family: Arial">Imposters. The &ldquo;things&rdquo; that seem joined together are rendered from an L-System into a texture, and a depth texture. <a href="http://home.wanadoo.nl/laurens.lapre/gallery.html" target="_blank"><font color="#0068cf">http://home.wanadoo.nl/laurens.lapre/gallery.html</font></a></span></font></li> <li class="EC_MsoNormal" style="color: navy"><font face="Arial" color="#000080" size="2"><span style="font-size: 10pt; font-family: Arial">Camera velocity stretching. The particles are stretched according to their motion plus the camera motion vector</span></font></li> <li class="EC_MsoNormal" style="color: navy"><font face="Arial" color="#000080" size="2"><span style="font-size: 10pt; font-family: Arial">drawing back to front with additive and multiplicative in a single billboard</span></font></li> <li class="EC_MsoNormal" style="color: navy"><font face="Arial" color="#000080" size="2"><span style="font-size: 10pt; font-family: Arial">light particles. These particles render &ldquo;local light&rdquo; into a render texture (which also has depth). When lit imposters are rendered, they are illuminated by light that is picked up from the local light texture. The local light is also rendered into the framebuffer in order to give the soft backlit illumination look</span></font></li> <li class="EC_MsoNormal" style="color: navy"><font face="Arial" color="#000080" size="2"><span style="font-size: 10pt; font-family: Arial">The motion of the junk in space is motivated by a fluid simulation</span></font></li> <li class="EC_MsoNormal" style="color: navy"><font face="Arial" color="#000080" size="2"><span style="font-size: 10pt; font-family: Arial">A serious amount of hidden object removal. After sorting back to front, he removes all particles that are fully occluded for a huge speed up.</span></font></li> </ol>
+</article>
+</div>
+<div id="tags">
+CG/rendering/voxel</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

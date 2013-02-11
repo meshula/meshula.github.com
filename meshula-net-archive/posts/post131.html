@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+Real-time Water Volumes
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2007-10-14 17:23:14</h3>
+<H1 class="title">Real-time Water Volumes</H1>
+</DIV>
+<div id="content">
+<article class="post">
+<p><img src="http://i148.photobucket.com/albums/s29/meshula/gpuwatervolume.jpg"> </p> <p>This method of <a href="http://artis.imag.fr/Publications/2006/BD06a/">rendering water volumes in real time</a> was presented by <a href="http://artis.imag.fr/~Lionel.Baboud">Lionel Baboud</a> and <a href="http://artis.imag.fr/Membres/Xavier.Decoret/">Xavier Décoret</a> at the <a href="http://pages.cpsc.ucalgary.ca/~laneb/ewnph06.html">Eurographics Workshop on Natural Phenomena in 2006</a>. It's a clever variation on <a href="http://en.wikipedia.org/wiki/Parallax_mapping">parallax mapping</a> commonly in use in more recent rendering engines. Parallax mapping and its ilk are pixel shader based volume ray tracing shaders that displace a texture coordinate by taking the view relative to the surface normal, and walking through the displacement map until an intersection point is found.</p> <p>In Baboud and Décoret's method, two height-field maps are used; one for the surface of the water, and another for the ground surface. The computational time is related to the number of visible pixels, and the individual pieces of the algorithm are separable which means the computations can be distributed according to where it fits efficiently into a containing engine.</p> <p>For each screen pixel a ray is cast. If it hits the ground heightfield before the water, the ground is lit and rendered. Otherwsie the ray is refracted and traced once more. If the refracted ray hits the ground heightfield, the lit ground is rendered with a caustic effect, otherwise the ray simply samples from an environment map.</p> <p>They propose extensions for depth extinction of light, and reflection into the heightfield, as well as refraction of contained objects. Caustics are created by reverse tracing photons into caustic map once at the start of the rendering.</p>
+</article>
+</div>
+<div id="tags">
+CG/rendering/volume_rendering</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

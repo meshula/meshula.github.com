@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+Siggraph 1990
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2007-11-15 02:44:27</h3>
+<H1 class="title">Siggraph 1990</H1>
+</DIV>
+<div id="content">
+<article class="post">
+Siggraph 1990 is right on the edge of the full transition from old school hidden line removal/painter's algorithm type rendering to raster based rendering and shading languages. Of particular interest this year, the not-quite-yet epynomous Renderman makes its debut. There are several before-their-time technology demonstrations. This is my short list of most interesting papers from Siggraph 1990. These papers either advance the art in a field that I am particularly interested in such as character animation, procedural modeling, or high quality lighting, or simply catch my fancy. Where possible, I have tried to link the project website; if there isn’t one, then the principal researcher’s website; if not that, then a pdf of the paper. If not that, you'll need to try picking up a proceedings on ebay or something. Here they are, in order. <strong>Dynamic Simulation of Autonomous Legged Locomotion</strong>, Michael McKenna, David Zeltzer, pp. 29-38. A paper I am particularly fond of, although I believe my neural network formulation is more robust. This paper coupled a robust mechanical simulation with a neural network to animate a cockroach, in the manner of Beer, Sterling, and Chiel. <strong>Rapid, Stable Fluid Dynamics for Computer Graphics</strong>, <a href="http://graphics.pixar.com/indexAuthorKass.html">Michael Kass</a>, <a href="http://www.doctorgavin.com/">Gavin Miller</a>, pp. 49-55. The equations of fluid motion are formulated vs. a two dimensional lattice tracking the upper and lower surface of a body of fluid. Velocity is modified according to depth, yielding a method highly applicable to games today. <strong>Adaptive Radiosity Textures for Bidirectional Ray Tracing</strong>, <a href="http://www.cs.cmu.edu/~ph/">Paul S. Heckbert</a>, pp. 145-154. A hybrid raytracing algorithm is proposed that uses two passes to render a scene - one pass using raytracing calculates diffuse global illumination contributions into textures, and a second pass does direct rendering using those textures plus specular highlights in the traditional scanline manner. <strong>Direct WYSIWYG Painting and Texturing on 3D Shapes</strong>, <a href="http://www-hci.stanford.edu/~hanrahan/">Pat Hanrahan</a>, <a href="http://www.graficaobscura.com/paul/index.html">Paul Haeberli</a>, pp. 215-223. "What You See Is What You Get," remember when that was new? Wow! Amazingly the technique of painting directly into a 3D viewport onto a mesh has been around for nearly twenty years, but is only now becoming commonplace! <strong>Strength Guided Motion</strong>, Philip Lee, Susanna Wei, Jianmin Zhao, Norman I. Badler, pp. 253-262. A kinematic biped model is informed by biologically plausible constraints including comfort, available torque, reducing moment, and pull back. This a fast computational approach to adjusting animation that conforms to physical laws, and generates qualitatively satisfying motion. <strong>Building Block Shaders</strong>, Gregory D. Abram, <a href="http://research.microsoft.com/~jtw/">Turner Whitted</a>, pp. 283-288. The first practical demonstration of block and wire based shader authoring based around Cook's shade trees. Another before-its-time paper embodied concepts that are highly in vogue today. <strong>A Language for Shading and Lighting Calculations</strong>, <a href="http://www-hci.stanford.edu/~hanrahan/">Pat Hanrahan</a>, Jim Lawson, pp. 289-298. The whole first version of the Renderman shading language is laid out, although it is not yet called Renderman. It remains a particularly interesting study, particularly if you design rendering systems. <strong>Generalized B-spline Surfaces of Arbitrary</strong> <strong>Topology</strong>, <a href="http://research.microsoft.com/~cloop/">Charles Loop</a>, <a href="http://www.cs.washington.edu/homes/derose/">Tony DeRose</a>, pp. 347-356. Loop and DeRose would soon pursue different approaches to the problem of high order surfaces - both would prefer subdivision surfaces, one inventing Loop surfaces, and the other championing Catmull-Clark subdivision surfaces. <strong><a href="http://www.double.co.nz/dust/Sims-1990-PAR.pdf">Particle Animation and Rendering Using Data Parallel Computation</a></strong>, <a href="http://www.genarts.com/karl/">Karl Sims</a>, pp. 405-413. This paper remains a little-known watershed in particle system architecture design. If you start a particles dynamics implementation by carefully studying Sim's design, keeping Cook's shade tree architecture in mind, you will have the beginnings of what remains to this date a pretty state of the art system. The key differences between Sim's architecture, and what one usually finds in a particle system are an emphasis on data parallel computation, and dynamics composition, often touted in recent literature as "second order particle systems." Sometimes it really does feel like there's nothing new under the sun, although if I really believed that, I of course wouldn't be bothering with the creation of this blog!
+</article>
+</div>
+<div id="tags">
+CG/siggraph/1990</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

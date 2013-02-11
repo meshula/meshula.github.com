@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+An Object Oriented Approach to a Digital Signal Processing Environment
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2007-07-29 14:27:13</h3>
+<H1 class="title">An Object Oriented Approach to a Digital Signal Processing Environment</H1>
+</DIV>
+<div id="content">
+<article class="post">
+Going through old papers, I found this paper I wrote in but never published in 1991. Gosh, I've been poking away at these problems for a <em>long</em> time. Unfortunately, only part of the first page survives. I've transcribed it here verbatim. <blockquote><strong>Abstract</strong> Building upon two basic object classes, Graphic Objects and Actions, it is possible to rapidly implement complicated environments whose functionality is specified in terms of the interactions between the Graphic Objects and Actions. In addition, object oriented principles are used to construct a class of Digital SIgnal Processing (DSP) objects called Filters which allow easy procedural specification of DSP dataflow. In order to demonstrate the simplicity of this approach, we shall consider the difference between functional specifications and procedural specifications by examing Graph Objects, Actions, and Filters in detail. <strong>Introduction</strong> This paper reports observations on object oriented programming design during the design, implemenation, and use of an interactive Digital Signal Processing environment. Many versions were tried and tested over a period of two years, finally resulting in the system presented here. The project was prompted by the need to have certain facilities readily available in a context where algorithms and functionality would be easily prototyped and developed into standalone packages comprising the desired functionality and an attractive user interface. An object oriented approach was adopted because of the perceived ease of reusability, and the fact that encapsulation of data and methods within individual object instances would shift the onus for responsibility for memory management, scoping, and data manipulation from the programmer building the final application to the programmer who designs the object classes. C++ was selected as the implementation language because of the ready availability of compilers, and the widespread acceptance of C++ by programmers and engineers doing DSP work in the realm of applications. All classes in this report have been developed using Borland's Turbo C++ package.</blockquote> Nowadays this approach is a widespread standard practice. I found it amusing to come across a paper analyzing why this sort of system might be a good idea!
+</article>
+</div>
+<div id="tags">
+programming/dsp</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

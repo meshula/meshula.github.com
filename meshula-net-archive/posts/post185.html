@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+What is it about game coding?
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2008-07-12 17:22:30</h3>
+<H1 class="title">What is it about game coding?</H1>
+</DIV>
+<div id="content">
+<article class="post">
+<p>Beauty is in the eye of the beholder, and what seem to some practitioners to be the most hideous code possible, to someone else can be an elegant rose. A wood carver would never allow his knives to cut another material, yet for carving wood, his knives are the perfect instrument. Game code by and large is <em>craft</em> informed by engineering. If we were to talk about drivers, or resuable engine components, that is a different matter, you had better be engineering. <h3>The obvious</h3> <p>Game code runs in a closed sandbox. Good game code has all known paths executed, and has been optimized for cycle efficiency. You don't have to worry about some things that other programmers have to worry about because the execution of certain functions is strictly deterministic, and not subject to console to console or user to user variation. <p>Poor game code does not exercise all possible paths, and is not thoroughly tested for reasonable outcomes (such as out of memory or disk not in drive). That's the difference between a game that can sit flawlessly in a kiosk in retail for weeks without restarting, and a game that won't even allow for a complete play through in one sitting. <h3>The compromise</h3> <p>Game code is optimized within a cycle of its life. APIs and code need to only survive the known condition of the particular game with the particular data on the particular console with a particular kernel. The fastest code is the code that doesn't execute, so if we can observe that certain lines of code only support safety against a non-thorough programmer, we tend to eliminate it and work hard to make sure our code does not execute illegally. On the other hand, code that will be exercised under conditions that cannot be strictly enforced, or written by people who don't have the necessary understanding to deal with such a raw exposure, should be thoroughly return tested, and have error recovery. <h3>Lex parsimoniae</h3> <p>Unlike many other high performance applications, the performance of game code is driven by artistic and aesthetic loading. The faster you make the game code, the more the artist will add data to bring the performance back down. Naturally your goal is the best possible look and experience, so you need to maintain the safety of the code, while minimizing the cycles executed. This means we don't optimize or write code for reusability, we write code and optimize it for the product we are going to ship. If our primary goal was reliability, or accuracy, then there are a completely different set of tradeoffs we would engage. Our guiding rule is Occam's Razor - "<i>entia non sunt multiplicanda praeter necessitatem"</i>, no more than is necessary. <h3>You get one turn at bat</h3> <p>In general, there is no version 2. We've got to have it right the first time the first user touches the game. It's not a primary goal that the code can be turned into another product (although we do try to refactor, triage, and fix to make the next game better technically). <p>Unlike other high performance realtime applications, such as aircraft control, where it does have to work perfectly the first time, we don't have control over our target hardware. If I was building a controller for a space shuttle, I would ensure that the hardware was adequate to support the functional goals and the characteristics of the program that I need to run. On a game console, there is one unchangeable box out there, and you need (and want) to squeeze every drop out of it. <h3>Competitive advantage</h3> <p>As a game programmer every cycle you can squeeze out of the machine, and still support the end user experience, is potentially a competitive advantage if it betters the interactive and aesthetic experience. <p>And that's where all the weird code comes from!
+</article>
+</div>
+<div id="tags">
+games/writing</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

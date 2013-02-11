@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+Compare and Swap
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2008-02-10 20:55:58</h3>
+<H1 class="title">Compare and Swap</H1>
+</DIV>
+<div id="content">
+<article class="post">
+<p>I came across an interesting introductory <a href="http://www.codeproject.com/KB/cpp/lockfreeq.aspx">codeproject tutorial</a> on Compare and Swap (CAS) instructions* for <a href="http://en.wikipedia.org/wiki/Lock-free_and_wait-free_algorithms">lock free parallelism</a>. Parallel programming frequently makes use of locking constructs, such as mutexes, semaphores, and critical sections to suspend other threads while the lock is in place. Such suspensions typically consume a great deal of time and thus adversely affect system performance. Lock free and wait free parallelism in contrast uses atomic instructions such as CAS to guarantee that data is not corrupted during writes, and to avoid suspension of other threads. A good deal of theoretical background can be found by following the links from this <a href="http://en.wikipedia.org/wiki/Non-blocking_synchronization">Wikipedia article</a>.</p> <p>Valve has published a GDC 2007 presentation called <a href="http://www.valvesoftware.com/publications/2007/GDC2007_SourceMulticore.pdf">Dragged Kicking and Screaming: Source Multicore</a> that talks about how they migrated to a lock-free threading system; some parts of their implementation are also wait-free. They structured their game architecture around what they call a hybrid threading model, where algorithms are broken up according to appropriate task models. They support high level constructs of function threading, where work is parceled out to other threads, but appears to complete in line, array parallelism, where work is described in array slices, and queued execution. To that end, they provide some templated functors and functional interfaces that abstract the implementation details from the application programmers.</p> <p>For comparison with another approach, please see <a href="http://meshula.net/wordpress/?p=112">this analysis</a> of multi-threaded rendering in Capcom's MT2 engine. The MT2 engine has to deal with further complexity to support parallelism on the PS3 in that every SPU task has to have a corresponding PPU thread to marshal it.</p> <p>I definitely have a lot to think about before I approach my next parallelization task!</p> <p>----------------------------</p> <p>* CAS takes three arguments; an address, the expected old value, and the new value. If the expected old value and the data at the address agree, then the new value is written to the address. If the address was written, success is reported. This allows an algorithm to read a value from memory, modify it, and write it to memory only if no other process has written to it in the mean time.</p> <p>In a typical implementation, a lock free algorithm using CAS re-attempts its computation if a value was written under it. This algorithm would not be wait-free. The tutorial on codeproject implements a lock-free queue implementation that waits. The linked list implementation in Valve's presentation also waits. The algorithms are structured around atomic operations such as rewriting the head or tail of the list.</p>
+</article>
+</div>
+<div id="tags">
+programming/concurrency</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

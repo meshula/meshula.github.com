@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+A New Method for Volume Rendering of Solid Objects
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2009-08-23 01:57:17</h3>
+<H1 class="title">A New Method for Volume Rendering of Solid Objects</H1>
+</DIV>
+<div id="content">
+<article class="post">
+Volumetric Billboards is a new technique for rendering voxel objects, created by Philippe Decaudin and Fabrice Neyret. Their research page is at <a href="http://www.antisphere.com/Research/VolumetricBillboards.php">http://www.antisphere.com/Research/VolumetricBillboards.php</a>. <center> <object width="425" height="344"><param name="movie" value="http://www.youtube.com/v/l05HgqQbUs4&hl=en&fs=1&"></param><param name="allowFullScreen" value="true"></param><param name="allowscriptaccess" value="always"></param><embed src="http://www.youtube.com/v/l05HgqQbUs4&hl=en&fs=1&" type="application/x-shockwave-flash" allowscriptaccess="always" allowfullscreen="true" width="425" height="344"></embed></object> </center> Objects are represented as a volume textures, the volume textures are created in a MIP hierarchy for level of detail. The resulting textures can be surprisingly small; the Eiffel Tower model shown here is voxelized at 128x128x256, and takes up 4.8MB of compressed texture memory. Applying the techniques from Vidal, Mei, and Decaudin 2008, a further 75% reduction on this model is claimed. The MIP chain associated with each volume model allows the hardware to interpolate smoothly between different levels of detail. This can be observed in the video. <center><img src="http://i148.photobucket.com/albums/s29/meshula/EiffelVoxels.jpg"/></center> Rendering a scene proceeds as follows: A scene containing such primitives is sorted on the CPU from far to near, and a series of slices parallel to the camera is intersected with the primitives. Starting in the distance, a series of polygons are generated. These are the intersection of each volume primitive with the slice, mapped into each object’s volume textures. As can be seen in the diagram below, these polygons will have 3, 4, or 5 sides. A nicety of this approach is that slices can be spaced according to visible resolution; the stepping is in projected screen space. <center><img src="http://i148.photobucket.com/albums/s29/meshula/intersection.jpg"/></center> <center><img src="http://i148.photobucket.com/albums/s29/meshula/slicing.jpg"/></center> These slices are submitted to the GPU per slice, rather than per object, and thus the usual problems with interleaved transparent object rendering are avoided; all objects, including translucent and transparent objects, will inter-sort properly. A potential drawback of this method is that there might not be enough GPU memory to hold all the volume textures in a slice, or that the volume textures will thrash through memory as rendering progresses. A mitigation would be to take the proposed algorithm one step further, and partition slices according to horizontal overlap in order to schedule volume textures across the bus more efficiently. These ideas have been gestating for a little while: A similar rendering technique has been described by Kevin Boulanger for rendering grass, as previously described <a href="http://meshula.net/wordpress/?p=119">here</a>. An extruded patch describes grass volumes, and in a step similar to Volumetric Billboards, middle distance grass is rendered as slices through that volume. Volumetric Billboards were also preceded by previous work by the same authors in <a href="http://meshula.net/wordpress/?p=97">rendering forests</a>. A terrain is extruded into prisms, and volume cell containing a voxel image of a tree encoded in a volume texture is ray-traced. This method was suitable for distant, or fly-over views, but didn’t generalize the rendering problem. The Volumetric Billboards algorithm can also deal with this sort of representation, as can be seen in the animated grass in the video. As described, the technique has most lighting information baked in. One can imagine that the technique can be extended to incorporate information to allow for dynamic relighting. It would also probably be useful to be able to switch between polygonal and voxel representations on the fly as the camera gets close to an object. Dynamic objects subject to more than just affine transformation could also be interesting. <b>References:</b> Ph. Decaudin, F. Neyret. <a href="http://www.antisphere.com/Research/VolBlbCGF09.php">Volumetric Billboards</a>. Computer Graphics Forum, Volume 28, 2009. V. Vidal, X. Mei, Ph. Decaudin. <a href="http://www-ljk.imag.fr/Publications/Basilic/com.lmc.publi.PUBLI_Article@11aaaec1633_1358f03/index_en.html">Simple Empty-Space Removal for Interactive Volume Rendering</a>. Journal of Graphics Tools, Volume 13 (2), p 21-–36, 2008
+</article>
+</div>
+<div id="tags">
+CG/rendering/volume_rendering</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

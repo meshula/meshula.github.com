@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+Immediate Mode Rendering
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2007-10-14 01:08:37</h3>
+<H1 class="title">Immediate Mode Rendering</H1>
+</DIV>
+<div id="content">
+<article class="post">
+<p>(Cross posted to <a href="http://realtimecollisiondetection.net/blog/?p=30">realtimecollisiondetection.net</a>)</p> <p>If you must support immediate mode rendering in your pipeline, here are some tips for maximizing performance.</p> <p>Make your primitives as high level as possible</p> <ol> <li>Prefer baked shapes to procedural primitives.</li> <li>Prefer procedurals to strips or point batches</li> <li>Prefer strips or point batches to quads, quads to tris.</li></ol> <p>For example, HUDs are often drawn with immediate or immediate-like rendering. If you can, bake the HUD so you can submit it as a single primitive. If the HUD has a highly variable part, try baking all of it except for the variable part, and have that have a fixed data size so you can just blit in what you need. </p> <p>If you must support submission of arbitrary lists of primitives, collate the primitives into baked buffers; don't submit individual primitives to the driver except as an extreme last resort (even in OpenGL).</p> <p>Treat text blocks and particle systems as single primitives. Maintain a single buffer or set of buffers, and recycle it. There will be an optimal size for this buffer that is a tradeoff between your application's requirements and hardware/driver performance. Profile often. <p>If you have a shape that you will re-use for several frames, bake it.</p> <p>If you frequently use some shape like a disc, parameterize it, and blit it into your render stream as a high level disc primitive.</p> <p>Use the notion of materials, never the fixed function pipeline (don't use a model of the FFP either!)</p> <ul> <li>The driver will maintain an internal state machine tracking your operations versus its internal state which represents a virtual model of the fixed function pipeline. In general all this state tracking is expensive.</li> <li>You need to minimize the state changes that are costly - and you will need to measure the hardware to find out what is actually slow. Don't trust what you read in a book or found on the web. It changes frequently.</li> <li>Create immediate mode materials that are blocks of expensive state change. Submit these blocks to the pipeline in chunks; don't do it in dribs and drabs.</li> <li>Order your renders to minimize invocations of these blocks. For typical immediate modes, you might be able to boil these materials down to a small set such as "unlit, untextured", "unlit, textured", "lit, textured", "shiny lit, textured", "unlit, alpha transparency". </li> <li>You also need to know the cost of a texture bind. Depending on whether texture bind or other state change is more expensive you will need to order your draws by texture then sub-order by material, or material then sub-order by texture.</li></ul> <p>Create an "unbind" material that creates a state change block that undoes the immediate material bind so that you don't mung things up for the rest of your pipeline.</p> <ul> <li>All the materials should touch all of the same state.</li> <li>Only issue the unbind material before you revert to non-immediate rendering.</li> <li>Assign each material a number. Order the numbers such that moving from one material to the next in sequence touches the fewest pipeline states. (You'll see why when we get to the keys.) Here, we are relying on the driver internal state tracking to help us minimize the cost of material binding.</li></ul> <p>Figure out what restrictions you can live with, and pick your restrictions for speed.</p> <ul> <li>If your application can get away with a text draw, and textured screen facing quads, support only that, and make it screamingly fast.</li> <li>So many things you think you need immediate for, such as manipulator axis, you can trivially do another way with baked geometry. If you can bake it, do!</li> <li>The immediate pipeline is your last resort.</li></ul> <p>Divide your rendering into phases. These phases are highly dependent on what you need your render engine to do to support your game. Typical phase breakdown might be</p> <ul> <li>z-depth pre-pass, non-alpha geo, alpha-geo, post-passes, composite, HUD</li></ul> <p>Assign a key to each batch of immediate renders. A typical 32 bit key might look like this (where 0 is the MSB):</p> <table cellspacing="0" cellpadding="2" width="400" border="0"> <tbody> <tr> <td valign="top" width="100">0-3:phase</td> <td valign="top" width="100">4-11: material</td> <td valign="top" width="100">12-16: texture</td> <td valign="top" width="100">17-31: rough z</td></tr></tbody></table> <ul> <li>highest order bits to indicate render phase</li> <li>a few bits to indicate material</li> <li>a few bits to indicate a texture page in VRAM</li> <li>the rest of the bits for rough z-order. If you want to use early z-depth, make low numbers near the camera. If you need back to front ordering for painters', then use high numbers near the camera</li></ul> <p>Use sorted submission lists using the key and merge sort during just in time final push to hardware as discussed earlier in the Input Latency thread. If you can keep the submission lists persistent from frame to frame, a radix sort works well for the individual lists before the merge sort. I am assuming that the rest of you render engine is similar broken into phases in order that the immediate lists can be interleaved with other incoming draws from other threads.</p> <p>Note that not all immediate rendering needs to be accumulated in submissions. The non-alpha geo phase in particular can be submitted interleaved with regular rendering for minimal latency. Unless you want to insert fences and syncs into your pipeline, all other order dependent phases will need to be accumulated into buffers. Fences and syncs can help you minimize RAM usage because the pipeline can demand that the engine cough up render requests at the right time, but you run the risk of stalling everything. </p> <p>On some architectures, you can chain in render primitives without copying the data into a GPU queue; in that case you're golden because you can just make DMA thread through all your drawing. The major caveat there is to make sure the data isn't discarded or overwritten until the DMA has chased past its end. With careful structuring, you can save large amounts of memory for things like water surfaces if you can queue up the next frame of simulation for the precise moment the DMA is done with the last frame's vertices.</p>
+</article>
+</div>
+<div id="tags">
+CG/rendering</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

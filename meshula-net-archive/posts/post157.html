@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+More on parallel rendering
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2008-03-09 16:04:07</h3>
+<H1 class="title">More on parallel rendering</H1>
+</DIV>
+<div id="content">
+<article class="post">
+<p>Timothy Farrar shares some interesting thoughts on parallel rendering. <p><a href="http://www.farrarfocus.com/atom/080223.htm">http://www.farrarfocus.com/atom/080223.htm</a> <p>Timothy points out an article parallel SPU rendering from GDC08 by Mike Acton of Insomniac Games. <p><a href="http://www.insomniacgames.com/tech/articles/0208/insomniac_spu_programming_gdc08.php">http://www.insomniacgames.com/tech/articles/0208/insomniac_spu_programming_gdc08.php</a> <p>This article has some insight turning conventional wisdom on its head. In particular, I am struck by the section on rendering fractured glass where the first approach was to take a high level view of fracturing the glass, then shove it down the pipeline. The second approach was to design a pipeline that could handle dynamic geometry, then fit the approach to the glass to what was achievable. <p>Old school, that's how we approached things. I feel this philosophy is a bit lost these days; top down is so ingrained in the way we are trained to think as modern software engineers - but Insomniac's results speak for themselves.</p>
+</article>
+</div>
+<div id="tags">
+CG/rendering/concurrency</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

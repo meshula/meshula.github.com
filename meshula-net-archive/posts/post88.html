@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+Procedural Animation
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2007-09-03 16:34:13</h3>
+<H1 class="title">Procedural Animation</H1>
+</DIV>
+<div id="content">
+<article class="post">
+<p></p> <p><strong>Notes from Siggraph 1994</strong></p> <p>I felt vindicated by the way things are going these days. Some years ago, I published a series of papers on <em>(what I was calling)</em> Synthetic Intellignece for controlling robots and animation. At the time, it was very difficult to published because <em>(the establishment) </em>was sure that symbolic AI would work <em>real soon now</em>, and the neuro-morphic approach I was pushing was just a flash in the pan. Consequently, I took my ideas to Japan and found a sponsor at Bandai, the world's largest toy manufacturer. We worked out principles of real AI for toys, and got a patent on an an inexpensive voice recognition circuit, and some other esoteric devices. The Synthetic Intelligence approach slowly worked its way into various products <em>(like Tamagotchi)</em>. Now, Bandai has voice-recognition toys, and story based games (not role-playing games) whose stories evolve on the basis of the player's actions.</p> <p>At Siggraph I was happy to see that the tide had turned <em>(or so I thought! We wouldn't really see a mainstream resurgence until Natural Motion came along with Euphoria.) </em>Now the approach I had championed years ago has become mainstream, and everbody knows it's not possible to achieve some character based animation effects any other way.</p> <p>Animation can be automated by using Forward Kinematics, Inverse Kinematics, Dynamics, Inverse Dynamics, and Space-Time Constraints. <strong>Liu, Gortler</strong>, and <strong>Cohen</strong> suggest the best way to automate animation is to specify goals to be accomplished, like having a create throw a ball at time t1 and have the ball go through the hoop at time t2. <em>(I still hold this to be true, although I am not a believer in Space-Time Constraints as an optimization problem.)</em> They use Space-Time Constraints specified using wavelet basis functions optimized using nonlinear numerical methods such as quasi-Newtonian gradient search. They recommended using Haar wavelet basis functions because they can be evaluated quickly.</p> <p><strong>Karl Sims </strong>suggests having programs evolve and write themselves on the basis of fitness functions and genetic algorithms. He showed creatures which learned how to walk, jump, swim, and slither all by themselves. He's on to a good thing here.</p> <p>Several years ago, <strong>David Baraff </strong>showed an animation of several blocks falling onto a chain. The blocks slid around and the chain bucked back and forth until the whole thing came to rest. The animation proceeded in a realistic fashion, but took hours to compute offline on a supercomputer. Recently he had one of those "ah-hah" experiences where he woke up and realized he was doing it backwards and rewrote the whole system. This year he showed the same animation generated in realtime on a desktop workstation.</p> <p><strong>Xiaoyuan Tu </strong>showed artificial fishes that schooled, predated, and behaved in a very realistic fashion, using what I would term Synthetic Intelligence.</p> <p><strong>J. Thomas Ngo</strong> showed that animations which are impossible to achieve using standard techniques can be accomplished using stocastic optimization. He showed a system that could make miracle pool shots - the balls were cracked in such a way that when they stopped rolling they formed a letter "S".</p>
+</article>
+</div>
+<div id="tags">
+CG/animation/procedural/siggraph/games/AI___Robotics</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

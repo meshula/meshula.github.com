@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+Sims Scripting
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2006-05-19 19:42:14</h3>
+<H1 class="title">Sims Scripting</H1>
+</DIV>
+<div id="content">
+<article class="post">
+Not sure where I got these notes from, but they're interesting, and related to the theme of Emergent Story - probably from a talk at GDC06. <!--more--> In Sims Scripting, an object is a collection of data, each containing an executable microthread that when placed in a lot will run code by default Each object contains localized String lists, executable scripts, common definition meta data, animation lists, routing information, advertising information, interaction definitions,- may also contain model information. Some objects are physical - cars, toilets etc., some are not - objects that handle visitors arriving on the lot, the weather, time of day, social objects etc. Microthreads are implemented using yielding primitives that wait until their functionality is complete. e.g.: Routing, animation, sleeping etc. Each thread has stack and can pass data to functions like any other language. Internal error checking when script crashes or errors occur (e.g routing errors), the object resets to a known state. In the case of sims, it resets them to the last saved state and repositions them in the world, as well as resetting any objects they were interacting with
+</article>
+</div>
+<div id="tags">
+AI___Robotics/story</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

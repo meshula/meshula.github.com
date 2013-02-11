@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+Symbols missing whilst debugging?
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2009-02-22 18:51:18</h3>
+<H1 class="title">Symbols missing whilst debugging?</H1>
+</DIV>
+<div id="content">
+<article class="post">
+<blockquote> <p>cool_static_MTD_d.lib(Cool.obj) : warning LNK4099: PDB 'vc90.pdb' was not found with '../extras/Cool/lib\cool_static_MTD_d.lib' or at 'd:\ProjectName\Debug\vc90.pdb'; linking object as if no debug info</p></blockquote> <p>Are you occasionally bothered by the MSVC linker complaining about missing or bad pdb files? Are you stepping into your code, including DLLs and seeing no symbols? Here's the solution:</p> <p>In all of your vcproj's Property Pages, go to the <strong>Program Database File Name</strong> setting (<strong>Configuration Properties/ C++/ Output Files</strong>), and enter the following mystery string (that tells the compiler that the pdb file goes in the intermediate directory, and to call it something like CoolnessWin32Debug.pdb):</p> <blockquote> <p><font face="Courier">$(IntDir)\$(ProjectName)$(PlatformName)$(ConfigurationName).pdb</font></p></blockquote> <p>If you are using libraries that you got from somewhere else, you'll need to make this fix to their vcproj's as well. Most developers seem not to know how to configure the setting, and the default that MSVC gives you is not at all helpful.</p> <p>Rebuild, and the warnings and debugging problems will be a thing of the past!</p>
+</article>
+</div>
+<div id="tags">
+programming/visual_studio</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

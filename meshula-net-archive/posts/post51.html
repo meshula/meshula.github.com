@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+En Plein Air
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2007-04-10 01:12:22</h3>
+<H1 class="title">En Plein Air</H1>
+</DIV>
+<div id="content">
+<article class="post">
+The last few years have seen an amazing improvement in the fundamentals of shading. We could summarize these improvements in general as reduction of artifacts and richness of rendering. Reduction of artifacts has improved through tesselation, filtering, and depth and transparency rendering. Richness has increased through higher geometry and texture throughput, and increases in shader program length allowing for a dramatic increase in the number of lights that can be computed. Shading is fundamentally concerned with the appearances of surfaces. Moving beyond Surfaces There's a completely different way of looking at the rendering of a scene. This method is common in landscape painting and matte painting in film. It is the notion of painting the air between the surfaces instead of the surfaces themselves. This technique became well known with the advent of the <em><a href="http://en.wikipedia.org/wiki/En_plein_air">en plein air</a></em> painters who advocated taking paint and canvas outside to paint from nature. Amusingly, this advance in painting was brought about by another technological revolution: the availability of paint in tubes supplanting the previous paradigm of artists mixing paints from powders, oils, and eggwhites! The values of the surfaces themselves are not represented in these paintings, but rather the interaction of light with the intervening medium. As long as rendering technologies remain focused on surfaces, these well understood properties of beautiful images can only be indirectly approximated, using imperfect tricks such as adding a fog term to a surface shader. A powerful compositing pipeline will be required to pull off a real time engine which can render participating media with light. Multiple layers must be individually rendered, with specific post processing between every pass. Partitioning the scene in depth, and the management of techniques such as scrims and a great variety of full screen post processes must be mastered. Avoiding artifacts between layers is a challenge here. <a href="http://photobucket.com"><img alt="Photo Sharing and Video Hosting at Photobucket" src="http://i148.photobucket.com/albums/s29/meshula/enPleinAir.jpg" border="0" /></a> For further inspiration, Dan Curry talks about rendering with light instead of surfaces roughly half way through a fxguide podcast, available <a href="http://www.fxguide.com/article410.html">here</a>.
+</article>
+</div>
+<div id="tags">
+CG/rendering</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

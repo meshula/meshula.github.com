@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+Volume Textures for Forest Rendering
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2007-09-12 01:26:09</h3>
+<H1 class="title">Volume Textures for Forest Rendering</H1>
+</DIV>
+<div id="content">
+<article class="post">
+I'm keen on methods of rendering trees in real time. One I hadn't come across before is described in a paper titled <a href="http://www.antisphere.com/Research/Forest.php">Rendering Forest Scenes in Real-Time</a> by <a href="http://antisphere.com/" target="_top"><font color="#0070d0">Philippe Decaudin</font></a>, <a href="http://www-evasion.imag.fr/~Fabrice.Neyret/" target="_top"><font color="#0070d0">Fabrice Neyret</font></a>, Florent Cohen. It's volume texture based; a terrain is extruded into prisms, and a volume cell is rendered through ray tracing. The prisms themselves contain data that matches up for aperiodic tiling. A bit of raymarching, lighting, shadow casting, and a nice (if kind of regular looking) forest is the result. I suppose this technique can only be used for middle to distant trees, or in applications like real time strategy games that benefit from an orthographic perspective. Nonetheless, it's a nice addition to the body of tree rendering methods. <img src="http://i148.photobucket.com/albums/s29/meshula/texcell1.jpg" /> <img src="http://i148.photobucket.com/albums/s29/meshula/dynlight1.jpg" />
+</article>
+</div>
+<div id="tags">
+CG/rendering/volume_rendering</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

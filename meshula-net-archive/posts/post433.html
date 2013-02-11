@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+
+
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/gallery.css" type="text/css" />
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" />
+
+<TITLE>
+Arima Toy Museum
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2009-11-28 21:40:38</h3>
+<H1 class="title">Arima Toy Museum</H1>
+</DIV>
+<div id="content">
+<article class="post">
+
+
+
+
+<div class="horizontal-row">
+	<div class="left-column">
+		<div class="vertical-column-el">
+		<img src='../img/up-arrow-black-64.jpg' id="up-scroll">
+		</div>
+		<div class="vertical-column-el">
+		<div id="gallery-index"></div>
+		</div>
+		<div class="vertical-column-el">
+		<img src='../img/dn-arrow-black-64.jpg' id="dn-scroll">
+		</div>
+	</div>
+
+    <div class="gallery">
+		<P>
+		Photos from the Arima Toy Museum in Japan. 
+		The special exhibition when we visited featured traditional German woodcrafts. 
+		The regular exhibits included many other fascinating antique and contemporary toys and automata. 
+		</P>
+		<P>
+		Here's a <a href="http://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=arima+toy+museum&amp;sll=34.798992,135.24437&amp;sspn=0.102338,0.110893&amp;ie=UTF8&amp;hq=toy+museum&amp;hnear=Arima+Japan&amp;t=h&amp;cid=8699942700039018647&amp;ll=34.807672,135.252085&amp;spn=0.035237,0.042915&amp;z=14&amp;iwloc=A" >
+		map</a> to the museum.
+		</P>    
+	    <div class="photo"></div>
+	</div>
+</div>
+
+
+
+</article>
+</div>
+<div id="tags">
+gallery/photography/travel/japan/arima/2009</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+
+<script src='../js/jquery-1.5.1.min.js'></script> 
+<script src='../js/gallery.js'></script> 
+<script>
+
+function adjustVisiblity()
+{
+	var el = document.getElementById('gallery-index');
+	if (el.scrollTop > 0)
+		$("#up-scroll").show();
+	else
+		$("#up-scroll").hide();
+		
+	if (el.scrollTop < el.scrollHeight - el.clientHeight)
+		$("#dn-scroll").show();
+	else
+		$("#dn-scroll").hide();
+}
+
+$(document).ready(function() {
+
+    FlickrPhotoSet('72157622893888420');
+    $("#up-scroll").hide();
+        
+    $("#gallery-index").scroll(function() { adjustVisiblity(); });
+    
+
+});
+</script> 
+
+
+</BODY>
+</HTML>

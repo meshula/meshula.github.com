@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+Siggraph 1986
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2007-11-16 02:43:40</h3>
+<H1 class="title">Siggraph 1986</H1>
+</DIV>
+<div id="content">
+<article class="post">
+<p>I'm struck by the typography in this proceedings, it ranges from LaTeX to typewritten papers. This year featured many fundamental advances, and the introduction of several now-basic techniques such as methods for texture filtering and anti-aliasing, and hardware implementations of polygon rasterizers. Many of the techniques are applicable to GPU today.</p> <p><strong>Modeling Waves and Surf,</strong> <a href="http://graphics.pixar.com/indexAuthorPeachey.html">Darwyn R. Peachey</a>, p. 65-74. An early approach to rendering waves and their interaction with a beach. Innovations included using particle systems to model spray when waves break. The techniques presented in this paper would translate to a lightweight GPU shader.</p> <p><strong>A Simple Model of Ocean Waves,</strong> Alan Fournier, William T. Reeves, pp. 75-84. This model is still frequently referenced today. It is a frequency based model that models the surface of the ocean as a series of stationary elliptical orbits. This model is highly applicable to the GPU.</p> <p><strong>Combining Physical and Visual Simulation - Creation of the Planet Jupiter for the Film "2010", </strong>Larry Yaegar, Craig Upson, Robert Myers. pp. 85-93. A vorticity map is used to advect a texture map representing the atmosphere of Jupiter. This is an early, but often overlooked usage of computer graphics in film.</p> <p><strong>A Fast Shaded-Polygon Renderer</strong>, Roger W. Swanson, Larry J. Thayer, pp. 95-102. I find this article a handy reference when implementing software rasterizers for polygons.</p> <p><strong><a href="http://www.cs.unc.edu/~gb/Pubs/siggraph86.html">Fast Phong Shading</a>,</strong> <a href="http://wwwx.cs.unc.edu/~gb/wp/about/">Gary Bishop</a>, David M. Weimer, pp. 103-106. Similarly, this article has a method for Phong shading that requires only seven additions, and a lookup.</p> <p><strong>Atmospheric Illumination and Shadows,</strong> Nelson L. Max, pp. 117-124. The shadow volume algorithm of Frank Crow is turned inside out to produce god rays.</p> <p><strong><a href="http://nis-lab.is.s.u-tokyo.ac.jp/~nis/cdrom/acm/p207-nakamae.pdf">Continuous Tone Representation of Three-Dimensional Objects Illuminated by Sky Light</a></strong>, <a href="http://nis-lab.is.s.u-tokyo.ac.jp/~nis/">Tomoyuki Nishita</a>, Eihachi Nakamae, pp. 125-132. An illumination model corresponding to the sky is developed, adjustable for such affects as direct illumination, overcast, and time of day. Good results are achieved with only single bounce global effects.</p> <p><strong>The Rendering Equation, </strong><a href="http://research.microsoft.com/users/kajiya/">James T. Kajiya</a>, pp. 143-150. The classic paper introducing the lighting model that forms the basis of so many rendering systems including Renderman. The formulation states that the transport intensity of light from one surface point to another is simply the sum of the emitted light, and the total light intensity scattered towards that point from all other surface points.</p> <p><strong><a href="http://tom.cs.byu.edu/~tom/papers/ffd.pdf">Free-Form Deformation of Solid Geometric Models</a>,</strong> <a href="http://tom.cs.byu.edu/~tom/">Thomas W. Sederberg</a>, Scott R. Parry, pp. 151-159. This paper introduced the notion of a deformation lattice fitted around a model to provide an easy to use manipulator or mesh modification.</p> <p><strong>Automatic Conversion of Curvilinear Wire-Frame Models to Surface Boundary Models: A Topological Approach, </strong>S. Mark Courter, John A. Brewer III, pp. 171-178. This paper presents an algorithm for deriving polygon surfaces given a set of edges connected at vertices. This paper is a very useful reference. Having implemented this algorithm once, I have to say that it is much more complicated than I expected, particularly when trying to derive topological features such as holes or tunnels.</p> <p><strong>Hairy Brushes</strong>, Steve Strassmann, pp. 225-232. A model for natural-media paint brushes takes spline segments and renders naturalistic strokes along them. A clear presentation of this concept. This paper is frequently referenced by people implementing natural media painting systems.</p> <p><strong><a href="http://www.eecs.berkeley.edu/Pubs/TechRpts/1988/CSD-88-416.pdf">Snap Dragging</a></strong>, Eric Allan Bier, Maureen C. Stone, pp. 233-240. A significant early description of constrained snapping for user interfaces.</p> <p><strong><a href="http://www.cs.cmu.edu/~ph/rif.ps.gz">Filtering by Repeated Integration</a>, </strong><a href="http://www.cs.cmu.edu/~ph/">Paul S. Heckbert</a>, pp. 315-321. Heckbert generalizes Crow's summed area table method of texture filtering by integrated a kernel a few times, then sampling the result, as an alternative to complete convolution. This is due to an original idea by Ken Perlin.</p>
+</article>
+</div>
+<div id="tags">
+CG/siggraph/1986</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

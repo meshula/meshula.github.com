@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+Lost Planet Parallel Rendering
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2007-10-06 15:59:11</h3>
+<H1 class="title">Lost Planet Parallel Rendering</H1>
+</DIV>
+<div id="content">
+<article class="post">
+<p>The Lost Planet roundup continues, this time with details on the Direct 10 upgrade, from <a href="http://www.4gamer.net/news/history/2007.08/20070809235901detail.html">an article at 4gamer.net</a>. A key feature of this engine is that it is based on an image composition pipeline. As I argue in <a href="http://www.acmqueue.com/modules.php?name=Content&amp;pa=showpage&amp;pid=139&amp;page=1">Gaming Graphics: Road to Revolution (2004)</a>, an image composition engine is an important element of a real time parallel rendering pipeline. I am keen on the advancements in Capcom's engine here as it offers numerous practical examples of these principles.</p> <p><strong>Motion Blur</strong></p> <p><img src="http://i148.photobucket.com/albums/s29/meshula/2_5Dblur1a.jpg"> <img src="http://i148.photobucket.com/albums/s29/meshula/2_5Dblur1.jpg"> <img src="http://i148.photobucket.com/albums/s29/meshula/2_5Dblur1b.jpg"> </p> <p>From left to right are accumulation buffer motion blur, accumulated over 64 frames. The next frame shows Lost Planet's DX9 method, and the right frame shows the DX10 method. The DX10 method is described here:</p> <p>At first, the base image and velocity map are rendered. The velocity map encodes a vector describing the change in position of the pixel between the previous frame and the current frame.</p> <p><img src="http://i148.photobucket.com/albums/s29/meshula/2_5DBlur2a.jpg"> </p> <p>The base image is blurred twice. It is rendered once into a smaller frame buffer (this buffer is recycled for other effects such as depth of field), and again into motion blurred target. To generate the motion blurred target, pixels are convolved with a kernel distorted in the direction and magnitude of the per pixel velocity.</p> <p><img src="http://i148.photobucket.com/albums/s29/meshula/2_5DBlur2b.jpg"> <img src="http://i148.photobucket.com/albums/s29/meshula/2_5DBlur2c.jpg"> </p> <p>The motion blurred target is thresholded versus the velocity magnitude. The velocity magnitude is retained in another target as a composite mask.</p> <p><img src="http://i148.photobucket.com/albums/s29/meshula/2_5DBlur2d.jpg"> </p> <p>Finally, the full image is composited from the base image, the base blur image for depth of field, and the motion blur image is matted on top.</p> <p><strong>Depth of Field</strong></p> <p>&nbsp;<img src="http://i148.photobucket.com/albums/s29/meshula/depth1a.jpg"> </p> <p>At first, the base image and depth image are rendered out.</p> <p><img src="http://i148.photobucket.com/albums/s29/meshula/depth1b.jpg"> <img src="http://i148.photobucket.com/albums/s29/meshula/depth1c.jpg"></p> <p>Next, elements of the image are rendered into four render targets; these elements are selected according to visual planes; near ground, mid ground near, mid ground far, and background. A geometry shader is used to generate a bunch of bokeh elements that blur and sample the viewports into the accumulation buffer. Recently this concept has got a very nice re-imagining on <a href="http://www.gamedev.net/community/forums/topic.asp?topic_id=587174">gamedev.net</a></p> <p>The four targets are chosen according to whether the </p> <ol> <li>object is very near the camera,</li> <li>close to the focal plane nearer the camera, </li> <li>close to the focal plane but on the other side versus the camera,</li> <li>far from the camera.</li> </ol> <p><img src="http://i148.photobucket.com/albums/s29/meshula/depth1d.jpg"> </p> <p> Finally, the image is composed from all the layers.</p> <p><img src="http://i148.photobucket.com/albums/s29/meshula/depth1e.jpg"> <img src="http://i148.photobucket.com/albums/s29/meshula/depth1f.jpg"> </p> <p>The image on the left shows the DirectX 9 image based method which involves an image space convolution with depth edge comparisons to avoid bleeding. Ringing artifacts are clearly visible, as well as a depth edge halo. The image on the right shows the DirectX 10 version; it is clear that the composition method offers a much better result.</p> <p><strong>Fur Shading</strong></p> <p>This is an intriguing development, new to me at least. They have introduced image space fur shading.</p> <p><img src="http://i148.photobucket.com/albums/s29/meshula/fur1.jpg"> </p> <p>In this method, a fur map is rendered out. The two targets indicate fur direction and length. A geometry shader renders over the screen with lines whose length and direction are derived from the map. The color is picked up from the source pixel, and blended towards transparency.</p> <p><img src="http://i148.photobucket.com/albums/s29/meshula/fur2.jpg"> </p> <p>Intriguingly Capcom's early results suggest that even though the DirectX 10 drivers are overall somewhat slower than DirectX 9 drivers on the same card, the game performance overall is higher due to the utilization of the geometry shader to reduce the processing down previously in pixel shaders.</p> <p><em>Postscript - there are even more details on anti-aliasing, normal map compression, </em><a href="http://www.4gamer.net/specials/3de/lost_planet/lost_planet_01.shtml"><em>and more here</em></a><em>.</em></p>
+</article>
+</div>
+<div id="tags">
+CG/rendering/concurrency</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>

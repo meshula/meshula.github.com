@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html id="home" lang="en">
+<head>
+<meta charset=UTF-8" />
+<!-- disable iPhone inital scale --> 
+<meta name="viewport" content="width=device-width; initial-scale=1.0" /> <link rel="shortcut icon" href="favicon.ico">  
+<!--[if lt IE 9]> 
+ <!-- html5.js for IE less than 9 --> 
+	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+ <!-- css3-mediaqueries.js for IE less than 9 --> 
+	<script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+<![endif]--> 
+<link rel="stylesheet" href="../css/reset.css" type="text/css" />
+<link rel="stylesheet" href="../css/isotype-style.css" type="text/css" media="screen" /> 
+<link rel="stylesheet" href="../css/standard.css" type="text/css" />
+<link rel="stylesheet" href="../css/buttons.css" type="text/css" /> 
+<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Aclonica:regular" type="text/css" /> 
+<TITLE>
+Content Pipelines
+</TITLE></HEAD>
+<BODY>
+<div id="pagewrap">
+<header id="header">
+ <hgroup><h1 id="site-logo">Spaces Between</h1></hgroup>
+</header>
+<DIV id="articleHeader">
+<H3 class='entry-date'>2007-09-16 00:33:22</h3>
+<H1 class="title">Content Pipelines</H1>
+</DIV>
+<div id="content">
+<article class="post">
+<h3>Advancing the Content Pipeline - a transcript of the course I presented at Siggraph 2007</h3> 
+<BR> <img src="http://i148.photobucket.com/albums/s29/meshula/datapipeline.jpg"/> 
+<small>Image created at <a href="http://wordle.net">wordle.net</a></small> 
+
+Discussion can be found at the <a href="http://meshula.net/wordpress/?p=101">original post</a>. 
+<BR> <H3 style="margin-bottom: 0.25in">Motivation</h3> 
+<p style="margin-bottom: 0.2in">The motivation for looking at the content pipeline came up a few 
+years ago. I used to build rendering engines for LucasArts, and we were getting to a point where 
+our renderers and engines were getting pretty powerful, and you could do a heck of a lot of stuff, 
+but we started to run into the problem where it wasn't possible to get the things you wanted into 
+the games in a timely way. We had engines that could throw around millions of polygons, but the 
+tools weren't able to do the same thing. It was difficult and time consuming to get things down 
+the pipeline, the tools bogged down. We had one example where we got a Star Wars Episode II 
+Geonossian insect creature from ILM to use in Republic Commando. We could render it in real time, 
+but in our tools it would redraw, even in wireframe, at several seconds per frame. You can't 
+iterate quickly when tools behave like that.</p> 
+
+<p style="margin-bottom: 0.2in">We are really 
+pushing, our aim is to achieve filmic quality in games in our next generation of titles. We had 
+to find some kind of a solution, so we asked ILM how they are dealing with this really heavy data. 
+We got the model from them, it was bogging our tools, but somehow they were getting thousands of 
+them into a scene. Ultimately, we had to pick apart the entire pipeline from top to bottom to 
+understand how to get into the content driven and really heavily data driven world. Now, several 
+years later, results and techniques we've shared back and forth with ILM are in practice on our 
+new game, Star Wars: The Force Unleashed.</p> <p style="margin-bottom: 0.2in"> </p> 
+
+<h3 style="margin-bottom: 0.25in">Goals of a Modern Pipeline</h3> <ul> <li> 
+
+<p style="margin-bottom: 0.25in">
+- We want to have close interoperability between tools and preview.</p> </li> 
+
+<li> <p style="margin-bottom: 0.25in">- We want the preview to be as close as possible to final 
+on our target platforms, whether that's a game engine or a film render. The faster you can 
+get the result of a tweak, the better off you are.</p> </li> 
+
+<li> <p style="margin-bottom: 0.25in">- We're interested in sharing assets, from top to bottom, 
+across the board.</p> </li> 
+
+<li> <p style="margin-bottom: 0.25in">- We've moved away from having a lot of funny little 
+proprietary formats that suit the needs of the moment, or the pipeline being used for the 
+particular project, to a pipeline where the tools, and the interfaces to the tools are consistent, 
+our data representations are consistent, and we share fundamental representations of geometry, 
+materials, and shader libraries, across the companies.</p> </li> 
+
+</ul> 
+
+<p style="margin-bottom: 0.25in"> </p> <h3 style="margin-bottom: 0.25in">Blinn's Law</h3> 
+
+<p style="margin-bottom: 0.25in">One of Blinn's Laws mentioned frequently recently is the saw 
+that &ldquo;all frames take 45 minutes.&rdquo; A translation of that is &ldquo;no matter how much 
+hardware or software optimization I give you, you're going to add more stuff in until it takes 45 
+minutes again.&rdquo; We see the same things in games as we get closer and closer to ship. 
+The frame-rate stays right on the edge, and the artists throw more and more things in, so 
+you're constantly going back to optimize to get things back to 30 (or whatever the target 
+frame-rate happens to be).</p> 
+
+<p style="margin-bottom: 0.25in">The 45 minute frame time is going away. As we move into an era of 
+interactive feedback and interactive tools, we are going to get used to a 30 Hz frame-rate in 
+tools; the artists like it, and they won't let it go. Caching and coherency are the keys for 
+letting that happen.</p> <p style="margin-bottom: 0.25in"> </p> 
+
+<p style="margin-bottom: 0.25in"><strong>Caching and Coherence</strong></p> 
+
+<p style="margin-bottom: 0.25in">I like to make the analogy that a good content pipeline is like 
+what goes on in a good game loader. In order to get the game loaded up quickly, you're going to 
+have to analyze the content of your scene. The order of the load has to be sequenced correctly, 
+and for particular subsystems; some subsystems might require their RAM to be loaded before others 
+and so on. Perhaps some portions of the data need to be converted on the fly. You try to order 
+these things so that as many things as possible are going in parallel so that the user doesn't 
+have to wait too long before things happen.</p> 
+
+<p style="margin-bottom: 0.25in">Thinking about that in terms of a content pipeline, where artists are trying to iterate, consider the individual steps that comprise the pipeline. An example is mesh partitioning &mdash; it might be necessary to touch the data several times in several tools in the process if you're not careful. You might be using XML as the model format, and you might find yourself needing to convert the mesh from XML to an internal format again and again. This is where caching comes into play. You want to store off the intermediate results so you're not recomputing them constantly.</p> 
+
+<p style="margin-bottom: 0.25in"> </p> 
+
+<p style="margin-bottom: 0.25in"><strong>Cached data leads to a pipeline</strong></p> 
+
+<p style="margin-bottom: 0.25in">The idea that all this leads to is that you've got this process where art starts at one end, goes through a series of steps, and the cached data are the results that you're saving out to disk as the process goes on. This leads to the existence and need for a pipeline.</p> 
+
+<p style="margin-bottom: 0.25in">A really bad example, yet a really common one is the situation where you have a lot of little tools that you need to get your mesh from Maya into your game. The first approximation of this pipeline might be that you write a little exporter script that writes mesh data out to some kind of easy to parse intermediate file, then you have some tool that maybe the graphics programmer gave you that reads that object file in, converts it to an optimized format, then writes it out to something else. Then, another tool picks that up and packs it into a big large file for the game to load. Typically when you're starting out, you often find people doing these steps manually, one after the other, and hoping to remember the individual steps, like &ldquo;did I remember to run the normal map extractor?&rdquo; If you do the same series of steps a hundred times, you have a pipeline.</p> 
+
+<p style="margin-bottom: 0.25in"> </p> <h3 style="margin-bottom: 0in">Kinds of Pipelines</h3> 
+
+<p style="margin-bottom: 0in">I'm characterizing the three kinds of pipelines you can come up with as <em>Ad hoc, Structured, </em><span style="font-style: normal">and </span><em>Modular.</em></p> 
+
+<p style="margin-bottom: 0in"> </p> 
+
+<P><strong>Type 1: Ad hoc</strong></p> 
+
+<P>The ad hoc structure is what you typically get in a start up situation, or when you are innovating your technology a lot. You build it as you need it. You might start out with the really simple pipeline in the previous example, you might add in your new normal mapper, you add this and you add that. Little by little, the pipeline grows up and around the features as you invent them.</p> 
+
+<P>A central idea here is that the entire product is built pretty much all in one go. There is likely to be a single individual who's job it is to push the big red button that causes all the gears to start grinding, and make the product pop out at the other end. By product, I mean typically a single game level (or possibly a whole entire DVD, but I hope not!)</p> 
+
+<P>An ad hoc pipeline has a lot of dependencies and couplings between steps, so you can't really skip along &mdash; you're committed. If you've worked with this kind of pipeline, I'm sure you've seen pipeline steps that can take five or six hours to really grind through everything and get to the end.</p> 
+
+<P>Another characteristic is that the data formats are arbitrary, because they have been made up as the project goes along.</p> 
+
+<P> </p> 
+
+<P><strong>Ad hoc Pros and Con</strong></p> 
+
+<P>Ad hoc pipelines are very flexible, due to the lack of structure. It is possible to easily innovate, and have rapid response to new needs. By the end of the production though, the ad hoc process turns into a liability. In the worst case, there enough squirrelly, or weird parts to the process that it might turn out that there is only one person in the building who can successfully get a build. As time goes on, and the game takes two or three years to produce, you might find that there's all kinds of crazy hacks and workarounds, there's exceptions - like maybe you can run the normal map extraction on every character, but don't ever run it on a one particular character, because the entire level will break. As the production gets near the end, failing pipeline elements become common and the TD's end up running all around the building like crazy just trying to keep the whole thing spinning.</p> 
+
+<P> </p> 
+
+<P><strong>Type 2: Structured</strong></p> 
+
+<P>The typical next stage for a studio after having been ad hoc for a few years, and experiencing the joy of it all, is to get structured. That's a good next step. A structured pipeline is like a flowchart, you've probably seen these types of diagrams. You might have the director up at the top, he dispatches his minions to go out and do some layout, some character modeling, some vizdev, and whatnot. It all branches out, comes back together, there's little approval loops. Finally at the bottom, you get your end product.</p> 
+
+<P>A key characteristic of this kind of pipeline is that there are sign-offs and approvals at certain stages, and that's good. There's checks and choke-points which are places where you can stop and assess the state of something. A choke-point is a place where several things have to come together at once, like a character model and it's character rig.</p> 
+
+<P>This kind of pipeline lends itself to automation. It can be scripted, you can ensure that everything is happening properly which is really difficult in the ad hoc structure. A key difference with ad hoc is that the structured pipeline is oriented towards the unit of work. If a product in the pipeline is a texture, then there is some sub-part of your graph that is all about textures.</p> 
+
+<P>It's important that the data formats be well documented because your data is going all over the building. You might also have to be rigid about it because you might still have some of those old rigid and brittle ad hoc tools sitting around that can't tolerate having the data migrate to a new format.</p> 
+
+<P>Structured pipelines become common after you've built a few games.</p> 
+
+<P> </p> 
+
+<P><strong>Structured Pros and Cons</strong></p> 
+
+<P>The structured pipeline has some pretty strong pros. It can be managed by non-technical personnel &mdash; they can use the databases and spreadsheets that they're familiar with. They can make estimates of where things are at, and when things are going to come out the other end.</p> 
+
+<P>The pipeline can be instrumented, and efficiencies identified. You might find out that it takes a really long time for backgrounds to get finaled, and you can address that, either by improving the process, our adjusting other processes to accommodate.</p> 
+
+<P>The flaw with the structured pipeline is the bottleneck. If too many things have to go through one person or one process, or one approval, you can back up everything. You can starve the rest of your pipe and have people sitting around who could be doing something productive, but they're blocked because they don't have lighting or whatever.</p> 
+
+<P>The fatal flaw with the structured pipeline that I've seen many times, is that the pipeline breaks down if you have to rework something and it sends something back up into the top part of the flowchart somewhere, and it has to go through a bottleneck again. That's something we've learned from film. If you've finalized something, for example a shader for Yoda's skin, the one thing you never do is come up with a really really cool advancement to that shader after lots of shots have been finaled. You'd have to re-film-out all the previously finaled shots, and worse, you might invalidate some other work like the lighting set up. As an industry, we do this in games all the time, but we really need to consider the cost of reworking final elements.</p> 
+
+<P> </p> 
+
+<P><strong>Ad Hoc vs. Structured</strong></p> 
+
+<P>Key differences between these two architectures are that the ad hoc pipeline is focused on getting the data through whereas the structured pipeline is focused on efficient process. Ad hoc is common during prototyping or in startup shops, whereas structured pipelines come with the introduction of formal management processes like waterfall. You can support a lot of creativity in an ad hoc environment, but you're more likely to get done with a structured process.</p> 
+
+<P> </p> 
+
+<P><strong>Type 3: Modular</strong></p> 
+
+<P>What I'd like to do is to introduce the notion of a Modular pipeline which is a hybrid of ad hoc and structured. A modular pipeline is strictly feed forward. There are no loops in the process so nothing can ever back up or starve people down the pipe. An analogy is an automobile assembly line &mdash; you've got the conveyor belt going along, the chassis is there, the wheels come in, the seat goes on, the engine goes in, eventually a car comes out the other end. The key to it all is that you've got little spurs on the side which is where your structured process occurs. Iteration on an element might occur in a loop on a spur &mdash; a background for example might get iterated and approved in a structured way in its own little flow chart, and it is released on to the main conveyor belt when it's done.</p> 
+
+<P>It takes a bit of work to set things up so that you can actually work that way and you really have to think about your dependencies.</p> 
+
+<P> </p> 
+
+<P><strong>Modular Pros and Cons </strong></p> 
+
+<P>You iterate on your spurs, there are no back ups, and you release to the main line as you go. Portions of the pipeline can be swapped out, or they can be reordered, or tools can even be re-purposed with little difficulty.</p> 
+
+<P>A flaw with this system is that without uniform well designed data structures, it can get expensive. If there are funny little formats everywhere, and you swap two processes, you might get stuck. There might be translators that go from A to B, but there might not be a translator from B to A. That's where it gets expensive if these things need to be created and maintained.</p> 
+
+<P>Uniform data structures can compromise algorithms. Perhaps some step needs a wonderful point cloud, but if everything uses the same data structures, but there's no accommodation for point clouds in there, it might become necessary to implement around not having the data that's needed.</p> 
+
+<P>Nonetheless, unblocking everyone else, and having little pieces of the pipeline isolated to be ad hoc or structured as needed is a big win.</p> 
+
+<P> </p> 
+
+<P><strong>Supporting the Rendering Pipeline</strong></p> 
+<P>In order to support the modular pipeline, you also need to update what your rendering pipeline does. I'm going to quickly run through the kinds of rendering models you typically find in game engines.</p> 
+<P> </p> 
+<P><strong>State and Geometry Driven Renderers</strong></p> 
+<P>State and Geometry Driven Renderers abstract an ideal underlying hardware model through their APIs. Typical examples of course are DirectX or OpenGL. The programmer is responsible for managing that virtual model of the hardware. The data that moves through the pipeline is state packets and geometry. It's the programmer's job to make this stuff all sing. The focus is on performance, not on content iteration. It can be mitigated by creating a sandbox, a place for artists to put unoptimized data to play with.</p> 
+<P> </p> 
+<P><strong>Scene Management Based Renderers</strong></p> 
+<P>Another common architecture is a scene management engine, sometimes known as a retained mode model, or a scene-graph. These architectures are very intrusive into your application and typically have very rigid data structures. These architectures impose a lot of structure on your game, and force their notions of the scene onto the game.</p> 
+<P>The content pipeline becomes tightly coupled to the rendering library, because you have to introduce nodes and their dependencies and things like that without which the data and the API won't actually function. The game can become slaved to the rendering library and your pipeline can sort of seize up. Changes to a rendering API can force pipeline changes, inducing massive reexport passes.</p> 
+<P>A mitigation is format conversion tools, but these are often brittle and bug-prone. They do let you go back and fix things that go wrong, but you really don't want to go there.</p> 
+<P> </p> 
+<P><strong>Shader System Based Renderers</strong></p> 
+<P>Shader based systems are common in film, typified by pipelines built around Renderman. A scene is described not so much as objects moving around through the system with a scene-graph and a transformation hierarchy, but instead in terms of light transport as in Renderman which implements Kajiya's model of participating media, surfaces and lights.</p> 
+<P>Shaders impact the pipeline by forcing a uniform exposure of the lighting model. This is a restriction, but it is a step in the right direction. Well designed HLSL FX pipelines hit that with well designed semantics. You can decouple the underpinnings of how things actually get down to the final product. In this case the pipeline management impact is restricted to the assignment of shaders to objects. This becomes a problem when there is something like a giant mesh that needs to be broken down into bits for simulation or something and a later computation step needs all those bits. If someone changes the mesh, maybe adds a few more verts, it might be necessary to submesh the mesh differently to retain optimality. Data farther down the pipeline has been broken. A mitigation is dependency tracker and tools that might be able to ping artists and tell them they have to fix it, or in the best case automatically detect that something upstream has changed and sort it out.</p> 
+<P> </p> 
+<P><strong>Submission Engines</strong></p> 
+<P>Submission engines are a completely different beast. The rendering of the scene is completely abstracted away from the engine. Lists of things to render are presented to the renderer every frame. Lists are separated by composition operators. The operators are those described in Porter and Duff, <em>over </em>and <em>blend</em> and so on, as well as sort constraints such as depth order, or alpha order. It becomes the responsibility of the submission engine to manage the underlying state of the virtual hardware and to order things correctly and optimally. The engine uses frame to frame coherence to keep things running as fast as possible; it knows what it knew last frame, and recycles as much computation as possible without programmer intervention from the application layer.</p> 
+<P>The implication for the modular pipeline stems from having decoupled the scene structure from the rendering structure, and state management from the content.</p> 
+<P> </p> 
+<P><strong>Data Design &mdash; Uniformity</strong></p> 
+<P>Uniformity is important for being able to inexpensively update the pipeline. Inexpensively implies being able to update the pipeline without investing a lot of engineering time into the change. A single data format and a single reading, writing, and processing library gives you the economy of implementing things only once, and having only a single set of data transfer quirks to learn about and deal with throughout the entire pipeline, instead of a quirk in every area of expertise. All of the data of the same kind should be stored in the same way.</p> 
+<P>The XML example here is of a scene description. The scene is composed of a set of objects.</p>
+
+<PRE>
+&lt;scene&gt;
+   &lt;objects&gt;
+      &lt;object="foo"&gt; 
+         &lt;attrs&gt;...&lt;/attrs&gt;
+         &lt;relationships&gt;...&lt;/relationships&gt; 
+         &lt;contains&gt;...&lt;/contains&gt;
+      &lt;/object&gt;
+      ... more objects ...
+   &lt;/objects&gt; 
+&lt;/scene&gt;
+</PRE>
+
+<P>Each object in the scene has the same structure. It has a set of attributes, a set of relationships with other objects, and a set of contained objects. Relationships typically encode dependencies between the object and other referenced objects, and a description of the relationship, for example, parenting. From this simple starting point a full scene description can be built out.</p> 
+<P> </p> 
+<P><strong>Data Design &mdash; Independence</strong></p> 
+<P>The next tier of the data description is data about the data. This is the schema. A schema assigns meaning to the objects. If part of the schema describes a transform, for example, given the schema, you're going to be able to find all the transforms anywhere in the data.</p> 
+<P>Semantics assign meanings to the attributes. For example, if you have an attribute, and its semantic type is transform, a tool could automatically create a manipulator for an object whenever the object is selected.</p> 
+<P>Rules assign meanings to the relationships. If a relationship is &ldquo;this is parent of that&rdquo;, the rule specifies that deep under the covers, a transform hierarchy needs to be wired up.</p> 
+<P>To support pipeline reordering, factor data transformations properly. Don't throw away data that later stages might need. For example, a mesh might start out as a nice Catmull-Clark patch surface with a lot of high vertex count patches. By the time it goes out to the rendering pipeline, it might have been tri-stripped. A lot of really interesting information about that mesh has been lost. That information might otherwise have been used efficiently later for other calculations. The data format should allow for retention of important things.</p> 
+<P> </p> 
+<P><strong>Data Design &mdash; Tolerance</strong></p> 
+<P>Pipeline elements should be tolerant. If garbage is read in, it should be possible to write it back out again without destroying it. An early example is the AIFF chunk format &mdash; the old audio interchange file format. Every chunk had a size and an identifier. If the parser didn't recognize the id, it burned right past it. There's a flaw in the scheme however. If there are unknown chunks, there is no way to tell if there are dependencies on data within those chunks that cross chunk boundaries. It is easily possible to corrupt a file if care isn't taken. The relationship rules should specify dependencies between data, so that even if you don't know what is in a chunk, you can at least warn a user that an edit could potentially break the data, and give options such as abandoning an edit, or removing chunks that could potentially become corrupt.</p> 
+<P>Watch for separable but dependent data. The light mapper and the sub-mesher are likely in separate tools, but if something is re-submeshed, the light maps will need to be regenerated. The pipeline must understand dependencies to avoid tripping things up.</p> 
+<P> </p> 
+<P><strong>Data Design &mdash; Longevity</strong></p> 
+<P>A well designed system has longevity. You can open up files years later, add water, and reconstitute them fairly reliably if the data formats are stable and robust.</p> 
+<P> </p> 
+<P><strong>Data Design &mdash; Summary</strong> </p> 
+<P>A data design based on these principals pays dividends on many fronts. The data can have a long life. Data transfer can be lossless. Dependencies can be encoded and tracked. Common data store access libraries can be developed which reduce the number of quirks one needs to deal with between various tools. Finally, applications can be dynamically bound at run time through common protocols for real time tweaking interfaces and similar enhancements.</p> 
+<P> </p> 
+<P><strong>The Importance of Look Development and Pre-production</strong></p> 
+<P>Up front look development keeps production costs down. Technology development and pipeline development during pre-production can be tailored to the look you want to get.</p> 
+<P>The corollary to that is important to fit new development into the pipeline structure without disruption. A new shader or something might be developed, and it might be really cool, but it has to be carefully considered. If the amazing new thing is introduced, will work that has already been finalled now need to be redone?</p> 
+<P>This is an implication of the modular pipeline. If someone suddenly starts sending hex bolts down the conveyer belt when everyone is expecting screws, that's going to result in chaos.</p> 
+<P> </p> 
+<P><strong>Random Tips</strong></p> 
+<P>Keep the pipeline unidirectional. Don't ever send things back up the pipeline.</p> 
+<P>The tools should all have the ability to run headless, without a UI, from the command line so that the pipeline can be automated. Artists shouldn't have to sit there hitting export, export, export over and over.</p> 
+<P>The automated batch mode should have the ability to reprocess an asset type, and regenerate all downstream dependencies.</p> 
+<P>Command line interfaces should be rich enough to support what you want to do. The interface should also be rich enough to support unit tests that can exercise every processing step for validation. Besides exposing all relevant parameters, or relying on a response file, it should be possible to set up independent inputs and outputs &mdash; it should be possible that an output file not overwrite the input file.</p> 
+<P>The pipeline should have traps for bad data, incomplete processing, and error conditions that occur during processing. Errors should be caught early and reported clearly. Don't let junk get into the main pipe where it can disturb other people's work.</p> 
+<P> </p> 
+<P><strong>The Future</strong></p> 
+<P>Simulation technologies will play an increasingly important role in the pipeline in the future. Deep compositing will be significant, as well as participating media. Currently when you see a frame of a game, you are seeing a one-shot final render &mdash; everything has been set up and bang! There you go. In film, you don't have to do that. Everything is done in passes and layers. If you want to sweeten the specularity of a particular component, you have that control. If you need to nudge something or brighten it up, you can do that. I'd like to see those facilities in real time pipelines.</p> 
+
+<P><em>Please note that ILM, LucasArts, Yoda, Star Wars, Geonossian, Republic Commando, and all related trademarks and indicia are copyright and trademarked by Lucasfilm Ltd.</em></p>
+</article>
+</div>
+<div id="tags">
+CG/film___games/games/siggraph</tags>
+
+<footer id="footer"> 
+	<p>Content by Nick Porcino (c) 1990-2011</p> 
+</footer> 
+	<!-- /#footer --> 
+</div>
+
+</BODY>
+</HTML>
