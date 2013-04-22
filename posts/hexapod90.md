@@ -82,7 +82,7 @@ The central pattern generators impose their oscillatory pattern upon the reflex 
 
 It is the duration of the stance phase relative to the duration of the swing phase that determines the gait. Changing the length of the swing phase makes the gait slower, but the gait patterns remain unchanged when swing versus stance ratios are maintained.
 
-![Figure 9. Relationship between the duration of swing and stance phases governs the resultant gait.](http://i148.photobucket.com/albums/s29/meshula/results.jpg "Results")
+![Figure 9. Relationship between the duration of swing and stance phases governs the resultant gait.](http://i148.photobucket.com/albums/s29/meshula/results-1.jpg "Results")
 
 Figure 9 summarizes the relationship between the duration of swing and stance phases. The length of the swing phase is unimportant, rather, it is the ratio of swing phase to stance phase which generates the different gaits. Swing time has therefore been normalized to 1.0 to generate the data in Figure 16. Note that the indicated data points are representative, and that the gaits smoothly blend into one another as the timing of the stance phases is changed. "Strange gaits" are gaits where the posterior legs step very much slower than the anterior legs, or gaits where the stance phase is significantly faster than the swing. Such gaits are not generally observed in nature.
 
