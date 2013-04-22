@@ -13,7 +13,7 @@ The consideration of neurophysiological data from invertebrate nervous systems a
 
 ## 1. AN INTRODUCTION TO INVERTEBRATE NERVOUS SYSTEMS
 
-The relative simplicity of the invertebrate nervous system raises the possibility of delineating, understanding and simulating the entire nervous system. There are on the order of one hundred thousand neurons in the system, of which about half are probably concerned with the reduction of sensory information. There are on the order of a thousand motor neurons and the number of interneurons controlling and modulating the motor neurons is likewise quite small (Hoyle, 1976)[^Hoyle-1976].
+The relative simplicity of the invertebrate nervous system raises the possibility of delineating, understanding and simulating the entire nervous system. There are on the order of one hundred thousand neurons in such a system, of which about half are probably concerned with the reduction of sensory information. There are on the order of a thousand motor neurons and the number of interneurons controlling and modulating the motor neurons is likewise quite small (Hoyle, 1976)[^Hoyle-1976].
 
 ![Figure 1. The ladder architecture as illustrated by the neuronal network of the leech.] (http://i148.photobucket.com/albums/s29/meshula/leech.jpg "Nervous System of the Leech")
 
@@ -35,20 +35,19 @@ Locomotor control is similar in all organisms - mediated by the brain but contro
 
 ### 2.1: THE ROLE OF SENSORY FEEDBACK
 
-Theory suggests that loading sensors prevent a leg's controlling ganglia from generating swing signals during the stance phase, thus preventing the swing phase from being initiated when a leg is carrying a significant portion of the animal's weight (Pearson, 1976). When another leg is placed down, it begins to carry some weight, relieving the weight on an already placed leg, thereby allowing that leg to swing. Experiment reveals that load information plays the largest part in allowing an organism to adapt to different terrains (Kaneko, Ihnie, & Than, 1989 [^Kaneko-et-al-1988]).
+Theory suggests that loading sensors prevent a leg's controlling ganglia from generating swing signals during the stance phase, thus preventing the swing phase from being initiated when a leg is carrying a significant portion of an animal's weight (Pearson, 1976). When another leg is placed down, it begins to carry some weight, relieving the weight on an already placed leg, thereby allowing that leg to swing. Experiment reveals that load information plays the largest part in allowing an organism to adapt to different terrains (Kaneko, Ihnie, & Than, 1989 [^Kaneko-et-al-1988]).
 
 ![Figure 3 - The Stepping Reflex Controller of Beer, Chiel, and Sterling (1989).](http://i148.photobucket.com/albums/s29/meshula/steppingReflex.jpg "Stepping Reflex")
 
-Beer, Chiel, and Sterling [^Beer-Chiel-Sterling-1989] used backward and forward angle sensors to detect the extreme leg positions, and thus provided the first step towards a sensory driven locomotor controller. The controller is illustrated in Figure 3. The backwards angle sensor excites the central pattern generator, predisposing it to fire and therefore swing the leg forward. The forward angle sensor inhibits the pattern generator, preventing the central pattern generator from hyperflexing the leg. The forward angle sensor also excites the extensor motor neuron to begin the backwards cycle. In the model described by Beer et al, these sensors were binary, firing at the extreme positions, but providing no detailed positional information.[^Chiel-Beer-1989]
+Beer, Chiel, and Sterling [^Beer-Chiel-Sterling-1989] used backward and forward angle sensors to detect the extreme leg positions, and thus provided the first step towards a sensory driven locomotor controller. The controller is illustrated in Figure 3. The backwards angle sensor excites the central pattern generator, predisposing it to fire and therefore swing the leg forward. The forward angle sensor inhibits the pattern generator, preventing the central pattern generator from hyperflexing the leg. The forward angle sensor also excites the extensor motor neuron to begin the backwards cycle. In the model described by Beer et al, these sensors were binary, firing at the extreme positions, but providing no detailed positional information.
 
-Natural sensory afferents have nonlinear responses, as do the sensors used by the simulations in this paper. The more extreme the angle of the leg, the greater the sensory neuron firing frequency. Thus, for very extreme angular displacements, the signals can't be ignored, and are therefore analogous to pain. This observation points the way to learning in the circuit, perhaps via operant conditioning (Klopf, 1982). Learning in these reflex circuits is not
-explored in this paper.
+Natural sensory afferents have nonlinear responses, as do the sensors used by the simulations in this paper. The more extreme the angle of the leg, the greater the sensory neuron firing frequency. Thus, for very extreme angular displacements, the signals can't be ignored, and are therefore analogous to pain. This observation points the way to learning in the circuit, perhaps via operant conditioning (Klopf, 1982 [^Klopf-1982]). Learning in these reflex circuits is not explored in this paper.
 
 ![Figure 4. The insect's foot. Diagram after Laurent and Hustert (1988).](http://i148.photobucket.com/albums/s29/meshula/insectFoot.jpg "Insect Foot")
 
 The insect's leg has a variety of mechanoreceptors, some of which correspond to forward and backward angle sensors: the spurs at the back of the foot signal backward extension, strain sensors in the insect's exoskeleton act as forward angle sensors. In addition, the pads on the bottom of the insect's foot, the pulvilli, are load sensors (see Figure 4 to the left).
 
-Most of the process of walking is carried out by four groups of muscles within the body which use -the whole leg as a lever to propel the body forward. The muscles controlling the leg are the flexors, extensors, levators, depressors, and refractors. Flexos bring the leg forward, extensors push it back. Levators lift the leg, and depressors push it down. Retractors retract the claw at the end of the tarsus.
+Most of the process of walking is carried out by four groups of muscles within the body which use the whole leg as a lever to propel the body forward. The muscles controlling the leg are the flexors, extensors, levators, depressors, and refractors. Flexors bring the leg forward, extensors push it back. Levators lift the leg, and depressors push it down. Retractors retract the claw at the end of the tarsus.
 
 ![Figure 5. The stepping reflex.](http://i148.photobucket.com/albums/s29/meshula/stepping2.jpg "Stepping Reflex")
 
@@ -66,7 +65,9 @@ The dotted connections in Figure 5 illustrate a reflex reaction - touching the d
 
 ![Figure 6. The full stepping reflex circuit.](http://i148.photobucket.com/albums/s29/meshula/hexapodpreview.jpg "Stepping Reflex 3")
 
-The proposed controller uses the circuitry of Figure 6 duplicated 6 times (once for every leg). The complete circuit was simulated with the Hodgkin-Huxley type neurons described the Appendix and the connection strengths were manually finetuned. If the six central pattern generators are not interconnected, the circuit walks, driven by sensory feedback. The gait patterns generated by this circuit are highly irregular however, due to the lack of any sort of inter-leg coordination beyond that provided by load information. The simulated stepping reflex is quite robust and removing connections or randomly perturbing synaptic weights causes the gradual degradation of performance we have come to expect from neural nets. Although the central pattern generator can drive the circuit, it can be removed from the circuit without significant effect to the stepping reflex, as the main purpose of the central pattern generator neuron is in intra-leg coordination, as will be detailed in the next section. A leg will keep stepping even if all connections are corrupted to some small degree, pointing to the inherent robustness of this circuit design.
+The proposed controller uses the circuitry of Figure 6 duplicated 6 times (once for every leg). The complete circuit was simulated with the Hodgkin-Huxley type neurons described the Appendix and the connection strengths were manually fine-tuned. If the six central pattern generators are not interconnected, the circuit walks, driven by sensory feedback. The gait patterns generated by this circuit are highly irregular however, due to the lack of any sort of inter-leg coordination beyond that provided by load information. The simulated stepping reflex is quite robust and removing connections or randomly perturbing synaptic weights causes the gradual degradation of performance we have come to expect from neural nets (Chiel and Beer, 1989 [^Chiel-Beer-1989]).
+
+Although the central pattern generator can drive the circuit, it can be removed from the circuit without significant effect to the stepping reflex, as the main purpose of the central pattern generator neuron is in intra-leg coordination, as will be detailed in the next section. A leg will keep stepping even if all connections are corrupted to some small degree, pointing to the inherent robustness of this circuit design.
 
 ### 2.2: THE ROLE OF CENTRAL PATTERN GENERATION
 
@@ -128,6 +129,9 @@ However, it is possible that rather than actually existing in an invertebrate's 
 
 [^Kaneko-et-al-1988]: Kaneko, Makoto, Kazuo Tanie, and Mohamad Nor Bin Mohamad Than. __A Control Algorithm for Hexapod Walking Machine Over Soft Ground__. IEEE Journal of Robotics and Automation, Vol. 4, No. 3, June 1988, pp. 294-302.
 
+[^Klopf-1982]: Klopf, A. Harry. The Hedonistic Neuron: A Theory of Memory, Learning, and Intelligence. Hemisphere
+Press, Washington DC, 1982.
+
 [^Laurent-Hustert-1988]: Laurent, Gilles & Reinhold Hustert. __Motor Nouronal Receptive Fields Delimit Patterns of Motor Activity During Locomotion of the Locust__. Journal of Neuroscience, vol. 8, no. 1 1, Nov. 1988. pp. 4349-4366
 
 [^Lockey-et-al-1989]: Lockey, S.R., G. Wittenburg, W B. Kdstan Jr., N. Oian, and Terrence Sejnowski. __Neural Network Analysis of Distributed Representations of Sensory Information In the Leech__. Presentation at Neural Information Processing Systems Conference, Denver Colorado, Nov. 1989.
@@ -158,6 +162,6 @@ The physical model of a leg used in the simulation. The coxa was simulated as tw
 
 ![](http://i148.photobucket.com/albums/s29/meshula/insect.jpg "Insect Robot")
 
-A whimsical illustration of the simulated insect. The simulation actually rendered from a 2D top down perspective.
+A whimsical illustration of the simulated insect. The simulation was actually rendered from a 2D top down perspective with simple graphics.
 
 The author wishes to thank Michael Ellis for helping with the programming of the simulation, and Dr. James Collins and Dr. Dale Shpak for helpful advice.
