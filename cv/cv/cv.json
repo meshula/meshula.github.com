@@ -1,0 +1,546 @@
+
+{
+    "timeline":
+    {
+        "headline":"Nick Porcino",
+        "type":"default",
+		"text":"Creating games, computer graphics, visual effeccts, artificial intelligence, and robotics since 1981. His adventures have seen him working on autonomous submersibles, robotic toys in Tokyo, game consoles since the industry's earliest days, and games for Disney Interactive and LucasArts. Most recently, he has worked on the GWiz previsualization tool for George Lucas, and has been implementing real time interactive systems for use on set at ILM.",
+		"startDate":"1985,1,1",
+        "date": [
+
+            {
+                "startDate":"1979,1,1",
+                "endDate":"1982,1,1",
+                "headline":"Zada Software - Partner/Game Designer/Programmer",
+                "text":"<P>Designed and wrote Race To Space for Apple ][, as well as Circuit Masters and other early games, in 6502 assembler.</P>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"1982,11,1",
+                "endDate":"1984,1,1",
+                "headline":"Interphase Technologies - Game Designer/Programmer",
+                "text":"<P>Designed and wrote Aquattack in Z80 assembler, after helping reverse engineer the Colecovision hardware and ROMs.</P>",
+                "asset":
+                {
+                    "media":"aquattack1.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+
+            {
+                "startDate":"1985,1,1",
+                "endDate":"1985,12,31",
+                "headline":"<a href='http://www.mobiltex.com/products/vms/index.html'>Mobiltex Data Ltd.</a>",
+                "text":"<P>The VMS automatically monitors field personnel as they work alone and/or around hazardous locations. The system ensures that field personnel maintain regular contact by sending status messages at selected time intervals from the truck-mounted keypad to the VMS Host computer.</P><P>I wrote the original control software in assembly language. I was particularly proud of synthesizing DTMF tones by interweaving pulse generation codes between the main operating codes.</P>",
+                "asset":
+                {
+                    "media":"http://www.mobiltex.com/products/pics/vms/littlebuddy.png",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+
+            {
+                "startDate":"1986,1,1",
+                "endDate":"1990,1,1",
+                "headline":"Canadian Department of National Defense - Research Engineer",
+                "text":"<P>I worked at Royal Roads Military College on the design of autonomous robotics and architectures for artificial intelligence, under the direction of Dr. James S. Collins.</P>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+
+            {
+                "startDate":"1988,1,1",
+                "endDate":"1989,1,1",
+                "headline":"Bandai - Research Engineer",
+                "text":"<P>I worked to bring robotic and microcomputer control technology to toys at Bandai's Strategic Research and Development Branch, in Kanda, Tokyo. I was Bandai's first non-Japanese engineer. We made many foundational advancements in entertainment technology, some of which are still coming to market today.</P>",
+                "asset":
+                {
+                    "media":"http://i148.photobucket.com/albums/s29/meshula/toysInside.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"1990,4,1",
+                "headline":"Paper in International Joint Conference in Neural Networks, 1990",
+                "text":"<P>Hexapod gait control by a neural network</P>",
+                "asset":
+                {
+                    "media":"http://i148.photobucket.com/albums/s29/meshula/hexapodpreview.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"1990,4,1",
+                "headline":"Paper in International Joint Conference in Neural Networks, 1990",
+                "text":"<P>An application of neural networks to the guidance of free-swimming submersibles. Co-authored with James S. Collins</P>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+
+            {
+                "startDate":"1991,1,1",
+                "endDate":"1991,12,31",
+                "headline":"Partner Cornerstone Graphics",
+                "text":"<P>This company did digital prepress, and architectural previsualization. Developed a virtual walk-around application on SGI hardware for Imax theater design.</P>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+
+
+            {
+                "startDate":"1992,1,1",
+                "endDate":"1995,12,31",
+                "headline":"<a href='http://en.wikipedia.org/wiki/Sanctuary_Woods'>Sanctuary Woods</a>",
+                "text":"<P>Lead - Advanced Technology Group</P><P>I architected and led the development of the <a href='http://wiki.scummvm.org/index.php/M4'>M4 game engine</a>, Sanctuary Woods' homegrown engine, mind-melded with the Microprose MADS adventure engine.</P>",
+                "asset":
+                {
+                    "media":"swoods.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"1993,1,1",
+                "headline":"Sanctuary Woods<BR><a href='http://www.gamefaqs.com/3do/584409-shelley-duvalls-its-a-birds-life'>It's a Bird's Life</a>",
+                "text":"<P>Lead - Advanced Technology Group</P><P>This edutainment title was the first CD off the assembly line for the new 3DO console. Trip Hawkins had a golden master framed behind his desk when I went to visit him some years ago. The title was built on a tool set and engine that I built which ultimately became M4.</P>",
+                "asset":
+                {
+                    "media":"iabl.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"1995,9,30",
+                "headline":"Sanctuary Woods<BR><a href='http://en.wikipedia.org/wiki/Riddle_of_Master_Lu'>The Riddle of Master Lu</a>",
+                "text":"<P>Lead - Advanced Technology Group</P><P>The Riddle of Master Lu was built on the M4 engine.</P><P>Ripley's Believe It or Not!: The Riddle of Master Lu is a point and click adventure game based on Robert Ripley, the creator of Ripley's Believe It or Not!.</P>",
+                "asset":
+                {
+                    "media":"http://upload.wikimedia.org/wikipedia/en/d/d6/Riddle_of_Master_Lu_cover.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"1996,1,1",
+                "headline":"Sanctuary Woods<BR><a href='http://en.wikipedia.org/wiki/Orion_Burger'>Orion Burger</a>",
+                "text":"<P>Lead - Advanced Technology Group</P><P>Orion Burger was built on the M4 engine.</P><P>Orion Burger features a young man saving the Earth from an interstellar fast food chain through a time loop.</P>",
+                "asset":
+                {
+                    "media":"http://upload.wikimedia.org/wikipedia/en/9/9f/Orion_Burger_cover.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+
+            {
+                "startDate":"1996,1,1",
+                "endDate":"1999,10,31",
+                "headline":"Disney Interactive",
+                "text":"<P>Lead - Advanced Technology Group - Disney Interactive Victoria</P><P>Disney Interactive Victoria was formed through the acquisition of Sanctuary Woods. I continued to architect, and lead engine and tool development. I also worked as a lead game designer, and as assistant producer.</P>",
+                "asset":
+                {
+                    "media":"di.png",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"1997,1,1",
+                "headline":"Disney Interactive - Ready to Read With Pooh",
+                "text":"<P>Lead - Advanced Technology Group - Disney Interactive Victoria</P><P>Architecture, led tools and engine development. Helped developed studio production model to allow continuous improvement of core technologies without interrupting product development.</P>",
+                "asset":
+                {
+                    "media":"pooh.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"1997,1,1",
+                "headline":"Disney Interactive - Hotshots",
+                "text":"<P>Lead - Advanced Technology Group - Disney Interactive Victoria</P><P>Architecture, led tools and engine development. Developed integrated production system, localization system, game design, and levels.</P>",
+                "asset":
+                {
+                    "media":"hotshots.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"1998,1,1",
+                "headline":"Disney Interactive - Hades' Challenge",
+                "text":"<P>Lead - Advanced Technology Group - Disney Interactive Victoria</P><P>Architecture, led tools and engine development. Integrated production system was now fully deployed and production cost savings were acruing.</P>",
+                "asset":
+                {
+                    "media":"hades.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"1998,1,1",
+                "headline":"Disney Interactive - Adventures in Typing with Timon and Pumbaa",
+                "text":"<P>Lead - Advanced Technology Group - Disney Interactive Victoria</P><P>Architecture, led tools and engine development. Further development of integrated production system.</P>",
+                "asset":
+                {
+                    "media":"typing.png",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+
+            {
+                "startDate":"1999,11,1",
+                "endDate":"2001,8,31",
+                "headline":"Lucas Learning",
+                "text":"Sr. Programmer",
+                "asset":
+                {
+                    "media":"lll.png",
+                    "credit":"",
+                    "caption":"<P></P>"
+                }
+            },
+            {
+                "startDate":"2001,4,25",
+                "headline":"<a href='http://www.mobygames.com/game/ps2/star-wars-super-bombad-racing'>Super Bombad Racing</a>",
+                "text":"<P>An irreverent take on the cart racing genre in the Star Wars universe.</P><P>I wrote the physics engine, the visual effects, and the artificial intelligence.</P><P>The physics engine was written under the tutelage of Travis Hilton, and included integrators, collision detection and resolution, and constraints.</P><P>The effects engine was highly parameterized for quick creation and iteration and included particles, ribbons, and so on.</P><P>My Insect AI architecture drove the racing AI. The AI itself learned to emulate the play styles of the QA personnel and continuously improved through hundreds of hours of game testing.</P>",
+                "asset":
+                {
+                    "media":"bombad.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+
+            {
+                "startDate":"2001,9,31",
+                "endDate":"2008,2,28",
+                "headline":"LucasArts",
+                "text":"<P>Sr. Software Engineer</P><P>At LucasArts, I wrote animation libraries, sound libraries, tools pipelines, effects engines, and with Steve Sullivan got the ball rolling on one of the earliest film-game convergence projects.</P>",
+                "asset":
+                {
+                    "media":"lec.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2002,6,1",
+                "headline":"<a href='http://www.mobygames.com/game/star-wars-jedi-starfighter'>Star Wars Jedi Starfighter</a>",
+                "text":"<P>Based loosely on the vehicles, events and characters of Star Wars Episode II: Attack of the Clones, you must pilot the new Jedi Starfighter, a sleek force powered vehicle, to defend a planet from total destruction.</P><P>I rewrote the PS2 graphics engine from Starfighter I, and optimized the engine as well as the content loading systems. The graphics kernel from JSF would form the basis of the R2 rendering engine.</P>",
+                "asset":
+                {
+                    "media":"http://pics.mobygames.com/images/covers/large/1051046614-00.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2002,11,22",
+                "headline":"<a href='http://www.mobygames.com/game/star-wars-bounty-hunter'>Bounty Hunter</a>",
+                "text":"<P>Jango Fett is about to take on a project that could make or break his bounty hunting career, and his life. Chosen to be the blue-print for the Clone Army, Jango must now prove himself in order to gain the biggest job on the streets, wiping out the deadly cult, Bando Gora. Every other bounty hunter in the galaxy is willing and able to do the job, so you must work hard to gain the contract from Darth Tyranus.</P><P>Bounty Hunter used the R2 rendering engine that I architected and led. I led and contributed to the development of the graphics content creation pipeline. I wrote the particle systems. I also wrote the sound engine for the PS2 version of the game. Contributed to the design, development, implementation, and optimization of the animation system which was used for most subsuequent internal games right up to Star Wars 1313.</P>",
+                "asset":
+                {
+                    "media":"http://pics.mobygames.com/images/covers/large/1039064439-00.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2003,6,17",
+                "headline":"<a href='http://www.mobygames.com/game/rtx-red-rock'>RTX Red Rock</a>",
+                "text":"<P>The player controls Major Eugene Wheeler, a radical tactics expert sent to the Mars base to investigate the loss of communications. Once there, he discovers that the base has been taken over by alien invaders who plan to use it to launch an attack on Earth. Wheeler must use all his wits and skills to prevent this from happening.</P><P>RTX Red Rock used the R2 rendering engine and tools pipeline that I architected and led. I also contributed to debugging and optimization.</P>",
+                "asset":
+                {
+                    "media":"http://pics.mobygames.com/images/covers/large/1080521525-00.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2003,6,17",
+                "headline":"<a href='http://www.mobygames.com/game/gladius'>Gladius</a>",
+                "text":"<P>Gladius is a turn-based gladiatorial RPG. Players try to build a championship gladiator school by gaining experience through fighting battles in the arenas, and recruiting new members.</P><P>Gladius used the R2 rendering engine that I architected and led. After hooking the PS2 version up to monitors and profiles, SCEA said that Gladius had one of the fastest polygon engines developed at the time.</P>",
+                "asset":
+                {
+                    "media":"http://pics.mobygames.com/images/covers/large/1079894157-00.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2003,9,1",
+                "endDate":"2008,3,1",
+                "headline":"Film Game Convergence",
+                "text":"<P>With Steve Sullivan, launched an initiative to combine the content creation methodologies of film and game into a new production methodology.</P><P>The history of this effort is well documented, <a href='http://www.gamasutra.com/php-bin/news_index.php?story=14789'>here</a>, and <a href='http://www.gamasutra.com/php-bin/news_index.php?story=15061'>here</a>. I gave a <a href='c22.pdf'>talk</a> with my collaborators at Siggraph, in 2007.",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":"<P></P>"
+                }
+            },
+            {
+                "startDate":"2003,1,1",
+                "headline":"OpenSteer",
+                "text":"<P>Code contributions and maintenance of <a href='http://opensteer.sourceforge.net/'>OpenSteer</a> - steering library and demo app by Craig Reynolds</P>",
+                "asset":
+                {
+                    "media":"http://opensteer.sourceforge.net/images/beta_250a.gif",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2003,3,1",
+                "headline":"GDC 2003 Presentation",
+                "text":"<P>AI interface standards: The road ahead. A Roundtable Discussion of the 2003 Game Developers Conference, March 2003, A Nareyek, N Porcino, M Kolenski</P>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2003,12,1",
+                "headline":"Zeno",
+                "text":"<P><a href='//http://www.awn.com/articles/people/lucasfilm-cto-cliff-plumer-talks-technology-0'>Zeno</a> is the core platform that ILM's proprietary technologies have been built upon. I led the effort to port Zeno from Linux to Windows. I wrote core portions of the OpenGL interactive rendering system, created several tools for game development, and was technical lead and one of the designers on the creation of the GWiz animation system designed by George Lucas. Over the years, I redesigned the audio layer, and rewrote it with Max Chen and Warren Davis, optimized geometry handling of very large datasets, and did a great deal of performance optimization particularly in animation playback and scenegraph traversal. Worked extensively with Kevin Wooley on stage related modifications and optimization.</P>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2003,12,1",
+                "headline":"OpenEXR",
+                "text":"<P><a href='//http://www.openexr.com'>OpenEXR</a> is the high dynamic range image file format developed at ILM.</P><P>I contributed many optimizations over the years and provided the initial port of OpenEXR to Windows.</P>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2010,12,1",
+                "headline":"Alembic",
+                "text":"<P><a href='//https://code.google.com/p/alembic/'>Alembic</a> is an open framework for storing and sharing scene data, developed jointly by ILM and Sony.</P><P>With Joe Ardent, I provided the initial Windows port, and provided ongoing platform support and optimizations.</P>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2004,4,1",
+                "headline":"ACM Queue Article",
+                "text":"<P><a href='http://delivery.acm.org/10.1145/990000/988409/porcino.pdf?ip=67.188.188.49&acc=OPEN&CFID=295906971&CFTOKEN=88439071&__acm__=1364283583_58110e43b54cb4c01ea5072988bb279f'>Gaming graphics: The road to revolution</a></P><P>This article anticipated the direction the industry was about to go in, covering such topics as parallel rendering, geometry shaders, and high dynamic range imaging.</P>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2004,6,1",
+                "headline":"Book Chapeter in AI Game Programming Wisdom 2",
+                "text":"<P>An Architecture for A-Life.</P><P>This article presents an architecture, notation, and design methodology for agent design.</P>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2005,1,1",
+                "headline":"Book Chapter in Game Programming Gems 4",
+                "text":"<P>Writing a verlet-based physics engine. This frequently referenced article summarized the experience gained during the creation of Super Bombad Racing, in a form intended to de-mystify the inner workings of physics simulators.</P>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2006,3,9",
+                "headline":"Book Chapter in AI Game Programming Wisdom 3",
+                "text":"<P>Insect AI 2: Implementation Strategies.</P><P>This article described how to integrate AI systems with blackbox physics, collision, and animation systems.",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+
+
+            {
+                "startDate":"2007,8,1",
+                "headline":"Siggraph 2007 Presentation",
+                "text":"<P><a href='c22.pdf'>LucasArts and ILM</a>: a course in film and game convergence, S Sullivan, C Williams, N Porcino, D Bullock, International Conference on Computer Graphics and Interactive Techniques ...</P>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2007,8,1",
+                "headline":"Siggraph 2007 Presentation",
+                "text":"<P><a href='c22.pdf'>Content tools & film use of Direct 3D 10, N Porcino, International Conference on Computer Graphics and Interactive Techniques ...</P>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+
+            
+    
+
+            {
+                "startDate":"2008,3,1",
+                "headline":"Industrial Light & Magic",
+                "text":"<P>Sr. R&D Engineer</P><P>Brought real time and interactive technologies to ILM's internal tools, with a focus on previsualization and on set augmented and hybrid cinematography.</P>",
+                "asset":
+                {
+                    "media":"ilm.gif",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2008,3,2",
+                "headline":"Movies",
+                "text":"<P>Indiana Jones, Iron Man, Star Trek X and XI, Rango, Red Tails, Pacific Rim.</P><P>Development and optimization of interactive rendering. Development and optimization of rigging technology for use on mocap stage. Work with device drivers. Optimization of geometry handling. Interactive cloud rendering. Development of animation tools. Advising production crews on set up and optimization of assets and workflows. Helped with integrating OpenSteer into animation systems.</P><P>Unannounced Films</P><P>Prototyping of new film making tools and rendering technologies to aid in the bidding and technology exploration process</P>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2008,9,16",
+                "headline":"<a href='http://www.mobygames.com/game/star-wars-the-force-unleashed'>Star Wars The Force Unleashed</a>",
+                "text":"<P>Star Wars: The Force Unleashed puts players in the role of Darth Vader's Secret Apprentice in an adventure that bridges the gap between Revenge of the Sith and A New Hope. Armed with an over-the-top arsenal of Force powers, players follow the Apprentice through his journey of vengeance and redemption, villainy and heroism, as he travels the galaxy.</P><P>I wrote core portions of the game engine and the animation system. Architected the particle and effects engine in cooperation with Nick Rasmussen of ILM, and wrote the initial implementation and tool set. Architected and led the development of the aiMuse sound engine, based on principles described by Walter Murch.</P><P>I led the adaptation of ILM's proprietary Zeno tool to games production and designed and built much of the initial pipeline and tool suite. Ultimately a new Shared Technologies group took over the development of the infrastructure.</P>",
+                "asset":
+                {
+                    "media":"http://pics.mobygames.com/images/covers/large/1224102062-00.jpg",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2008,4,1",
+                "headline":"GWiz",
+                "text":"<P>GWiz is a previsualization tool designed by George Lucas.</P><P>Architecture, co-designer, technology lead, key contributor. Delivered in 2011.</P>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2008,4,2",
+                "headline":"Zviz",
+                "text":"<P>Zviz is a previsualization tool used in the production of Clone Wars, and in the preprivisualization of movies such as Red Tails, and Pacific Rim.</P><P>Ongoing contributions to performance, rendering, effects visualization.</P>",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2010,7,17",
+                "headline":"Controlling Robotic Motion of Camera<BR>United States pending 2010/0149,337",
+                "text":"<p>A system comprising:a first camera generating a live image of a scene, the first camera configured for being placed in a plurality of locations by robotic motion; anda handheld device that includes a display device for continuously presenting the live image, wherein movement of the handheld device causes the handheld device to generate an output that controls the robotic motion.</P>",
+                "asset":
+                {
+                    "media":"roboticArm.png",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2012,1,5",
+                "headline":"Virtual Production",
+                "text":"<P>Augmented cinematography - on set previsualization and performance capture. Contributions to design and architecture. Interactive rendering team lead, programmer.</P><P>We achieved the real time interactive display of a scene from Star Wars New Hope, and replicated lens effects and more in order to achieve photorealistic equivalence to the source footage. A director was able to direct motion captured actors through a performance and record footage that was close to what would be generated in an offline process.",
+                "asset":
+                {
+                    "media":"",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2012,12,27",
+                "headline":"Editable Character Action User Interfaces<BR>United States pending 2012/0327,088<BR>co-author with Adam Schnitzer, Kent Oberheu, Louise Rasmussen, Joshua Goldenberg",
+                "text":"<p>A system includes a computing device that includes a memory configured to store instructions. The computing device also includes a processor configured to execute the instructions to perform a method that includes defining at least one of a location in a virtual scene and a time represented in a timeline as being associated with a performance of an animated character. The method also includes aggregating data that represents actions of the animation character for at least one of the defined location and the defined time. The method also includes presenting a user interface that includes a representation of the aggregated actions. The representation is editable to adjust at least one action included in the aggregation..</P>",
+                "asset":
+                {
+                    "media":"gwiz.png",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+          {
+                "startDate":"2012,9,6",
+                "headline":"Copying an Object in an Animation Creation Application<BR>United States pending 2012/0226,983<BR>co-author with Adam Schnitzer, Kent Oberheu, Louise Rasmussen, Joshua Goldenberg",
+                "text":"<p>A first input is received in an animation creation application having a user interface showing a virtual-space area for first objects, and a timeline area for second objects representing events. To generate the first input, a user presses and holds an input control while a cursor is over one of the first or second objects. It is determined whether the input control is held for at least a predefined duration. If so, a copy of the object is assigned to the cursor, and the copy is subsequently pasted at another location in the user interface upon the input control ceasing to be held after the cursor is moved to the other location. If the input control does not remain held for at least the predefined duration the copy of the object is not assigned to the cursor.</P>",
+                "asset":
+                {
+                    "media":"copy.png",
+                    "credit":"",
+                    "caption":""
+                }
+            },
+            {
+                "startDate":"2012,9,12",
+                "headline":"Retaining a surface Detail<BR>United States pending 2012/0226,983<BR>co-author with Adam Schnitzer, Kent Oberheu, Louise Rasmussen, Joshua Goldenberg",
+                "text":"<p>Among other disclosure, a computer-implemented method for retaining a surface detail includes identifying a surface that is to be used for generating an image in a rendering process. The surface includes polygons to be changed from an initial size to a larger size as the surface is changed to a lower resolution as part of tessellating the surface. The surface includes at least one surface detail...</P>",
+                "asset":
+                {
+                    "media":"retaining.png",
+                    "credit":"",
+                    "caption":""
+                }
+            }
+
+        ]
+    }
+}
