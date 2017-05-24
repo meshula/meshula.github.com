@@ -1,0 +1,89 @@
+Meshula Lab
+-------------
+
+Meshula Lab is a hybrid realitme and offline authoring and playback system for linear and interactive media.
+
+Streamlined iterative production processes driven by a workflow schema
+
+Interoperabiity with third party systems via Pixar's Univesal Scene Description
+
+Well defined distributed heterogeneous system integration through a consistent FFI and RPC
+
+Secure block chain transacted asset revision, tracking, and rights across networked systems
+
+Desktop and virtual authoring environment and playback systems
+
+
+# Production Platform
+
+A production management dashboard, and a work schema defining content creation, assembly, and deployment.
+
+Production management includes task tracking and workflow analysis of historical
+data, defined per production via workflow schemas.
+
+# Creation infrastructure
+
+- asset dependency tracking and validation.
+- Automatic creation of production artifacts such as sides
+- localization automation
+- iterative asset development from specification through prototype and delivery
+
+# Assembly Infrastructure
+
+- heavily leverages Pixar's Universal Scene Description
+- distributed asset storage replicated with eventual consistency
+- LabWorkbench tool development infrastructure https://github.com/meshula/LabWorkbench
+- UI driven and performance driven authoring for layout, animation, and sequencing
+- heterogeneous distributed collaborative workflow environment
+
+# Deploymnet
+
+- Meshula Lab incorporates its own realtime playback engine, but can transport files
+to other playback systems such as third party game engines.
+
+# Lab Workbench Sub-modules
+
+LabWorkbench is dependent on these sub-modules:
+
+- Landru scripting language - https://github.com/meshula/Landru
+- LabRender render engine - https://github.com/meshula/LabRender
+- Wires dependency and operator graph - https://github.com/meshula/Wires
+- LabCmd RPC engine - https://github.com/meshula/LabCmd
+- LabSound audio engine - https://github.com/LabSound/LabSound
+- LabAcme - asset storage and URI resolution - https://github.com/meshula/LabAcme
+- LabJson - https://github.com/meshula/LabJson
+- LabText - https://github.com/meshula/LabText
+- LabWeb - https://github.com/meshula/LabWeb
+- LabMidi - https://github.com/meshula/LabWeb
+
+# License
+
+Meshula Lab, LabWorkbench, and the sub-modules are copyright 2017 by Nick Porcino
+and released under the Apache 2.0 source license.
+
+# Third party dependencies
+
+USD
+ |
+ +-- Alembic
+ +-- boost
+ +-- tbb
+
+USD-Hydra
+ |
+ +-- GLEW
+ +-- OpenSubdiv
+ +-- Ptex
+ +-- OpenEXR
+       |
+       +-- z
+ +-- OpenImageIO
+       |
+       +-- libpng
+       +-- libtiff
+       +-- turbojpeg
+
+assimp
+
+<!-- Markdeep: --><style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script src="markdeep.min.js"></script><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>
+
