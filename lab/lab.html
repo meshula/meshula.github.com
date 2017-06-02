@@ -315,10 +315,254 @@ Purchaser - consideration to the person making a purchase on behalf of someone e
 
 
 
+# About databases
+
+
+reference -
+http://blog.memsql.com/cache-is-the-new-ram/
+
+reference -
+https://github.com/irrationalistic/nchat
+
+I like to have a schema for production work flow, adapted per show/game, with the ability to roll data forward in order to recover production statistics for planning. I like that production state and can be mined and correlated vs. the asset store, and that the assets can be sieved from the data for preview or injection into pipeline stages, and filtered back again. I like that file references themselves can be virtualized through the same look ups, and that cross-file dependencies can also be recovered. Then I like for the work flow schema to be evolved as time goes on as workflow bottlenecks are identified and corrected.
+
+I used to be a fan of the large SQL database, but over the years, I've run into too many problematic ones (poorly chosen pivots, lack of pivots, isolation from asset servers, proprietary wobbly implementations, flat databases, institutionally unchangeable but production mismatched databases, pet projects, can't be taken offline for upgrades, data can't be migrated, etc...) Even a well engineered and maintained database can become a burden once it has reached a critical mass, but embodies slowly obsoleting functionality.
+
+I've had a lot more fun with federations of small databases (hipster or sqlite as appropriate) whose data can be keep close to hand and migrated cheaply as process evolves. This also leads to easy integration of small bespoke web apps (possibly with very short lifespans) that can be introduced and removed from the workflow easily.
+
+It does mean that the overall system has a lot of moving parts, and you need something rigorous on top so the whole shebang doesn't fly apart, but the ability to crack open the hood while everything is running, swap a part, and send her back out on the track with an upgrade makes it worthwhile.
+
+Closer to the CPU, I like a hexastore (http://www.vldb.org/pvldb/1/1453965.pdf) implemented on Google's leveldb (https://code.google.com/p/leveldb/ - open source re-implementation of the ideas in their BigTable software). Here's a presentation on the concept - with a javascript variant http://nodejsconfit.levelgraph.io . In my testing, it returned results at a rate similar to a hash table, but with the advantage that it doesn't have to be all in CPU memory.
+
+
+# Rendezvous protocol
+
+
+RENDEZVOUS
+   Admin
+   ShowAdmins
+      [name, email, [tags], show]
+   Contributors
+      [name, email, [tags], [shows]]
+
+   Shows
+      [name, assetRoot, meta, [tags], [episodes]]
+   Episodes
+      [name, id, show, [sequences], [tags], meta]
+   Sequences
+      [name, id, show, episode, [tags], [shots]]
+   Shots
+      [id, show, episode, sequence, directionNotes, [tags], [takes]]
+   Takes
+      [id, show, episode, sequence, shot, [tags], notes]
+
+   ShowSessions
+      [show, [sessionIds]]
+   Sessions
+      id, name, show, episode, sequence, shot, take, [users]
+
+---------------------------------------------------------------------
+Admin adds session master server to rendezvous session master pool
+---------------------------------------------------------------------
+
+ADMIN                 RENDEZVOUS
+   :                     :
+   add $SESSIONSERVER -- add to pool
+
+
+---------------------------------------------------------------------
+Admin removes session master server to rendezvous session master pool
+---------------------------------------------------------------------
+
+ADMIN                   RENDEZVOUS
+   :                         :
+   remove $SESSIONSERVER -- remove from pool
+
+------------------------------
+Admin lists session servers
+------------------------------
+
+ADMIN                     RENDEZVOUS
+  :                          :
+  list sessions  ------------+
+                             :
+  +---------------- generate list
+  :
+  receive list
+
+-----------------
+Admin adds a show
+-----------------
+
+---------------------
+Admin removes a show
+---------------------
+
+----------------------------
+Admin adds a Show admin
+----------------------------
+
+-------------------------------
+Admin edits Show admin details
+-------------------------------
+
+----------------------------
+Admin removes a Show admin
+----------------------------
+
+----------------------------
+Show admin adds a contributor
+----------------------------
+
+----------------------------------
+Show admin edits contributor details
+----------------------------------
+
+----------------------------
+Show admin removes a contributor
+----------------------------
+
+----------------------------
+Show admin adds an episode
+----------------------------
+
+------------------------------
+Show admin removes an episode
+------------------------------
+
+----------------------------
+Show admin adds a sequence
+----------------------------
+
+------------------------------
+Show admin removes a sequence
+------------------------------
+
+----------------------------
+contributor adds a shot
+----------------------------
+
+----------------------------
+contributor removes a shot
+----------------------------
+
+----------------------------
+contributor adds a take of a shot
+----------------------------
+
+--------------------------------
+contributor removes a take of a shot
+--------------------------------
+
+---------------------
+contributor enters system
+---------------------
+
+CLIENT                         RENDEZVOUS
+  :                                   :
+  join session $USER/$SHOW/$DURATION -+
+                                      :
+                                authenticate ----* reject
+                                   :
+                               issue session $CREDENTIAL for $USER/$SHOW
+                               start authentication timedown. 
+                                :
+  +-----------------------------+             
+  :
+  *
 
 
 
 
+-----------------------------
+contributor asks for sessions list
+-----------------------------
+
+CLIENT                        RENDEZVOUS 
+  :                                 :
+  available sessions $CREDENTIAL ---+
+                                    :
+                        return $SESSIONS list
+                               |
+  +----------------------------+             
+  :
+  *
+
+
+
+-----------------------
+contributor joins a session
+-----------------------
+
+CLIENT                    RENDEZVOUS         $SESSION MASTER
+  :                            :  
+  join $SESSION $CREDENTIAL ---+
+                               :
+                               +----------- allow $CREDENTIAL join to $SESSION  ----* reject
+                                                 :
+                                         issue session $MEMBERSHIP on $MASTER
+                                                 :
+  +----------------------------------------------+             
+  :
+  *
+
+
+-------------------------
+contributor creates a session
+-------------------------
+
+CLIENT                    RENDEZVOUS                     MASTER
+  :                            :
+  create $SESSION(EPISODE/SEQUENCE/SHOT/TAKE) $CREDENTIAL -+
+                                                           :
+                                                           +----------- allow $CREDENTIAL to create $SESSION  ----* reject
+                                                           :
+                                         issue session $MEMBERSHIP
+                                                 :
+  +----------------------------------------------+             
+  :
+  *
+
+
+
+---------------------------------
+contributor formally leaves a session
+---------------------------------
+
+CLIENT                    SESSION MASTER                 RENDEZVOUS
+  :                            :
+  leave $SESSION $CREDENTIAL --+
+  :                            :
+  *                       if no members left, -------- suspend $SESSION
+
+
+
+
+-------------------------
+contributor credential expires
+-------------------------
+
+SESSION MASTER                 CLIENT           RENDEZVOUS
+  :                             :                    :
+  timeout notification ------ refresh request ----- authenticate ---* reject
+                                                     :
+                                        refresh request for new $CREDENTIAL
+                                                     :
+    +------------------------------------------------+
+    :                                                :
+   anticipate new $CREDENTIAL for old                :
+                                                     :
+                           receive new $CREDENTIAL --+
+                                :
+                      transfer old for new
+                                :
+    transfer old for new -------+
+        :
+        *
+
+
+
+# left over notes
 
 
 ground plane recognition and walls
