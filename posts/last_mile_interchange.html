@@ -32,7 +32,7 @@ gltf has elided structure and choice points in order to prepare buffer data idea
 
 The 1.0 version of gltf specifically encapsulates WebGL objects for the Web. It is not forward looking in the sense that if a new paradigm arrives, such as WebVulkan, gltf will surely be displayable, but it will be via translation of WebGL concepts to WebVulkan concepts.
 
-The 2.0 version of gltf still retains some of its WebGL heritage, but more broadly encodes information required by previewers and game engines, such as a material encoding scheme incorporating a phyical shading model that meets modern requirements in being, roughly speaking, a hybrid of the Disney and Unreal PBR shading models.
+The 2.0 version of gltf moves beyond that, providing an API-neutral runtime asset delivery format. It still retains some of its WebGL heritage, but more broadly encodes information required by previewers and game engines, such as a material encoding scheme incorporating a phyical shading model that meets modern requirements in being, roughly speaking, a hybrid of the Disney and Unreal PBR shading models.
 
 Autodesk's fbx format seems like it might be an interchange format, but is in fact a last mile format. It takes complex asset structure and choice points, and reduces it to the strict subset of functionality supported by Motion Builder. It only feels like an interchange format because of the deceptive complexity of the format. Nonetheless, the correct use of an fbx file is Maya -> fbx -> { Motion Builder, Unreal, etc. } A backwards workflow from an endpoint such as Motion Builder through fbx will typically be used to bring animation data back to a content creation tool, but will not be used for purposes such as geometry edits.
 
