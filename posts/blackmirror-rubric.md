@@ -2,7 +2,6 @@
 Black Mirror Rubric
 ===================
 Nick Porcino
-------------
 - work in progress 2018
 
 We've been aware for some time that there's a disconnect between technology as an art, and technology as a practice. Famously, the Jurassic Park mathematician Ian Malcolm said -
