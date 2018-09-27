@@ -1,0 +1,103 @@
+
+Black Mirror Rubric
+===================
+Nick Porcino
+------------
+- work in progress 2018
+
+We've been aware for some time that there's a disconnect between technology as an art, and technology as a practice. Famously, the Jurassic Park mathematician Ian Malcolm said -
+
+*Your scientists were so preoccupied with whether or not they could, they didn’t stop to think if they should.*
+
+<div style="text-align: right">- Michael Crichton</div>
+
+Crichton's Challenge gives a sense of what we should be thinking about when we consider technology, but it doesn't give us the tools to evaluate a technology concretely in terms that might help decision makers.
+
+This paper develops a rubric to that end.
+
+Contraindications
+-----------------
+
+Some controversial technology development is justified by
+practitioners through various arguments; this paper argues
+those justifications are contraindications, and don't help to
+address Crichton's challenge. Some of those justifications include:
+
+- Ubiquity
+
+   There are already killer robots, so it's fine if I make killer robots
+
+- Inevitability
+
+  If I don't make killer robots, someone else will anyway
+
+- Denial of Agency
+
+  Someone else told me to build killer robots
+
+- Denial of Responsibility
+
+  Killer robots don't kill people, the AI in the killer robots kills people
+
+- Profiteering
+
+  Killer robots pay big money. That money will be allocated and I deserve that money as much as anyone.
+
+The Black Mirror Rubric
+-----------------------
+
+The episodic show Black Mirror takes technological artifacts and trends and projects them to extreme, dystopic ends. This rubric is named for the show. It provides tools for analysing a technology or trend. The output of the rubric will be a considered list of possible outcomes, to be used as an input to the decision process.
+
+The rubric is a matrix, combining two critical dimensions; impact and reach. Impact describes what the technology affects, whether it's the weight of a wearable on the wrist, or clearing land to build a data center. Reach describes the magnitude of the impact, from impacting a single person, to impacting everyone.
+
+Impact
+------
+
+- Somatic
+
+  Affects on the body.
+
+- Emotional
+
+  Affects on feeling, mode, a sense of wellbeing
+
+- Psychic
+
+  Affects on judgement, ability to remember, learn, or reason
+
+- Existential
+
+  Affects on the environment
+
+Reach
+-----
+
+- Individual
+
+  Affects a single individual
+
+- Tribe
+
+  Affects a group of related individuals
+
+- Society
+
+  Affects the society in which an individual or tribe in embedded
+
+- Universal
+
+  Affects everyone, irrespective of society
+
+Arranged in a chart, the evaluative matrix appears like this:
+
+|                | Individual | Tribe | Society | Universal |
+| --------------:| -----------| ------|---------|-----------|
+| **Somatic**    |            |       |         |           |
+| **Emotional**  |            |       |         |           |
+| **Psychic**    |            |       |         |           |
+| **Existential**|            |       |         |           |
+
+It's meant as a framework for thought, and can be filled out as completely as necessary to start to understand a technology, whether it should be undertaken, and how the risks can be discovered.
+
+Conversely, the matrix can also be used as a light mirror to brainstorm and qualify positive aspects.
+
