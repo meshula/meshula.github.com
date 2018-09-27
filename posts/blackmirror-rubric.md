@@ -81,7 +81,7 @@ Reach
 
 - Society
 
-  Affects the society in which an individual or tribe in embedded
+  Affects the society in which an individual or tribe is embedded
 
 - Universal
 
