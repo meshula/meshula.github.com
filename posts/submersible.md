@@ -1,4 +1,7 @@
 
+
+<meta charset="utf-8" emacsmode="-*- markdown -*-"><link rel="stylesheet" href="markdeep.1-01.dark.css">
+
 # An Application of Neural Networks to the Guidance of Free-Swimming Submersibles
 
 Domenico P. Porcino
@@ -48,24 +51,24 @@ The original model of Barto, Sutton, and Anderson used real synaptic weights to 
 
 The following equation describes the output of the ASE at a given time:
 
-![Equation 1](http://nickporcino.com/posts/sub90/eqn1.jpg "Equation 1")
+![Equation 1](http://nickporcino.com/posts/sub90/eq1.jpg "Equation 1")
 
 
 The addition of a noise signal having a zero-center Guassian distribution causes the ASE's output to be governed by chance. The noise is necessary during early training to ensure that the system fully explores the state space. The noise should be gradually shut off over time to fine tune the weights, and completely shut off after training is complete to ensure consistent and repeatable behavior.
 
-![Equation 2a](http://nickporcino.com/posts/sub90/eqn2a.jpg "Equation 2a")
+![Equation 2a](http://nickporcino.com/posts/sub90/eq2a.jpg "Equation 2a")
 
-![Equation 2b](http://nickporcino.com/posts/sub90/eqn2b.jpg "Equation 2b")
+![Equation 2b](http://nickporcino.com/posts/sub90/eq2b.jpg "Equation 2b")
 
 The output fo the ASE is passed through a thresholding function f. This quantizer provides the system's nonlinearity - utterly necessary for any computation. Equation (2a) describes the quantizer for real numbers, and (2b) shows the quantizer extended for complex numbers.
 
 The controller's most recent choices were most likely responsible for the current success or failure of the system, and therefore the most eligible to have their weights changed. A complex eligibility trace e decays a rate governed by d valued between 0 and 1. The inclusion of the output of the ASE, y(t), means that eligibility will be positive decaying to zero if the ASE's output was positive and negative decaying towards zero otherwise.
 
-![Equation 3](http://nickporcino.com/posts/sub90/eqn3.jpg "Equation 3")
+![Equation 3](http://nickporcino.com/posts/sub90/eq3.jpg "Equation 3")
 
 The eligibility remembers how long ago a choice was made at a particular synapse, and what that chioice was.
 
-![Equation 4](http://nickporcino.com/posts/sub90/eqn4.jpg "Equation 4")
+![Equation 4](http://nickporcino.com/posts/sub90/eq4.jpg "Equation 4")
 
 This equation shows how weights change over time.
 
@@ -83,11 +86,11 @@ The ACE receives the same decoder signal as the ASE, and also has a memory trace
 
 Figure 5 shows what the ACE eventually learns about the submersible control problem. If displacement and velocity are both large and of the same sign, failure will soon occur. The white squares show where no reinforcement arrives from the environment, and the darker squares show that a failure signal is likely to occur soon.
 
-![Equation 5](http://nickporcino.com/posts/sub90/eqn5.jpg "Equation 5")
+![Equation 5](http://nickporcino.com/posts/sub90/eq5.jpg "Equation 5")
 
 This equation shows how the ACE makes its prediction, where v holds the ACE's internal weights, and x is the output of the decoder. At failure the ACE's prediction is zero as every decoder element output will be zero. The ACE sends the ASE the internal reinforcement signal:
 
-![Equation 6](http://nickporcino.com/posts/sub90/eqn6.jpg "Equation 6")
+![Equation 6](http://nickporcino.com/posts/sub90/eq6.jpg "Equation 6")
 
 Upoin failure, the output of the decoder and consequently the ACE, p(t), will be zero, but the external reinforcement, r, will be -1 (where usually it is zero). The internal reinforcement r hat will be the difference between the previous reinforcement signal p(t-1) and r. A fully predicted failure causes no reinforcement. Incorrect actions leading up the failure will be punished in accordance with how much the ACE's eligibility traces have decayed. The predictions of failure will be reinforced, because they were accurate.
 
@@ -95,11 +98,11 @@ In the absense of external signals, the discount term, gamma, causes the interna
 
 If the system moves from a low danger to a high danger state, the internal reinforcement will be negative, punishing the system. If on the other hand the system moves from a high danger state to a low danger state, reinforcement will be positive: reward. From this information the system learns to avoid dangerous states. The equations govering learning in the ACE and ASE are very similar:
 
-![Equation 7](http://nickporcino.com/posts/sub90/eqn7.jpg "Equation 7")
+![Equation 7](http://nickporcino.com/posts/sub90/eq7.jpg "Equation 7")
 
 Notice that the term inside the square brackets is the same as the internal reinforcement signal r hat in (6). In form and substance (7) is almost the same as the ASE's weight change (4) except for the reinforcement term, and the form of the eligibility. The ACE's eligibility trace equation is similar to the ASE's in (3).
 
-![Equation 8](http://nickporcino.com/posts/sub90/eqn8.jpg "Equation 8")
+![Equation 8](http://nickporcino.com/posts/sub90/eq8.jpg "Equation 8")
 
 ## Submersible Model and Simulation Results
 
@@ -144,3 +147,13 @@ Knopf, A.H., The Hedonistic Neuron: A Theory of Memory, Learning, and Intelligen
 Michie D., R.A. Chambers. BOXES: An experiment in adaptive control. Machine Intelligence 2, E. Dale and D. Mitchie, Eds. Oliver and Boyd, Edinburgh, pp. 137-152, 1968
 
 <!-- Markdeep: --><style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style><script src="markdeep.min.js"></script><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js"></script><script>window.alreadyProcessedMarkdeep||(document.body.style.visibility="visible")</script>
+
+<!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=GA_TRACKING_ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-38190740-1');
+</script>
