@@ -42,7 +42,7 @@ Processes
 A process is the behavior pattern of an object. Behavior is described as a pattern wherein 
 events lead to other behaviors. Events are instantaneous actions - atomic actions 
 without duration. 
-There's nothing special about an event, there imply no causality. Events are not considered 
+There's nothing special about an event, they imply no causality. Events are not considered 
 to be sent or received, rather, they merely represent that something has occurred, and 
 therefore a further pattern of action is expected. Another way to describe an event is 
 as a synchronization primitive that one or more processes can engage with.
@@ -73,6 +73,8 @@ that two events occur simultaneously, they are treated as a single event.
 A machine that accepts two coins, dispenses two chocolates, and stops can be described as:
 
     (coin -> (choc -> (coin -> (choc -> STOP))))
+
+First, the machine waits for a coin insert event. Then it waits for a chocolate extracted event, then a coin inserted event, a chocolate extracted event, and finally it executes the STOP process.
     
 If this sequence was to repeat indefinitely, recursion could be used. A clock might be 
 described by ticks:
@@ -85,7 +87,8 @@ A CLOCK can emit a single tick, and we can define
     
 This can then be expanded via substitution as many times as we want. 
 
-    CLOCK = (tick -> tick -> tick -> tick ->(tick -> CLOCK))
+    CLOCK = (tick -> (tick -> (tick -> (tick -> (tick -> CLOCK)))))
+
     
 If the chocolate vending machine described earlier has an unlimited supply of chocolate, 
 it could be defined as 
@@ -104,7 +107,8 @@ comes in handy for proofs and simplifications.
 
 Recursion can be mutual:
 
-    CLOCKA = (ticka -> CLOCKB) CLOCKB = (tickb -> CLOCKA)
+    CLOCKA = (ticka -> CLOCKB) 
+    CLOCKB = (tickb -> CLOCKA)
 
 Choices are indicated with a bar. This equation 
 
@@ -115,7 +119,7 @@ z occurs, R results. No other event is engaged with this process.
 
 This idea can be used to implement a copy process. 
 
-    COPYBIT = (in.0 -> out.0 -> X | in.1 -> out.1 -> X)
+    COPYBIT = (in.0 -> out.0 -> COPYBIT | in.1 -> out.1 -> COPYBIT)
 
 The only distinction between the notions of input and output in a process is that the 
 environment can provide an input of in.0, or in.1, but the corresponding output has no 
@@ -164,6 +168,18 @@ action engages only a single process.
 Nondeterminism
 ==============
 
+Internal and external choice.
+              _
+R = (a -> B) | | (b -> C)
+
+R will choice internally whether to respect the first or second process.
+
+External choice
+
+R = (a -> B) [] (b -> C)
+
+The first or second process will be selected externally, for example
+
 Nondeterminism is introduced to describe situations where multiple actions are possible, 
 but the choice cannot be anticipated; it is made at the time the action occurs. For 
 example, a process cannot know which lever a user might pull, until the moment the lever 
@@ -195,6 +211,10 @@ then one or the other of the processes can engage an action. If P cannot accept 
 then Q can take it, and vice versa. If both can accept it, then one or the other will take 
 it, nondeterministically. If neither can take it, deadlock results. An algebra is 
 developed, as well as the behavior of traces and refusals, and the use of specifications.
+
+(a -> b -> STOP) ||| (c -> b -> STOP)
+
+means that a, c, b, STOP and c, a, b, STOP are both valid sequences. 
 
 Communications
 ==============
