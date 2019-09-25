@@ -42,7 +42,7 @@
 <p>The relative simplicity of the invertebrate nervous system raises the possibility of delineating, understanding and simulating the entire nervous system. There are on the order of one hundred thousand neurons in such a system, of which about half are probably concerned with the reduction of sensory information. There are on the order of a thousand motor neurons and the number of interneurons controlling and modulating the motor neurons is likewise quite small (Hoyle, 1976)<a href="#fn:1" id="fnref:1" title="see footnote" class="footnote">[1]</a>.</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/leech.jpg" alt="Figure 1. The ladder architecture as illustrated by the neuronal network of the leech." title="Nervous System of the Leech" />
+<img src="hexapod90/leech.jpg" alt="Figure 1. The ladder architecture as illustrated by the neuronal network of the leech." title="Nervous System of the Leech" />
 <figcaption>Figure 1. The ladder architecture as illustrated by the neuronal network of the leech.</figcaption></figure>
 
 
@@ -52,7 +52,7 @@
 <p>Through the mechanism of inhibitory connections between ganglia, the ladder circuit forms a pattern generator. The leech&#8217;s swimming motion is effected by contraction of the muscles on one side and relaxation on the other, possibly caused by symmetrical spikes firing both sides. The patterns provide a low energy operational modality - the neurons settle into a sort of cooperative pattern that allows all the neurons to fire maximally. As an example, two identical neurons connected such that each inhibits the other settle into a pattern where they fire alternately, with spikes maximally separated in time. This circuit is called the &#8220;half-center&#8221; model (Pearson, 1976<a href="#fn:2" id="fnref:2" title="see footnote" class="footnote">[2]</a>). Figure 2 shows the results of a simulation which demonstrates the half-center model undergoing the process of entrainment.</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/patternGen.jpg" alt="Figure 2. A simple pattern generator." title="simple pattern generator" />
+<img src="hexapod90/patternGen.jpg" alt="Figure 2. A simple pattern generator." title="simple pattern generator" />
 <figcaption>Figure 2. A simple pattern generator.</figcaption></figure>
 
 
@@ -74,7 +74,7 @@
 <p>Theory suggests that loading sensors prevent a leg&#8217;s controlling ganglia from generating swing signals during the stance phase, thus preventing the swing phase from being initiated when a leg is carrying a significant portion of an animal&#8217;s weight (Pearson, 1976). When another leg is placed down, it begins to carry some weight, relieving the weight on an already placed leg, thereby allowing that leg to swing. Experiment reveals that load information plays the largest part in allowing an organism to adapt to different terrains (Kaneko, Ihnie, &amp; Than, 1989 <a href="#fn:3" id="fnref:3" title="see footnote" class="footnote">[3]</a>).</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/steppingReflex.jpg" alt="Figure 3 - The Stepping Reflex Controller of Beer, Chiel, and Sterling (1989)." title="Stepping Reflex" />
+<img src="hexapod90/steppingReflex.jpg" alt="Figure 3 - The Stepping Reflex Controller of Beer, Chiel, and Sterling (1989)." title="Stepping Reflex" />
 <figcaption>Figure 3 - The Stepping Reflex Controller of Beer, Chiel, and Sterling (1989).</figcaption></figure>
 
 
@@ -84,7 +84,7 @@
 <p>Natural sensory afferents have nonlinear responses, as do the sensors used by the simulations in this paper. The more extreme the angle of the leg, the greater the sensory neuron firing frequency. Thus, for very extreme angular displacements, the signals can&#8217;t be ignored, and are therefore analogous to pain. This observation points the way to learning in the circuit, perhaps via operant conditioning (Klopf, 1982 <a href="#fn:5" id="fnref:5" title="see footnote" class="footnote">[5]</a>). Learning in these reflex circuits is not explored in this paper.</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/insectFoot.jpg" alt="Figure 4. The insects foot. Diagram after Laurent and Hustert (1988)." title="Insect Foot" />
+<img src="hexapod90/insectFoot.jpg" alt="Figure 4. The insects foot. Diagram after Laurent and Hustert (1988)." title="Insect Foot" />
 <figcaption>Figure 4. The insect&#8217;s foot. Diagram after Laurent and Hustert (1988).</figcaption></figure>
 
 
@@ -94,7 +94,7 @@
 <p>Most of the process of walking is carried out by four groups of muscles within the body which use the whole leg as a lever to propel the body forward. The muscles controlling the leg are the flexors, extensors, levators, depressors, and refractors. Flexors bring the leg forward, extensors push it back. Levators lift the leg, and depressors push it down. Retractors retract the claw at the end of the tarsus.</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/stepping2.jpg" alt="Figure 5. The stepping reflex." title="Stepping Reflex" />
+<img src="hexapod90/stepping2.jpg" alt="Figure 5. The stepping reflex." title="Stepping Reflex" />
 <figcaption>Figure 5. The stepping reflex.</figcaption></figure>
 
 
@@ -114,7 +114,7 @@
 <p>The dotted connections in Figure 5 illustrate a reflex reaction - touching the dorsal surface of the tarsus causes a strong levation reaction. This is a stumble reflex: if the top of the tarsus hits some obstacle, the leg is lifted to avoid the obstacle. Figure 6 shows the complete circuit as implemented in the simulations.</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/hexapodpreview.jpg" alt="Figure 6. The full stepping reflex circuit." title="Stepping Reflex 3" />
+<img src="hexapod90/hexapodpreview.jpg" alt="Figure 6. The full stepping reflex circuit." title="Stepping Reflex 3" />
 <figcaption>Figure 6. The full stepping reflex circuit.</figcaption></figure>
 
 
@@ -128,7 +128,7 @@
 <p>Observation tells us that contralateral and adjacent pairs of legs never swing at the same time (Pearson, 1976). A logical way to design a pattern generator, therefore, is to connect pattern generators (one for each leg) in an inhibitory ladder to produce coordination of all the legs, as in Figure 7. There is no central motor store, no programmed walking pattern. Coordination of the legs is an emergent behaviour of a distributed system. Section 3 details a number of modes of oscillation of this circuit. (This hypothetical architecture doesn&#8217;t tell the whole story. Insects placed on water, for example, can propel themselves with synchronous contralateral kicks. Some arthropods can walk backwards or even sideways. These are radically different behaviours, elicited by different sensory input, and are not behaviours supported by this architecture. It is possible that each different behaviour is controlled by a collection of disjoint pattern generating circuits, selected by the cerebral ganglion (Hoyle, 1976)).</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/ladder.jpg" alt="Figure 7. The Ladder Architecture." title="Ladder Architecture" />
+<img src="hexapod90/ladder.jpg" alt="Figure 7. The Ladder Architecture." title="Ladder Architecture" />
 <figcaption>Figure 7. The Ladder Architecture.</figcaption></figure>
 
 
@@ -136,7 +136,7 @@
 <p>Making the rear legs of the insect longer gives them a lower stepping frequency. The inhibitory connections entrain the whole system to the frequency of the rear legs, producing a metachronal wave, where a ripple effect can be seen. In almost all species, the metachronal wave starts posteriorly and moves anteriorly. Figure 8 shows a time slice of activity in a simulated network of pacemakers connected in an inhibitory ladder. The rate of charging of the lowest pair of pacemakers has been slowed by lowering the tonic current input. By the end of the diagram, all the pacemakers have been entrained to the slower frequency.</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/entrainment.jpg" alt="Figure 8. Entrainment is driven by the slowest oscillators. In this case the two bottom traces correspond to the rear-most legs." title="Entrainment" />
+<img src="hexapod90/entrainment.jpg" alt="Figure 8. Entrainment is driven by the slowest oscillators. In this case the two bottom traces correspond to the rear-most legs." title="Entrainment" />
 <figcaption>Figure 8. Entrainment is driven by the slowest oscillators. In this case the two bottom traces correspond to the rear-most legs.</figcaption></figure>
 
 
@@ -146,7 +146,7 @@
 <p>It is the duration of the stance phase relative to the duration of the swing phase that determines the gait. Changing the length of the swing phase makes the gait slower, but the gait patterns remain unchanged when swing versus stance ratios are maintained.</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/results-1.jpg" alt="Figure 9. Relationship between the duration of swing and stance phases governs the resultant gait." title="Results" />
+<img src="hexapod90/results-1.jpg" alt="Figure 9. Relationship between the duration of swing and stance phases governs the resultant gait." title="Results" />
 <figcaption>Figure 9. Relationship between the duration of swing and stance phases governs the resultant gait.</figcaption></figure>
 
 
@@ -156,7 +156,7 @@
 <p>It is clear from the graph that the swing/stance ratio is the factor which has the greatest effect on the resulting gait, although entrainment of the anterior legs duct to the lower speed of the posterior legs is sometimes a factor, as evidenced by the low speed gait.</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/tripodgait.jpg" alt="Figure 10. The tripod gait." title="Tripod Gait" />
+<img src="hexapod90/tripodgait.jpg" alt="Figure 10. The tripod gait." title="Tripod Gait" />
 <figcaption>Figure 10. The tripod gait.</figcaption></figure>
 
 
@@ -164,18 +164,18 @@
 <p>This fastest gait (sometimes called high gear) alternates between two stable configurations. Note that between every step cycle, all feet are briefly on the ground. On page 325 of Gray, 1968<a href="#fn:8" id="fnref:8" title="see footnote" class="footnote">[8]</a>, an example tripod gait is illustrated. The swing versus stance ratio reported by Gray is 1/1, in Accordance with the data reported in Figure 9. (I wish to note that data from Gray came to my attention after this study had been completed, and is included because of the remarkable coherence between natural data and computational results, supporting the predictive qualities of the model presented here.)</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/medGait1.jpg" alt="" title="Medium Gait" /></figure>
+<img src="hexapod90/medGait1.jpg" alt="" title="Medium Gait" /></figure>
 
 
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/medGait2.jpg" alt="" title="Medium Gait" /></figure>
+<img src="hexapod90/medGait2.jpg" alt="" title="Medium Gait" /></figure>
 
 
 
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/medGait3.jpg" alt="Figure 11. Medium speed gaits. Either of these patterns result according to initial conditions." title="Medium Gait" />
+<img src="hexapod90/medGait3.jpg" alt="Figure 11. Medium speed gaits. Either of these patterns result according to initial conditions." title="Medium Gait" />
 <figcaption>Figure 11. Medium speed gaits. Either of these patterns result according to initial conditions.</figcaption></figure>
 
 
@@ -185,7 +185,7 @@
 <p>The middle speed gait (sometimes called middle gear) is a period three gait. The two gaits shown in Figures 11a and 11b differ by the relative phasing of the left and right legs. Naturally occurring gaits occur at some phasing combination between the extremes of these two gaits. The third combinatorial arrangement which would have the two sides in phase with each other is impossible because of the mutual inhibition of contralateral pairs of legs. The gait illustrated on p. 322 of Gray shows a medium speed gait which is half way between the two gaits illustrated in Figure 11. Gray&#8217;s reported swing/stance ratio is 1/2, again exactly corresponding to the computational model. Only two legs swing at any time, due to the slower stance phase.</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/lowspeed.jpg" alt="Figure 12. Low speed gaits." title="Low speed gaits" />
+<img src="hexapod90/lowspeed.jpg" alt="Figure 12. Low speed gaits." title="Low speed gaits" />
 <figcaption>Figure 12. Low speed gaits.</figcaption></figure>
 
 
@@ -199,7 +199,7 @@
 <p>Future research will involve incorporating various behaviours into the controller. One way to do this is to have several independent controllers, activated by the cerebral ganglion. Enough circuits would then be able to generate the range of observable behaviours of an insect.</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/behaviors.jpg" alt="Figure 13. Controlling a variety of behaviors." title="Behaviors" />
+<img src="hexapod90/behaviors.jpg" alt="Figure 13. Controlling a variety of behaviors." title="Behaviors" />
 <figcaption>Figure 13. Controlling a variety of behaviors.</figcaption></figure>
 
 
@@ -207,7 +207,7 @@
 <p>However, it is possible that rather than actually existing in an invertebrate&#8217;s nervous system, these circuits simply describe the computation being done by a more general circuit of sensory inputs, control inputs, interneurons, and integrating ganglia. The individual circuits might not actually exist except as transient configurations of the entire nervous system, selected amongst by the cerebral ganglion, sensory stimulus, or hormonal modulation. A possibility then is to start with a more biologically plausible arrangement, such as that illustrated in Figure 14, and train this more plausible architecture to exhibit the desired behaviours using one of the standard dynamical neural net training algorithms. This approach has already met with considerable success elsewhere (Lockey et al, 1989 <a href="#fn:9" id="fnref:9" title="see footnote" class="footnote">[9]</a>).</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/layers.jpg" alt="Figure 14. A more realistic architecture showing a few sample connections." title="Layers" />
+<img src="hexapod90/layers.jpg" alt="Figure 14. A more realistic architecture showing a few sample connections." title="Layers" />
 <figcaption>Figure 14. A more realistic architecture showing a few sample connections.</figcaption></figure>
 
 
@@ -219,7 +219,7 @@
 <p>The system of equations used to simulate the neural circuits detailed in this paper, and its description is based on the simple model described in MacGregor (1987, pp. 220&#8211;227)<a href="#fn:10" id="fnref:10" title="see footnote" class="footnote">[10]</a>. The equations model the standard equivalent electrical circuit of a biological neuron.</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/neuralCircuit.jpg" alt="" title="Circuit" /></figure>
+<img src="hexapod90/neuralCircuit.jpg" alt="" title="Circuit" /></figure>
 
 
 
@@ -228,12 +228,12 @@
 <p>The motion of the charge at the end of these lipoproteins corresponds to electrical current, and when an applied electric field displaces such a molecule, the transfer of energy which moves the protein corresponds to a classic capacitative effect in electromagnetic theory (MacGregor, 1987, pp. 246&#8211;250). The transmembrane conductances are typically modulated by synaptic activity, and the conductances determine the potential within the neuron.</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/neuralEqn.jpg" alt="" title="Equations" /></figure>
+<img src="hexapod90/neuralEqn.jpg" alt="" title="Equations" /></figure>
 
 
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/fullCircuit.jpg" alt="" title="Full Circuit" /></figure>
+<img src="hexapod90/fullCircuit.jpg" alt="" title="Full Circuit" /></figure>
 
 
 
@@ -241,14 +241,14 @@
 <p>The complete circuit as implemented in the simulation. Note that all large neurons have a self-excitatory connection not documented in the text of the paper. This connection was suggested by the biological literature, but the need for it could have been satisfied in other ways, such as tonic excitation, or more carefully tuned connection weights. In general, connection weights were not found to be important, as the exponential response against extreme inputs from the sensors was sufficient to tune the simulation. The simulation was also found to be largely robust against broken connections or bad weights.</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/leg.jpg" alt="" title="Leg" /></figure>
+<img src="hexapod90/leg.jpg" alt="" title="Leg" /></figure>
 
 
 
 <p>The physical model of a leg used in the simulation. The coxa was simulated as two revolute joints. Muscles were simulated as linear actuators in agonist-antagonist pairs. Note the muscles wrapped over the knee and under the ankle - in the simulation these two were modeled as torque actuators. All muscles functioned as springs when no signal was applied. If no signals were applied, the leg would return the rest pose illustrated here.</p>
 
 <figure>
-<img src="http://i148.photobucket.com/albums/s29/meshula/insect.jpg" alt="" title="Insect Robot" /></figure>
+<img src="hexapod90/insect.jpg" alt="" title="Insect Robot" /></figure>
 
 
 
