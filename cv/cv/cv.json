@@ -66,7 +66,7 @@
                 "text":"<P>I worked to bring robotic and microcomputer control technology to toys at Bandai's Strategic Research and Development Branch, in Kanda, Tokyo. I was Bandai's first non-Japanese engineer. We made many foundational advancements in entertainment technology, some of which are still coming to market today.</P>",
                 "asset":
                 {
-                    "media":"http://i148.photobucket.com/albums/s29/meshula/toysInside.jpg",
+                    "media":"../../posts/toysInside.jpg",
                     "credit":"",
                     "caption":""
                 }
@@ -77,7 +77,7 @@
                 "text":"<P>Hexapod gait control by a neural network</P>",
                 "asset":
                 {
-                    "media":"http://i148.photobucket.com/albums/s29/meshula/hexapodpreview.jpg",
+                    "media":"../../posts/hexapodpreview.jpg",
                     "credit":"",
                     "caption":""
                 }

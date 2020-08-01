@@ -13,7 +13,7 @@ The bootstrapping process was well known to old school game coders. We knew all 
 
 But what about systems not quite so hacker friendly? One of my favorite bootstraps was the one we did at Interphase Technologies on the Colecovision. 
 
-![Aquattack on Colecovision] (http://i148.photobucket.com/albums/s29/meshula/aquattack.jpg "Aquattack on Colecovision")
+![Aquattack on Colecovision] (../../posts/aquattack.jpg "Aquattack on Colecovision")
 
 The Colecovision was an archetypal closed gaming console, popular long before the days of SDKs. When we started we knew nothing about the machine, some components were sealed under epoxy blobs, some parts had numbers removed. Our first order of business was some radical deconstruction. This involved acids, sledgehammers, microscopes, and drops from high altitudes. It also involved diagramming out circuits and other down to earth engineering. We worked out the general capabilities of the machine; most importantly we found that it was sporting a Z80. Going back to an unpulverized unit, we desoldered the CPU and wired in a breakout header, then carefully reattached the CPU above it. We attached a signal analyzer to the breakout header, and built a latch on the address lines so that we could halt the CPU when a certain address was requested from the ROM. We wired LEDs to some outputs. Now we had a debugger! We dumped the system ROM, and it was all straight forward from there. 
 

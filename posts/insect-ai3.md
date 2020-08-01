@@ -28,7 +28,7 @@ Unfortunately, as task complexity increases, the Subsumption Architecture falls 
 
 Nagata et al in Japan proposed a solution to the hierarchical control problem in reactive architectures in 1990 [^Nagata-1990]. The difference in character between autonomous, strictly reactive reflexes and the more complex behaviours which are a result of the interactions of lower level reflexes suggests a functional split for the proposed architecture. By splitting control problems into two parts - a _reason_ module, and an _instinct_ module. _Reflexes_ implementing simple or atomic tasks are arranged within each module. The _instinct_ module implements those basic behaviors such as _Steer Towards Light_ for which any of the common reactive architectures excel. The _reflexes_ in the _instinct_ module can affect the environment directly, and also outputs a self-awareness vector encoding its activity. The _reflexes_ in the _reason_ module monitor the self-awareness vector and the environment, and output an _intention_ vector that selects amongst the behaviors carried out by the _instinct_ module. The _reason_ module cannot affect the environment directly.
 
-![Insect AI 3](http://i148.photobucket.com/albums/s29/meshula/syntFigure1.gif "Figure 1.")
+![Insect AI 3](../../posts/syntFigure1.gif "Figure 1.")
 
 
 ##Insect AI 3
@@ -63,7 +63,7 @@ Development of Insect AI 3 architectures incorporating the reason-instinct split
 
 Whereas external senses are of primary importance only to the reason module, the internal senses must be divided into a self-awareness vector for the reason module, and peripheral senses for the instinct module. The self-awareness signals are the means by which the reason module's meta-reflex can monitor (be aware of) the activity of the reflexes in the instinct module. The peripheral senses and intention vector drive the instinct module, which in turn controls the effectors, completing the loop by providing a means whereby a robotic or other intelligent system can modify, and be modified by, the total environment.
 
-> ![Insect AI 3, Level I](http://i148.photobucket.com/albums/s29/meshula/syntFigure1.gif "Figure 1.")
+> ![Insect AI 3, Level I](../../posts/syntFigure1.gif "Figure 1.")
 
 The Insect AI 3 architecture is modelled after the invertebrate nervous system. The __reason__ module is analogous to the invertebrate's cerebral ganglia, the __instinct__ module corresponds to the thoracic or sub-cerebral ganglia. The __intention vector__ is the means by which __meta-reflexes__ control __reflexes__, and the __self-awareness vector__ allows the reflexes to influence the meta-reflexes.
 
