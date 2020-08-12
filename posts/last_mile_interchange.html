@@ -10,13 +10,12 @@ This document does not attempt to compare explicit feature sets, performance and
 
 Disclosure: These notes are biased by the fact that I wrote a great deal of production 3d interchange code for LucasArts, ILM, and Apple, and was lead on Apple's ModelIO which handles the OS level treatment of 3d file formats. I worked with some of the gltf architects and debated issues with them, and worked with Pixar for several years to help get Universal Scene Description shipped.
 
-I hope you find these notes somehow useful.
-
-
 Last-mile vs Interchange
 ========================
 
 An interchange format is characterized by an expectation that asset structure, and artist choice points, including overrides and variations, are preserved wherever the asset is imported, and that the straight import/export of the data is round trip loss-less.
+
+Interchange formats do not allow interchange of application specific data, but may allow the embedding of application specific data so that information such as construction history may be retained when round-tripping from the same application. This facility is outside the scope of the current discussion. 
 
 A last mile format has imposed an opinion on the contents of the input data and conformed it to that opinion. The complexity of the original asset, including raw scans and artist choice points, has been flattened away, or completely deleted. Characteristically however, a last mile format is ideal for a particular process or step in a production pipeline. 
 
@@ -32,19 +31,19 @@ gltf has elided structure and choice points in order to prepare buffer data idea
 
 The 1.0 version of gltf specifically encapsulates WebGL objects for the Web. It is not forward looking in the sense that if a new paradigm arrives, such as WebVulkan, gltf will surely be displayable, but it will be via translation of WebGL concepts to WebVulkan concepts.
 
-The 2.0 version of gltf moves beyond that, providing an API-neutral runtime asset delivery format. It still retains some of its WebGL heritage, but more broadly encodes information required by previewers and game engines, such as a material encoding scheme incorporating a phyical shading model that meets modern requirements in being, roughly speaking, a hybrid of the Disney and Unreal PBR shading models.
+The 2.0 version of gltf moves beyond that, providing an API-neutral runtime asset delivery format. It still retains some of its WebGL heritage, but more broadly encodes information required by previewers and game engines, such as a material encoding scheme incorporating a physical shading model that meets modern needs for a metallic/dielectric material model.
 
-Autodesk's fbx format seems like it might be an interchange format, but is in fact a last mile format. It takes complex asset structure and choice points, and reduces it to the strict subset of functionality supported by Motion Builder. It only feels like an interchange format because of the deceptive complexity of the format. Nonetheless, the correct use of an fbx file is Maya -> fbx -> { Motion Builder, Unreal, etc. } A backwards workflow from an endpoint such as Motion Builder through fbx will typically be used to bring animation data back to a content creation tool, but will not be used for purposes such as geometry edits.
+Autodesk's fbx format seems like it might be an interchange format, but is in fact a last mile format. It originated as a format holding data for real-time display in Kaydara's FiLMBOX. FiLMBOX was renamed Motion Builder after it's acquisition by Autodesk, and was subsequently leveraged for interchange between other Autodesk products.The FBX format reduces complex asset structure and choice points to the subset of functionality dictated by Motion Builder's realtime needs. It only feels like an interchange format because of the deceptive complexity of the format. Nonetheless, the correct use of an FBX file is Maya -> FBX -> { Motion Builder, Unreal, etc. } A backwards workflow from an endpoint such as Motion Builder through FBX will typically be used to bring animation data back to a content creation tool, but will not be used for purposes such as geometry edits.
 
-It's important to recognize that fbx is a proprietary, closed format. Third party reverse engineered parsers exist, but this is not a robust path.
+It's important to recognize that FBX is a proprietary, closed format. Third party reverse engineered parsers exist, but this is not a robust path.
 
-alembic (60% last mile)
+Alembic (60% last mile)
 -----------------------
 
 Alembic is also on the last mile side of the balance. Although it can interchange geometry data and scene structure, in general, it is commonly used as a cached format holding the outputs of a simulation. In that sense Alembic holds an opinionated rendering of a simulation sampled over time. It is much more general than gltf and fbx in that it is schema based and can be easily extended. Layering is currently being introduced to move alembic more to the interchange side of the scale, but it's not clear to me how to move forward on missing core semantics necessary for important asset types such as characters; there is no standardized schema for skeletal bindings or blend shapes.
 
 
-usd (20% last mile)
+USD (20% last mile)
 -------------------
 
 USD is last mile as well, but its last mile is complex enough that it can be coerced into general interchange. What I mean by that, is that USD encodes a full scenegraph with the same complexity and expressiveness of the Maya or Houdini hypergraphs, including the equivalent of a full scene composition algebra, as is implemented by tools such as Unreal, or Katana. Where USD diverges from the Houdini or Maya hypergraphs is that USD does not encode the dataflow graph of Maya, or the operator graph of Houdini. That is what biases USD to interchange rather than last mile, as a strict encoding of an operator graph would be a fully implemented and opinionated end point and would require that users of USD conform to that computational model. 
@@ -96,6 +95,9 @@ Collada - Apple runtimes, Unity and Unreal via plugins
 
 usd - Import shipped native with Unreal, a full C# binding is available for Unity. Apple runtimes.
 
+Version History
+===============
 
+2020 Aug 12 - add notes on FBX history, and app specific embedded blind data. h/t @gorlak
 
 <!-- Markdeep: --><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js?"></script>
