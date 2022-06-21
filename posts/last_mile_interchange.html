@@ -10,6 +10,7 @@ This document does not attempt to compare explicit feature sets, performance and
 
 Disclosure: These notes are biased by the fact that I wrote a great deal of production 3d interchange code for LucasArts, ILM, and Apple, and was lead on Apple's ModelIO which handles the OS level treatment of 3d file formats. I worked with some of the gltf architects and debated issues with them, and worked with Pixar for several years to help get Universal Scene Description shipped.
 
+
 Last-mile vs Interchange
 ========================
 
@@ -22,82 +23,60 @@ A last mile format has imposed an opinion on the contents of the input data and 
 I will say up front that there are no pure interchange formats, although there are many pure last-mile formats. 
 
 
-gltf and fbx (100% last-mile)
-------------------------------
+gltf (last-mile)
+----------------
 
-gltf and fbx are last-mile formats.
-
-gltf has elided structure and choice points in order to prepare buffer data ideal for the most common class of shader programs which render a model. It contains other data commonly required by real time previewers and game engines.
+gltf is last mile because it has elided compositional structure and choice points in order to prepare buffer data ideal for the most common class of shader programs which render a model. It contains other data commonly required by real time previewers and game engines.
 
 The 1.0 version of gltf specifically encapsulates WebGL objects for the Web. It is not forward looking in the sense that if a new paradigm arrives, such as WebVulkan, gltf will surely be displayable, but it will be via translation of WebGL concepts to WebVulkan concepts.
 
 The 2.0 version of gltf moves beyond that, providing an API-neutral runtime asset delivery format. It still retains some of its WebGL heritage, but more broadly encodes information required by previewers and game engines, such as a material encoding scheme incorporating a physical shading model that meets modern needs for a metallic/dielectric material model.
 
+
+fbx (last mile)
+---------------
+
 Autodesk's fbx format seems like it might be an interchange format, but is in fact a last mile format. It originated as a format holding data for real-time display in Kaydara's FiLMBOX. FiLMBOX was renamed Motion Builder after it's acquisition by Autodesk, and was subsequently leveraged for interchange between other Autodesk products.The FBX format reduces complex asset structure and choice points to the subset of functionality dictated by Motion Builder's realtime needs. It only feels like an interchange format because of the deceptive complexity of the format. Nonetheless, the correct use of an FBX file is Maya -> FBX -> { Motion Builder, Unreal, etc. } A backwards workflow from an endpoint such as Motion Builder through FBX will typically be used to bring animation data back to a content creation tool, but will not be used for purposes such as geometry edits.
 
 It's important to recognize that FBX is a proprietary, closed format. Third party reverse engineered parsers exist, but this is not a robust path.
 
-Alembic (60% last mile)
------------------------
 
-Alembic is also on the last mile side of the balance. Although it can interchange geometry data and scene structure, in general, it is commonly used as a cached format holding the outputs of a simulation. In that sense Alembic holds an opinionated rendering of a simulation sampled over time. It is much more general than gltf and fbx in that it is schema based and can be easily extended. Layering is currently being introduced to move alembic more to the interchange side of the scale, but it's not clear to me how to move forward on missing core semantics necessary for important asset types such as characters; there is no standardized schema for skeletal bindings or blend shapes.
-
-
-USD (20% last mile)
+Alembic (last mile)
 -------------------
 
-USD is last mile as well, but its last mile is complex enough that it can be coerced into general interchange. What I mean by that, is that USD encodes a full scenegraph with the same complexity and expressiveness of the Maya or Houdini hypergraphs, including the equivalent of a full scene composition algebra, as is implemented by tools such as Unreal, or Katana. Where USD diverges from the Houdini or Maya hypergraphs is that USD does not encode the dataflow graph of Maya, or the operator graph of Houdini. That is what biases USD to interchange rather than last mile, as a strict encoding of an operator graph would be a fully implemented and opinionated end point and would require that users of USD conform to that computational model. 
+Alembic is also on the last mile side of the balance. Although it can interchange geometry data and scene structure, in general, it is commonly used as a cached format holding the outputs of a simulation thus qualifying it as last mile. In that sense Alembic holds an opinionated rendering of a simulation sampled over time. It is much more general than gltf and fbx in that it has a dynamic schema interperable at runtime and can be easily extended. Layering was introduced to move alembic more to the interchange side of the scale, but there's currently no activity on missing core semantics necessary for important data types such as skeletal-vertex weighting or blend shapes.
 
-Unlike Alembic, USD supports character models as first class citizens. Unlike gltf, USD supports shader graphs, and is a strict superset of graphs such as Unreal's, gltf's, or that of MaterialX.
 
-collada (0% last mile)
-----------------------
+USD (interchange/last mile)
+---------------------------
 
-Collada is an XML based interchange format. It has an expressive structure, and data contents which much be heavily transformed to suit one engine or another. Collada has strongly specified types, but suffers from under-specified structure, resulting in inconsistent results when moving a Collada file from application to application. For this reason, Collada works best when going through a matched import/export pair.
+USD encodes a full scenegraph with the same complexity and expressiveness of Maya or Houdini hypergraphs. It extends general notions of scenegraphs with a deep layering system including a scene composition algebra. USD does not interchange computational dataflow graphs as found in programs such as Houdini and Maya. USD supports character and crowd models as first class citizens. USD supports shader graphs, and is a strict superset of graphs such as those in MaterialX, GLTF, MDL, Unreal, and so on. USD has schemas for positional audio, interactive physics, and several other application domains.
 
-Apple's SceneKit is a prominent Collada consumer. 
+USD can be leveraged as a high performance last mile format; this requires attention in pipeline processes to ensure that output usd files conform to some set of output requirements. USDZ is a formal last mile variant with defined semantics of what may or may not be in a valid file.
 
-antiques (obj, ply, stl, etc)
+
+USDZ (last mile)
+----------------
+
+USDZ is formal USD archival variant designed for delivery. It incorporates all USD features, but requires that all referenced textures, payloads, and referenced USD files are contained within the archive.
+
+
+Collada (interchange)
+---------------------
+
+Collada is an XML based interchange format. It has an expressive structure, and data contents which much be heavily transformed to suit one engine or another. Collada has strongly specified types, but suffers from under-specified structure, resulting in inconsistent results when moving a Collada file from application to application. For this reason, Collada works best when going through a matched import/export pair. Collada has not been updated since 2008.
+
+
+Antiques - obj, ply, stl, etc
 -----------------------------
 
-These file types are historical and were developed to address interchange and last mile issues simultaneously. They are largely ad hoc and underspecified. Even ply which is highly specified is underspecified in that it defines a general schema but specifies only limited semantics.
+These file types are historical and many were developed to address interchange and last mile issues simultaneously. They are largely ad hoc and underspecified. Even ply which is highly specified is underspecified in that it defines a general schema but specifies only limited semantics.
 
-
-
-Application support
-===================
-
-gltf 1.0 - Blender, online fbx converter
-gltf 2.0 - Wide availability of import; many exporters arriving.
-
-fbx - just about everything. Autodesk has moved fbx to maintenance mode; not a forward looking option.
-
-alembic - all high end DCC's, blender coming online slowly
-all Apple apps, including Preview and Quicklook
-
-Collada - plug ins or native support available for all high end DCC's, quality and format consistency varies
-
-usd - Pixar supplies plugins for Maya, Houdini, Katana. Sketchup, Modo and many others are independently available.
-all Apple apps, including Preview and Quicklook
-
-
-Engine support
-==============
-
-gltf 1.0 - web viewers, limited native support
-gltf 2.0 - ubiquitous import for game engines seems to be arriving.
-
-fbx - Unity, Unreal, most hobby engines
-
-alembic - Unity, Unreal plugins exist, CryEngine, Apple runtimes
-
-Collada - Apple runtimes, Unity and Unreal via plugins
-
-usd - Import shipped native with Unreal, a full C# binding is available for Unity. Apple runtimes.
 
 Version History
 ===============
 
-2020 Aug 12 - add notes on FBX history, and app specific embedded blind data. h/t @gorlak
+2020 Aug - add notes on FBX history, and app specific embedded blind data. h/t @gorlak
+2022 Jun - add USDZ. Removed list of engines and applications compatible with USD and GLTF as support for both is becoming ubiquitous.
 
 <!-- Markdeep: --><script src="https://casual-effects.com/markdeep/latest/markdeep.min.js?"></script>
