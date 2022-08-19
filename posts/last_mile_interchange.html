@@ -8,7 +8,7 @@ This document discusses a taxonomy of 3d file formats based on the intent of the
 
 This document does not attempt to compare explicit feature sets, performance and efficiency, or adoption, unless it is to illustrate a point.
 
-Disclosure: These notes are biased by the fact that I wrote a great deal of production 3d interchange code for LucasArts, ILM, and Apple, and was lead on Apple's ModelIO which handles the OS level treatment of 3d file formats. I worked with some of the gltf architects and debated issues with them, and worked with Pixar for several years to help get Universal Scene Description shipped.
+Disclosure: These notes are biased by the fact that I wrote a great deal of production 3d interchange code for LucasArts, ILM, and Apple, and was lead on Apple's ModelIO which handles the OS level treatment of 3d file formats. I worked with some of the gltf architects and debated issues with them, and worked with Pixar for several years to help get Universal Scene Description shipped. Today I work for Pixar, on USD and other technologies.
 
 
 Last-mile vs Interchange
@@ -16,21 +16,31 @@ Last-mile vs Interchange
 
 An interchange format is characterized by an expectation that asset structure, and artist choice points, including overrides and variations, are preserved wherever the asset is imported, and that the straight import/export of the data is round trip loss-less.
 
-Interchange formats do not allow interchange of application specific data, but may allow the embedding of application specific data so that information such as construction history may be retained when round-tripping from the same application. This facility is outside the scope of the current discussion. 
+Interchange formats do not allow interchange of application specific data, but may allow the embedding of application specific data so that information such as construction history may be retained when round-tripping from the same application. This facility is outside the scope of the current discussion.
 
 A last mile format has imposed an opinion on the contents of the input data and conformed it to that opinion. The complexity of the original asset, including raw scans and artist choice points, has been flattened away, or completely deleted. Characteristically however, a last mile format is ideal for a particular process or step in a production pipeline. 
 
-I will say up front that there are no pure interchange formats, although there are many pure last-mile formats. 
+I will say up front that there are no pure interchange formats, although there are many pure last-mile formats.
+
+"Preservation of artistic choice points" is a key distinguishing point between "interchange" and "last mile". If an artist's work is modified on export to a file format, such that special set ups used to create the model, alternative versions, work in progress elements, and so on are deleted, that's "last mile", because you can't get back to the artist's thought process or to the other possibilities that exist in the alternative versions, optional structures, even notes and annotations that were in the original file. A last mile format by definition therefore, doesn't allow going back to the artist's work in progress. Interchange you can, and clearly there are degrees from file format to file format to which you can actually go back.
+
+It isn't a value judgement to describe a file format to last mile or interchange. Rather, the distinction indicates whether an import/export cycle transforms the data. As an example, baking an arbitrary polygon mesh to triangles is a transformation and therefore last mile because it is not reversible. If an export preserves polygon topology, no information is lost, and the polygon mesh is therefore interchanged.
+
+In the discussion that follows, one may caveat the assignment of last-mile or interchange to one's own workflow.
 
 
-gltf (last-mile)
+glTF (last-mile)
 ----------------
 
-gltf is last mile because it has elided compositional structure and choice points in order to prepare buffer data ideal for the most common class of shader programs which render a model. It contains other data commonly required by real time previewers and game engines.
+glTF is last mile because it has elided compositional structure and choice points in order to prepare buffer data ideal for the most common class of shader programs which render a model. It contains other data commonly required by real time previewers and game engines.
 
-The 1.0 version of gltf specifically encapsulates WebGL objects for the Web. It is not forward looking in the sense that if a new paradigm arrives, such as WebVulkan, gltf will surely be displayable, but it will be via translation of WebGL concepts to WebVulkan concepts.
+The 1.0 version of glTF specifically encapsulates WebGL objects for the Web. It is not forward looking in the sense that if a new paradigm arrives, such as WebGPU, gltf will surely be displayable, but it will be via translation of WebGL concepts to WebGPU concepts.
 
-The 2.0 version of gltf moves beyond that, providing an API-neutral runtime asset delivery format. It still retains some of its WebGL heritage, but more broadly encodes information required by previewers and game engines, such as a material encoding scheme incorporating a physical shading model that meets modern needs for a metallic/dielectric material model.
+The 2.0 version of glTF moves beyond that, providing an API-neutral runtime asset delivery format. It still retains some of its WebGL heritage, but more broadly encodes information required by previewers and game engines, such as a material encoding scheme incorporating a physical shading model that meets modern needs for a metallic/dielectric material model.
+
+The roadmap for glTF post 2022 involves enhancing functionality of the format with behaviors, such as "show object on hotspot clicked", geospatial anchors, and other enhancements necessary for project metaverse style activities.
+
+glTF today commonly serves as an interchange format in circumstances where baking to glTF does not lose data. As an example, a triangle based polygon mesh would not lose information in an export/import cycle. Nonetheless, there is a general, opinionated, transformation of data that occurs on export, a polygon mesh must be triangulated, tangent spaces must be in Mikktspace, vertex weights must sort the largest values into the first four entries, and so on, all of which leaves glTF in the last-mile space.
 
 
 fbx (last mile)
