@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vedic Ninefold Mandala</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a2e 50%, #0a0a0a 100%);
+            overflow: hidden;
+            font-family: 'Georgia', serif;
+            cursor: none;
+        }
+        
+        canvas {
+            display: block;
+            cursor: none;
+        }
+        
+        #info {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            max-width: 300px;
+            line-height: 1.4;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        
+        #cursor {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(255, 215, 0, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1000;
+            transition: transform 0.1s ease;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+        }
+        
+        .activated {
+            transform: scale(2);
+            box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="mandala"></canvas>
+    <div id="cursor"></div>
+    <div id="info">
+        <h3>The Ninefold Mandala of Memory's Triad</h3>
+        <p>Move your cursor to activate the eight traditions surrounding the center. Each direction embodies a unique wisdom tradition's approach to the eternal question of memory's nature.</p>
+        <p><em>Sparsha</em> (contact) creates <em>antarala</em> (between-space) from which arises <em>udbhava</em> (emergence).</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('mandala');
+        const ctx = canvas.getContext('2d');
+        const cursor = document.getElementById('cursor');
+        
+        // Set canvas size
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+        
+        // Animation state
+        let time = 0;
+        let mouseX = canvas.width / 2;
+        let mouseY = canvas.height / 2;
+        let centerX = canvas.width / 2;
+        let centerY = canvas.height / 2;
+        
+        // The nine traditions in mandala arrangement
+        const traditions = [
+            // Cardinal Directions
+            { name: "Sanskrit", direction: "East", angle: 0, color: [255, 215, 0], annotation: "(dawn of consciousness)", 
+              words: ["स्मृति", "स्पर्श", "उद्भव", "क्षेत्र", "चिह्न"], sigil: "ॐ" },
+            { name: "Chinese", direction: "South", angle: Math.PI/2, color: [255, 100, 100], annotation: "(natural wisdom)",
+              words: ["記憶", "觸", "湧現", "場", "痕"], sigil: "☯" },
+            { name: "German", direction: "West", angle: Math.PI, color: [100, 150, 255], annotation: "(philosophical depth)",
+              words: ["Gedächtnis", "Berührung", "Entspringen", "Feld", "Spur"], sigil: "⚡" },
+            { name: "Greek", direction: "North", angle: 3*Math.PI/2, color: [150, 255, 150], annotation: "(analytical clarity)",
+              words: ["μνήμη", "ἐπαφή", "ἀνάδυσις", "πεδίον", "ἴχνος"], sigil: "Φ" },
+            
+            // Intermediate Directions
+            { name: "Theosophical", direction: "Southeast", angle: Math.PI/4, color: [255, 150, 255], annotation: "(synthesis)",
+              words: ["Memory", "Contact", "Becoming", "Field", "Trace"], sigil: "🜔" },
+            { name: "Hermetic", direction: "Southwest", angle: 3*Math.PI/4, color: [255, 255, 100], annotation: "(correspondence)",
+              words: ["Divine Memory", "Sacred Marriage", "Resurrection", "Sacred Field", "Signature"], sigil: "⚡" },
+            { name: "Latin", direction: "Northwest", angle: 5*Math.PI/4, color: [150, 255, 255], annotation: "(precision)",
+              words: ["memoria", "tactus", "emergentia", "campus", "vestigium"], sigil: "⚔" },
+            { name: "Arabic", direction: "Northeast", angle: 7*Math.PI/4, color: [255, 200, 150], annotation: "(devotional)",
+              words: ["الذاكرة", "اللمس", "الانبثاق", "الحقل", "الأثر"], sigil: "☪" },
+            
+            // Center
+            { name: "English Literal", direction: "Center", angle: 0, color: [255, 255, 255], annotation: "(transparent pointing)",
+              words: ["memory", "touch", "emergence", "field", "trace"], sigil: "◉" }
+        ];
+        
+        // Sigil drawing functions
+        const sigilDrawers = {
+            "ॐ": (ctx, x, y, size, alpha) => {
+                ctx.fillStyle = `rgba(255, 215, 0, ${alpha})`;
+                ctx.font = `${size}px serif`;
+                ctx.textAlign = 'center';
+                ctx.fillText('ॐ', x, y + size/3);
+            },
+            "☯": (ctx, x, y, size, alpha) => {
+                ctx.strokeStyle = `rgba(255, 100, 100, ${alpha})`;
+                ctx.fillStyle = `rgba(255, 100, 100, ${alpha})`;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(x, y, size/2, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(x, y - size/4, size/4, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.beginPath();
+                ctx.arc(x, y + size/4, size/4, Math.PI, 0);
+                ctx.fill();
+            },
+            "⚡": (ctx, x, y, size, alpha) => {
+                ctx.strokeStyle = `rgba(100, 150, 255, ${alpha})`;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.moveTo(x - size/4, y - size/2);
+                ctx.lineTo(x + size/8, y - size/8);
+                ctx.lineTo(x - size/8, y);
+                ctx.lineTo(x + size/4, y + size/2);
+                ctx.stroke();
+            },
+            "Φ": (ctx, x, y, size, alpha) => {
+                ctx.strokeStyle = `rgba(150, 255, 150, ${alpha})`;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(x, y, size/3, 0, Math.PI * 2);
+                ctx.moveTo(x, y - size/2);
+                ctx.lineTo(x, y + size/2);
+                ctx.stroke();
+            },
+            "🜔": (ctx, x, y, size, alpha) => {
+                ctx.strokeStyle = `rgba(255, 150, 255, ${alpha})`;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(x - size/3, y - size/3);
+                ctx.lineTo(x + size/3, y + size/3);
+                ctx.moveTo(x + size/3, y - size/3);
+                ctx.lineTo(x - size/3, y + size/3);
+                ctx.arc(x, y, size/4, 0, Math.PI * 2);
+                ctx.stroke();
+            },
+            "⚔": (ctx, x, y, size, alpha) => {
+                ctx.strokeStyle = `rgba(150, 255, 255, ${alpha})`;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.moveTo(x - size/3, y - size/3);
+                ctx.lineTo(x + size/3, y + size/3);
+                ctx.moveTo(x - size/6, y - size/2);
+                ctx.lineTo(x + size/6, y - size/2);
+                ctx.moveTo(x - size/6, y + size/2);
+                ctx.lineTo(x + size/6, y + size/2);
+                ctx.stroke();
+            },
+            "☪": (ctx, x, y, size, alpha) => {
+                ctx.strokeStyle = `rgba(255, 200, 150, ${alpha})`;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(x - size/8, y, size/3, 0.3, Math.PI * 2 - 0.3);
+                ctx.moveTo(x + size/4, y - size/4);
+                ctx.lineTo(x + size/3, y - size/6);
+                ctx.lineTo(x + size/6, y - size/6);
+                ctx.closePath();
+                ctx.stroke();
+            },
+            "◉": (ctx, x, y, size, alpha) => {
+                ctx.strokeStyle = `rgba(255, 255, 255, ${alpha})`;
+                ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.3})`;
+                ctx.lineWidth = 2;
+                ctx.beginPath();
+                ctx.arc(x, y, size/3, 0, Math.PI * 2);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.arc(x, y, size/6, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        };
+        
+        // Animation properties
+        let mandalaRotation = 0;
+        let activationStates = new Array(9).fill(0);
+        let wordFloaters = [];
+        
+        // Mouse tracking
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            cursor.style.left = (mouseX - 10) + 'px';
+            cursor.style.top = (mouseY - 10) + 'px';
+            
+            // Update center point
+            centerX = canvas.width / 2;
+            centerY = canvas.height / 2;
+        });
+        
+        // Click handler
+        document.addEventListener('click', (e) => {
+            // Create word explosion at cursor
+            for (let i = 0; i < 5; i++) {
+                const activeTradition = getActiveTradition();
+                if (activeTradition && activeTradition.words) {
+                    wordFloaters.push({
+                        x: mouseX,
+                        y: mouseY,
+                        vx: (Math.random() - 0.5) * 200,
+                        vy: (Math.random() - 0.5) * 200,
+                        word: activeTradition.words[Math.floor(Math.random() * activeTradition.words.length)],
+                        color: activeTradition.color,
+                        life: 1.0,
+                        size: 16 + Math.random() * 8
+                    });
+                }
+            }
+        });
+        
+        function getActiveTradition() {
+            const dx = mouseX - centerX;
+            const dy = mouseY - centerY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            if (distance < 80) return traditions[8]; // Center
+            if (distance > 350) return null;
+            
+            let angle = Math.atan2(dy, dx);
+            if (angle < 0) angle += Math.PI * 2;
+            
+            // Find closest tradition
+            let closest = 0;
+            let minDiff = Math.PI * 2;
+            
+            for (let i = 0; i < 8; i++) {
+                let diff = Math.abs(angle - traditions[i].angle);
+                if (diff > Math.PI) diff = Math.PI * 2 - diff;
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    closest = i;
+                }
+            }
+            
+            return minDiff < Math.PI / 8 ? traditions[closest] : null;
+        }
+        
+        function updateActivations() {
+            const dx = mouseX - centerX;
+            const dy = mouseY - centerY;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            
+            // Center activation
+            activationStates[8] = distance < 80 ? Math.min(1, (80 - distance) / 80) : Math.max(0, activationStates[8] - 0.02);
+            
+            // Check cursor activation for each tradition
+            for (let i = 0; i < 8; i++) {
+                const tradition = traditions[i];
+                const radius = 250;
+                const tx = centerX + Math.cos(tradition.angle + mandalaRotation) * radius;
+                const ty = centerY + Math.sin(tradition.angle + mandalaRotation) * radius;
+                
+                const tdx = mouseX - tx;
+                const tdy = mouseY - ty;
+                const tdist = Math.sqrt(tdx * tdx + tdy * tdy);
+                
+                const targetActivation = tdist < 60 ? Math.min(1, (60 - tdist) / 60) : 0;
+                activationStates[i] = activationStates[i] * 0.9 + targetActivation * 0.1;
+            }
+            
+            // Update cursor appearance
+            const maxActivation = Math.max(...activationStates);
+            if (maxActivation > 0.3) {
+                cursor.classList.add('activated');
+            } else {
+                cursor.classList.remove('activated');
+            }
+        }
+        
+        function drawMandala() {
+            // Clear canvas
+            ctx.fillStyle = 'rgba(10, 10, 20, 0.1)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Draw outer ring
+            ctx.strokeStyle = 'rgba(100, 100, 150, 0.3)';
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, 300, 0, Math.PI * 2);
+            ctx.stroke();
+            
+            // Draw connection lines between traditions
+            ctx.strokeStyle = 'rgba(80, 80, 120, 0.2)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i < 8; i++) {
+                const angle1 = traditions[i].angle + mandalaRotation;
+                const angle2 = traditions[(i + 1) % 8].angle + mandalaRotation;
+                const radius = 250;
+                
+                const x1 = centerX + Math.cos(angle1) * radius;
+                const y1 = centerY + Math.sin(angle1) * radius;
+                const x2 = centerX + Math.cos(angle2) * radius;
+                const y2 = centerY + Math.sin(angle2) * radius;
+                
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.stroke();
+                
+                // Line to center
+                ctx.beginPath();
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(centerX, centerY);
+                ctx.stroke();
+            }
+            
+            // Draw traditions around the circle
+            for (let i = 0; i < 8; i++) {
+                const tradition = traditions[i];
+                const angle = tradition.angle + mandalaRotation;
+                const radius = 250;
+                const activation = activationStates[i];
+                
+                const x = centerX + Math.cos(angle) * radius;
+                const y = centerY + Math.sin(angle) * radius;
+                
+                // Draw sigil
+                const sigalSize = 20 + activation * 20;
+                const alpha = 0.6 + activation * 0.4;
+                
+                if (sigilDrawers[tradition.sigil]) {
+                    sigilDrawers[tradition.sigil](ctx, x, y, sigalSize, alpha);
+                }
+                
+                // Draw tradition name
+                ctx.fillStyle = `rgba(${tradition.color[0]}, ${tradition.color[1]}, ${tradition.color[2]}, ${alpha})`;
+                ctx.font = `${12 + activation * 4}px Georgia`;
+                ctx.textAlign = 'center';
+                ctx.fillText(tradition.name, x, y + 40);
+                
+                // Draw direction and annotation
+                ctx.fillStyle = `rgba(200, 200, 200, ${alpha * 0.7})`;
+                ctx.font = `${10 + activation * 2}px Georgia`;
+                ctx.fillText(tradition.direction, x, y + 55);
+                ctx.fillText(tradition.annotation, x, y + 70);
+                
+                // Pulsing aura when activated
+                if (activation > 0.2) {
+                    const pulseRadius = 40 + Math.sin(time * 4) * 10;
+                    ctx.strokeStyle = `rgba(${tradition.color[0]}, ${tradition.color[1]}, ${tradition.color[2]}, ${activation * 0.3})`;
+                    ctx.lineWidth = 2;
+                    ctx.beginPath();
+                    ctx.arc(x, y, pulseRadius, 0, Math.PI * 2);
+                    ctx.stroke();
+                }
+            }
+            
+            // Draw center tradition
+            const centerActivation = activationStates[8];
+            const centerTradition = traditions[8];
+            
+            // Center sigil
+            sigilDrawers[centerTradition.sigil](ctx, centerX, centerY, 30 + centerActivation * 20, 0.8 + centerActivation * 0.2);
+            
+            // Center text
+            ctx.fillStyle = `rgba(255, 255, 255, ${0.8 + centerActivation * 0.2})`;
+            ctx.font = `${14 + centerActivation * 6}px Georgia`;
+            ctx.textAlign = 'center';
+            ctx.fillText(centerTradition.name, centerX, centerY + 50);
+            ctx.fillText(centerTradition.annotation, centerX, centerY + 70);
+            
+            // Center aura
+            if (centerActivation > 0.1) {
+                const centerPulse = 60 + Math.sin(time * 3) * 15;
+                ctx.strokeStyle = `rgba(255, 255, 255, ${centerActivation * 0.4})`;
+                ctx.lineWidth = 3;
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, centerPulse, 0, Math.PI * 2);
+                ctx.stroke();
+            }
+        }
+        
+        function updateWordFloaters() {
+            for (let i = wordFloaters.length - 1; i >= 0; i--) {
+                const word = wordFloaters[i];
+                word.x += word.vx * 0.016;
+                word.y += word.vy * 0.016;
+                word.vy += 300 * 0.016; // Gravity
+                word.life -= 0.01;
+                
+                if (word.life <= 0) {
+                    wordFloaters.splice(i, 1);
+                    continue;
+                }
+                
+                // Draw word
+                ctx.fillStyle = `rgba(${word.color[0]}, ${word.color[1]}, ${word.color[2]}, ${word.life})`;
+                ctx.font = `${word.size * word.life}px Georgia`;
+                ctx.textAlign = 'center';
+                ctx.fillText(word.word, word.x, word.y);
+            }
+        }
+        
+        function animate() {
+            time += 0.016;
+            mandalaRotation += 0.001; // Very slow rotation
+            
+            updateActivations();
+            drawMandala();
+            updateWordFloaters();
+            
+            requestAnimationFrame(animate);
+        }
+        
+        // Start animation
+        animate();
+    </script>
+</body>
+</html>
