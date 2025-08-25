@@ -1,0 +1,21 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import ReferenceLayout from '../../layouts/ReferenceLayout.astro';
+import { render } from 'astro:content';
+
+export async function getStaticPaths() {
+	const references = await getCollection('references');
+	return references.map((reference) => ({
+		params: { slug: reference.id },
+		props: reference,
+	}));
+}
+type Props = CollectionEntry<'references'>;
+
+const reference = Astro.props;
+const { Content } = await render(reference);
+---
+
+<ReferenceLayout {...reference.data}>
+	<Content />
+</ReferenceLayout>

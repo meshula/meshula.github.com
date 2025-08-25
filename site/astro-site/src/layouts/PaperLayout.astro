@@ -1,0 +1,226 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { Image } from 'astro:assets';
+
+type Props = CollectionEntry<'papers'>['data'];
+
+const { title, description, pubDate, updatedDate, heroImage, category, triadic_domain, author, sanskrit_terms, tags } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+			.hero-image {
+				width: 100%;
+			}
+			.hero-image img {
+				display: block;
+				margin: 0 auto;
+				border-radius: 12px;
+				box-shadow: var(--box-shadow);
+			}
+			.prose {
+				width: 800px; /* Wider for academic papers */
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+				line-height: 1.6; /* Better for academic reading */
+			}
+			.paper-header {
+			.paper-title {
+				font-family: 'Michroma', 'Arial Black', Impact, sans-serif;
+				font-weight: 400;
+				font-size: 2.5em;
+				margin: 0 0 0.5em 0;
+				line-height: 1.2;
+				color: rgb(var(--black));
+				letter-spacing: 0.02em;
+			}
+				margin: 0 0 0.5em 0;
+				line-height: 1.2;
+				color: rgb(var(--black));
+				letter-spacing: 0.02em;
+			}
+			.paper-meta {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 1em;
+				justify-content: center;
+				align-items: center;
+				margin: 1em 0;
+				font-size: 0.9em;
+			}
+			.date {
+				color: rgb(var(--gray));
+				font-family: 'Michroma', 'Arial Black', Impact, sans-serif;
+				font-weight: 400;
+				letter-spacing: 0.01em;
+				font-size: 0.9em;
+			}
+			.author {
+				color: rgb(var(--gray-dark));
+				font-weight: 600;
+			}
+			.category {
+				background: var(--accent);
+				color: white;
+				padding: 0.3em 0.8em;
+				border-radius: 15px;
+				font-size: 0.8em;
+				text-transform: uppercase;
+				letter-spacing: 0.05em;
+			}
+			.triadic-domain {
+				background: rgb(var(--gray-light));
+				color: rgb(var(--gray-dark));
+				padding: 0.3em 0.8em;
+				border-radius: 15px;
+				font-size: 0.8em;
+				font-style: italic;
+			}
+			.sanskrit-terms {
+				margin: 1em 0;
+				font-size: 0.9em;
+				color: rgb(var(--gray));
+			}
+			.sanskrit-terms .term {
+				font-family: serif;
+				font-weight: 600;
+				color: var(--accent);
+			}
+			.tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5em;
+				justify-content: center;
+				margin: 1em 0;
+			/* Academic paper specific spacing adjustments */
+			.prose h1 {
+				margin-top: 2em;
+			}
+			.prose h2 {
+				margin-top: 2em;
+			}
+			.prose h3 {
+				margin-top: 1.5em;
+			}
+				font-size: 0.75em;
+			}
+			.last-updated-on {
+				font-style: italic;
+				font-size: 0.85em;
+				color: rgb(var(--gray));
+			}
+			/* Academic paper specific typography */
+			.prose h1 {
+				font-family: 'Michroma', sans-serif;
+				font-size: 2em;
+				margin-top: 2em;
+				letter-spacing: 0.01em;
+			}
+			.prose h2 {
+				font-family: 'Michroma', sans-serif;
+				font-size: 1.5em;
+				margin-top: 2em;
+				letter-spacing: 0.01em;
+			}
+			.prose h3 {
+				font-family: 'Michroma', sans-serif;
+				font-size: 1.2em;
+				margin-top: 1.5em;
+				letter-spacing: 0.01em;
+			}
+			
+			/* Responsive images in content */
+			.prose img {
+				max-width: 100%;
+				height: auto;
+				display: block;
+				margin: 1.5em auto;
+				border-radius: 8px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				/* Limit very large images to a reasonable size */
+				max-height: 80vh;
+				object-fit: contain;
+			}
+			
+			/* Mobile responsiveness */
+			@media (max-width: 720px) {
+				.paper-title {
+					font-size: 1.8em;
+				}
+				.paper-meta {
+					flex-direction: column;
+					gap: 0.5em;
+				}
+				.prose {
+					width: 100%;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<article>
+				<div class="hero-image">
+					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+				</div>
+				<div class="prose">
+					<div class="paper-header">
+						<h1 class="paper-title">{title}</h1>
+						
+						<div class="paper-meta">
+							{author && <span class="author">{author}</span>}
+							<span class="date">
+								<FormattedDate date={pubDate} />
+							</span>
+							{category && <span class="category">{category}</span>}
+							{triadic_domain && <span class="triadic-domain">{triadic_domain}</span>}
+						</div>
+						
+						{sanskrit_terms && sanskrit_terms.length > 0 && (
+							<div class="sanskrit-terms">
+								Sanskrit terms: {sanskrit_terms.map((term, i) => (
+									<span>
+										<span class="term">{term}</span>
+										{i < sanskrit_terms.length - 1 ? ', ' : ''}
+									</span>
+								))}
+							</div>
+						)}
+						
+						{tags && tags.length > 0 && (
+							<div class="tags">
+								{tags.map((tag) => (
+									<span class="tag">{tag}</span>
+								))}
+							</div>
+						)}
+						
+						{updatedDate && (
+							<div class="last-updated-on">
+								Last updated on <FormattedDate date={updatedDate} />
+							</div>
+						)}
+					</div>
+					
+					<slot />
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>

@@ -1,0 +1,57 @@
+---
+// Stealth mode - low-key landing page
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TRITRYAM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Bakbak+One&family=Kosugi+Maru&display=swap" rel="stylesheet" />
+  <style>
+    html, body {
+      margin: 0; padding: 0; height: 100%;
+      background: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      user-select: none;
+      font-weight: 700;
+    }
+    #rotating-text {
+      transition: opacity 0.5s ease;
+      text-align: center;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+  <div id="rotating-text">TRITRYAM</div>
+
+  <script>
+    const texts = [
+      { text: 'TRITRYAM', font: "'Michroma', sans-serif", fontSize: '4rem' },
+      { text: 'त्रित्रयम्', font: "'Bakbak One', cursive", fontSize: '3rem' },
+      { text: '森トリトリャム', font: "'Kosugi Maru', sans-serif", fontSize: '3rem' }
+    ];
+    let index = 0;
+    const el = document.getElementById('rotating-text');
+
+    function rotateText() {
+      el.style.opacity = 0;
+      setTimeout(() => {
+        index = (index + 1) % texts.length;
+        const item = texts[index];
+        el.textContent = item.text;
+        el.style.fontFamily = item.font;
+        el.style.fontSize = item.fontSize;
+        el.style.opacity = 1;
+      }, 500);
+    }
+
+    setInterval(rotateText, 3000);
+  </script>
+</body>
+</html>

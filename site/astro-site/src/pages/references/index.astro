@@ -1,0 +1,105 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../../components/FormattedDate.astro';
+
+const references = (await getCollection('references')).sort(
+	(a, b) => (b.data.originalDate || b.data.pubDate).valueOf() - (a.data.originalDate || a.data.pubDate).valueOf(),
+);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${SITE_TITLE} - References`} description="Foundational texts and historical references that inform triadic consciousness research" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="blog-page">
+				<header class="blog-header">
+					<h1 class="blog-title">References</h1>
+					<p class="blog-description">
+						Foundational texts and historical references that inform triadic consciousness research and contemplative technology development.
+					</p>
+					<hr class="blog-rule" />
+				</header>
+
+				{references.length > 0 ? (
+					<div class="posts-list">
+						{references.map((reference) => (
+							<article class="post-item reference-item">
+								<h2 class="post-title">
+									<a href={`/references/${reference.id}/`}>{reference.data.title}</a>
+								</h2>
+								
+								<div class="reference-meta">
+									<div class="original-author">
+										<span class="label">Author:</span> {reference.data.originalAuthor}
+									</div>
+									
+									<div class="dates">
+										{reference.data.originalDate && (
+											<span class="original-date">
+												<span class="label">Published:</span> 
+												<FormattedDate date={reference.data.originalDate} />
+											</span>
+										)}
+										<span class="curated-date">
+											<span class="label">Added:</span> 
+											<FormattedDate date={reference.data.pubDate} />
+										</span>
+									</div>
+									
+									{reference.data.originalSource && (
+										<div class="original-source">
+											<span class="label">Source:</span> {reference.data.originalSource}
+										</div>
+									)}
+									
+									{reference.data.publicDomain && (
+										<span class="public-domain">Public Domain</span>
+									)}
+								</div>
+								
+								{reference.data.historicalContext && (
+									<p class="historical-context">
+										<strong>Historical Context:</strong> {reference.data.historicalContext}
+									</p>
+								)}
+								
+								{reference.data.relevanceToTritrayam && (
+									<p class="relevance">
+										<strong>Relevance to त्रित्रयम्:</strong> {reference.data.relevanceToTritrayam}
+									</p>
+								)}
+								
+								{reference.data.description && (
+									<p class="post-excerpt">{reference.data.description}</p>
+								)}
+								
+								{reference.data.tags && reference.data.tags.length > 0 && (
+									<div class="post-categories">
+										{reference.data.tags.map((tag) => (
+											<span class="category">{tag}</span>
+										))}
+									</div>
+								)}
+								
+								<a href={`/references/${reference.id}/`} class="read-more">Read Reference →</a>
+							</article>
+						))}
+					</div>
+				) : (
+					<div class="no-posts">
+						<p>No references available yet.</p>
+					</div>
+				)}
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>

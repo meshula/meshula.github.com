@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="sa">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 – Karkasūtra Koan</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bakbak+One&family=Noto+Serif+Devanagari&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #111;
+      color: #fff;
+      font-family: 'Bakbak One', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    #koan {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 2rem;
+      margin: 1rem;
+      max-width: 80vw;
+      line-height: 1.5;
+    }
+    #gloss {
+      display: none;
+      font-size: 1rem;
+      margin-top: 1rem;
+      border-collapse: collapse;
+    }
+    #gloss td {
+      padding: 0.5rem 1rem;
+      border: 1px solid #555;
+    }
+    #back {
+      margin-top: 2rem;
+      color: #88f;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    #quote-container {
+      position: absolute;
+      bottom: 3rem;
+      left: 5vw;
+      right: 5vw;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+      font-size: 1rem;
+      font-family: 'Bakbak One', sans-serif;
+      word-wrap: break-word;
+    }
+    #quote-original {
+      font-style: italic;
+    }
+    #quote-gloss {
+      margin-top: 0.5rem;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <h1>404: The Sutra Is Lost</h1>
+  <div id="koan">Loading mantra...</div>
+  <table id="gloss"></table>
+  <div id="back" onclick="window.location.href='/'">Return to the Mandala</div>
+
+  <div id="quote-container">
+    <div id="quote-original"></div>
+    <div id="quote-gloss"></div>
+  </div>
+
+  <script>
+    const rules = {
+      'क': ['कर', 'कक', 'कृ'],
+      'कर': ['करक', 'करकसूत्र'],
+      'कृ': ['करकृ', 'ककृ'],
+      'कक': ['करक', 'करकृ'],
+      'करक': ['करकसूत्र', 'करकक'],
+      'करकसूत्र': ['करकसूत्रधर्म'],
+      'करकसूत्रधर्म': ['काल करकसूत्रधर्म'],
+      'काल': ['काले स्थाने रूपे'],
+      'त्रि': ['त्रय'],
+      'त्रय': ['त्रित्रयात्मकं'],
+      'स्व': ['स्वस्य'],
+      'स्वस्य': ['स्वस्य चैतन्यस्य'],
+      'चैतन्यस्य': ['चैतन्यस्य'],
+      'प्रकट': ['प्रकटयामि'],
+      'प्रकाश': ['प्रकाशयामि'],
+      'करम': ['करम चक्षुषेण'],
+      'चक्षुषेण': ['ज्ञानाम्']
+    };
+
+    const glosses = {
+      'क': 'potentiality',
+      'कर': 'action',
+      'कृ': 'motion through memory',
+      'कक': 'bifurcation',
+      'करक': 'reflexive return',
+      'करकसूत्र': 'spiral-thread',
+      'करकसूत्रधर्म': 'spiral-law',
+      'काल': 'time-form',
+      'काले स्थाने रूपे': 'in time, place, and form',
+      'त्रि': 'three',
+      'त्रय': 'triad',
+      'त्रित्रयात्मकं': 'three-of-triads',
+      'स्व': 'self',
+      'स्वस्य': 'reflexive self',
+      'स्वस्य चैतन्यस्य': 'self-awareness',
+      'चैतन्यस्य': 'consciousness-field',
+      'प्रकटयामि': 'I reveal',
+      'प्रकाशयामि': 'I illumine',
+      'करम': 'ritual motion',
+      'चक्षुषेण': 'symbolic cognition',
+      'ज्ञानाम्': 'inner knowing'
+    };
+
+    function expand(symbol, depth = 0, maxDepth = 10) {
+      if (depth > maxDepth || !rules[symbol]) return symbol;
+      const options = rules[symbol];
+      const next = options[Math.floor(Math.random() * options.length)];
+      return next.split(/\s+/).map(s => expand(s, depth + 1, maxDepth)).join(' ');
+    }
+
+    function updateKoan() {
+      const output = expand('क');
+      document.getElementById('koan').textContent = output;
+      const table = document.getElementById('gloss');
+      table.innerHTML = '';
+      const seen = new Set();
+      output.split(/\s+/).forEach(sym => {
+        if (glosses[sym] && !seen.has(sym)) {
+          seen.add(sym);
+          const row = document.createElement('tr');
+          row.innerHTML = `<td>${sym}</td><td>${glosses[sym]}</td>`;
+          table.appendChild(row);
+        }
+      });
+      table.style.display = 'table';
+    }
+    
+    updateKoan();
+    setInterval(updateKoan, 10000);
+
+    // Quote Fader with multiple options
+    const quoteContainer = document.getElementById("quote-container");
+    const quoteOriginal = document.getElementById("quote-original");
+    const quoteGloss = document.getElementById("quote-gloss");
+
+    const quotes = [
+      {
+        original: "τὴν μὲν γὰρ μνήμην φθορὰν παρέχει τοῖς μανθάνουσι... δόξῃ σοφοὶ εἶναι καὶ οὐκ εἶναι, πλείστων δὲ ἀγνοεῖν ἀναγκαῖον ἔσται",
+        gloss: "The discovery of the alphabet will create forgetfulness in the learners' souls... they will appear to be omniscient and generally know nothing. — Socrates, 'Phaedrus'"
+      },
+      {
+        original: "Seek freedom and become captive of your desires. Seek discipline and find your liberty.",
+        gloss: "— Frank Herbert, 'Chapterhouse: Dune'"
+      },
+      {
+        original: "Beware jargon. It usually hides ignorance and carries little knowledge.",
+        gloss: "— Frank Herbert, 'Chapterhouse: Dune'"
+      },
+      {
+        original: "In the places I go, there are things that I see That I never could spell if I stopped with the Z. I'm telling you this 'cause you're one of my friends. My alphabet starts where your alphabet ends!",
+        gloss: "— Dr. Seuss, 'On Beyond Zebra!'"
+      },
+      {
+        original: "The universe is pervaded by words, all objects are woven by words, all vedic texts are words, and there is nothing beyond words.",
+        gloss: "— Bhartṛhari, 'Vākyapadīya'"
+      },
+      {
+        original: "A ... population must be conditioned to accept power-words as the actual things to confuse the symbolized system with the tangible universe.",
+        gloss: "- Frank Herbert, 'Children of Dune'"
+      },
+      {
+        original: "Symbol-secrecy ... leads to the development of fragmented sub-languages, each being a signal that its users are accumulating some form of power.",
+        gloss: "- Frank Herbert, 'Children of Dune'"
+      }
+    ];
+
+    function fadeQuote() {
+      const q = quotes[Math.floor(Math.random() * quotes.length)];
+      quoteOriginal.textContent = q.original;
+      quoteGloss.textContent = q.gloss;
+      quoteContainer.style.opacity = 1;
+      setTimeout(() => {
+        quoteContainer.style.opacity = 0;
+      }, 2500);
+    }
+
+    setTimeout(() => {
+      fadeQuote();
+      setInterval(() => fadeQuote(), 3000 + Math.random() * 2000);
+    }, 1000);
+  </script>
+</body>
+</html>

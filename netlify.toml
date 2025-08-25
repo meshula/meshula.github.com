@@ -1,0 +1,22 @@
+[build]
+  base = "."
+  publish = "site/astro-site/dist"
+  command = "chmod +x build.sh && ./build.sh"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+# Redirect rules for clean URLs (optional)
+[[redirects]]
+  from = "/blog"
+  to = "/blog/"
+  status = 301
+
+# Handle Astro's routing
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

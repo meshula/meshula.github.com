@@ -1,0 +1,305 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import { Image } from 'astro:assets';
+
+type Props = CollectionEntry<'references'>['data'];
+
+const { 
+	title, 
+	description, 
+	pubDate, 
+	originalDate, 
+	originalAuthor, 
+	originalSource, 
+	publicDomain, 
+	historicalContext, 
+	relevanceToTritrayam, 
+	tags, 
+	curatedBy, 
+	heroImage 
+} = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+			.hero-image {
+				width: 100%;
+			}
+			.hero-image img {
+				display: block;
+				margin: 0 auto;
+				border-radius: 12px;
+				box-shadow: var(--box-shadow);
+			}
+			.prose {
+				width: 800px; /* Wider for reading historical texts */
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+				line-height: 1.6; /* Comfortable for extended reading */
+			}
+			.reference-header {
+				margin-bottom: 2em;
+				padding: 1.5em 0;
+				text-align: center;
+				border-bottom: 2px solid rgb(var(--gray-light));
+			}
+			.reference-title {
+				font-family: 'Michroma', 'Arial Black', Impact, sans-serif;
+				font-weight: 400;
+				font-size: 2.5em;
+				margin: 0 0 0.5em 0;
+				line-height: 1.2;
+				color: rgb(var(--black));
+				letter-spacing: 0.02em;
+			}
+			.reference-subtitle {
+				font-size: 1.2em;
+				color: rgb(var(--gray));
+				margin-bottom: 1em;
+				font-style: italic;
+			}
+			.reference-meta {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+				gap: 1em;
+				margin: 1.5em 0;
+				font-size: 0.9em;
+				text-align: left;
+			}
+			.meta-item {
+				background: rgb(var(--gray-light));
+				padding: 1em;
+				border-radius: 8px;
+				border-left: 4px solid var(--accent);
+			}
+			.meta-label {
+				font-weight: 600;
+				color: rgb(var(--gray-dark));
+				text-transform: uppercase;
+				font-size: 0.8em;
+				letter-spacing: 0.05em;
+				margin-bottom: 0.5em;
+			}
+			.meta-value {
+				color: rgb(var(--black));
+			}
+			.original-author {
+				font-weight: 600;
+				font-size: 1.1em;
+			}
+			.date {
+				color: rgb(var(--gray));
+				font-family: 'Michroma', 'Arial Black', Impact, sans-serif;
+				font-weight: 400;
+				letter-spacing: 0.01em;
+			}
+			.public-domain-notice {
+				background: #e8f5e8;
+				border: 1px solid #4caf50;
+				color: #2e7d32;
+				padding: 0.8em;
+				border-radius: 6px;
+				font-size: 0.9em;
+				text-align: center;
+				margin: 1em 0;
+			}
+			.context-section {
+				background: rgb(var(--gray-light));
+				padding: 1.5em;
+				border-radius: 8px;
+				margin: 1.5em 0;
+				border-left: 4px solid var(--accent);
+			}
+			.context-title {
+				font-weight: 600;
+				color: rgb(var(--gray-dark));
+				margin-bottom: 0.5em;
+				text-transform: uppercase;
+				font-size: 0.9em;
+				letter-spacing: 0.05em;
+			}
+			.context-content {
+				line-height: 1.6;
+				color: rgb(var(--black));
+			}
+			.tritrayam-relevance {
+				background: linear-gradient(135deg, #fff3e0 0%, #ffebee 100%);
+				border-left: 4px solid #ff9800;
+			}
+			.tags {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.5em;
+				justify-content: center;
+				margin: 1.5em 0;
+			}
+			.tag {
+				background: rgb(var(--gray-light));
+				color: rgb(var(--gray-dark));
+				padding: 0.3em 0.8em;
+				border-radius: 15px;
+				font-size: 0.8em;
+				border: 1px solid rgb(var(--gray));
+			}
+			.curator-info {
+				font-size: 0.85em;
+				color: rgb(var(--gray));
+				text-align: center;
+				margin-top: 1em;
+				font-style: italic;
+			}
+			
+			/* Reference content styling */
+			.prose h1, .prose h2, .prose h3 {
+				font-family: 'Michroma', sans-serif;
+				letter-spacing: 0.01em;
+				margin-top: 2em;
+			}
+			.prose h1 {
+				font-size: 2em;
+				border-bottom: 2px solid rgb(var(--gray-light));
+				padding-bottom: 0.5em;
+			}
+			.prose h2 {
+				font-size: 1.5em;
+			}
+			.prose h3 {
+				font-size: 1.2em;
+			}
+			.prose blockquote {
+				border-left: 4px solid var(--accent);
+				padding: 1em 1.5em;
+				margin: 1.5em 0;
+				background: rgb(var(--gray-light));
+				font-style: italic;
+			}
+			
+			/* Responsive images in content */
+			.prose img {
+				max-width: 100% !important;
+				height: auto !important;
+				display: block;
+				margin: 1.5em auto;
+				border-radius: 8px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				/* Limit very large images to a reasonable size */
+				max-height: 80vh !important;
+				object-fit: contain;
+			}
+			
+			/* Mobile responsiveness */
+			@media (max-width: 720px) {
+				.reference-title {
+					font-size: 1.8em;
+				}
+				.reference-meta {
+					grid-template-columns: 1fr;
+				}
+				.prose {
+					width: 100%;
+				}
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main>
+			<article>
+				<div class="hero-image">
+					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
+				</div>
+				<div class="prose">
+					<div class="reference-header">
+						<h1 class="reference-title">{title}</h1>
+						{originalAuthor && (
+							<p class="reference-subtitle">by {originalAuthor}</p>
+						)}
+						
+						<div class="reference-meta">
+							{originalAuthor && (
+								<div class="meta-item">
+									<div class="meta-label">Original Author</div>
+									<div class="meta-value original-author">{originalAuthor}</div>
+								</div>
+							)}
+							
+							{originalDate && (
+								<div class="meta-item">
+									<div class="meta-label">Original Publication</div>
+									<div class="meta-value date">
+										<FormattedDate date={originalDate} />
+									</div>
+								</div>
+							)}
+							
+							{originalSource && (
+								<div class="meta-item">
+									<div class="meta-label">Original Source</div>
+									<div class="meta-value">{originalSource}</div>
+								</div>
+							)}
+							
+							<div class="meta-item">
+								<div class="meta-label">Added to Collection</div>
+								<div class="meta-value date">
+									<FormattedDate date={pubDate} />
+								</div>
+							</div>
+						</div>
+						
+						{publicDomain && (
+							<div class="public-domain-notice">
+								📖 This work is in the public domain
+							</div>
+						)}
+						
+						{historicalContext && (
+							<div class="context-section">
+								<div class="context-title">Historical Context</div>
+								<div class="context-content">{historicalContext}</div>
+							</div>
+						)}
+						
+						{relevanceToTritrayam && (
+							<div class="context-section tritrayam-relevance">
+								<div class="context-title">Relevance to त्रित्रयम्</div>
+								<div class="context-content">{relevanceToTritrayam}</div>
+							</div>
+						)}
+						
+						{tags && tags.length > 0 && (
+							<div class="tags">
+								{tags.map((tag) => (
+									<span class="tag">{tag}</span>
+								))}
+							</div>
+						)}
+						
+						{curatedBy && (
+							<div class="curator-info">
+								Curated by {curatedBy}
+							</div>
+						)}
+					</div>
+					
+					<slot />
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>
