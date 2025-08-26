@@ -177,7 +177,7 @@ USD's composition system resolves opinion conflicts through the **LIVERPS** stre
 6. **Payloads** — Conditionally loaded external content for memory management
 7. **Specializes** — Base class relationships with globally weak opinions
 
-### **Key Strength Relationships:**
+### **Notable Arc Relationships:**
 
 - **Local > All Arcs:** Direct authoring always wins over composed content
 - **Inherits > Specializes:** Targeted inheritance overrides foundational base classes, enabling specific modifications to fine-tune general base definitions
@@ -186,14 +186,7 @@ USD's composition system resolves opinion conflicts through the **LIVERPS** stre
 
 ### **Special Behaviors:**
 
-- **Specializes Global Weakness:** If prim A specializes prim B, then ALL opinions for prim A are stronger than ALL opinions for prim B, creating true hierarchical inheritance
-- **Variant Deferred Evaluation:** Variants are processed after all other arcs to ensure complete opinion availability for selection computation
-- **Relocates Structural Preprocessing:** Applied once per layer stack, transforming addressing space before opinion composition begins
+- **Specializes as a Base Class:** If prim A specializes prim B, then ALL opinions for prim A are stronger than ALL opinions for prim B, creating hierarchical inheritance.
+- **Variant Deferred Evaluation:** Variants are processed after all other arcs to ensure complete opinion availability for selection computation.
 
 This strength ordering ensures predictable composition behavior where local authoring takes precedence, inheritance relationships work intuitively, and structural transformations occur at the appropriate processing stage.
-
----
-
-## Conclusion
-
-LIVERPS is a framework for predicting opinion strength, understanding evaluation order, and debugging complex stage assemblies. This introduction to LIVERPS and USD's composition engine provides a conceptual foundation to build upon in the exploration of compositional topics, performance optimization, and real-world production patterns.
