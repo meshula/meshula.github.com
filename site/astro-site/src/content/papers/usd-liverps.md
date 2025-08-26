@@ -25,7 +25,7 @@ The **LIVERPS** mnemonic orders the USD compositional arcs in order of strength 
 - **P** (Payloads): Work like references, but their content is only loaded when requested. They keep scenes lighter by deferring heavy assets until needed.
 
 ### 3. **Content Modification**:
-- **E** (Relocates): Map opinions from source paths to new paths using namespace remapping. Note that relocates transform the namespace topology effectively behaving as a preprocessing step before other arcs.
+- **E** (Relocates): Enable non-destructive namespace remapping of composition source content via layer metadata path mappings. This allows reparenting and renaming without modifying original assets.
 - **V** (Variants): Apply conditional selection among authored alternatives using deferred evaluation
 
 ### 4. **Global Hierarchy**
