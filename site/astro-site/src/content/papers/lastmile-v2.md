@@ -721,19 +721,19 @@ The following formats represent an important category in contemporary 3D workflo
 **Primary Domain**: Ad Hoc Tool Development, Script-Based Workflows  
 **Development**: Wavefront Technologies (1990s), Community Maintained
 
-##### Format Overview
+#### Format Overview
 
 OBJ emerged as one of the earliest attempts at standardized 3D geometry interchange, designed during an era when simplicity and human readability took precedence over comprehensive feature sets. Originally developed by Wavefront Technologies for their advanced animation and modeling software, OBJ was conceived as a straightforward ASCII format that could represent basic geometric data without the complexity overhead of more ambitious interchange standards.
 
 The format's enduring relevance stems from its architectural alignment with contemporary automation and scripting workflows. OBJ's hyperspecialized emergence occurs in contexts where implementation simplicity outweighs feature completeness - rapid prototyping, procedural generation, and ad hoc tool development scenarios where developers need immediate geometric output without format complexity overhead.
 
-##### Hyperspecialized Emergence Patterns
+#### Hyperspecialized Emergence Patterns
 
-• **Script-based workflows**: Minimal parsing overhead enables rapid implementation in automation tools
-• **Procedural generation**: Simple format structure facilitates algorithmic geometry creation
-• **Educational contexts**: Human-readable format supports learning and debugging geometric algorithms
-• **Rapid prototyping**: Quick geometry export for validation and testing workflows
-• **Cross-platform compatibility**: Universal support through format simplicity rather than standardization
+- **Script-based workflows**: Minimal parsing overhead enables rapid implementation in automation tools
+- **Procedural generation**: Simple format structure facilitates algorithmic geometry creation
+- **Educational contexts**: Human-readable format supports learning and debugging geometric algorithms
+- **Rapid prototyping**: Quick geometry export for validation and testing workflows
+- **Cross-platform compatibility**: Universal support through format simplicity rather than standardization
 
 ---
 
@@ -743,19 +743,19 @@ The format's enduring relevance stems from its architectural alignment with cont
 **Primary Domain**: Point Cloud Processing, Gaussian Splat Workflows  
 **Development**: Stanford University (1990s), Research Community
 
-##### Format Overview
+#### Format Overview
 
 PLY originated from Stanford University's 3D scanning research as a flexible container for point cloud and mesh data captured from real-world scanning operations. Unlike formats designed for content creation workflows, PLY was architected around the variable and unpredictable nature of captured geometric data, prioritizing schema flexibility over standardized feature sets.
 
 The format's contemporary resurgence reflects its architectural prescience for modern volumetric rendering techniques. PLY's hyperspecialized emergence in Gaussian splat and neural radiance field workflows demonstrates how research-oriented design decisions can achieve unexpected relevance in advanced rendering domains that didn't exist during the format's original development.
 
-##### Hyperspecialized Emergence Patterns
+#### Hyperspecialized Emergence Patterns
 
-• **Gaussian splat workflows**: Schema flexibility accommodates novel point-based rendering attributes
-• **Neural radiance fields**: Research heritage aligns with experimental rendering technique development
-• **Point cloud processing**: Flexible attribute system supports diverse scanning and sensing modalities
-• **Computer vision research**: Academic origins facilitate integration with research toolchains
-• **Volumetric data representation**: Simple structure enables rapid experimentation with novel data types
+- **Gaussian splat workflows**: Schema flexibility accommodates novel point-based rendering attributes
+- **Neural radiance fields**: Research heritage aligns with experimental rendering technique development
+- **Point cloud processing**: Flexible attribute system supports diverse scanning and sensing modalities
+- **Computer vision research**: Academic origins facilitate integration with research toolchains
+- **Volumetric data representation**: Simple structure enables rapid experimentation with novel data types
 
 ---
 
@@ -765,19 +765,19 @@ The format's contemporary resurgence reflects its architectural prescience for m
 **Primary Domain**: 3D Printing, Additive Manufacturing  
 **Development**: 3D Systems (1980s), Manufacturing Standard
 
-##### Format Overview
+#### Format Overview
 
 STL emerged from the specific requirements of early stereolithography systems, designed as the interface between CAD modeling software and physical manufacturing hardware. The format's architectural constraints - triangulated mesh representation with no material, color, or hierarchical information - reflect the technological limitations and processing requirements of 1980s additive manufacturing systems.
 
 STL's hyperspecialized persistence demonstrates how manufacturing domain alignment can sustain formats through technological evolution. Despite the emergence of more sophisticated manufacturing formats, STL's continued dominance in 3D printing workflows reflects the format's precise optimization for slicing algorithms and manufacturing process requirements that remain fundamentally unchanged.
 
-##### Hyperspecialized Emergence Patterns
+#### Hyperspecialized Emergence Patterns
 
-• **Slicing algorithm optimization**: Triangulated mesh structure matches processing requirements perfectly
-• **Manufacturing workflow integration**: Universal adoption across printer ecosystems regardless of vendor
-• **Process robustness**: Simple structure eliminates complexity-related manufacturing failures
-• **Quality assurance**: Geometric constraints enable reliable validation and error detection
-• **Cross-platform manufacturing**: Format simplicity enables universal hardware compatibility
+- **Slicing algorithm optimization**: Triangulated mesh structure matches processing requirements perfectly
+- **Manufacturing workflow integration**: Universal adoption across printer ecosystems regardless of vendor
+- **Process robustness**: Simple structure eliminates complexity-related manufacturing failures
+- **Quality assurance**: Geometric constraints enable reliable validation and error detection
+- **Cross-platform manufacturing**: Format simplicity enables universal hardware compatibility
 
 ### 3.7.1 Architectural Principles of Hyperspecialized Persistence
 
