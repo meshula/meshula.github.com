@@ -43,7 +43,7 @@ The **LIVERPS** mnemonic orders the USD compositional arcs in order of strength 
 
 ### 2. **Content Accumulation**
 - **I** (Inherits): Propagate opinions from base prims, using automatic upstream layer stack propagation
-- **R** (References): Bring in an external layer stack and add its opinions beneath the referencing prim in the composed stage (e.g. referencing /B/C at /A results in /A/B/C)
+- **R** (References): Bring in an external layer stack and add its opinions beneath the referencing prim in the composed stage (for instance, referencing the prim /Asset/B/C from an external layer under /A in the current stage results in a composed prim at /A/B/C).
 - **P** (Payloads): Work like references, but their content is only loaded when requested. They keep scenes lighter by deferring heavy assets until needed.
 - **V** (Variants): Apply conditional selection among authored alternatives using deferred evaluation
 
@@ -70,7 +70,7 @@ Unlike composition arcs that operate at the prim level and create "remote" opini
 
 Relocates address situations where direct editing would be destructive — affecting all other contexts that reference the same assets. By specifying path mappings in layer metadata (`relocates = { </source/path> : </target/path> }`), you can reorganize referenced content while preserving the source assets unchanged.
 
-During composition, relocates integrate with the -IV-RPS strength ordering by providing additional namespace mappings that modify other arcs' standard mappings. When a prim matches a relocates target path, USD composes opinions from the mapped source path, removes ancestral opinions (except variant arcs), and applies the namespace transformation to all descendant prims and their relationships.
+During composition, relocates integrate with the -IV-RPS strength ordering by providing additional namespace mappings that modify other arcs' standard mappings. When a prim matches a relocates target path, USD composes opinions from the mapped source path, removes ancestral opinions (except variant arcs), and applies the namespace transformation to all descendant prims and their relationships. Relocates are resolved before references and payloads bring in external scene description, ensuring that the remapping applies to those arcs as well.
 
 Relocates transform "where things are" rather than "what things contain," enabling flexible asset organization patterns while maintaining composition arc semantics within the transformed namespace structure.
 
@@ -103,7 +103,7 @@ Note that inherit arcs introduce opinions during composition and therefore inher
 
 ### VariantSets
 
-**VariantSets** — the **V** in LIVERPS — enable conditional selection among alternate authored opinions within a prim. Unlike references or payloads that introduce external content, variants switch between different versions of content already authored within the same prim.
+**VariantSets** — the **V** in LIVERPS — enable conditional selection among alternate authored opinions within a prim. "Variant Sets" are collections of "variants". Unlike references or payloads that introduce external content, variants switch between different versions of content already authored within the same prim.
 
 Variants function as conditional branches in the composition process. When a variant set contains multiple options (e.g., "summer" and "winter" versions of a tree), the composition engine selects one branch based on the current variant selection, then proceeds as if only that branch had been authored.
 
@@ -130,7 +130,8 @@ def Xform "Tree" {
 
 **References** — the **R** in LIVERPS — are a key mechanism for bringing external content into a stage. A reference introduces a complete prim hierarchy from another layer or asset, creating a new subtree in the namespace while preserving the source hierarchy.
 
-References can target entire layers or specific prims within a layer, making them versatile for assembling complex scenes. A single prop, environment section, or character can be referenced multiple times at different points in the stage. Each reference is processed individually, with the composition algorithm executed separately for each reference.
+References may point to an entire layer (via its defaultPrim metadata) or directly to a specific prim path—such as /Asset/B/C.
+This makes them versatile for assembling complex scenes. A single prop, environment section, or character can be referenced multiple times at different points in the stage. Each reference is processed individually, with the composition algorithm executed separately for each reference.
 
 References are **unconditional**: once authored, they always participate in stage composition. This makes references essential for scene construction workflows where external assets must be integrated into the composed stage.
 
@@ -178,7 +179,9 @@ The strength relationship **Inherits** > **Specializes** ensures that more targe
 
 ## LIVERPS Composition Strength Ordering
 
-USD's composition system resolves opinion conflicts through the **LIVERPS** strength ordering, where each composition arc type has a specific position in the hierarchy:
+USD's composition system resolves opinion conflicts through the **LIVERPS** strength ordering, where each composition arc type has a specific position in the hierarchy. LIVERPS governs the strength ordering of composition arcs within a single LayerStack. Across layers, the usual sublayer strength rules apply: the strongest opinions come from the last sublayer in the stack.
+
+It helps to think of sublayer strength as the outer frame, and LIVERPS as the inner ordering within each frame.
 
 1. **Local** - Direct Specification
     — Opinions authored directly in the current layer stack
