@@ -43,7 +43,7 @@ The **LIVERPS** mnemonic orders the USD compositional arcs in order of strength 
 
 ### 2. **Content Accumulation**
 - **I** (Inherits): Propagate opinions from base prims, using automatic upstream layer stack propagation
-- **R** (References): Bring in an external layer stack and add its opinions beneath the referencing prim in the composed stage (for instance, referencing the prim /Asset/B/C from an external layer under /A in the current stage results in a composed prim at /A/B/C).
+- **R** (References): Bring in an external layer stack and add its opinions beneath the referencing prim in the composed stage. For example, if the `defaultPrim` in `/Asset`, when referenced at a particular prim results in the children of the `defaultPrim` composing at that prim. If the default prim is `/Asset/MyRoot`, which has the child opinion `C/D` under it, a composition under `/A/B` would result in `/A/B/C/D`.
 - **P** (Payloads): Work like references, but their content is only loaded when requested. They keep scenes lighter by deferring heavy assets until needed.
 - **V** (Variants): Apply conditional selection among authored alternatives using deferred evaluation
 
