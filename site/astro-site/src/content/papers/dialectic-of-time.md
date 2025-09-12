@@ -1675,9 +1675,9 @@ The **causal‑nonseparability witness** (8) is precisely the **commutator** of 
 
 | Classical triad | Quantum counterpart | Interpretation |
 |----------------|--------------------|----------------|
-| **Being ↔ Nothing ↔ Becoming** | $$|\psi\rangle \xrightarrow{\operatorname{Tr}_\infty} \rho_{\text{dir}} \xrightarrow{V(\cdot)V^\dagger} \rho_{\text{syn}}$$ | The *state* (thesis) is reduced to a *directional* pure state (antithesis); the *isometry* that adds an ancilla (∞‑mode) creates a *joint* state that contains both. |
+| **Being ↔ Nothing ↔ Becoming** | $$\psi\rangle \xrightarrow{\operatorname{Tr}_\infty} \rho_{\text{dir}} \xrightarrow{V(\cdot)V^\dagger} \rho_{\text{syn}}$$ | The *state* (thesis) is reduced to a *directional* pure state (antithesis); the *isometry* that adds an ancilla (∞‑mode) creates a *joint* state that contains both. |
 | **Ground (second triad)** | Fixed point of a CP map (thermal equilibrium, present projector) | The *ground* is a **steady‑state density operator** $$\rho_{\text{eq}}$$ that satisfies $$\mathcal{E}(\rho_{\text{eq}})=\rho_{\text{eq}}$$. |
-| **Judgment (third triad)** | Global pure spinor $$|\Omega\rangle$$ (block) | The *judgment* is the **global entangled state** of all events; it is a *self‑determining* CP map that reproduces itself under partial trace (dialectical recursion). |
+| **Judgment (third triad)** | Global pure spinor $$\Omega\rangle$$ (block) | The *judgment* is the **global entangled state** of all events; it is a *self‑determining* CP map that reproduces itself under partial trace (dialectical recursion). |
 | **Absolute (null cone)** | Unitary representation of the full conformal group $$\mathrm{Spin}(4,1)$$ | The **null cone** is the *invariant subspace* of the representation; any CP map that respects the conformal symmetry is a *dialectical absolute*. |
 
 Hence **every Hegelian concept survives**: the *negation* becomes a trace, the *sublation* a dilation, the *dual* a Hermitian conjugate, and the *absolute* a fully entangled conformal state.
