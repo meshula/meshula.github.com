@@ -8,6 +8,7 @@ mathematical_content: true
 tags: ["time", "CGA", "conformal geometric algebra", "Hegel", "Aristotle", "Aquinas", "Buddhism", "quantum mechanics"]
 author: "Nick Porcino"
 draft: false
+# image: "/images/og/time.png"
 ---
 
 ### A Question That Haunts Philosophy
@@ -324,7 +325,7 @@ Consequently, while you can **draw a diagram** that looks like a loop (samsara �
 | Feature of CGA | What it *does* in mathematics | Why the analogy is limited |
 |----------------|-------------------------------|----------------------------|
 | **Points at infinity** | Represent directions; they are *ideal* elements that allow us to treat parallel lines as intersecting “at infinity.” | They are **formal devices** that make calculations easier; they do not imply that the *actual* universe has an unreachable temporal boundary. |
-| **Conformal compactification** | Adds a “sphere at infinity” so that Euclidean space becomes a closed manifold (e.g., \(S^n\)). | This is a *geometric* closure, not a *metaphysical* one. The “infinity” is still a well‑defined point in the model, not an unknowable, ineffable reality. |
+| **Conformal compactification** | Adds a “sphere at infinity” so that Euclidean space becomes a closed manifold (e.g., $$S^n$$). | This is a *geometric* closure, not a *metaphysical* one. The “infinity” is still a well‑defined point in the model, not an unknowable, ineffable reality. |
 | **Infinities as “strictly inaccessible”** | In physics one sometimes treats singularities as beyond observational reach. | In metaphysics (Aristotle, Aquinas, Buddhism) “inaccessibility” is a *conceptual* or *ontological* claim about the nature of being, not a statement about the limits of a coordinate system. |
 
 Thus, **using CGA’s “points at infinity” as a metaphor for the unknowability of a beginning or an ultimate end** can be a helpful illustration, but it **does not carry the same explanatory weight** as the philosophical arguments about *potentiality vs. actuality* (Aristotle) or *eternal providence* (Aquinas). The “infinite” in CGA is a **mathematical convenience**, whereas the “infinite” in Aquinas (God’s eternity) or in Buddhist emptiness is a **metaphysical assertion** about the structure of reality.
@@ -721,15 +722,15 @@ In **Buddhism** the *regression* is the *re‑appearance* of conceptual clinging
 
 ### 4.1. Objects
 
-* **Finite point** \(P\) – represents a *potential* being (Aristotle’s *potential*).  
+* **Finite point** $$P$$ – represents a *potential* being (Aristotle’s *potential*).  
 * **Infinite direction** ∞ – the *antithesis* that shows the Euclidean gap.  
-* **Line** \(L = P∧∞) – the *synthesis* that unites the point with its limit.
+* **Line** $$L = P∧∞) – the *synthesis* that unites the point with its limit.
 
 ### 4.2. Algebraic steps (dialectical sublation)
 
-1. **Thesis (P)**: \(P\) is a null‑vector with non‑zero magnitude → *pure being*.  
+1. **Thesis (P)**: $$P$$ is a null‑vector with non‑zero magnitude → *pure being*.  
 2. **Antithesis (¬P)**: The *absence* of a finite magnitude is expressed by the **null cone** condition P⋅P=0. This is the *negation* of finite magnitude (the *nothing*).  
-3. **Synthesis (L)**: The **outer product** \(P∧∞) yields a **line** that is *null* (it lies on the conformal null cone) **and** contains the direction toward infinity. The line *sublates* both the point and the infinity: it *preserves* the point’s location and the infinite direction while *overcoming* their mutual exclusivity.
+3. **Synthesis (L)**: The **outer product** $$P∧∞) yields a **line** that is *null* (it lies on the conformal null cone) **and** contains the direction toward infinity. The line *sublates* both the point and the infinity: it *preserves* the point’s location and the infinite direction while *overcoming* their mutual exclusivity.
 
 ### 4.3. Interpretation as a *final cause*
 
@@ -768,9 +769,9 @@ and the **Buddhist synthesis** is the *final sublation* where the *null cone* (t
 
 | Step | Hegelian label | Geometric operation | Philosophical meaning |
 |------|----------------|---------------------|-----------------------|
-| **Thesis** | *Being* – a **point** \(P\) (pure form, Euclidean). | \(P\) is a null‑vector of grade‑1. | Aristotle’s *potential* form; Euclid’s primitive. |
-| **Antithesis** | *Nothing* – the **absence of a meeting point** (parallelism). | Two parallel lines \(L1, L2\) have no finite intersection. | Decay (Aristotle) / Fall (Aquinas) / Ignorance (Buddhism). |
-| **Synthesis** | *Becoming* – the **plane** \( P = L1 ∧ L2 ∧ ∞). | The **join** of the two parallel lines with the point at infinity yields a plane that *contains* both lines *and* their common direction. | Aquinas’s *final cause* (divine ground) / Hegel’s *ground* (Essence) / Buddhist *emptiness* (the plane is a *relational* whole that does not privilege any interior point). |
+| **Thesis** | *Being* – a **point** $$P$$ (pure form, Euclidean). | $$P$$ is a null‑vector of grade‑1. | Aristotle’s *potential* form; Euclid’s primitive. |
+| **Antithesis** | *Nothing* – the **absence of a meeting point** (parallelism). | Two parallel lines $$L1, L2$$ have no finite intersection. | Decay (Aristotle) / Fall (Aquinas) / Ignorance (Buddhism). |
+| **Synthesis** | *Becoming* – the **plane** $$ P = L1 ∧ L2 ∧ ∞). | The **join** of the two parallel lines with the point at infinity yields a plane that *contains* both lines *and* their common direction. | Aquinas’s *final cause* (divine ground) / Hegel’s *ground* (Essence) / Buddhist *emptiness* (the plane is a *relational* whole that does not privilege any interior point). |
 
 The **plane** is a *self‑determining whole*: it *preserves* the identity of the two lines (they share a direction) while *negating* their separation (they now intersect in the direction at infinity).  In Hegelian terminology the plane **sublates** (Aufhebung) the contradiction between identity and difference.
 
@@ -806,7 +807,7 @@ In Hegelian terms the **Absolute Idea** is the *concept that contains itself*; i
 
 ### 7.1. Set‑up (Euclidean thesis)
 
-*Take three Euclidean points* \(A, B, C\) forming a triangle.  
+*Take three Euclidean points* $$A, B, C$$ forming a triangle.  
 In Euclid the **triad** “point → line → plane” is *static*: the triangle is a *closed* figure; there is no *direction* toward an external limit.
 
 ### 7.2. Antithesis (CGA addition of infinity)
@@ -845,9 +846,9 @@ If we now **remove** the distinction between interior and exterior of the plane 
 | Dialectical move | Geometric operation | Hegelian term | Philosophical reading |
 |------------------|---------------------|---------------|-----------------------|
 | **Thesis → Antithesis** | *Negation* = **subtract** a sub‑space (e.g., remove the point at infinity) | *Negation* (Aufhebung) | Decay (Aristotle) / Fall (Aquinas) / Ignorance (Buddhism) |
-| **Antithesis → Synthesis** | *Join* = **outer product** with the negated element (e.g., \(L∧∞)) | *Sublation* (Aufhebung) | Realization of form (Aristotle) / Divine ground (Aquinas) / Insight into emptiness (Buddhism) |
+| **Antithesis → Synthesis** | *Join* = **outer product** with the negated element (e.g., $$L∧∞)) | *Sublation* (Aufhebung) | Realization of form (Aristotle) / Divine ground (Aquinas) / Insight into emptiness (Buddhism) |
 | **Synthesis → Higher‑order Antithesis** | Dualisation: S* = S · I⁻¹  (dual via pseudoscalar) | *Higher‑order negation* | Re‑appearance of finitude (Aristotle) / Temptation (Aquinas) / Conceptual clinging (Buddhism) |
-| **Higher‑order Synthesis** | *Conformal compactification* = **union** of all previous objects + \(∞) | *Absolute* (Hegel) | *Absolute Idea* (Aquinas’s God) / *Nirvāṇa* (emptiness) / *Ultimate geometric closure* (null cone). |
+| **Higher‑order Synthesis** | *Conformal compactification* = **union** of all previous objects + $$∞) | *Absolute* (Hegel) | *Absolute Idea* (Aquinas’s God) / *Nirvāṇa* (emptiness) / *Ultimate geometric closure* (null cone). |
 
 Thus **regression** is not a “back‑track” to the original thesis but a **re‑embedding** of the synthesis into a *higher‑order* triad.  In geometric terms, the **plane** (Essence) can be *re‑projected* onto a **sphere at infinity**, which then becomes a *new thesis* for a *higher* triad (e.g., *Sphere → Dual sphere → Compactified manifold*).
 
@@ -858,7 +859,7 @@ Thus **regression** is not a “back‑track” to the original thesis but a **r
 | Level | Hegelian category | Geometric entity | Philosophical meaning |
 |-------|-------------------|------------------|-----------------------|
 | **1st triad (Being)** | *Pure Being* → *Nothing* → *Becoming* | **Point** → **No point** → **Line** | Aristotle’s *potential → actual*; the line is the *formal cause* of motion. |
-| **2nd triad (Essence)** | *Identity* → *Difference* → *Ground* | **Parallel lines** → **Common direction \(∞)** → **Plane** | Aquinas’s *form* (parallelism) + *motion* (difference) → *final cause* (plane = divine ground). |
+| **2nd triad (Essence)** | *Identity* → *Difference* → *Ground* | **Parallel lines** → **Common direction $$∞)** → **Plane** | Aquinas’s *form* (parallelism) + *motion* (difference) → *final cause* (plane = divine ground). |
 | **3rd triad (Notion)** | *Subject* → *Predicate* → *Judgment* | **Sphere** → **Dual sphere** → **Conformal compactification** | Buddhist *emptiness* (null cone) as the *ultimate judgment* that dissolves subject–predicate distinction. |
 | **4th (meta‑triad)** | *Synthesis of all three* → *Absolute* | **Null cone** (the set of all null multivectors) | The **Absolute Idea**: a self‑identical, self‑determining whole that contains every lower‑order triad as a *sublated* moment. |
 
@@ -883,7 +884,7 @@ These calculations are **exactly** the algebraic counterpart of Hegel’s “Auf
 ### TL;DR
 
 * **Hegel’s Logic** supplies the *dialectical skeleton* (triads) that explains **why** we need to move from Euclid’s static “thesis” to CGA’s “antithesis” (the point at infinity) and then to a *teleologically* enriched “synthesis” (Aristotle’s formal cause, Aquinas’s divine ground, Buddhism’s emptiness).  
-* The **geometric operations** of CGA (outer product, join with \(∞), conformal compactification) are *literal realizations* of Hegelian sublation: each operation preserves the content of the earlier stage while overcoming its limitation.  
+* The **geometric operations** of CGA (outer product, join with $$∞), conformal compactification) are *literal realizations* of Hegelian sublation: each operation preserves the content of the earlier stage while overcoming its limitation.  
 * The **final cause** in each tradition is simply the *geometric synthesis* that results from the triadic movement; the **absolute** (null cone) is the ultimate Hegelian synthesis that makes all previous distinctions *empty*—the very heart of Buddhist nirvāṇa.
 
 ---
@@ -967,9 +968,9 @@ The ancient philosophical dream of understanding temporal reality with both conc
 
 | Aspect | Hegel’s Logic | Conformal Geometric Algebra (CGA) | Classical‑/Buddhist‑Metaphysics |
 |--------|---------------|-----------------------------------|---------------------------------|
-| **Being → Becoming** (first logical triad) | “Pure Being” is a static datum; “Nothing” is its negation; “Becoming” is the *process* that unites them. | A **null‑vector** \(X\) (a point) is *pure being*; the **null cone** condition X⋅X=0 is the *nothing* that makes the point *potentially* a direction; the **outer product** \(X\wedge Y\) (a line) is the *becoming* that contains both. | Aristotle’s *potentiality → actuality*; Aquinas’s *form + efficient cause → final cause*; Buddhism’s *impermanence* (anicca) – all treat **change** as the ontological core of time. |
-| **Essence → Ground** (second logical triad) | “Identity” (the same) is negated by “Difference”; the “Ground” (the relation that makes identity possible) is the synthesis. | Two **parallel lines** \(L_1, L_2\) have the same *direction* (identity) but no intersection (difference). Adding the **point at infinity** \(\infty\) yields a **plane** Π=L1​∧L2​∧∞ – the *ground* that makes the parallelism coherent. | The **thermodynamic arrow** (entropy increase) is the *difference* that breaks the static equilibrium (identity). The *ground* is the *state of maximal entropy* (equilibrium) that makes the arrow intelligible. |
-| **Notion → Judgment** (third logical triad) | “Subject” and “Predicate” are sublated in a *self‑determining* judgment. | A **sphere** \(S\) (inner region) and its **dual** \(S^\ast\) (exterior) are sublated by the **conformal compactification** M=S∪S∗∪{∞}. | **Sequential time** (causal ordering of events) is the *subject*; **simultaneous (external) time** (the block‑universe view) is the *predicate*; the *judgment* is the *relativistic spacetime manifold* that contains both. |
+| **Being → Becoming** (first logical triad) | “Pure Being” is a static datum; “Nothing” is its negation; “Becoming” is the *process* that unites them. | A **null‑vector** $$X$$ (a point) is *pure being*; the **null cone** condition X⋅X=0 is the *nothing* that makes the point *potentially* a direction; the **outer product** $$X\wedge Y$$ (a line) is the *becoming* that contains both. | Aristotle’s *potentiality → actuality*; Aquinas’s *form + efficient cause → final cause*; Buddhism’s *impermanence* (anicca) – all treat **change** as the ontological core of time. |
+| **Essence → Ground** (second logical triad) | “Identity” (the same) is negated by “Difference”; the “Ground” (the relation that makes identity possible) is the synthesis. | Two **parallel lines** $$L_1, L_2$$ have the same *direction* (identity) but no intersection (difference). Adding the **point at infinity** $$\infty$$ yields a **plane** Π=L1​∧L2​∧∞ – the *ground* that makes the parallelism coherent. | The **thermodynamic arrow** (entropy increase) is the *difference* that breaks the static equilibrium (identity). The *ground* is the *state of maximal entropy* (equilibrium) that makes the arrow intelligible. |
+| **Notion → Judgment** (third logical triad) | “Subject” and “Predicate” are sublated in a *self‑determining* judgment. | A **sphere** $$S$$ (inner region) and its **dual** $$S^\ast$$ (exterior) are sublated by the **conformal compactification** M=S∪S∗∪{∞}. | **Sequential time** (causal ordering of events) is the *subject*; **simultaneous (external) time** (the block‑universe view) is the *predicate*; the *judgment* is the *relativistic spacetime manifold* that contains both. |
 
 Thus **time** is not an extra parameter that we tack on later; it **emerges** already in the first logical triad (Becoming) and is *geometrised* by the CGA operations that produce lines, planes, and finally the full conformal spacetime manifold.  
 
@@ -979,9 +980,9 @@ Thus **time** is not an extra parameter that we tack on later; it **emerges** al
 
 | Regime | Physical / Metaphysical description | Hegelian triad (thesis‑antithesis‑synthesis) | CGA realisation |
 |--------|--------------------------------------|----------------------------------------------|-----------------|
-| **Thermodynamic (arrow of time)** | Entropy \(S\) increases in isolated systems; the *arrow* points from low‑entropy *thesis* to high‑entropy *antithesis*. | **Thesis** = low‑entropy *potential* (ordered state). <br>**Antithesis** = high‑entropy *actual* (disordered state). <br>**Synthesis** = *equilibrium* (maximum entropy) – a *ground* that contains both ordered and disordered possibilities. | **Bivector** \(B = X\wedge Y\) representing a *process* (heat flow). <br>Entropy increase ↔ **grade‑2 increase** (area) of the bivector. <br>Equilibrium ↔ **null bivector** (no net oriented area) – the *ground* plane \(\Pi\). |
-| **Sequential (causal) time** | Events are ordered by a *causal* relation \(e_1\prec e_2\). The *present* is the *becoming* of the future into the past. | **Thesis** = *future* (potential). <br>**Antithesis** = *past* (actual). <br>**Synthesis** = *present* (the *moment* that sublates both). | **World‑line** \(W = P\wedge V\) where \(P\) is an event and \(V\) a timelike direction (a *future‑pointing* vector). <br>The *present* is the **grade‑1 intersection** \(W\cdot \infty\) – the *instant* where the line meets the point‑at‑infinity (the “now” hyperplane). |
-| **External / Simultaneous (block‑universe)** | All events exist “at once” in a 4‑dimensional manifold; simultaneity is frame‑dependent. | **Thesis** = *local* temporal ordering (subject). <br>**Antithesis** = *global* simultaneity (predicate). <br>**Synthesis** = *relativistic spacetime* (the *judgment* that reconciles both). | **Conformal Minkowski space** \(\mathcal{M}_{1,3}\) is built from **null vectors** \(X\) satisfying \(X\!\cdot\!X=0\). <br>Simultaneity slices are **hyperplanes** \(X\cdot n = 0\) for a timelike normal \(n\). <br>The *block* is the **null cone** plus its dual – the *absolute* that contains every hyperplane. |
+| **Thermodynamic (arrow of time)** | Entropy $$S$$ increases in isolated systems; the *arrow* points from low‑entropy *thesis* to high‑entropy *antithesis*. | **Thesis** = low‑entropy *potential* (ordered state). <br>**Antithesis** = high‑entropy *actual* (disordered state). <br>**Synthesis** = *equilibrium* (maximum entropy) – a *ground* that contains both ordered and disordered possibilities. | **Bivector** $$B = X\wedge Y$$ representing a *process* (heat flow). <br>Entropy increase ↔ **grade‑2 increase** (area) of the bivector. <br>Equilibrium ↔ **null bivector** (no net oriented area) – the *ground* plane $$\Pi$$. |
+| **Sequential (causal) time** | Events are ordered by a *causal* relation $$e_1\prec e_2$$. The *present* is the *becoming* of the future into the past. | **Thesis** = *future* (potential). <br>**Antithesis** = *past* (actual). <br>**Synthesis** = *present* (the *moment* that sublates both). | **World‑line** $$W = P\wedge V$$ where $$P$$ is an event and $$V$$ a timelike direction (a *future‑pointing* vector). <br>The *present* is the **grade‑1 intersection** $$W\cdot \infty$$ – the *instant* where the line meets the point‑at‑infinity (the “now” hyperplane). |
+| **External / Simultaneous (block‑universe)** | All events exist “at once” in a 4‑dimensional manifold; simultaneity is frame‑dependent. | **Thesis** = *local* temporal ordering (subject). <br>**Antithesis** = *global* simultaneity (predicate). <br>**Synthesis** = *relativistic spacetime* (the *judgment* that reconciles both). | **Conformal Minkowski space** $$\mathcal{M}_{1,3}$$ is built from **null vectors** $$X$$ satisfying $$X\!\cdot\!X=0$$. <br>Simultaneity slices are **hyperplanes** $$X\cdot n = 0$$ for a timelike normal $$n$$. <br>The *block* is the **null cone** plus its dual – the *absolute* that contains every hyperplane. |
 
 Each regime is a **dialectical moment** of the same underlying logical structure: a *potential* (thesis) is negated (antithesis) and then *sublated* (synthesis). The CGA formalism makes the sublation **explicit**: a *join* (outer product) with the appropriate *infinite* element produces the synthesis.
 
@@ -1038,10 +1039,10 @@ The **point at infinity** is simply
 
 | Dialectical move | CGA operator | Result |
 |------------------|--------------|--------|
-| **Negation** (thesis → antithesis) | **Inner product** with \(\infty\) (project onto infinity) | Removes finite magnitude → *nothing* (pure direction). |
-| **Sublation** (antithesis → synthesis) | **Outer product** (join) with \(\infty\) | Adds the missing element, producing a higher‑grade object (line, plane, manifold). |
-| **Higher‑order negation** (synthesis → new thesis) | **Dualisation** \(M^\ast = M\!\cdot\!I\) where \(I\) is the pseudoscalar | Turns a synthesis into its *dual* (e.g., equilibrium plane ↔ entropy bivector). |
-| **Absolute synthesis** | **Conformal compactification** \( \mathcal{M}= \bigvee\limits_{\text{all }X} X \) | Union of all points, lines, planes, and \(\infty\) – the *block universe* plus the *thermodynamic block*. |
+| **Negation** (thesis → antithesis) | **Inner product** with $$\infty$$ (project onto infinity) | Removes finite magnitude → *nothing* (pure direction). |
+| **Sublation** (antithesis → synthesis) | **Outer product** (join) with $$\infty$$ | Adds the missing element, producing a higher‑grade object (line, plane, manifold). |
+| **Higher‑order negation** (synthesis → new thesis) | **Dualisation** $$M^\ast = M\!\cdot\!I$$ where $$I$$ is the pseudoscalar | Turns a synthesis into its *dual* (e.g., equilibrium plane ↔ entropy bivector). |
+| **Absolute synthesis** | **Conformal compactification** $$ \mathcal{M}= \bigvee\limits_{\text{all }X} X $$ | Union of all points, lines, planes, and $$\infty$$ – the *block universe* plus the *thermodynamic block*. |
 
 These operators are **exactly** the algebraic counterpart of Hegel’s “Aufhebung”: the inner product *negates* a grade, the outer product *raises* it, and the resulting multivector *contains* both the original and its negation.
 
@@ -1057,9 +1058,9 @@ These operators are **exactly** the algebraic counterpart of Hegel’s “Aufheb
 
 **CGA picture**:  
 
-* A **timelike direction** \(V\) is the *potential* (Aristotle’s *dunamis*).  
-* The **world‑line** \(W = X\wedge V\) is the *actual* motion.  
-* The **hyperplane** \(H = V\) (the *now*) is the *final cause*: it is the *goal* that the line strives toward (the direction of proper time).  
+* A **timelike direction** $$V$$ is the *potential* (Aristotle’s *dunamis*).  
+* The **world‑line** $$W = X\wedge V$$ is the *actual* motion.  
+* The **hyperplane** $$H = V$$ (the *now*) is the *final cause*: it is the *goal* that the line strives toward (the direction of proper time).  
 
 **Result:** The *arrow* of becoming is already present in the **first logical triad**; the *final cause* is the **grade‑1 subspace** that sublates past and future.
 
@@ -1068,13 +1069,13 @@ These operators are **exactly** the algebraic counterpart of Hegel’s “Aufheb
 ### 4.2. Aquinas – **Form + Efficient Cause → Final Cause (Divine Ground)**  
 
 * In Aquinas the **final cause** is a *ground* that makes the whole causal chain intelligible.  
-* In the CGA picture the **plane** \(\Pi = L_1\wedge L_2\wedge\infty\) is precisely that *ground*: it contains the *identity* (parallelism) and the *difference* (absence of intersection).  
+* In the CGA picture the **plane** $$\Pi = L_1\wedge L_2\wedge\infty$$ is precisely that *ground*: it contains the *identity* (parallelism) and the *difference* (absence of intersection).  
 
 **Temporal reading**  
 
-* **Thesis** – *future‑directed* timelike vector \(V\) (the *efficient cause* of a process).  
-* **Antithesis** – *past* world‑line \(W\) (the *form* that has already been actualised).  
-* **Synthesis** – the **hyperplane** \(H = V\) (the *now*), which is the *final cause* that determines the *direction* of all subsequent joins.  
+* **Thesis** – *future‑directed* timelike vector $$V$$ (the *efficient cause* of a process).  
+* **Antithesis** – *past* world‑line $$W$$ (the *form* that has already been actualised).  
+* **Synthesis** – the **hyperplane** $$H = V$$ (the *now*), which is the *final cause* that determines the *direction* of all subsequent joins.  
 
 Thus **Aquinas’s final cause** is the *present hyperplane* that simultaneously contains the *potential* (future) and the *actual* (past).  
 
@@ -1084,12 +1085,12 @@ Thus **Aquinas’s final cause** is the *present hyperplane* that simultaneously
 
 | Buddhist notion | Hegelian moment | CGA analogue |
 |-----------------|----------------|--------------|
-| **Impermanence** (all phenomena are in flux) | *Becoming* (first triad) | **World‑line** \(W = X\wedge V\) – every phenomenon is a line, not a static point. |
-| **Dependent origination** (pratītyasamutpāda) | *Identity ↔ Difference → Ground* (second triad) | **Parallel lines + \(\infty\)** → **plane** \(\Pi\) – the relational “ground” that makes two events co‑existent. |
-| **Emptiness** (no intrinsic self‑nature) | *Absolute* (null cone) | **Null cone** \(\mathcal{N}\) – every multivector is *null* when projected onto the absolute, i.e. has no intrinsic magnitude; only relational structure (joins) survives. |
-| **Threefold time** (past‑present‑future) | *Subject‑Predicate‑Judgment* (third triad) | **Sphere + dual sphere + \(\infty\)** → **compactified spacetime** \(\mathcal{M}\). The *subject* (inner sphere) is the *process* of becoming; the *predicate* (dual sphere) is the *simultaneous* block; the *judgment* is the *compactified manifold* that contains both. |
+| **Impermanence** (all phenomena are in flux) | *Becoming* (first triad) | **World‑line** $$W = X\wedge V$$ – every phenomenon is a line, not a static point. |
+| **Dependent origination** (pratītyasamutpāda) | *Identity ↔ Difference → Ground* (second triad) | **Parallel lines + $$\infty$$** → **plane** $$\Pi$$ – the relational “ground” that makes two events co‑existent. |
+| **Emptiness** (no intrinsic self‑nature) | *Absolute* (null cone) | **Null cone** $$\mathcal{N}$$ – every multivector is *null* when projected onto the absolute, i.e. has no intrinsic magnitude; only relational structure (joins) survives. |
+| **Threefold time** (past‑present‑future) | *Subject‑Predicate‑Judgment* (third triad) | **Sphere + dual sphere + $$\infty$$** → **compactified spacetime** $$\mathcal{M}$$. The *subject* (inner sphere) is the *process* of becoming; the *predicate* (dual sphere) is the *simultaneous* block; the *judgment* is the *compactified manifold* that contains both. |
 
-**Key insight:** In Buddhist thought the *arrow of time* is not a fundamental “flow” but a **relational pattern** of entropy‑like bivectors. In CGA this pattern is captured by the **oriented bivector** \(B = X\wedge Y\); its *magnitude* is a scalar that can be identified with **thermodynamic entropy** (up to a constant factor). The *emptiness* of the null cone then guarantees that **no event possesses an intrinsic temporal direction** – the direction is always *relative* to another event (the antithesis) and to the point at infinity (the synthesis).
+**Key insight:** In Buddhist thought the *arrow of time* is not a fundamental “flow” but a **relational pattern** of entropy‑like bivectors. In CGA this pattern is captured by the **oriented bivector** $$B = X\wedge Y$$; its *magnitude* is a scalar that can be identified with **thermodynamic entropy** (up to a constant factor). The *emptiness* of the null cone then guarantees that **no event possesses an intrinsic temporal direction** – the direction is always *relative* to another event (the antithesis) and to the point at infinity (the synthesis).
 
 
 ---
@@ -1290,9 +1291,9 @@ Perfect—I’ve rewritten your 8-step “dialectical‑CGA” recipe as a **por
 | Question | Answer supplied by the synthesis |
 |----------|-----------------------------------|
 | **Is time a fundamental entity?** | No. Time is the *sublated* product of *being* (null point) and *direction* (null infinity). It is **ontologically emergent** from the dialectic of Being ↔ Nothing. |
-| **Why do we experience an arrow?** | The arrow is the *ground* (equilibrium plane) that results when a bivector (entropy‑like process) is joined with \(\infty\). The *present hyperplane* is the *final cause* that orders the arrow. |
+| **Why do we experience an arrow?** | The arrow is the *ground* (equilibrium plane) that results when a bivector (entropy‑like process) is joined with $$\infty$$. The *present hyperplane* is the *final cause* that orders the arrow. |
 | **How can the same world be described both sequentially and as a block?** | Both are **different grades** of the same null‑cone structure. The *present hyperplane* is a static object (a slice of the block) that simultaneously encodes the causal ordering. |
-| **How does irreversibility fit with reversible micro‑dynamics?** | The *regression* (inner product with \(\infty\)) removes the oriented bivector, yielding a null bivector (no arrow). The *higher‑order synthesis* (new perturbation) reinstates a fresh arrow. Thus irreversibility is a *dialectical phase* that can be *re‑embedded* into a reversible higher‑grade structure. |
+| **How does irreversibility fit with reversible micro‑dynamics?** | The *regression* (inner product with $$\infty$$) removes the oriented bivector, yielding a null bivector (no arrow). The *higher‑order synthesis* (new perturbation) reinstates a fresh arrow. Thus irreversibility is a *dialectical phase* that can be *re‑embedded* into a reversible higher‑grade structure. |
 | **What is the final cause of temporal evolution?** | The **present hyperplane** (or equilibrium plane) that contains the future direction. In Hegelian terms this is the **final cause** of the third logical triad; in CGA it is a **grade‑1 blade** that sublates past and future. |
 | **What is the ultimate “ground” of all temporal structures?** | The **null cone** (absolute), which is self‑identical and contains every sub‑object (points, lines, planes, hyperplanes). It is the **Absolute Idea** of Hegel, realized geometrically as the **null cone** of the conformal algebra. |
 
@@ -1300,8 +1301,8 @@ Perfect—I’ve rewritten your 8-step “dialectical‑CGA” recipe as a **por
 
 ## 10. Further Directions  
 
-* **Quantum extensions:** Replace the classical timelike direction \(V\) by a **spinor** (a minimal left ideal of the Clifford algebra). The **world‑line** becomes a **bivector** built from spinors, and the **present hyperplane** is then a *projector* onto a spinor subspace – a natural way to incorporate **quantum superposition of temporal orders**.  
-* **Cosmological models:** Use a **family of parallel planes** \(\{H_n\}\) (different cosmic times) and join them with a *global* dual sphere to model **expanding universes** within the same dialectical framework.  
+* **Quantum extensions:** Replace the classical timelike direction $$V$$ by a **spinor** (a minimal left ideal of the Clifford algebra). The **world‑line** becomes a **bivector** built from spinors, and the **present hyperplane** is then a *projector* onto a spinor subspace – a natural way to incorporate **quantum superposition of temporal orders**.  
+* **Cosmological models:** Use a **family of parallel planes** $$\{H_n\}$$ (different cosmic times) and join them with a *global* dual sphere to model **expanding universes** within the same dialectical framework.  
 * **Philosophical implications:** The synthesis suggests a **new reading of Hegel’s “static‑dynamic” paradox**: the *static* hyperplane (present) is itself a *dynamic* synthesis of past and future, mirroring the **block universe** where the *static* spacetime contains the *dynamic* causal arrows.
 
 ---
@@ -1408,13 +1409,13 @@ The central idea is that **quantum states are spinors of the conformal Clifford 
 
 | Classical object | CGA multivector | Quantum analogue |
 |------------------|----------------|------------------|
-| Point (event) \(X\) | Null vector, grade‑1 | **Spinor** \(|\psi_X\rangle = X\,\Phi\) (left‑ideal element) |
-| Timelike direction \(V\) | Null‑augmented vector | **Momentum‑spinor** \(|p\rangle = V\,\Phi\) |
-| World‑line \(W = X\wedge V\) | Bivector (grade‑2) | **Propagator operator** \(\hat{U}_{X\to V}= X\wedge V\) acting on spinors |
-| Entropy bivector \(B = X\wedge Y\) | Bivector | **Thermal channel** \(\mathcal{E}_B(\rho)=\frac12\bigl(B\rho B^\dagger + \rho\bigr)\) |
-| Hyperplane (present) \(H = W\cdot\infty\) | Grade‑1 vector | **Projector** \(\Pi_H = \frac12(1+ \hat{h})\) with \(\hat{h}\) a Hermitian operator representing the “now”. |
+| Point (event) $$X$$ | Null vector, grade‑1 | **Spinor** $$|\psi_X\rangle = X\,\Phi$$ (left‑ideal element) |
+| Timelike direction $$V$$ | Null‑augmented vector | **Momentum‑spinor** $$|p\rangle = V\,\Phi$$ |
+| World‑line $$W = X\wedge V$$ | Bivector (grade‑2) | **Propagator operator** $$\hat{U}_{X\to V}= X\wedge V$$ acting on spinors |
+| Entropy bivector $$B = X\wedge Y$$ | Bivector | **Thermal channel** $$\mathcal{E}_B(\rho)=\frac12\bigl(B\rho B^\dagger + \rho\bigr)$$ |
+| Hyperplane (present) $$H = W\cdot\infty$$ | Grade‑1 vector | **Projector** $$\Pi_H = \frac12(1+ \hat{h})$$ with $$\hat{h}$$ a Hermitian operator representing the “now”. |
 
-*Technical note*: In a **real Clifford algebra** \(Cl_{4,1}\) the minimal left ideals are generated by a primitive idempotent \(\Phi\). Any multivector \(M\) acting on \(\Phi\) yields a **spinor** \(|\psi\rangle = M\Phi\). The inner product of two spinors is the **Clifford scalar part** \(\langle\psi|\phi\rangle = \langle \Phi^\dagger M^\dagger N \Phi\rangle_0\). This reproduces the usual Hilbert‑space inner product when we restrict to the **even subalgebra** \(Cl^+_{4,1}\cong \mathbb{C}(4)\).
+*Technical note*: In a **real Clifford algebra** $$Cl_{4,1}$$ the minimal left ideals are generated by a primitive idempotent $$\Phi$$. Any multivector $$M$$ acting on $$\Phi$$ yields a **spinor** $$|\psi\rangle = M\Phi$$. The inner product of two spinors is the **Clifford scalar part** $$\langle\psi|\phi\rangle = \langle \Phi^\dagger M^\dagger N \Phi\rangle_0$$. This reproduces the usual Hilbert‑space inner product when we restrict to the **even subalgebra** $$Cl^+_{4,1}\cong \mathbb{C}(4)$$.
 
 ---
 
@@ -1422,14 +1423,14 @@ The central idea is that **quantum states are spinors of the conformal Clifford 
 
 | Dialectical move | Classical CGA operator | Quantum operator analogue |
 |------------------|------------------------|---------------------------|
-| **Negation** (thesis → antithesis) | \(M \mapsto M\cdot\infty\) (inner product) | **Partial trace** over the “infinite” degree of freedom: \(\rho \mapsto \operatorname{Tr}_\infty[\rho]\). This removes the *magnitude* of a vector, leaving only its *direction* (a pure state on the Bloch sphere). |
-| **Sublation** (antithesis → synthesis) | \(M \mapsto M\wedge\infty\) (outer product) | **Stinespring dilation**: \(\rho \mapsto V\rho V^\dagger\) with an isometry \(V\) that adjoins an ancillary “∞‑mode”. The resulting state lives in a larger Hilbert space and *contains* both the original and its negation. |
-| **Dualisation** (higher‑order negation) | \(M \mapsto M^\ast = M\cdot I\) (pseudoscalar) | **Hermitian conjugation** combined with a **Hodge dual**: \(\hat{M}^\dagger = I^{-1} M^\dagger I\). This maps a bivector (process) to its *dual* (observable). |
-| **Absolute synthesis** (join of all primitives) | \(\bigvee_X X\) (conformal compactification) | **Tensor‑product of all modes**: \(\bigotimes_{X} |\psi_X\rangle\). The resulting *global state* is the **quantum block universe**. |
+| **Negation** (thesis → antithesis) | $$M \mapsto M\cdot\infty$$ (inner product) | **Partial trace** over the “infinite” degree of freedom: $$\rho \mapsto \operatorname{Tr}_\infty[\rho]$$. This removes the *magnitude* of a vector, leaving only its *direction* (a pure state on the Bloch sphere). |
+| **Sublation** (antithesis → synthesis) | $$M \mapsto M\wedge\infty$$ (outer product) | **Stinespring dilation**: $$\rho \mapsto V\rho V^\dagger$$ with an isometry $$V$$ that adjoins an ancillary “∞‑mode”. The resulting state lives in a larger Hilbert space and *contains* both the original and its negation. |
+| **Dualisation** (higher‑order negation) | $$M \mapsto M^\ast = M\cdot I$$ (pseudoscalar) | **Hermitian conjugation** combined with a **Hodge dual**: $$\hat{M}^\dagger = I^{-1} M^\dagger I$$. This maps a bivector (process) to its *dual* (observable). |
+| **Absolute synthesis** (join of all primitives) | $$\bigvee_X X$$ (conformal compactification) | **Tensor‑product of all modes**: $$\bigotimes_{X} |\psi_X\rangle$$. The resulting *global state* is the **quantum block universe**. |
 
 Thus the **dialectical ladder** becomes a **ladder of completely positive (CP) maps**:
 
-\[
+$$
 \underbrace{\rho}_{\text{thesis}}
 \;\xrightarrow{\;\operatorname{Tr}_\infty\;}\;
 \underbrace{\rho_{\text{dir}}}_{\text{antithesis}}
@@ -1437,7 +1438,7 @@ Thus the **dialectical ladder** becomes a **ladder of completely positive (CP) m
 \underbrace{\rho_{\text{syn}}}_{\text{synthesis}}
 \;\xrightarrow{\;\mathcal{D}\;}\;
 \underbrace{\rho_{\text{abs}}}_{\text{absolute}} .
-\]
+$$
 
 ---
 
@@ -1445,57 +1446,57 @@ Thus the **dialectical ladder** becomes a **ladder of completely positive (CP) m
 
 #### 3.1  Entropy‑Like Bivector as a Lindblad Generator  
 
-Take two events \(X\) and \(Y\) and form the **process bivector**
+Take two events $$X$$ and $$Y$$ and form the **process bivector**
 
-\[
+$$
 \hat{B}=X\wedge Y \;\in\; Cl_{4,1}^{(2)} .
-\]
+$$
 
-Define a **Lindblad superoperator** that uses \(\hat{B}\) as the jump operator:
+Define a **Lindblad superoperator** that uses $$\hat{B}$$ as the jump operator:
 
-\[
+$$
 \boxed{\;
 \mathcal{L}_B(\rho)=\gamma\Bigl(\hat{B}\,\rho\,\hat{B}^\dagger -\frac12\{\hat{B}^\dagger\hat{B},\rho\}\Bigr)
 \;}
 \tag{1}
-\]
+$$
 
-where \(\gamma>0\) is a rate. The **entropy production** is
+where $$\gamma>0$$ is a rate. The **entropy production** is
 
-\[
+$$
 \dot S = -\operatorname{Tr}\bigl[\mathcal{L}_B(\rho)\,\ln\rho\bigr] \ge 0 .
 \tag{2}
-\]
+$$
 
 *Dialectical reading*:  
 
-* **Thesis** – the pure event spinor \(|\psi_X\rangle\).  
-* **Negation** – trace over ∞, leaving a *directional* pure state \(|\psi_V\rangle\).  
+* **Thesis** – the pure event spinor $$|\psi_X\rangle$$.
+* **Negation** – trace over ∞, leaving a *directional* pure state $$|\psi_V\rangle$$.  
 * **Sublation** – the dilation (1) adds the ∞‑mode back, producing a *mixed* state that encodes the irreversible flow (the “thermal arrow”).  
 
-Because \(\hat{B}\) is a **bivector**, it can be **rotated** by a Lorentz boost in the algebra, which corresponds to a **change of quantum reference frame** (see §5). The arrow is therefore *frame‑covariant*.
+Because $$\hat{B}$$ is a **bivector**, it can be **rotated** by a Lorentz boost in the algebra, which corresponds to a **change of quantum reference frame** (see §5). The arrow is therefore *frame‑covariant*.
 
 #### 3.2  Superposition of Thermodynamic Arrows  
 
-Since \(\hat{B}\) is an operator, we can prepare a **coherent superposition** of two distinct entropy processes:
+Since $$\hat{B}$$ is an operator, we can prepare a **coherent superposition** of two distinct entropy processes:
 
-\[
+$$
 |\Phi\rangle = \alpha\,|B_1\rangle + \beta\,|B_2\rangle ,\qquad |\alpha|^2+|\beta|^2=1 .
-\]
+$$
 
 The corresponding CP map is
 
-\[
+$$
 \mathcal{E}(\rho)=\alpha\,\mathcal{L}_{B_1}(\rho)+\beta\,\mathcal{L}_{B_2}(\rho) .
-\]
+$$
 
 The **entropy production** becomes an *interference term*:
 
-\[
+$$
 \dot S = |\alpha|^2\dot S_1+|\beta|^2\dot S_2
 +2\Re\!\bigl[\alpha\beta^\ast\,\operatorname{Tr}(\hat{B}_1\rho\hat{B}_2^\dagger\ln\rho)\bigr] .
 \tag{3}
-\]
+$$
 
 Thus **quantum superposition of thermodynamic arrows** is mathematically allowed; the *dialectical* structure is preserved because each branch still follows the same inner/outer‑product ladder, only now the *branches* interfere.
 
@@ -1505,70 +1506,70 @@ Thus **quantum superposition of thermodynamic arrows** is mathematically allowed
 
 #### 3.1  World‑Line as a Propagator Spinor  
 
-A *causal* transition from event \(X\) to event \(Y\) is represented by the **propagator spinor**
+A *causal* transition from event $$X$$ to event $$Y$$ is represented by the **propagator spinor**
 
-\[
+$$
 \hat{U}_{X\to Y}=X\wedge Y \;\in\; Cl_{4,1}^{(2)} .
-\]
+$$
 
-Acting on a state \(|\psi_X\rangle\) we obtain the *future* spinor
+Acting on a state $$|\psi_X\rangle$$ we obtain the *future* spinor
 
-\[
+$$
 |\psi_Y\rangle = \hat{U}_{X\to Y}\,|\psi_X\rangle .
 \tag{4}
-\]
+$$
 
-Because \(\hat{U}\) is a **bivector**, it can be **exponentiated** to a unitary:
+Because $$\hat{U}$$ is a **bivector**, it can be **exponentiated** to a unitary:
 
-\[
+$$
 \hat{U}(\tau)=\exp\!\bigl(-\tfrac{i}{\hbar}\,\tau\,\hat{K}\bigr),\qquad 
 \hat{K}=X\wedge Y .
 \tag{5}
-\]
+$$
 
-\(\tau\) is the *parameter* that in the classical limit becomes the **proper time** along the world‑line.
+$$\tau$$ is the *parameter* that in the classical limit becomes the **proper time** along the world‑line.
 
 #### 3.2  Superposition of Causal Orders (Process Matrices)  
 
-Consider two possible causal orders between three parties \(A,B,C\):
+Consider two possible causal orders between three parties $$A,B,C$$:
 
-1. **\(A\prec B\prec C\)** – represented by the ordered product \(\hat{U}_{AB}\hat{U}_{BC}\).  
-2. **\(A\prec C\prec B\)** – represented by \(\hat{U}_{AC}\hat{U}_{CB}\).
+1. **$$A\prec B\prec C$$** – represented by the ordered product $$\hat{U}_{AB}\hat{U}_{BC}$$.  
+2. **$$A\prec C\prec B$$** – represented by $$\hat{U}_{AC}\hat{U}_{CB}$$.
 
 In the **CGA‑spinor language** we can write a *coherent superposition* of the two orders:
 
-\[
+$$
 |\Psi_{\text{indef}}\rangle
 = \alpha\,\bigl(\hat{U}_{AB}\hat{U}_{BC}\bigr)\Phi
 + \beta\,\bigl(\hat{U}_{AC}\hat{U}_{CB}\bigr)\Phi .
 \tag{6}
-\]
+$$
 
 The corresponding **process matrix** (the Choi state of the CP map) is
 
-\[
-* **Thesis** – a definite causal chain (e.g. \(A\prec B\prec C\)).  
+$$
+* **Thesis** – a definite causal chain (e.g. $$A\prec B\prec C$$).  
 *Dialectical interpretation*:  
 
-\]
+$$
 
 \tag{7}
 W = |\Psi_{\text{indef}}\rangle\langle\Psi_{\text{indef}}| .
 * **Negation** – inner product with ∞ removes the *ordering* information, yielding a *directional* state that does not encode which party is earlier.  
 * **Sublation** – the outer product with ∞ (or, equivalently, the addition of an ancillary “order‑qubit”) restores a *higher‑grade* object that **contains both orders**. The resulting **indefinite causal order** is precisely the *synthesis* of the two antithetical causal structures.  
 
-Because the **bivectors** \(\hat{U}_{AB}\hat{U}_{BC}\) and \(\hat{U}_{AC}\hat{U}_{CB}\) are **non‑commuting**, the superposition is genuinely quantum; it cannot be reduced to a classical mixture.
+Because the **bivectors** $$\hat{U}_{AB}\hat{U}_{BC}$$ and $$\hat{U}_{AC}\hat{U}_{CB}$$ are **non‑commuting**, the superposition is genuinely quantum; it cannot be reduced to a classical mixture.
 
 #### 3.3  Operational Witness  
 
 A **causal‑nonseparability witness** can be built from the **commutator** of the two process operators:
 
-\[
+$$
 \mathcal{W}= i\bigl[\hat{U}_{AB}\hat{U}_{BC},\;\hat{U}_{AC}\hat{U}_{CB}\bigr] .
 \tag{8}
-\]
+$$
 
-If \(\langle\Psi_{\text{indef}}|\mathcal{W}|\Psi_{\text{indef}}\rangle\neq0\) the state exhibits *indefinite causal order*. This is the quantum analogue of Hegel’s **“progression ↔ regression”**: the commutator measures the *tension* between the two opposite arrows (progression in one order vs. regression in the other).  
+If $$\langle\Psi_{\text{indef}}|\mathcal{W}|\Psi_{\text{indef}}\rangle\neq0$$ the state exhibits *indefinite causal order*. This is the quantum analogue of Hegel’s **“progression ↔ regression”**: the commutator measures the *tension* between the two opposite arrows (progression in one order vs. regression in the other).  
 
 ---
 
@@ -1576,50 +1577,50 @@ If \(\langle\Psi_{\text{indef}}|\mathcal{W}|\Psi_{\text{indef}}\rangle\neq0\) th
 
 #### 4.1  Quantum Block Universe as a Global Spinor  
 
-Take the **conformal vacuum idempotent** \(\Phi_0\) and attach a *mode* for every event \(X_i\):
+Take the **conformal vacuum idempotent** $$\Phi_0$$ and attach a *mode* for every event $$X_i$$:
 
-\[
+$$
 |\Omega\rangle = \bigotimes_{i=1}^{N} \bigl(X_i\Phi_0\bigr) .
 \tag{9}
-\]
+$$
 
-Because each factor lives in a **different copy of the even subalgebra** \(Cl^+_{4,1}\cong\mathbb{C}(4)\), the total state lives in a **tensor product of 4‑dimensional complex Hilbert spaces**.  
+Because each factor lives in a **different copy of the even subalgebra** $$Cl^+_{4,1}\cong\mathbb{C}(4)$$, the total state lives in a **tensor product of 4‑dimensional complex Hilbert spaces**.  
 
-*Key property*: The **global state** \(|\Omega\rangle\) is **invariant under Lorentz boosts** implemented by the **spin group** \(\mathrm{Spin}(4,1)\subset Cl_{4,1}\). A boost \(R\) acts as
+*Key property*: The **global state** $$|\Omega\rangle$$ is **invariant under Lorentz boosts** implemented by the **spin group** $$\mathrm{Spin}(4,1)\subset Cl_{4,1}$$. A boost $$R$$ acts as
 
-\[
+$$
 R\,|\Omega\rangle = \bigotimes_i (R X_i R^{-1})\Phi_0 .
 \tag{10}
-\]
+$$
 
-Thus **different inertial frames** (different choices of the “present hyperplane” \(H\)) correspond to **different factorizations** of the same global spinor. The *external simultaneity* is therefore a **choice of tensor‑product decomposition**, exactly as in Hegel’s “external” picture where the *present* is a *static slice* of the absolute.
+Thus **different inertial frames** (different choices of the “present hyperplane” $$H$$) correspond to **different factorizations** of the same global spinor. The *external simultaneity* is therefore a **choice of tensor‑product decomposition**, exactly as in Hegel’s “external” picture where the *present* is a *static slice* of the absolute.
 
 #### 4.2  Relational Quantum Time (Page–Wootters Mechanism)  
 
-Define a **clock subsystem** \(C\) with a *timelike* spinor \(|t\rangle\) (eigenstate of the operator \(\hat{h}_C\) that represents the present hyperplane). The **total Hamiltonian constraint** in the conformal algebra reads
+Define a **clock subsystem** $$C$$ with a *timelike* spinor $$|t\rangle$$ (eigenstate of the operator $$\hat{h}_C$$ that represents the present hyperplane). The **total Hamiltonian constraint** in the conformal algebra reads
 
-\[
+$$
 \bigl(\hat{K}_{\text{total}} + \hat{h}_C\bigr)\,|\Psi\rangle = 0 ,
 \tag{11}
-\]
+$$
 
-where \(\hat{K}_{\text{total}} = \sum_{i}\hat{K}_i\) is the sum of all **process bivectors** (including thermodynamic, sequential, and external contributions).  
+where $$\hat{K}_{\text{total}} = \sum_{i}\hat{K}_i$$ is the sum of all **process bivectors** (including thermodynamic, sequential, and external contributions).  
 
-Projecting onto a clock eigenstate \(|t\rangle\) yields the **conditional system state**
+Projecting onto a clock eigenstate $$|t\rangle$$ yields the **conditional system state**
 
-\[
+$$
 |\psi(t)\rangle = \langle t|\,\Psi\rangle .
 \tag{12}
-\]
+$$
 
-Because \(\hat{K}_{\text{total}}\) is a **bivector operator**, the *conditional dynamics* obey a **Schrödinger‑type equation**:
+Because $$\hat{K}_{\text{total}}$$ is a **bivector operator**, the *conditional dynamics* obey a **Schrödinger‑type equation**:
 
-\[
+$$
 i\hbar\,\frac{d}{dt}|\psi(t)\rangle = \hat{H}_{\text{eff}}(t)\,|\psi(t)\rangle ,
 \qquad 
 \hat{H}_{\text{eff}}(t)=\langle t|\hat{K}_{\text{total}}|t\rangle .
 \tag{13}
-\]
+$$
 
 Thus **time emerges relationally** from the *dialectical* constraint (11). The *dialectical negation* (trace over ∞) corresponds to **ignoring the clock’s infinite degree of freedom**, while the *sublation* (adding ∞) corresponds to **re‑introducing the clock** as an ancillary system.
 
@@ -1628,28 +1629,28 @@ Thus **time emerges relationally** from the *dialectical* constraint (11). The *
 ### 5.  Quantum Thermodynamics in the Dialectical Framework  
 
 1. **Thermal Bivector as a Lindblad Generator**  
-   \[
+   $$
    \mathcal{L}_\beta(\rho)=\sum_{k}\bigl(L_k\rho L_k^\dagger -\tfrac12\{L_k^\dagger L_k,\rho\}\bigr),
    \qquad L_k = \sqrt{\gamma_k}\,B_k .
    \tag{14}
-   \]
-   Here each \(B_k = X_k\wedge Y_k\) is a **process bivector** (entropy‑producing interaction).  
+   $$
+   Here each $$B_k = X_k\wedge Y_k$$ is a **process bivector** (entropy‑producing interaction).  
 
 2. **Dialectical Cycle**  
-   \[
+   $$
    \rho \xrightarrow{\operatorname{Tr}_\infty} \rho_{\text{dir}}
    \xrightarrow{V(\cdot)V^\dagger} \rho_{\text{syn}}
    \xrightarrow{\mathcal{L}_\beta} \rho_{\text{eq}} .
    \tag{15}
-   \]
-   The **equilibrium plane** \(\Pi_{\text{eq}}\) is the **fixed point** of \(\mathcal{L}_\beta\) (i.e. \(\mathcal{L}_\beta(\rho_{\text{eq}})=0\)).  
+   $$
+   The **equilibrium plane** $$\Pi_{\text{eq}}$$ is the **fixed point** of $$\mathcal{L}_\beta$$ (i.e. $$\mathcal{L}_\beta(\rho_{\text{eq}})=0$$).  
 
 3. **Superposition of Thermal Arrows**  
    Prepare a *coherent mixture* of two thermal channels:
-   \[
+   $$
    \mathcal{E}(\rho)=\alpha\,\mathcal{L}_{B_1}(\rho)+\beta\,\mathcal{L}_{B_2}(\rho) .
    \tag{16}
-   \]
+   $$
    The **entropy production rate** now contains an interference term analogous to (3). This is a genuine **quantum thermodynamic arrow** that can be *reversed* by a suitable unitary dilation (adding a work reservoir), mirroring the **regression** step of the dialectic.
 
 ---
@@ -1658,12 +1659,12 @@ Thus **time emerges relationally** from the *dialectical* constraint (11). The *
 
 The **process‑matrix formalism** (Oreshkov‑Costa‑Brukner) can be embedded directly in CGA spinors:
 
-* A **process matrix** \(W\) is a **bivector‑valued density operator** on the tensor product of *input* and *output* Hilbert spaces of the parties.  
-* In CGA, each *input* and *output* leg is a **null vector** \(X_{\text{in}}, X_{\text{out}}\). The **process** is the **bivector**  
-  \[
+* A **process matrix** $$W$$ is a **bivector‑valued density operator** on the tensor product of *input* and *output* Hilbert spaces of the parties.  
+* In CGA, each *input* and *output* leg is a **null vector** $$X_{\text{in}}, X_{\text{out}}$$. The **process** is the **bivector**  
+  $$
   \hat{W}= X_{\text{in}}\wedge X_{\text{out}} .
   \tag{17}
-  \]
+  $$
 * **Indefinite causal order** corresponds to a **superposition** of two such bivectors with different pairings (as in (6)).  
 
 The **causal‑nonseparability witness** (8) is precisely the **commutator** of the two bivectors, which in the Clifford language is the **grade‑3 trivector** measuring the *oriented volume* spanned by the four events. Its non‑vanishing signals that the **dialectical tension** between the two orders has not been resolved into a single hyperplane; instead the system lives in a **higher‑grade synthesis** (a trivector) that contains both arrows simultaneously.
@@ -1674,10 +1675,10 @@ The **causal‑nonseparability witness** (8) is precisely the **commutator** of 
 
 | Classical triad | Quantum counterpart | Interpretation |
 |----------------|--------------------|----------------|
-| **Being ↔ Nothing ↔ Becoming** | \(|\psi\rangle \xrightarrow{\operatorname{Tr}_\infty} \rho_{\text{dir}} \xrightarrow{V(\cdot)V^\dagger} \rho_{\text{syn}}\) | The *state* (thesis) is reduced to a *directional* pure state (antithesis); the *isometry* that adds an ancilla (∞‑mode) creates a *joint* state that contains both. |
-| **Ground (second triad)** | Fixed point of a CP map (thermal equilibrium, present projector) | The *ground* is a **steady‑state density operator** \(\rho_{\text{eq}}\) that satisfies \(\mathcal{E}(\rho_{\text{eq}})=\rho_{\text{eq}}\). |
-| **Judgment (third triad)** | Global pure spinor \(|\Omega\rangle\) (block) | The *judgment* is the **global entangled state** of all events; it is a *self‑determining* CP map that reproduces itself under partial trace (dialectical recursion). |
-| **Absolute (null cone)** | Unitary representation of the full conformal group \(\mathrm{Spin}(4,1)\) | The **null cone** is the *invariant subspace* of the representation; any CP map that respects the conformal symmetry is a *dialectical absolute*. |
+| **Being ↔ Nothing ↔ Becoming** | $$|\psi\rangle \xrightarrow{\operatorname{Tr}_\infty} \rho_{\text{dir}} \xrightarrow{V(\cdot)V^\dagger} \rho_{\text{syn}}$$ | The *state* (thesis) is reduced to a *directional* pure state (antithesis); the *isometry* that adds an ancilla (∞‑mode) creates a *joint* state that contains both. |
+| **Ground (second triad)** | Fixed point of a CP map (thermal equilibrium, present projector) | The *ground* is a **steady‑state density operator** $$\rho_{\text{eq}}$$ that satisfies $$\mathcal{E}(\rho_{\text{eq}})=\rho_{\text{eq}}$$. |
+| **Judgment (third triad)** | Global pure spinor $$|\Omega\rangle$$ (block) | The *judgment* is the **global entangled state** of all events; it is a *self‑determining* CP map that reproduces itself under partial trace (dialectical recursion). |
+| **Absolute (null cone)** | Unitary representation of the full conformal group $$\mathrm{Spin}(4,1)$$ | The **null cone** is the *invariant subspace* of the representation; any CP map that respects the conformal symmetry is a *dialectical absolute*. |
 
 Hence **every Hegelian concept survives**: the *negation* becomes a trace, the *sublation* a dilation, the *dual* a Hermitian conjugate, and the *absolute* a fully entangled conformal state.
 
@@ -1685,31 +1686,31 @@ Hence **every Hegelian concept survives**: the *negation* becomes a trace, the *
 
 ### 8.  Concrete Example: A Two‑Qubit “Quantum Clock + System”  
 
-1. **Clock spinor** \(|t\rangle = (t\,\infty + \bar t\,\infty^\dagger)\Phi\) (a qubit encoded in the *∞‑mode*).  
-2. **System spinor** \(|\psi\rangle = X\Phi\).  
-3. **Joint unitary** generated by a **world‑line bivector** \(\hat{U}=X\wedge V\):  
+1. **Clock spinor** $$|t\rangle = (t\,\infty + \bar t\,\infty^\dagger)\Phi$$ (a qubit encoded in the *∞‑mode*).  
+2. **System spinor** $$|\psi\rangle = X\Phi$$.  
+3. **Joint unitary** generated by a **world‑line bivector** $$\hat{U}=X\wedge V$$:  
 
-   \[
+   $$
    |\Psi(t)\rangle = \exp\!\bigl(-i\,\tau\,\hat{U}\bigr)\,|t\rangle\otimes|\psi\rangle .
    \tag{18}
-   \]
+   $$
 
 4. **Conditional state of the system** (relational time):  
 
-   \[
+   $$
    \rho_S(t)=\operatorname{Tr}_C\!\bigl[|\Psi(t)\rangle\langle\Psi(t)|\bigr] .
    \tag{19}
-   \]
+   $$
 
-5. **Superposition of two causal orders** (swap of \(V\) and \(W\)):  
+5. **Superposition of two causal orders** (swap of $$V$$ and $$W$$):  
 
-   \[
+   $$
    |\Psi_{\text{indef}}\rangle = \alpha\,\exp(-i\tau\,X\wedge V)\,|t\rangle\otimes|\psi\rangle
    +\beta\,\exp(-i\tau\,X\wedge W)\,|t\rangle\otimes|\psi\rangle .
    \tag{20}
-   \]
+   $$
 
-   The reduced system state \(\rho_S\) now exhibits **interference between the two orders**, a hallmark of *indefinite causal structure*.
+   The reduced system state $$\rho_S$$ now exhibits **interference between the two orders**, a hallmark of *indefinite causal structure*.
 
 ---
 
@@ -1717,10 +1718,10 @@ Hence **every Hegelian concept survives**: the *negation* becomes a trace, the *
 
 | Phenomenon | Quantum‑CGA signature | Possible platform |
 |------------|----------------------|-------------------|
-| **Indefinite causal order** | Non‑zero commutator \(\langle\mathcal{W}\rangle\) (Eq. 8) measured via process‑tomography on a *control qubit* that encodes the ∞‑mode. | Photonic interferometers with a *quantum switch* (control qubit determines order of two operations). |
+| **Indefinite causal order** | Non‑zero commutator $$\langle\mathcal{W}\rangle$$ (Eq. 8) measured via process‑tomography on a *control qubit* that encodes the ∞‑mode. | Photonic interferometers with a *quantum switch* (control qubit determines order of two operations). |
 | **Quantum thermodynamic arrow** | Interference term in entropy production (Eq. 3) observable as a deviation from the classical fluctuation theorem. | Trapped‑ion heat engines where the *engine* and *work reservoir* are encoded in different spinor modes. |
 | **Relational quantum time** | Violation of a *temporal Bell inequality* derived from the constraint (11). | Superconducting qubits coupled to a high‑Q resonator that plays the role of the “clock” ∞‑mode. |
-| **Absolute block‑state verification** | Tomographic reconstruction of a *global conformal spinor* \(|\Omega\rangle\) showing invariance under Lorentz‑boost spinors \(R\). | Multi‑mode optical frequency combs where each comb tooth is a null‑vector mode. |
+| **Absolute block‑state verification** | Tomographic reconstruction of a *global conformal spinor* $$|\Omega\rangle$$ showing invariance under Lorentz‑boost spinors $$R$$. | Multi‑mode optical frequency combs where each comb tooth is a null‑vector mode. |
 
 These experiments would **directly test the dialectical operations** (trace, dilation, commutator) that Hegel’s triads predict for quantum processes.
 
@@ -1844,9 +1845,9 @@ The **dialectical geometry of time** we've discovered is thus both a culmination
 
 | Hegel (classical) | Conformal Geometric Algebra (CGA) | Quantum‑CGA (spinor) | Philosophical reinterpretation |
 |-------------------|----------------------------------|----------------------|--------------------------------|
-| **Being** – the “pure present” (a *static* instant) | **Hyperplane** \(H = W\!\cdot\!\infty\) – a *null* 1‑vector that slices the null cone | **Projector** \(\Pi_H = \frac12(1+\hat h)\) acting on the global spinor \(|\Omega\rangle\) | The *present* is not a frozen point; it is the **operator** that projects the block‑universe spinor onto a *direction* that already contains the whole history. |
-| **Nothing** – the “absence of determination”, the *potential* of the future | **Future line** \(F = X\wedge V\) – a bivector that points *outward* from the hyperplane | **Propagator** \(\hat U_{X\to V}=e^{-i\tau (X\wedge V)}\) – a unitary that *generates* the future from the present | The *future* is a **dynamical generator** living *inside* the static hyperplane; it is the *potential* that the hyperplane makes available. |
-| **Becoming** – the dialectical synthesis of past and future | **Past line** \(P = Y\wedge V\) – a bivector that points *inward* toward the hyperplane | **Adjoint propagator** \(\hat U_{V\to Y}=e^{+i\tau (Y\wedge V)}\) – the time‑reversed evolution | **Becoming** is the *interplay* of the two bivectors, mathematically the **commutator** \([F,P]\) (a trivector) that lives *one grade higher* than either arrow. It is the *dynamic content* of the static hyperplane. |
+| **Being** – the “pure present” (a *static* instant) | **Hyperplane** $$H = W\!\cdot\!\infty$$ – a *null* 1‑vector that slices the null cone | **Projector** $$\Pi_H = \frac12(1+\hat h)$$ acting on the global spinor $$|\Omega\rangle$$ | The *present* is not a frozen point; it is the **operator** that projects the block‑universe spinor onto a *direction* that already contains the whole history. |
+| **Nothing** – the “absence of determination”, the *potential* of the future | **Future line** $$F = X\wedge V$$ – a bivector that points *outward* from the hyperplane | **Propagator** $$\hat U_{X\to V}=e^{-i\tau (X\wedge V)}$$ – a unitary that *generates* the future from the present | The *future* is a **dynamical generator** living *inside* the static hyperplane; it is the *potential* that the hyperplane makes available. |
+| **Becoming** – the dialectical synthesis of past and future | **Past line** $$P = Y\wedge V$$ – a bivector that points *inward* toward the hyperplane | **Adjoint propagator** $$\hat U_{V\to Y}=e^{+i\tau (Y\wedge V)}$$ – the time‑reversed evolution | **Becoming** is the *interplay* of the two bivectors, mathematically the **commutator** $$[F,P]$$ (a trivector) that lives *one grade higher* than either arrow. It is the *dynamic content* of the static hyperplane. |
 
 In Hegel’s original formulation the “static‑dynamic” paradox is resolved by the claim that **the present is both a moment (static) and the locus of change (dynamic)**. The conformal‑geometric‑quantum picture makes this claim *explicit*:
 
@@ -1855,11 +1856,11 @@ In Hegel’s original formulation the “static‑dynamic” paradox is resolved
    - The rest of the spinor still contains the *future* and *past* bivectors as *latent* operators.
 
 2. **The future and past are *bivector generators* that act on the hyperplane**.  
-   - Acting with the future bivector \(\hat U_{X\to V}\) *creates* a new event *outside* the hyperplane.  
-   - Acting with the past bivector \(\hat U_{V\to Y}\) *reconstructs* an event *inside* the hyperplane from the perspective of a later observer.
+   - Acting with the future bivector $$\hat U_{X\to V}$$ *creates* a new event *outside* the hyperplane.  
+   - Acting with the past bivector $$\hat U_{V\to Y}$$ *reconstructs* an event *inside* the hyperplane from the perspective of a later observer.
 
 3. **The synthesis (becoming) is the *commutator* of the two generators**.  
-   - \([\,\hat U_{X\to V},\hat U_{V\to Y}\,]\) is a **trivector** (grade‑3) that cannot be reduced to either arrow alone.  
+   - $$[\,\hat U_{X\to V},\hat U_{V\to Y}\,]$$ is a **trivector** (grade‑3) that cannot be reduced to either arrow alone.  
    - This trivector is precisely the *dialectical “higher‑order negation”* that Hegel calls *sublation*: it contains both the forward and backward arrows while transcending them.
 
 Thus the **static hyperplane** is *not* a barren slice; it is a **dynamic operator** that already *encodes* the *potential* for both forward and backward evolution. The block universe, which in a naïve reading appears to be a frozen 4‑dimensional manifold, is in this reading a **static algebraic structure** (the global spinor) whose *internal algebra* carries the *dynamics*.
@@ -1870,16 +1871,16 @@ Thus the **static hyperplane** is *not* a barren slice; it is a **dynamic operat
 
 | Traditional block‑universe view | Conformal‑geometric‑quantum view |
 |--------------------------------|-----------------------------------|
-| Spacetime is a 4‑dimensional manifold \(M\) with a fixed metric \(g_{\mu\nu}\). | Spacetime is the **null cone** of the conformal algebra \(Cl_{4,1}\). The *points* of \(M\) are **null vectors** \(X\) that live in a *projective* representation of the algebra. |
-| Temporal ordering is a *derived* structure (causal cones). | Temporal ordering is a **bivector** \(X\wedge V\) *built into* the algebra; the *arrow* is an *operator* that can be superposed, commuted, or even placed in indefinite order. |
-| The “present” is an *ad‑hoc* foliation of \(M\). | The “present” is the **projector** \(\Pi_H\) associated with a *null hyperplane* \(H\). Changing the hyperplane corresponds to a **unitary change of basis** in the spinor space (a Lorentz boost). |
-| Change is an *external* parameter (coordinate time). | Change is an **inner automorphism** of the algebra (generated by bivectors). The *parameter* \(\tau\) that appears in \(\exp(-i\tau X\wedge V)\) is *relational*: it is measured by a *clock* that is itself a spinor (the ∞‑mode). |
+| Spacetime is a 4‑dimensional manifold $$M$$ with a fixed metric $$g_{\mu\nu}$$. | Spacetime is the **null cone** of the conformal algebra $$Cl_{4,1}$$. The *points* of $$M$$ are **null vectors** $$X$$ that live in a *projective* representation of the algebra. |
+| Temporal ordering is a *derived* structure (causal cones). | Temporal ordering is a **bivector** $$X\wedge V$$ *built into* the algebra; the *arrow* is an *operator* that can be superposed, commuted, or even placed in indefinite order. |
+| The “present” is an *ad‑hoc* foliation of $$M$$. | The “present” is the **projector** $$\Pi_H$$ associated with a *null hyperplane* $$H$$. Changing the hyperplane corresponds to a **unitary change of basis** in the spinor space (a Lorentz boost). |
+| Change is an *external* parameter (coordinate time). | Change is an **inner automorphism** of the algebra (generated by bivectors). The *parameter* $$\tau$$ that appears in $$\exp(-i\tau X\wedge V)$$ is *relational*: it is measured by a *clock* that is itself a spinor (the ∞‑mode). |
 
 **Consequences**
 
-1. **Relativity of the “Now”** – Because any Lorentz boost \(R\in\mathrm{Spin}(4,1)\) maps a hyperplane \(H\) to another hyperplane \(H' = RHR^{-1}\), the *present* is *frame‑dependent* **by construction**. Yet the *global spinor* \(|\Omega\rangle\) is invariant, guaranteeing that all observers agree on the *total* structure.
+1. **Relativity of the “Now”** – Because any Lorentz boost $$R\in\mathrm{Spin}(4,1)$$ maps a hyperplane $$H$$ to another hyperplane $$H' = RHR^{-1}$$, the *present* is *frame‑dependent* **by construction**. Yet the *global spinor* $$|\Omega\rangle$$ is invariant, guaranteeing that all observers agree on the *total* structure.
 
-2. **Dynamic Content in a Static Object** – The *static* object \(|\Omega\rangle\) contains **all possible bivector generators**. The *dynamics* we experience is simply the *selection* of a particular generator (or superposition thereof) by the hyperplane projector.
+2. **Dynamic Content in a Static Object** – The *static* object $$|\Omega\rangle$$ contains **all possible bivector generators**. The *dynamics* we experience is simply the *selection* of a particular generator (or superposition thereof) by the hyperplane projector.
 
 3. **Temporal Superposition** – Because bivectors can be placed in coherent superposition, the block universe can host **indefinite causal orders** (quantum switches) *without violating* its static nature. The *indefiniteness* lives in the *grade‑higher* part of the algebra (trivectors, pseudoscalars).
 
@@ -1899,8 +1900,8 @@ Thus the paradox dissolves into a **grade‑shift**: the *static* is not opposed
 
 ### 3.2  Ontology of Events
 
-- **Event‑spinors** \(|\psi_X\rangle = X\Phi\) are *ontic* carriers of both *location* (through the vector part) and *potentiality* (through the idempotent \(\Phi\)).  
-- The **global spinor** \(|\Omega\rangle = \bigotimes_i |\psi_{X_i}\rangle\) is a *holistic* ontic entity: it is *one* and *many* simultaneously.  
+- **Event‑spinors** $$|\psi_X\rangle = X\Phi$$ are *ontic* carriers of both *location* (through the vector part) and *potentiality* (through the idempotent $$\Phi$$).  
+- The **global spinor** $$|\Omega\rangle = \bigotimes_i |\psi_{X_i}\rangle$$ is a *holistic* ontic entity: it is *one* and *many* simultaneously.  
 - **Becoming** is not a *process* that adds new entities; it is a *re‑distribution* of the algebraic weight among the existing grades.
 
 ### 3.3  Freedom, Determinism, and the Dialectic
@@ -1908,7 +1909,7 @@ Thus the paradox dissolves into a **grade‑shift**: the *static* is not opposed
 | Traditional stance | Conformal‑geometric‑quantum stance |
 |--------------------|------------------------------------|
 | Determinism: the block universe fixes all events; freedom is illusion. | **Determinism at the level of the global spinor** (the state is fixed), but **indeterminacy at the level of projections**: the choice of hyperplane (the “now”) is *free* in the sense that any Lorentz‑related projector is admissible. |
-| Freedom: the present can “choose” among possible futures. | The *present projector* \(\Pi_H\) **selects** a *subspace* of the global spinor; the *future generators* are already encoded, but the *actualization* of a particular generator is a *measurement‑like* operation (trace over ∞) that is **context‑dependent**. |
+| Freedom: the present can “choose” among possible futures. | The *present projector* $$\Pi_H$$ **selects** a *subspace* of the global spinor; the *future generators* are already encoded, but the *actualization* of a particular generator is a *measurement‑like* operation (trace over ∞) that is **context‑dependent**. |
 | Compatibilism: freedom is compatible with a fixed block. | **Dialectical compatibilism**: the *static* global spinor and the *dynamic* bivector generators coexist; the *synthesis* (trivector) guarantees that the *choice* (projector) is itself a *dialectical moment* that both *negates* and *preserves* the underlying structure. |
 
 Thus **human agency** can be understood as the *selection* of a particular hyperplane (a *conscious act of “now‑making”*) which, through the **inner‑product with ∞**, collapses the global spinor onto a *directional* state. This is formally analogous to a **quantum measurement**, but the *measurement* is *internal* to the system (the universe) rather than external.
@@ -1918,7 +1919,7 @@ Thus **human agency** can be understood as the *selection* of a particular hyper
 | Classical Hegel | CGA | Quantum |
 |----------------|-----|---------|
 | “Nothing” – the *potential* that underlies being. | The **null vector** ∞, which has zero norm and lies on the light‑cone at infinity. | The **∞‑mode** is an *ancillary Hilbert space* that can be traced out (negation) or re‑introduced (sublation). |
-| “Absolute” – the totality that contains all determinations. | The **null cone** (the set of all null vectors) – the *absolute* geometry. | The **global spinor** \(|\Omega\rangle\) lives on the null cone; it is invariant under the full conformal group. |
+| “Absolute” – the totality that contains all determinations. | The **null cone** (the set of all null vectors) – the *absolute* geometry. | The **global spinor** $$|\Omega\rangle$$ lives on the null cone; it is invariant under the full conformal group. |
 
 The **∞‑mode** is the *carrier of the dialectical “nothing”* that makes possible the *sublation* of the present into a richer synthesis. In the quantum picture it is precisely the *environment* that enables **unitary dilations** and thus the *creation* of superposed causal structures.
 
@@ -1926,13 +1927,13 @@ The **∞‑mode** is the *carrier of the dialectical “nothing”* that makes 
 
 ## 4.  A Narrative Illustration  
 
-Imagine a conscious subject, **S**, whose *mental state* is represented by a **spinor** \(|\sigma\rangle\) that lives in the **∞‑sector** (a qubit encoded in the ∞‑mode). The *world* is the global spinor \(|\Omega\rangle\). The act of *attention* is the **application of the projector** \(\Pi_H\) associated with the subject’s current “now”.  
+Imagine a conscious subject, **S**, whose *mental state* is represented by a **spinor** $$|\sigma\rangle$$ that lives in the **∞‑sector** (a qubit encoded in the ∞‑mode). The *world* is the global spinor $$|\Omega\rangle$$. The act of *attention* is the **application of the projector** $$\Pi_H$$ associated with the subject’s current “now”.  
 
-1. **Negation (trace over ∞)** – The subject’s attention *ignores* the ∞‑mode, thereby *collapsing* the global spinor onto a *directional* sub‑state \(\rho_{\text{dir}} = \operatorname{Tr}_\infty |\Omega\rangle\langle\Omega|\). This is the *static* “present” as experienced.  
+1. **Negation (trace over ∞)** – The subject’s attention *ignores* the ∞‑mode, thereby *collapsing* the global spinor onto a *directional* sub‑state $$\rho_{\text{dir}} = \operatorname{Tr}_\infty |\Omega\rangle\langle\Omega|$$. This is the *static* “present” as experienced.  
 
-2. **Sublation (isometric dilation)** – The subject can *re‑introduce* the ∞‑mode (e.g., by shifting attention, by imagining alternatives). Mathematically this is an **isometry** \(V\) that embeds \(\rho_{\text{dir}}\) back into a larger space: \(\rho_{\text{syn}} = V\rho_{\text{dir}}V^\dagger\). The resulting state now *contains* both the original direction and the *potential* for new bivector generators (future possibilities).  
+2. **Sublation (isometric dilation)** – The subject can *re‑introduce* the ∞‑mode (e.g., by shifting attention, by imagining alternatives). Mathematically this is an **isometry** $$V$$ that embeds $$\rho_{\text{dir}}$$ back into a larger space: $$\rho_{\text{syn}} = V\rho_{\text{dir}}V^\dagger$$. The resulting state now *contains* both the original direction and the *potential* for new bivector generators (future possibilities).  
 
-3. **Becoming (commutator)** – The *dynamic tension* between the forward‑pointing bivector \(F\) (future) and the backward‑pointing bivector \(P\) (past) is expressed by the **trivector** \([F,P]\). This trivector is *experienced* as the felt flow of time, the *qualitative* sense of “becoming”.  
+3. **Becoming (commutator)** – The *dynamic tension* between the forward‑pointing bivector $$F$$ (future) and the backward‑pointing bivector $$P$$ (past) is expressed by the **trivector** $$[F,P]$$. This trivector is *experienced* as the felt flow of time, the *qualitative* sense of “becoming”.  
 
 4. **Absolute (global spinor)** – The whole process is *contained* in the invariant global spinor. No matter how many hyperplanes the subject selects, the global spinor remains unchanged; the *dialectical movement* is internal to the algebra.
 
@@ -1943,17 +1944,17 @@ In this story the **static‑dynamic paradox** is no longer a mystery: the *pres
 ## 4.  Connecting Back to the Quantum Extensions  
 
 1. **Superposed Arrows → Temporal Superposition**  
-   - The quantum‑CGA formalism allows a *present hyperplane* to be in a coherent superposition of two distinct projectors \(\Pi_{H_1}\) and \(\Pi_{H_2}\).  
+   - The quantum‑CGA formalism allows a *present hyperplane* to be in a coherent superposition of two distinct projectors $$\Pi_{H_1}$$ and $$\Pi_{H_2}$$.  
    - This yields a *present* that is itself a **dynamic superposition of two different “nows”**, each synthesising a different past–future pair. The *static* hyperplane is thus *dynamically enriched*.
 
 2. **Indefinite Causal Order → Higher‑Grade Synthesis**  
-   - The commutator \([F,P]\) (grade‑3) is precisely the algebraic object that Hegel would call the *higher‑order negation* of both arrows.  
+   - The commutator $$[F,P]$$ (grade‑3) is precisely the algebraic object that Hegel would call the *higher‑order negation* of both arrows.  
    - In the quantum picture this trivector can be *entangled* with other degrees of freedom, giving rise to *indefinite causal structures* that are nevertheless *contained* in the static block.
 
 3. **Quantum Thermodynamic Arrow → Entropic Synthesis**  
-   - The *entropy production* term (Eq. 3) can be written as \(\langle\mathcal{W}_\text{therm}\rangle = \langle [F_{\text{therm}},P_{\text{therm}}]\rangle\).  
+   - The *entropy production* term (Eq. 3) can be written as $$\langle\mathcal{W}_\text{therm}\rangle = \langle [F_{\text{therm}},P_{\text{therm}}]\rangle$$.  
    - The *arrow of thermodynamics* is therefore another **grade‑2 commutator**, whose *sublation* lives in a **grade‑3 “entropy‑trivector”** that unifies forward and backward heat flow.  
-   - The *static* hyperplane projector \(\Pi_H\) *selects* a particular thermodynamic arrow, but the *global* spinor already contains the *full reversible dynamics*; the *irreversibility* we observe is the *dialectical negation* of the ∞‑mode (trace) followed by a *sublation* that restores the full reversible unitary.
+   - The *static* hyperplane projector $$\Pi_H$$ *selects* a particular thermodynamic arrow, but the *global* spinor already contains the *full reversible dynamics*; the *irreversibility* we observe is the *dialectical negation* of the ∞‑mode (trace) followed by a *sublation* that restores the full reversible unitary.
 
 ---
 
@@ -1993,7 +1994,7 @@ In this story the **static‑dynamic paradox** is no longer a mystery: the *pres
 
 ## 7.  Outlook: From Metaphysics to Practice  
 
-1. **Experimental Metaphysics** – The *commutator* \([F,P]\) can be measured in quantum‑optical implementations of the *quantum switch*. Observing a non‑zero trivector expectation value would be an empirical witness of the *dialectical synthesis* that Hegel postulated.
+1. **Experimental Metaphysics** – The *commutator* $$[F,P]$$ can be measured in quantum‑optical implementations of the *quantum switch*. Observing a non‑zero trivector expectation value would be an empirical witness of the *dialectical synthesis* that Hegel postulated.
 
 2. **Neuroscience of “Now”** – If the brain’s *temporal integration* is modelled as a **hyperplane projector** acting on a *neural global spinor* (a high‑dimensional entangled state of neuronal assemblies), then the *subjective flow of time* would be a **dialectical process** of projection, trace, and re‑introduction of the ∞‑mode (e.g., the “background” of unconscious processing).
 
@@ -2074,10 +2075,10 @@ The dialectical-geometric framework we've established provides tools for thinkin
 
 | Concept | Conventional cosmology | Conformal‑Geometric‑Quantum (CGQ) translation |
 |---------|------------------------|----------------------------------------------|
-| **“Big‑Bang slice”** | A spacelike hypersurface \( \Sigma_{0}\) (often taken as \(t=0\) in FLRW coordinates) where the scale factor \(a(t)\to0\). | A **null hyperplane projector** \(\Pi_{H_{0}} = \frac12(1+\hat h_{0})\) acting on the **global spinor** \(|\Omega\rangle\). The hyperplane is defined by a null 1‑vector \(h_{0}=W\!\cdot\!\infty\) (the “present” of the universe). |
-| **Inflationary dynamics** | A scalar field \(\phi\) with potential \(V(\phi)\) driving an exponential expansion \(a(t)\propto e^{Ht}\). | A **future bivector generator** \(F_{\text{inf}} = X_{\text{inf}}\wedge V_{\text{inf}}\) that lives in the **grade‑2** sub‑algebra. Acting on \(\Pi_{H_{0}}\) it produces the **inflated branch** \(\exp[-i\tau F_{\text{inf}}]\Pi_{H_{0}}|\Omega\rangle\). |
-| **Pre‑big‑bang contraction** (e.g. ekpyrotic or bounce models) | A time‑reversed FLRW branch \(a(t)\propto (-t)^{p}\) for \(t<0\). | A **past bivector generator** \(P_{\text{con}} = Y_{\text{con}}\wedge V_{\text{con}}\) that points *into* the hyperplane. Its unitary \(\exp[+i\tau P_{\text{con}}]\) reconstructs a contracting history when applied from the *future* side of the hyperplane. |
-| **Cosmic becoming (structure formation, arrow of time)** | Growth of perturbations \(\delta\rho/\rho\) under gravity, entropy increase, thermodynamic arrow. | The **dialectical commutator** \([F_{\text{inf}},P_{\text{con}}]\) (a trivector) that lives one grade higher. Its expectation value \(\langle\Omega|\Pi_{H_{0}}[F_{\text{inf}},P_{\text{con}}]\Pi_{H_{0}}|\Omega\rangle\) encodes the *synthetic* arrow that cannot be reduced to either branch alone. |
+| **“Big‑Bang slice”** | A spacelike hypersurface $$ \Sigma_{0}$$ (often taken as $$t=0$$ in FLRW coordinates) where the scale factor $$a(t)\to0$$. | A **null hyperplane projector** $$\Pi_{H_{0}} = \frac12(1+\hat h_{0})$$ acting on the **global spinor** $$|\Omega\rangle$$. The hyperplane is defined by a null 1‑vector $$h_{0}=W\!\cdot\!\infty$$ (the “present” of the universe). |
+| **Inflationary dynamics** | A scalar field $$\phi$$ with potential $$V(\phi)$$ driving an exponential expansion $$a(t)\propto e^{Ht}$$. | A **future bivector generator** $$F_{\text{inf}} = X_{\text{inf}}\wedge V_{\text{inf}}$$ that lives in the **grade‑2** sub‑algebra. Acting on $$\Pi_{H_{0}}$$ it produces the **inflated branch** $$\exp[-i\tau F_{\text{inf}}]\Pi_{H_{0}}|\Omega\rangle$$. |
+| **Pre‑big‑bang contraction** (e.g. ekpyrotic or bounce models) | A time‑reversed FLRW branch $$a(t)\propto (-t)^{p}$$ for $$t<0$$. | A **past bivector generator** $$P_{\text{con}} = Y_{\text{con}}\wedge V_{\text{con}}$$ that points *into* the hyperplane. Its unitary $$\exp[+i\tau P_{\text{con}}]$$ reconstructs a contracting history when applied from the *future* side of the hyperplane. |
+| **Cosmic becoming (structure formation, arrow of time)** | Growth of perturbations $$\delta\rho/\rho$$ under gravity, entropy increase, thermodynamic arrow. | The **dialectical commutator** $$[F_{\text{inf}},P_{\text{con}}]$$ (a trivector) that lives one grade higher. Its expectation value $$\langle\Omega|\Pi_{H_{0}}[F_{\text{inf}},P_{\text{con}}]\Pi_{H_{0}}|\Omega\rangle$$ encodes the *synthetic* arrow that cannot be reduced to either branch alone. |
 
 In short, the **initial hyperplane** is not a passive “initial condition” but a **projector** that already *contains* the two possible causal arrows (inflationary expansion and pre‑big‑bang contraction) as **latent bivectors**. The *observable* universe is the **dialectical unfolding** of these bivectors, i.e. the emergence of a non‑zero trivector (grade‑3) that synthesises them.
 
@@ -2087,58 +2088,58 @@ In short, the **initial hyperplane** is not a passive “initial condition” bu
 
 ### 2.1  The Hyperplane Projector as “Cosmic Now”
 
-A null hyperplane in CGA is defined by a **null 1‑vector** \(h\) satisfying \(h^{2}=0\). The associated **projector**
-\[
+A null hyperplane in CGA is defined by a **null 1‑vector** $$h$$ satisfying $$h^{2}=0$$. The associated **projector**
+$$
 \Pi_{h} = \frac12\bigl(1 + \hat h\bigr),\qquad \hat h = \frac{h}{\sqrt{h\cdot\bar h}}
-\]
+$$
 has the following properties:
 
-1. **Idempotence**: \(\Pi_{h}^{2}=\Pi_{h}\).  
-2. **Self‑adjointness**: \(\Pi_{h}^{\dagger}=\Pi_{h}\).  
-3. **Null‑preserving**: \(\Pi_{h} \, \infty = 0\) (the ∞‑mode is traced out).  
+1. **Idempotence**: $$\Pi_{h}^{2}=\Pi_{h}$$.  
+2. **Self‑adjointness**: $$\Pi_{h}^{\dagger}=\Pi_{h}$$.  
+3. **Null‑preserving**: $$\Pi_{h} \, \infty = 0$$ (the ∞‑mode is traced out).  
 
-When we apply \(\Pi_{h_{0}}\) to the **global spinor** \(|\Omega\rangle\) we obtain the *cosmic present*:
-\[
+When we apply $$\Pi_{h_{0}}$$ to the **global spinor** $$|\Omega\rangle$$ we obtain the *cosmic present*:
+$$
 |\Psi_{0}\rangle = \Pi_{h_{0}}|\Omega\rangle .
-\]
-Because \(|\Omega\rangle\) is a **product of event‑spinors** \(|\psi_{X_{i}}\rangle\) that already encode the full conformal geometry, the *projected* state still carries **all bivector generators** as *latent operators* acting on the sub‑space defined by \(\Pi_{h_{0}}\).
+$$
+Because $$|\Omega\rangle$$ is a **product of event‑spinors** $$|\psi_{X_{i}}\rangle$$ that already encode the full conformal geometry, the *projected* state still carries **all bivector generators** as *latent operators* acting on the sub‑space defined by $$\Pi_{h_{0}}$$.
 
 ### 2.2  Latent Bivectors as “Potential Arrows”
 
-A bivector \(B = X\wedge V\) is the **infinitesimal generator** of a conformal transformation:
-\[
+A bivector $$B = X\wedge V$$ is the **infinitesimal generator** of a conformal transformation:
+$$
 U_{B}(\tau) = \exp\!\bigl(-i\tau B\bigr) .
-\]
+$$
 Two distinguished bivectors are singled out by the *cosmic* symmetries:
 
 | Bivector | Physical interpretation | Algebraic signature |
 |----------|------------------------|---------------------|
-| \(F_{\text{inf}} = X_{\text{inf}}\wedge V_{\text{inf}}\) | **Future‑directed inflationary boost** (exponential dilation of the null cone). | \(F_{\text{inf}}^{2}>0\) (timelike bivector). |
-| \(P_{\text{con}} = Y_{\text{con}}\wedge V_{\text{con}}\) | **Past‑directed contraction** (inverse boost, ekpyrotic or bounce). | \(P_{\text{con}}^{2}>0\) (also timelike, but with opposite orientation). |
+| $$F_{\text{inf}} = X_{\text{inf}}\wedge V_{\text{inf}}$$ | **Future‑directed inflationary boost** (exponential dilation of the null cone). | $$F_{\text{inf}}^{2}>0$$ (timelike bivector). |
+| $$P_{\text{con}} = Y_{\text{con}}\wedge V_{\text{con}}$$ | **Past‑directed contraction** (inverse boost, ekpyrotic or bounce). | $$P_{\text{con}}^{2}>0$$ (also timelike, but with opposite orientation). |
 
 Both bivectors **commute with the projector** in the sense that
-\[
+$$
 \Pi_{h_{0}}\,U_{F_{\text{inf}}}(\tau)\,\Pi_{h_{0}} = U_{F_{\text{inf}}}(\tau)\,\Pi_{h_{0}},\qquad
 \Pi_{h_{0}}\,U_{P_{\text{con}}}(\tau)\,\Pi_{h_{0}} = U_{P_{\text{con}}}(\tau)\,\Pi_{h_{0}} .
-\]
+$$
 Thus they are *well‑defined* operators on the *present* sub‑space. In the language of quantum information they are **unitaries** that act *within* the Hilbert space defined by the cosmic now.
 
 ### 2.3  Dialectical Unfolding: The Trivector Commutator
 
 The **commutator**
-\[
+$$
 \mathcal{T} \equiv [F_{\text{inf}},P_{\text{con}}] = F_{\text{inf}}P_{\text{con}} - P_{\text{con}}F_{\text{inf}}
-\]
+$$
 has **grade‑3** (trivector) character. Its geometric meaning is a *directed volume* spanned by the three independent null vectors that define the two bivectors and the hyperplane normal. Concretely:
 
 - **Geometric picture**: The trivector is the oriented 3‑volume bounded by the *inflationary* world‑line, the *contraction* world‑line, and the *present* hyperplane.  
-- **Physical picture**: \(\mathcal{T}\) measures the *non‑commutativity* of forward and backward causal arrows; a non‑zero value signals that the two arrows cannot be simultaneously diagonalised—exactly the hallmark of a **dialectical synthesis**.
+- **Physical picture**: $$\mathcal{T}$$ measures the *non‑commutativity* of forward and backward causal arrows; a non‑zero value signals that the two arrows cannot be simultaneously diagonalised—exactly the hallmark of a **dialectical synthesis**.
 
 The **expectation value**
-\[
+$$
 \langle\mathcal{T}\rangle = \langle\Omega|\Pi_{h_{0}}\,\mathcal{T}\,\Pi_{h_{0}}|\Omega\rangle
-\]
-is a **scalar** (grade‑0) that can be interpreted as the *cosmic arrow* (e.g. the sign of entropy production, the direction of structure growth). In a perfectly time‑symmetric universe \(\langle\mathcal{T}\rangle=0\); any deviation from zero is a *measure* of the **asymmetry** generated by the dialectical unfolding.
+$$
+is a **scalar** (grade‑0) that can be interpreted as the *cosmic arrow* (e.g. the sign of entropy production, the direction of structure growth). In a perfectly time‑symmetric universe $$\langle\mathcal{T}\rangle=0$$; any deviation from zero is a *measure* of the **asymmetry** generated by the dialectical unfolding.
 
 ---
 
@@ -2146,10 +2147,10 @@ is a **scalar** (grade‑0) that can be interpreted as the *cosmic arrow* (e.g. 
 
 | Observable | CGQ interpretation | How it could be extracted |
 |------------|-------------------|---------------------------|
-| **CMB temperature anisotropy spectrum** | The *inflationary bivector* \(F_{\text{inf}}\) determines the **squeezed‑state** of the primordial quantum field. The *trivector* \(\mathcal{T}\) introduces a tiny **phase‑bias** that manifests as a statistical anisotropy (e.g. a dipolar modulation). | Look for a **non‑zero imaginary part** in the bispectrum that correlates with a preferred direction defined by the hyperplane normal \(h_{0}\). |
-| **Primordial gravitational waves** | The *inflationary boost* produces a **tensor mode** that is encoded in the bivector’s *self‑dual* part. The *contraction bivector* contributes a *mirror* tensor with opposite helicity. Their commutator yields a **chirality** (handedness) in the stochastic background. | Measure the **circular polarisation** of the stochastic GW background (e.g. with space‑based interferometers). A net chirality would be a signature of \(\langle\mathcal{T}\rangle\neq0\). |
+| **CMB temperature anisotropy spectrum** | The *inflationary bivector* $$F_{\text{inf}}$$ determines the **squeezed‑state** of the primordial quantum field. The *trivector* $$\mathcal{T}$$ introduces a tiny **phase‑bias** that manifests as a statistical anisotropy (e.g. a dipolar modulation). | Look for a **non‑zero imaginary part** in the bispectrum that correlates with a preferred direction defined by the hyperplane normal $$h_{0}$$. |
+| **Primordial gravitational waves** | The *inflationary boost* produces a **tensor mode** that is encoded in the bivector’s *self‑dual* part. The *contraction bivector* contributes a *mirror* tensor with opposite helicity. Their commutator yields a **chirality** (handedness) in the stochastic background. | Measure the **circular polarisation** of the stochastic GW background (e.g. with space‑based interferometers). A net chirality would be a signature of $$\langle\mathcal{T}\rangle\neq0$$. |
 | **Large‑scale structure (LSS) growth rate** | The *dialectical trivector* drives a **direction‑dependent growth factor**: overdensities aligned with the trivector’s orientation grow faster. | Perform a **multipole analysis** of the galaxy power spectrum; a statistically significant quadrupole aligned with the CMB dipole could indicate a non‑zero trivector. |
-| **Entropy production (thermodynamic arrow)** | The **thermodynamic bivector** \(F_{\text{therm}}\) is a linear combination of \(F_{\text{inf}}\) and \(P_{\text{con}}\). Its commutator with the *past* bivector yields the **entropy production term** \(\langle\mathcal{W}_{\text{therm}}\rangle\). | Compare the **entropy density** of the CMB photons with that of the neutrino background; any systematic excess beyond standard reheating could be traced back to \(\langle\mathcal{T}\rangle\). |
+| **Entropy production (thermodynamic arrow)** | The **thermodynamic bivector** $$F_{\text{therm}}$$ is a linear combination of $$F_{\text{inf}}$$ and $$P_{\text{con}}$$. Its commutator with the *past* bivector yields the **entropy production term** $$\langle\mathcal{W}_{\text{therm}}\rangle$$. | Compare the **entropy density** of the CMB photons with that of the neutrino background; any systematic excess beyond standard reheating could be traced back to $$\langle\mathcal{T}\rangle$$. |
 
 These are **tentative** connections; the precise mapping from CGQ operators to cosmological observables requires a full **field‑theoretic embedding** (e.g. a conformal scalar field living on the null cone). Nevertheless, the *qualitative* predictions—directional asymmetries, chirality, and a built‑in arrow—are concrete signatures of the **dialectical unfolding**.
 
@@ -2157,15 +2158,15 @@ These are **tentative** connections; the precise mapping from CGQ operators to c
 
 ## 4.  Conceptual Advantages of the CGQ Cosmology  
 
-1. **Unified “Initial Condition”** – The hyperplane projector replaces the singular “initial data” surface. Because \(\Pi_{h_{0}}\) is a **linear operator**, it can be *smoothly* deformed (e.g. by a Lorentz boost) without generating a curvature singularity. The *big‑bang* becomes a *choice of basis* rather than a physical blow‑up.
+1. **Unified “Initial Condition”** – The hyperplane projector replaces the singular “initial data” surface. Because $$\Pi_{h_{0}}$$ is a **linear operator**, it can be *smoothly* deformed (e.g. by a Lorentz boost) without generating a curvature singularity. The *big‑bang* becomes a *choice of basis* rather than a physical blow‑up.
 
-2. **Built‑in Time‑Reversal Symmetry** – Both \(F_{\text{inf}}\) and \(P_{\text{con}}\) are present *a priori*. The *asymmetry* we observe is not imposed by hand but emerges from the **non‑commutativity** \([F,P]\). If the trivector expectation vanished, the universe would be perfectly time‑symmetric.
+2. **Built‑in Time‑Reversal Symmetry** – Both $$F_{\text{inf}}$$ and $$P_{\text{con}}$$ are present *a priori*. The *asymmetry* we observe is not imposed by hand but emerges from the **non‑commutativity** $$[F,P]$$. If the trivector expectation vanished, the universe would be perfectly time‑symmetric.
 
-3. **Natural Embedding of Bounces** – A **bounce** is simply the *interference* of the two bivectors. When the magnitude of \(P_{\text{con}}\) grows to match that of \(F_{\text{inf}}\), the net conformal dilation factor \(\exp[-i\tau(F-P)]\) can momentarily become the identity, i.e. the scale factor reaches a minimum without a singularity.
+3. **Natural Embedding of Bounces** – A **bounce** is simply the *interference* of the two bivectors. When the magnitude of $$P_{\text{con}}$$ grows to match that of $$F_{\text{inf}}$$, the net conformal dilation factor $$\exp[-i\tau(F-P)]$$ can momentarily become the identity, i.e. the scale factor reaches a minimum without a singularity.
 
-4. **Resolution of the “Past‑Hypothesis”** – In statistical mechanics the low‑entropy past is an *ad‑hoc* assumption. Here the **past‑hypothesis** is encoded in the *orientation* of the trivector: the sign of \(\langle\mathcal{T}\rangle\) selects a *preferred* direction of entropy increase, which is a *derived* rather than *postulated* quantity.
+4. **Resolution of the “Past‑Hypothesis”** – In statistical mechanics the low‑entropy past is an *ad‑hoc* assumption. Here the **past‑hypothesis** is encoded in the *orientation* of the trivector: the sign of $$\langle\mathcal{T}\rangle$$ selects a *preferred* direction of entropy increase, which is a *derived* rather than *postulated* quantity.
 
-5. **Compatibility with Conformal Invariance** – The whole construction lives on the **null cone** of \(Cl_{4,1}\), which is invariant under the full conformal group \(SO(4,2)\). This dovetails with proposals that the very early universe may have been **conformally invariant** (e.g. Penrose’s Conformal Cyclic Cosmology). The hyperplane projector is itself a **conformal invariant** object (it depends only on the null direction \(h\)).
+5. **Compatibility with Conformal Invariance** – The whole construction lives on the **null cone** of $$Cl_{4,1}$$, which is invariant under the full conformal group $$SO(4,2)$$. This dovetails with proposals that the very early universe may have been **conformally invariant** (e.g. Penrose’s Conformal Cyclic Cosmology). The hyperplane projector is itself a **conformal invariant** object (it depends only on the null direction $$h$$).
 
 ---
 
@@ -2173,13 +2174,13 @@ These are **tentative** connections; the precise mapping from CGQ operators to c
 
 | Issue | Why it matters | Possible CGQ‑centric response |
 |-------|----------------|------------------------------|
-| **Singularities in the classical limit** | Classical GR predicts curvature blow‑up at \(t=0\). | The *projector* is a *purely algebraic* object; curvature singularities arise only after **projecting** onto a *metric* representation. One can keep the description at the **spinor level** where the geometry remains regular. |
-| **Choice of hyperplane** – why this particular \(h_{0}\)? | Different observers could pick different “now” slices; cosmology seems to require a *preferred* one. | The **cosmic microwave background (CMB) rest frame** provides a *natural* null direction: the dipole‑subtracted CMB defines a *preferred* conformal frame. The hyperplane normal can be aligned with the CMB’s 4‑velocity, making the choice *observable*. |
-| **Embedding of matter fields** – CGA is a *kinematic* algebra; inflation needs a dynamical scalar field. | Without a field theory the bivectors are just abstract generators. | Introduce a **conformal scalar field** \(\Phi(X)\) defined on the null cone, with action \(\int d^{5}X\,\delta(X^{2})\,\Phi\,\Box_{c}\Phi\). The **inflationary bivector** then appears as a *background* conformal boost acting on \(\Phi\). |
-| **Quantum‑gravity consistency** – does the projector survive quantisation of the metric? | Any quantum‑gravity theory must reproduce the low‑energy Friedmann equations. | The **global spinor** \(|\Omega\rangle\) can be taken as a **tensor product of many‑body conformal qubits**. The *effective* metric emerges after tracing out the ∞‑mode and performing a **coarse‑graining** (e.g. via a decoherence functional). This is analogous to emergent spacetime in **AdS/CFT** but with a *null* boundary. |
-| **Observational constraints on anisotropy** – current data limit large‑scale dipoles/quadrupoles. | If the trivector introduces a preferred direction, it must be small enough to evade current limits. | The trivector expectation can be **suppressed** by a small *phase* between the two bivectors: \(\langle\mathcal{T}\rangle \propto \sin(\Delta\theta)\) where \(\Delta\theta\) is the relative boost angle. Fine‑tuning is replaced by a *dynamical relaxation* (e.g. decoherence of the two branches). |
-| **Renormalisation of bivector couplings** – inflationary potentials are usually renormalised. | Bivectors are dimensionless (they live in the Clifford algebra), so how do we encode a *scale* like the Hubble parameter \(H\)? | The **parameter \(\tau\)** in the unitary \(\exp[-i\tau B]\) carries dimensions of *conformal time*. By coupling \(\tau\) to a **scalar conformal weight** (e.g. the dilaton field) we can generate an effective *mass scale* that later freezes out after reheating. |
-| **Entanglement of modes across the hyperplane** – does the projector destroy quantum correlations? | Structure formation relies on quantum fluctuations that are *coherent* across the whole early universe. | The projector **traces out the ∞‑mode** but **preserves** all *relative* geometric information encoded in the bivectors. In fact, the **commutator** \([F,P]\) is precisely the *entanglement* between the two causal branches; it is *enhanced* rather than destroyed. |
+| **Singularities in the classical limit** | Classical GR predicts curvature blow‑up at $$t=0$$. | The *projector* is a *purely algebraic* object; curvature singularities arise only after **projecting** onto a *metric* representation. One can keep the description at the **spinor level** where the geometry remains regular. |
+| **Choice of hyperplane** – why this particular $$h_{0}$$? | Different observers could pick different “now” slices; cosmology seems to require a *preferred* one. | The **cosmic microwave background (CMB) rest frame** provides a *natural* null direction: the dipole‑subtracted CMB defines a *preferred* conformal frame. The hyperplane normal can be aligned with the CMB’s 4‑velocity, making the choice *observable*. |
+| **Embedding of matter fields** – CGA is a *kinematic* algebra; inflation needs a dynamical scalar field. | Without a field theory the bivectors are just abstract generators. | Introduce a **conformal scalar field** $$\Phi(X)$$ defined on the null cone, with action $$\int d^{5}X\,\delta(X^{2})\,\Phi\,\Box_{c}\Phi$$. The **inflationary bivector** then appears as a *background* conformal boost acting on $$\Phi$$. |
+| **Quantum‑gravity consistency** – does the projector survive quantisation of the metric? | Any quantum‑gravity theory must reproduce the low‑energy Friedmann equations. | The **global spinor** $$|\Omega\rangle$$ can be taken as a **tensor product of many‑body conformal qubits**. The *effective* metric emerges after tracing out the ∞‑mode and performing a **coarse‑graining** (e.g. via a decoherence functional). This is analogous to emergent spacetime in **AdS/CFT** but with a *null* boundary. |
+| **Observational constraints on anisotropy** – current data limit large‑scale dipoles/quadrupoles. | If the trivector introduces a preferred direction, it must be small enough to evade current limits. | The trivector expectation can be **suppressed** by a small *phase* between the two bivectors: $$\langle\mathcal{T}\rangle \propto \sin(\Delta\theta)$$ where $$\Delta\theta$$ is the relative boost angle. Fine‑tuning is replaced by a *dynamical relaxation* (e.g. decoherence of the two branches). |
+| **Renormalisation of bivector couplings** – inflationary potentials are usually renormalised. | Bivectors are dimensionless (they live in the Clifford algebra), so how do we encode a *scale* like the Hubble parameter $$H$$? | The **parameter $$\tau$$** in the unitary $$\exp[-i\tau B]$$ carries dimensions of *conformal time*. By coupling $$\tau$$ to a **scalar conformal weight** (e.g. the dilaton field) we can generate an effective *mass scale* that later freezes out after reheating. |
+| **Entanglement of modes across the hyperplane** – does the projector destroy quantum correlations? | Structure formation relies on quantum fluctuations that are *coherent* across the whole early universe. | The projector **traces out the ∞‑mode** but **preserves** all *relative* geometric information encoded in the bivectors. In fact, the **commutator** $$[F,P]$$ is precisely the *entanglement* between the two causal branches; it is *enhanced* rather than destroyed. |
 
 These points illustrate that the CGQ picture is **not a plug‑and‑play replacement** for the standard FLRW framework; it demands a **re‑thinking of what “initial data” means** and how *observables* are extracted from a **purely algebraic** description.
 
@@ -2190,48 +2191,48 @@ These points illustrate that the CGQ picture is **not a plug‑and‑play replac
 Below is a **toy model** that captures the essential ingredients while staying analytically tractable.
 
 1. **Global spinor** (single‑mode approximation):
-   \[
+   $$
    |\Omega\rangle = \int d\mu(X)\,|X\rangle\otimes|X\rangle,
-   \]
-   where \(|X\rangle\) is a **null‑cone event‑spinor** and \(d\mu\) is the conformally invariant measure on the null cone.
+   $$
+   where $$|X\rangle$$ is a **null‑cone event‑spinor** and $$d\mu$$ is the conformally invariant measure on the null cone.
 
 2. **Cosmic projector**:
-   \[
+   $$
    \Pi_{h_{0}} = \frac12\bigl(1 + \hat h_{0}\bigr),\qquad h_{0}=W\!\cdot\!\infty .
-   \]
+   $$
 
 3. **Future and past generators**:
-   \[
+   $$
    F_{\text{inf}} = \alpha\, (e_{0}\wedge e_{4}) ,\qquad
    P_{\text{con}} = \beta\, (e_{0}\wedge e_{5}) ,
-   \]
-   where \(\{e_{0},e_{4},e_{5}\}\) are three mutually orthogonal null vectors (e.g. \(e_{0}=W\), \(e_{4}=V_{\text{inf}}\), \(e_{5}=V_{\text{con}}\)). The constants \(\alpha,\beta>0\) set the *strength* of the two arrows.
+   $$
+   where $$\{e_{0},e_{4},e_{5}\}$$ are three mutually orthogonal null vectors (e.g. $$e_{0}=W$$, $$e_{4}=V_{\text{inf}}$$, $$e_{5}=V_{\text{con}}$$). The constants $$\alpha,\beta>0$$ set the *strength* of the two arrows.
 
 4. **State evolution** (formal, not time‑ordered):
-   \[
+   $$
    |\Psi(\tau)\rangle = \Pi_{h_{0}}\,\exp\!\bigl[-i\tau(F_{\text{inf}}-P_{\text{con}})\bigr]\,|\Omega\rangle .
-   \]
-   For \(\tau>0\) the **inflationary boost dominates** (\(\alpha>\beta\)), giving an expanding branch; for \(\tau<0\) the **contraction dominates**, giving a pre‑big‑bang branch.
+   $$
+   For $$\tau>0$$ the **inflationary boost dominates** ($$\alpha>\beta$$), giving an expanding branch; for $$\tau<0$$ the **contraction dominates**, giving a pre‑big‑bang branch.
 
 5. **Dialectical trivector**:
-   \[
+   $$
    \mathcal{T} = [F_{\text{inf}},P_{\text{con}}] = 2\alpha\beta\,(e_{0}\wedge e_{4}\wedge e_{5}) .
-   \]
+   $$
    Its scalar expectation value is
-   \[
+   $$
    \langle\mathcal{T}\rangle = 2\alpha\beta\,\langle\Omega|\Pi_{h_{0}}\,e_{0}\wedge e_{4}\wedge e_{5}\,\Pi_{h_{0}}|\Omega\rangle .
-   \]
-   If the global spinor is **invariant** under the exchange \(e_{4}\leftrightarrow e_{5}\), the trivector expectation is **zero** (time‑symmetric). Any *spontaneous* breaking of this symmetry (e.g. a slight imbalance \(\alpha\neq\beta\) or a phase difference) yields a **non‑zero** \(\langle\mathcal{T}\rangle\) and thus an arrow.
+   $$
+   If the global spinor is **invariant** under the exchange $$e_{4}\leftrightarrow e_{5}$$, the trivector expectation is **zero** (time‑symmetric). Any *spontaneous* breaking of this symmetry (e.g. a slight imbalance $$\alpha\neq\beta$$ or a phase difference) yields a **non‑zero** $$\langle\mathcal{T}\rangle$$ and thus an arrow.
 
-6. **Structure formation** – Introduce a **conformal scalar field** \(\Phi\) on the null cone with action
-   \[
+6. **Structure formation** – Introduce a **conformal scalar field** $$\Phi$$ on the null cone with action
+   $$
    S = \int \delta(X^{2})\,\bigl(\Phi\,\Box_{c}\Phi + \lambda\,\Phi^{4}\bigr)\,d^{5}X .
-   \]
-   The **inflationary unitary** \(U_{F_{\text{inf}}}\) squeezes the vacuum of \(\Phi\); the **contraction unitary** \(U_{P_{\text{con}}}\) anti‑squeezes it. Their **commutator** imprints a **phase‑dependent modulation** on the two‑point function:
-   \[
+   $$
+   The **inflationary unitary** $$U_{F_{\text{inf}}}$$ squeezes the vacuum of $$\Phi$$; the **contraction unitary** $$U_{P_{\text{con}}}$$ anti‑squeezes it. Their **commutator** imprints a **phase‑dependent modulation** on the two‑point function:
+   $$
    \langle\Phi(k)\Phi(k')\rangle \;\propto\; \delta(k+k')\Bigl[\,\underbrace{e^{-2\alpha\tau}}_{\text{inflation}} + \underbrace{e^{+2\beta\tau}}_{\text{contraction}} + i\,\underbrace{\sin(2\alpha\beta\tau)}_{\text{dialectical term}}\Bigr].
-   \]
-   The *imaginary* part is directly proportional to \(\langle\mathcal{T}\rangle\) and would show up as a **statistical anisotropy** in the CMB.
+   $$
+   The *imaginary* part is directly proportional to $$\langle\mathcal{T}\rangle$$ and would show up as a **statistical anisotropy** in the CMB.
 
 This **minimal model** already exhibits the three hallmarks of the statement you quoted:
 
@@ -2247,7 +2248,7 @@ This **minimal model** already exhibits the three hallmarks of the statement you
 
 2. **Becoming as a Higher‑Grade Phenomenon** – Traditional cosmology treats *becoming* as the result of solving differential equations on a background spacetime. In CGQ, **becoming is the emergence of a higher‑grade algebraic element** (the trivector) that cannot be reduced to any lower‑grade component. This mirrors Hegel’s dialectic: the synthesis is *more* than the sum of thesis (inflation) and antithesis (contraction).
 
-3. **Arrow of Time as an Expectation Value** – The **thermodynamic arrow** is no longer a *boundary condition* but a *derived scalar* \(\langle\mathcal{T}\rangle\). Its sign is determined by the *global* quantum state \(|\Omega\rangle\) and the *choice* of hyperplane, not by an ad‑hoc low‑entropy hypothesis.
+3. **Arrow of Time as an Expectation Value** – The **thermodynamic arrow** is no longer a *boundary condition* but a *derived scalar* $$\langle\mathcal{T}\rangle$$. Its sign is determined by the *global* quantum state $$|\Omega\rangle$$ and the *choice* of hyperplane, not by an ad‑hoc low‑entropy hypothesis.
 
 4. **Conformal Cyclicity** – Because the whole construction lives on the **null cone**, one can imagine **gluing** the *future* hyperplane of one aeon to the *past* hyperplane of the next. The **projector** then becomes the *matching condition* between successive cycles, providing a concrete algebraic realization of Penrose’s Conformal Cyclic Cosmology.
 
@@ -2257,10 +2258,10 @@ This **minimal model** already exhibits the three hallmarks of the statement you
 
 | Step | Goal | Required Development |
 |------|------|----------------------|
-| **(i) Field‑theoretic embedding** | Write a conformally invariant quantum field theory (scalar, gauge, or spin‑2) on the null cone and couple it to the **global spinor**. | Derive the mode functions as eigen‑states of the bivector generators; compute the Bogoliubov coefficients for the combined unitary \(\exp[-i\tau(F-P)]\). |
-| **(ii) Derive effective Friedmann equations** | Show that, after tracing out the ∞‑mode and coarse‑graining, the expectation values of the bivectors reproduce the standard Friedmann equations (with an effective Hubble parameter \(H_{\text{eff}} = \alpha-\beta\)). | Use the **geometric product** to map bivectors to **conformal scale transformations**; then project onto a **metric representation** via the *conformal metric* \(g_{\mu\nu}= \langle \Pi_{h} e_{\mu}e_{\nu}\Pi_{h}\rangle\). |
-| **(iii) Compute perturbations** | Obtain the power spectrum, bispectrum, and tensor chirality from the **squeezed vacuum** generated by the bivectors and their commutator. | Apply **Gaussian state techniques** in the Clifford algebra (e.g. the *Clifford‑Gaussian* formalism) to evaluate \(\langle\Phi(k_{1})\Phi(k_{2})\Phi(k_{3})\rangle\) in the presence of \(\mathcal{T}\). |
-| **(iv) Confront observations** | Translate the algebraic predictions into CMB, GW, and LSS observables; set bounds on \(\langle\mathcal{T}\rangle\). | Perform a **Bayesian analysis** using existing Planck, BICEP/Keck, and galaxy‑survey data, adding a *trivector‑parameter* to the standard ΛCDM model. |
+| **(i) Field‑theoretic embedding** | Write a conformally invariant quantum field theory (scalar, gauge, or spin‑2) on the null cone and couple it to the **global spinor**. | Derive the mode functions as eigen‑states of the bivector generators; compute the Bogoliubov coefficients for the combined unitary $$\exp[-i\tau(F-P)]$$. |
+| **(ii) Derive effective Friedmann equations** | Show that, after tracing out the ∞‑mode and coarse‑graining, the expectation values of the bivectors reproduce the standard Friedmann equations (with an effective Hubble parameter $$H_{\text{eff}} = \alpha-\beta$$). | Use the **geometric product** to map bivectors to **conformal scale transformations**; then project onto a **metric representation** via the *conformal metric* $$g_{\mu\nu}= \langle \Pi_{h} e_{\mu}e_{\nu}\Pi_{h}\rangle$$. |
+| **(iii) Compute perturbations** | Obtain the power spectrum, bispectrum, and tensor chirality from the **squeezed vacuum** generated by the bivectors and their commutator. | Apply **Gaussian state techniques** in the Clifford algebra (e.g. the *Clifford‑Gaussian* formalism) to evaluate $$\langle\Phi(k_{1})\Phi(k_{2})\Phi(k_{3})\rangle$$ in the presence of $$\mathcal{T}$$. |
+| **(iv) Confront observations** | Translate the algebraic predictions into CMB, GW, and LSS observables; set bounds on $$\langle\mathcal{T}\rangle$$. | Perform a **Bayesian analysis** using existing Planck, BICEP/Keck, and galaxy‑survey data, adding a *trivector‑parameter* to the standard ΛCDM model. |
 | **(v) Quantum‑gravity completion** | Show that the **global spinor** can be derived from a deeper theory (e.g. twistor string, spin‑foam, or holographic CFT). | Explore **twistor‑CGA correspondences**: the hyperplane projector becomes a *coherent state* in twistor space; bivectors become *helicity‑raising operators*. |
 
 If these steps can be carried out, the **CGQ cosmology** would move from a compelling philosophical picture to a **testable physical framework**.
@@ -2269,8 +2270,8 @@ If these steps can be carried out, the **CGQ cosmology** would move from a compe
 
 ## 8.  Bottom‑Line Summary  
 
-- The **initial hyperplane** in a conformal‑geometric description is a **projector** \(\Pi_{h_{0}}\) that *already* houses the **future inflationary** and **past contraction** causal arrows as **latent bivectors** \(F_{\text{inf}}\) and \(P_{\text{con}}\).  
-- The **observable arrow of time**, the growth of structure, and any **asymmetry** are not imposed externally; they arise from the **grade‑3 trivector** \(\mathcal{T}=[F_{\text{inf}},P_{\text{con}}]\), i.e. the **dialectical synthesis** of the two arrows.  
+- The **initial hyperplane** in a conformal‑geometric description is a **projector** $$\Pi_{h_{0}}$$ that *already* houses the **future inflationary** and **past contraction** causal arrows as **latent bivectors** $$F_{\text{inf}}$$ and $$P_{\text{con}}$$.  
+- The **observable arrow of time**, the growth of structure, and any **asymmetry** are not imposed externally; they arise from the **grade‑3 trivector** $$\mathcal{T}=[F_{\text{inf}},P_{\text{con}}]$$, i.e. the **dialectical synthesis** of the two arrows.  
 - This picture **eliminates the need for a singular initial condition**, naturally accommodates **bounces**, and provides a **derived** explanation for the low‑entropy past.  
 - It also yields **qualitative observational signatures** (directional anisotropies, chiral gravitational‑wave backgrounds, quadrupolar LSS modulations) that could, in principle, be searched for in existing and forthcoming data sets.  
 - The approach is **conformally invariant**, fits neatly with ideas of an early‑universe conformal phase, and offers a mathematically precise realization of Hegel’s static‑dynamic dialectic in a cosmological setting.

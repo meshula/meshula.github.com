@@ -9,11 +9,20 @@ import { Image } from 'astro:assets';
 type Props = CollectionEntry<'papers'>['data'];
 
 const { title, description, pubDate, updatedDate, heroImage, category, triadic_domain, author, sanskrit_terms, tags } = Astro.props;
+
+const imageUrl = heroImage
+  ? new URL(heroImage, Astro.site).toString()
+  : new URL('/images/default-og-image.jpg', Astro.site).toString();
+
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+<BaseHead
+  title={title}
+  description={description}
+  image={imageUrl}
+/>
 		<style>
 			main {
 				width: calc(100% - 2em);
