@@ -38,11 +38,11 @@ The aim of this synthesis is to offer something new: a **mathematically rigorous
 <BR><BR><BR>
 ---
 
-## Chapter 1: Thomas Aquinas and the Mathematics of Temporal Experience
+## Chapter 1: Thomas Aquinas and Temporal Experience
 
 ### Why Begin with a Medieval Philosopher?
 
-In our quest to understand time's dialectical structure, we might naturally expect to begin with contemporary physics or modern philosophy. Why instead turn to a 13th-century Dominican friar? The answer lies in Thomas Aquinas's remarkably **mathematical approach** to temporal experience—an approach that anticipates, with delightful precision, the geometric insights we will develop throughout this work.
+In the quest to understand time's dialectical structure, we might naturally expect to begin with contemporary physics or modern philosophy. Why instead turn to a 13th-century Dominican friar? The answer lies in Thomas Aquinas's remarkably **mathematical approach** to temporal experience, an approach that anticipates, later geometrical insights.
 
 Aquinas recognized that time is not a simple, uniform phenomenon but rather a **hierarchical structure** that manifests differently across distinct modes of being. His analysis distinguishes three fundamental temporal experiences, *tempus*, *aevum*, and *aeternitas*.
 
@@ -58,123 +58,79 @@ According to Aquinas therefore:
 - **Angels** experience time as *aeviternity*, **discrete duration**. They can apprehend extended sequences simultaneously while still experiencing genuine temporal succession in their choices and actions. They live *with* time rather than *in* it. 
 - **God** experiences *tota simul*, *aeternitas*, **eternity**. God lives *beyond* time while being intimately present to every temporal moment.
 
-### The Mathematical Intuition
+Aquinas seems to be making making theological distinctions between entities beyond humanity whose existance can only be presumed to exist. However, if cast in modern terms, his system is recognizable in terms of different **coordinate systems** and **topological relationships** within a unified temporal manifold. Using modern insights of relativity theory and conformal geometry, Aquina's conceptions develop naturally.
 
-The geometric character of Aquinas' framework is striking. At first encounter Aquinas seems to be making making theological distinctions between entities whose existance can only be presumed to exist. However, if cast in modern terms, he describes what we can immediately recognize as different **coordinate systems** and **topological relationships** within a unified temporal manifold.
+- **Temporal creatures** experience time like observers moving along a *worldline* (a path through spacetime), able to perceive only events within their *immediate lightcone* (those events that could causally affect or be affected by them).
+- **Angels** experience time like observers with *extended lightcones*, able to apprehend larger regions of spacetime simultaneously, seeing more of the causal structure at once.
+- **God** experiences time like an observer at *conformal infinity*, a “perspective” that perceives the entire block universe (spacetime as a single, unchanging four-dimensional structure in which past, present, and future coexist), seeing all events in a unified whole.
 
-Consider the mathematical parallels:
-- **Temporal creatures** experience time like observers moving along a worldline, with access only to their immediate lightcone
-- **Angels** experience time like observers with extended lightcones, able to apprehend larger regions of spacetime simultaneously  
-- **God** experiences time like an observer at conformal infinity, with access to the entire block universe
+### On the Nature of Proper Ends
 
-Aquinas's framework anticipates core insights of relativity theory and conformal geometry even though those ideas would not emerge until centuries hence.
+If a seed grows into an oak tree because it is *directed toward* its mature form, in what sense does the future oak "cause" the present growth? If human beings act *for the sake of* ultimate happiness, how does this future goal influence present choices? And if God orders all things toward their ultimate end in the Beatific Vision, how does this cosmic *telos* operate within the forward flow of temporal causation? **How can future ends direct present processes without violating the normal order of causation?** This question suggests a mathematical approach.
 
-### The Directional Problem
+At first glance, this problem seems to threaten causality itself. If effects could precede their causes—if future ends could "reach back" to influence past events—the entire causal order might appear to collapse. Some interpreters have indeed read Aquinas this way, suggesting that teleological causality entails a kind of "backwards determination," predetermination, or a lack of free will (Kenny 1976, Maritain 1948, MacIntyre 1990).
 
-Aquinas's most mathematically suggestive insight concerns **teleological causality**. This is the idea that natural processes are directed toward their proper ends or goals. This raises a crucial question: **How can future ends direct present processes without violating the normal order of causation?**
+Closer examination reveals a different picture. Teleological causality does not violate temporal order; instead, it indicates a more subtle structure underlying time itself. Just as classical mechanics allows forces to act instantaneously only when mediated by geometric constraints, future ends may “inform” the present not by reversing causation but by participating in a system of relations that organizes temporal events.
 
-If a seed grows into an oak tree because it is *directed toward* its mature form, in what sense does the future oak "cause" the present growth? If human beings act *for the sake of* ultimate happiness, how does this future goal influence present choices? And if God orders all things toward their ultimate end in the Beatific Vision, how does this cosmic *telos* operate within the forward flow of temporal causation?
+From this perspective, the influence of ends resembles a geometric or algebraic structure within time: rather than pushing or pulling events backward, they provide a framework in which present processes unfold coherently toward synthesis. This insight opens the door to a formal mathematical representation, one in which teleology and temporal sequence coexist harmoniously—anticipating the conformal-geometric and spinorial structures we will develop in subsequent chapters.
 
-### The Stakes of the Question
+### Teleological Causality
 
-This problem initially appears to threaten causality itself. If effects can precede their causes — if future ends can "reach back" to influence past events — then the entire causal order seems to collapse into incoherence. Some interpreters have indeed read Aquinas this way, suggesting that teleological causality requires a kind of "backwards determination" from future to past; predetermination, a lack of free will.
+#### 1. The Kinds of Cause
 
-But this interpretation misunderstands both Aquinas's sophistication and the deeper structure he was exploring. As we will discover, teleological causality doesn't violate temporal order; it reveals a more fundamental level of temporal organization that **transcends the simple opposition between forward and backward causation**.
+Aquinas's philosophy inherits Aristotle’s four causes:
 
-### The Method Forward
+| Aristotle's Causes | What it explains          | Example |
+|--------------------|---------------------------|---------------------|
+| **Material**       | What something is made of | Bronze of a statue |
+| **Formal**         | What gives it its *form* or *essence* | Shape of the statue |
+| **Efficient**      | The *agent* that brings about change | The sculptor |
+| **Final**          | The *end* or *purpose* toward which it moves | The statue’s being beautiful |
 
-To understand how this works, we need to examine Aquinas's analysis with mathematical precision. We will discover that his account of final causes provides not backwards causation but rather a **geometrical orientation** that operates at a different level than efficient causation. Just as parallel lines in Euclidean geometry never meet yet share a common direction, natural processes in Aquinas's framework never violate temporal sequence yet share a common orientation toward their proper ends.
+Aquinas stresses that *final causes* are real, not simply ideas or mental projections. They are the *cause* of a thing’s being what it is:
 
-This orientation becomes mathematically precise when we recognize that Aquinas an implicit parallel with what we now call **conformal geometry**, a mathematical framework where "points at infinity" provide the directional structure that unifies otherwise disconnected finite processes.
+> “Every agent acts for an end; the end is the *cause* of the agent’s action.” (**Summa Theologiae** I-II q. 1, a. 2)
 
-But we're getting ahead of ourselves. Let us begin by examining exactly what Aquinas means by teleological causality, and why his account does **not** require the kind of backwards causation that would undermine temporal order.
+Thus, for Aquinas, *finality* is a genuine explanatory principle, on a par with material, formal, and efficient causes. This notion gives rise to the common discussion of predetermination and free will.
 
----
+### 2. Final Causes Are Ontologically Prior, Not Temporally Prior
 
-## 1. The Kinds of Cause
-
-Aquinas's philosophy is foundational rooted in Aristotle’s four causes. He inherits them, and keeps them distinct:
-
-| Aristotle's Causes | What it explains | Example |
-|-------|------------------|---------------------|
-| **Material** | What something is made of | Bronze of a statue |
-| **Formal**   | What gives it its *form* or *essence* | Shape of the statue |
-| **Efficient**| The *agent* that brings about change | The sculptor |
-| **Final**   | The *end* or *purpose* toward which it moves | The statue’s being beautiful |
-
-In the **Summa Theologiae** I‑q.45‑48 Aquinas stresses that *final causes* are real, not simply ideas or mental projections. They are the *cause* of a thing’s being what it is.
-
-> “Every agent acts for an end; the end is the *cause* of the agent’s action.” (ST I-II q. 1, a. 2)
-
-Thus, for Aquinas, *finality* is a genuine explanatory principle, on a par with material, formal, and efficient causes. This notion gives rise to common discussion of predetermination and free will.
-
----
-
-## 2. Final Causes Are Ontologically Prior, Not Temporally Prior
-
-Aquinas makes a crucial distinction between **temporal order** (what comes first in time) and **ontological order** (what is more fundamental in the structure of being).
+Aquinas makes a crucial distinction between **temporal order** (what comes first in time) and **ontological order** (what is more fundamental in the structure of being: what grounds or directs other things, even if it does not occur first in time).
 
 * **Temporal order**: Efficient causes precede their effects. The sculptor strikes the chisel *before* the statue is shaped.
-* **Ontological order**: The *final* cause (the statue’s being beautiful) is *prior* to the sculptor’s action in the sense that the sculptor’s activity is *directed* toward that end. The end is what *gives* the action its direction, even though it does not *precede* the action in time.
+* **Ontological order**: The final cause (the statue’s being beautiful) is prior in the sense that it gives direction and explanatory priority to the sculptor’s action. The end shapes the activity of the cause without preceding it in time.
 
-Aquinas says (ST I-II, q.1, a.2):
+Aquinas says in ST I-II, q.1, a.2:
 
 > “The final cause is the *cause* of the *action* of the efficient cause, not the *cause* of the *effect* of the efficient cause.”
 
 In other words, the *goal* of an action explains **why** the efficient cause acts, but it does not *push* the cause backward in time. The final cause is a *principle of direction* that exists in the *being* of the thing, not a later event that retro‑causally determines the past. Thus Aquinas allows for a universe with free will.
 
----
+### 3. The Ultimate Final Cause
 
-## 3. The Ultimate Final Cause: God
-
-Aquinas extends the notion of final causality to the whole created order:
+Aquinas extends the notion of final causality to the whole created order, attributing final cause to God:
 
 * **God as the supreme final cause**  
   God’s goodness is the ultimate end toward which all creatures are directed. This is a recurring theme in the Summa Theologiae (e.g., ST I, q. 6, a. 1, ad 2; ST I-II, q. 1, a. 8)
-* **Providence**: God “moves all things to their proper ends”. This is a *continuous* act of sustaining and directing, not a one‑time push from the future.
-* **God as causality and eternity**: God is outside time (*aeviternitas*) and sees the whole course of time in a single, simultaneous intuition. This idea is rooted in Boethius and adopted by Aquinas (ST I, q. 10, a. 1-2).
+* **Providence**: God continuously “moves all things to their proper ends”.
+* **God as causality and eternity**: God is outside time (*aeviternitas*) and sees the whole course of time in a single, simultaneous intuition.
 
+According to Aquinas therefore, from the perspective of *aeternitus*, God's is not bound by temporal succession: final causality is not a "pull from the future" or a one-time event. Instead, his eternal, providential will infuses every moment with an orientation toward the ultimate end. He directs things to their ends "not by a temporal motion, but eternally".
 
-Because his eternity is not bound by temporal succession, God's final causality is not a "pull from the future" or a one-time event. Instead, his eternal, providential will infuses every moment with an orientation toward the ultimate end. He directs things to their ends "not by a temporal motion, but eternally".
-
----
-
-## 4. The Eschaton in Aquinas
+### 4. The Eschaton in Aquinas
 
 When Aquinas speaks of an *eschaton* (the consummation of all history), he means:
 
 1. **The Beatific Vision** – the ultimate happiness of the rational soul in the direct vision of God (ST I-II, q. 3, a. 8 and ST I, q. 12).  
 2. **A final telos for the whole creation** – the consummation of all things in God (ST I, q. 73, a. 1, ad 1 and ST I, q. 103, a. 2).
 
-These are *future* states, but they are **not** causal antecedents that “reach back” to produce present events. They are *telic* goals that give meaning to the present motion. Aquinas repeatedly stresses that the *present* is already ordered toward that future end:
+These are *future* states, but they are **not** causal antecedents that “reach back” to predeterministically produce present events. They are *telic* goals that give meaning to the present motion. Aquinas repeatedly stresses that the *present* is already ordered toward that future end:
 
 > “The present act of a thing is already directed to its final end; the future end does not *cause* the present, but the present *participates* in the final end.” (ST I-II, q. 1, a. 2)
 
 Thus, the eschaton is **the final cause** of the *whole* order, but it does not function as a *temporal* cause that forces the past to align with the future.
 
----
-
-## 5. No “Recursive Backwards” Causation
-
-So, asking whether teleological causality requires “all action recursively inducing backwards” suggests a model where:
-
-1. A future end *determines* a present cause.  
-2. That present cause *determines* a prior cause, and so on, moving **backward** through time.
-
-This doesn't follow from Aquinas' arguments for several reasons:
-
-| Reason | Aquinas’ Position |
-|--------|-------------------|
-| **Causality is fundamentally *efficient* and forward‑moving** | Efficient causes always precede their effects (ST I‑q.45, a.2). |
-| **Final causes are *orientations*, not temporal antecedents** | The final cause *guides* the efficient cause, but does not *precede* it in time. |
-| **God’s eternity precludes temporal “back‑pull”** | God’s providence is *simultaneous* with all moments; it does not wait for a future state to act. |
-| **Metaphysical principle of *act* and *potency*** | Change proceeds from potency to act under the direction of a *formal* and *final* principle, not by retro‑causation. |
-
-In Aquinas’ metaphysics, the chain of efficient causes runs forward (cause → effect). The chain of *final* orientations runs **upward** in the hierarchy of being (particular ends → the ultimate end in God), but this “upward” movement is **ontological**, not temporal.
-
----
-
-## 6. How Aquinas Uses Teleology in Practice
+### 5. How Aquinas Uses Teleology
 
 1. **Natural Philosophy** – When explaining why a seed grows into a tree, Aquinas cites the *final cause* “the tree’s nature to be a tree” (ST I, q.2, a.3). The seed’s efficient cause (the germination process) is *directed* toward that end, but the end does not *cause* the seed to germinate from a future state; it simply *explains* the direction of the process.
 
@@ -182,9 +138,17 @@ In Aquinas’ metaphysics, the chain of efficient causes runs forward (cause →
 
 3. **Cosmological Argument** – The *first cause* (God) is the *ultimate* final cause of the whole order, but the argument proceeds from *present* motion to the *necessity* of a sustaining cause, not from a future eschaton to the present.
 
----
+Aquinas' position allows for free will:
 
-## 7. Summing Up
+| Reason | Aquinas’ Position |
+|--------|-------------------|
+| **Causality is fundamentally *efficient* and forward‑moving** | Efficient causes always precede their effects. |
+| **Final causes are *orientations*, not temporal antecedents** | The final cause *guides* the efficient cause, but does not *precede* it in time. |
+| **God’s eternity precludes predeterminism** | God’s providence is *simultaneous* with all moments; it does not wait for a future state to act. |
+| **Metaphysical principle of *act* and *potency*** | Change proceeds from potency to act under the direction of a *formal* and *final* principle, not by retro‑causation. |
+
+In Aquinas’ metaphysics, the chain of efficient causes runs forward (cause → effect). The chain of *final* orientations runs **upward** in the hierarchy of being (particular ends → the ultimate end in God), but this “upward” movement is **ontological**, not temporal.
+
 
 | Question | Aquinas’ answer |
 |----------|-----------------|
@@ -192,8 +156,6 @@ In Aquinas’ metaphysics, the chain of efficient causes runs forward (cause →
 | **Is cosmological action “recursively induced backwards”?** | No.  Efficient causes move forward in time; final causes give direction *ontologically* but do not pull the chain backward. |
 | **What is the role of the eschaton?** | It is the *ultimate* telos toward which all created things are oriented, grounded in God’s providence. It provides the *explanatory* final cause, not a *temporal* antecedent. |
 | **How does this differ from a “future‑to‑past” causal model?** | Aquinas’ model keeps causation fundamentally *forward* (efficient) while allowing *final* orientations that are prior in the order of being, not in time. |
-
----
 
 ### For Further Reading on Aquinas
 
@@ -206,9 +168,10 @@ In Aquinas’ metaphysics, the chain of efficient causes runs forward (cause →
 * **Edward Feser, *Aquinas: A Beginner's Guide* (Oneworld Publications, 2009)**: Offers a clear overview of Aquinas's metaphysics, including his account of final causality.
 * **Steven A. Long, *Teleological Grammar: The Ultimate Finality of Nature in Aquinas* (Catholic University of America Press, 2017)**: A focused and rigorous modern analysis of the topic.
 
+<BR><BR><BR>
 ---
 
-## Chapter II: A Metaphysical Landscape - Aristotle, Buddhism, and Geometric Algebra
+# Chapter II: A Metaphysical Landscape - Aristotle, Buddhism, and Geometric Algebra
 
 ### Expanding the Mathematical Vision
 
@@ -348,7 +311,7 @@ Thus, **using CGA’s “points at infinity” as a metaphor for the unknowabili
 
 ---
 
-## Chapter III: Mathematical Foundations of Time
+# Chapter III: Mathematical Foundations of Time
 
 ### From Philosophical Insight to Mathematical Precision
 
@@ -595,7 +558,7 @@ Having established a full geometric framework for teleological causality, we are
 
 ---
 
-## Chapter IV: Hegel's Dialectical Framework – The Missing Methodological Key
+# Chapter IV: Hegel's Dialectical Framework – The Missing Methodological Key
 
 ### The Bridge We’ve Been Building Toward
 
@@ -885,7 +848,7 @@ These calculations are **exactly** the algebraic counterpart of Hegel’s “Auf
 
 ---
 
-## Chapter V: The Emergence of Time - Dialectical Geometry in Action
+# Chapter V: The Emergence of Time - Dialectical Geometry in Action
 
 ### The Moment of Synthesis
 
@@ -1311,7 +1274,7 @@ All three temporal pictures are thus **dialectically unified** in the language o
 
 ---
 
-## Chapter VI: Quantum Extensions – Dialectical Geometry at the Fundamental Level
+# Chapter VI: Quantum Extensions – Dialectical Geometry at the Fundamental Level
 
 ### The Ultimate Test
 
@@ -1736,7 +1699,7 @@ Thus the **Hegelian triadic structure**—*Being ↔ Nothing ↔ Becoming*, *Gro
 
 ---
 
-## Chapter VII: Conclusion: A New Foundation for Temporal Reality
+# Chapter VII: Conclusion: A New Foundation for Temporal Reality
 
 ### The Journey Completed
 
@@ -2273,3 +2236,12 @@ If these steps can be carried out, the **CGQ cosmology** would move from a compe
 - The approach is **conformally invariant**, fits neatly with ideas of an early‑universe conformal phase, and offers a mathematically precise realization of Hegel’s static‑dynamic dialectic in a cosmological setting.
 
 In practice, turning this elegant algebraic picture into a **full‑fledged cosmological model** will require (i) a concrete field‑theoretic embedding on the null cone, (ii) a systematic derivation of effective metric dynamics from the spinor level, and (iii) a careful confrontation with the wealth of precision cosmological data. Nonetheless, the statement you quoted captures a **powerful unifying insight**: the universe’s “beginning” can be viewed as a **logical projection** that already contains, in latent form, the *entire causal tapestry* from which the observed cosmic history *dialectically* unfolds.
+
+<BR><BR><BR>
+---
+# Bibliography
+
+1. ***Anthony Kenny**, Aquinas: A Collection of Critical Essays* (New York: Doubleday, 1976).
+2. ***Jacques Maritain**, Existence and the Existent* (New York: Pantheon Books, 1948).
+3. ***Alasdair MacIntyre**, Three Rival Versions of Moral Inquiry: Encyclopaedia, Genealogy, and Tradition* (Notre Dame, IN: University of Notre Dame Press, 1990).
+
