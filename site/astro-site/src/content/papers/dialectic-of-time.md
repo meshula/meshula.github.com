@@ -11,42 +11,31 @@ draft: false
 # image: "/images/og/time.png"
 ---
 
-### A Question That Haunts Philosophy
+### What is Time?
 
-What is time? This deceptively simple question has driven philosophical inquiry for millennia, yet remains one of the most elusive challenges in human thought. Is time an absolute container flowing uniformly forward? A subjective construction of consciousness? A geometric dimension of spacetime? Or something far more fundamental—a dialectical structure underlying reality itself?
+What is time? This deceptively simple question has animated inquiry for millennia, yet remains unresolved. Is time an absolute container flowing uniformly forward, a thermodynamic arrow of entropy? A subjective construction of consciousness? A reversible ordering of relations? A geometric dimension of spacetime itself?
 
-This work traces a philosophical thread from Euclid's geometric imperatives through Aristotle's teleological causality, Aquinas's divine providence, Hegel's dialectical logic, and into contemporary conformal geometric algebra and quantum mechanics, in an effort to discover whether a common understanding of time links these seemingly disparate traditions.
+This book follows a thread that winds through philosophy and mathematics: from Aristotle’s measure of change to Aquinas’s final causes, Buddhist concepts of impermanence and dependent origination, Euclid’s geometrical foundations, from relativity’s proper time to the infinities of conformal geometric algebra and the probabilistic structure of quantum mechanics. Each tradition approaches the nature of time differently, yet common structures emerge. Hegel’s *Science of Logic* offers a surprising dialectical framework that links these diverse accounts, mapping logical categories to geometric operations. Projection operators, in turn, make visible the emergence of time itself.
 
-Our investigation begins by examing an apparently common thread, a relationship between teleological causality and temporal direction. Starting with Thomas Aquinas's account of final causes, we examine the question of predetermination and whether causality "flows backward" from future ends; this illuminates deeper structural questions about the nature of temporal ordering itself. We investigate several philosophical traditions:
-
-**Aristotelian Naturalism** treats time as the measure of change from potentiality to actuality, grounded in the intrinsic teleological structure of natural beings.
-
-**Thomistic Synthesis** extends this framework by grounding all temporal becoming in divine providence, creating a hierarchy of final causes that orders the entire cosmos toward its ultimate end.
-
-**Buddhist Metaphysics** offers a seemingly contradictory perspective through concepts of impermanence (anicca), dependent origination (pratītyasamutpāda), and emptiness (śūnyatā), suggesting that temporal flow itself lacks inherent existence.
-
-We will examine how Euclid's foundational geometry creates a structural gap ~ parallel lines that never meet, and the resolution of the gap through conformal geometric algebra's points at infinity. This will set up a geometric metaphor that illuminates how finite temporal processes can be oriented toward infinite or inaccessible ends.
-
-Next, Georg Wilhelm Friedrich Hegel's *Science of Logic* provides a methodological component. Hegel's triadic structure: thesis, antithesis, synthesis offers a framework for mapping logical categories to geometric operations in conformal algebra. Projection operators then demonstrate the emergence of time.
-
-Finally, we sepculatively extend the framework into quantum mechanics and contemporary physics. The same dialectical-geometric structure that unifies classical metaphysics also provides a natural language for exploring time in modern physics:
+The same dialectical-geometric structure that unifies classical metaphysics also provides a natural language for exploring time in modern science:
 
 - **Quantum superposition of temporal orders** (indefinite causal structure)
 - **Thermodynamic arrows of time** emerging from statistical mechanics
 - **Relativistic simultaneity** and the block universe interpretation
 - **Consciousness and the "hard problem"** of subjective temporal experience
 
-In an era of increasing specialization, this work demonstrates the continued relevance of **systematic philosophical thinking**. By showing how ancient metaphysical insights anticipate and illuminate cutting-edge developments in physics and consciousness studies, we gain:
+In an era of increasing specialization, this work argues for the continued relevance of **systematic philosophical thinking**. By showing how ancient metaphysical insights anticipate and illuminate cutting-edge developments in physics and consciousness studies, we gain:
 
-1. **Conceptual clarity** about foundational questions that purely technical approaches often obscure
-2. **Mathematical precision** in domains previously relegated to  abstract philosophy
+1. **Conceptual clarity** about foundational questions too easily obscured by technical detail
+2. **Mathematical precision** in domains often relegated to  abstract philosophy
 3. **Practical applications** for understanding time in artificial intelligence, neuroscience, and quantum technologies
 4. **Wisdom traditions** that offer tested frameworks for navigating temporal existence
 
-### The Promise
+### The Goal of this Work
 
-If successful, this synthesis offers something a new tool: a **mathematically rigorous metaphysics of time** that honors both the precision of modern science and the depth of traditional wisdom. We discover that the question "What is time?" can be addressed through physics and philosophy together, through a **dialectical integration**. The ancient promise of philosophy, to achieve both theoretical understanding and practical wisdom, finds new expression in this geometric dialectic of time.
+The aim of this synthesis is to offer something new: a **mathematically rigorous metaphysics of time** that honors both the precision of science while preserving the depth of philosophy. By weaving physics and metaphysics into a dialectical integration, we find that the ancient promise of philosophy, to achieve both theoretical understanding and practical wisdom, can be renewed. In the geometric dialectic of time, metaphysics and mathematics converge, and the perennial question “What is time?” gains a form both rigorous and profound.
 
+<BR><BR><BR>
 ---
 
 ## Chapter 1: Thomas Aquinas and the Mathematics of Temporal Experience
@@ -55,13 +44,19 @@ If successful, this synthesis offers something a new tool: a **mathematically ri
 
 In our quest to understand time's dialectical structure, we might naturally expect to begin with contemporary physics or modern philosophy. Why instead turn to a 13th-century Dominican friar? The answer lies in Thomas Aquinas's remarkably **mathematical approach** to temporal experience—an approach that anticipates, with delightful precision, the geometric insights we will develop throughout this work.
 
-Aquinas recognized that time is not a simple, uniform phenomenon but rather a **hierarchical structure** that manifests differently across distinct modes of being. His analysis distinguishes three fundamental temporal experiences:
+Aquinas recognized that time is not a simple, uniform phenomenon but rather a **hierarchical structure** that manifests differently across distinct modes of being. His analysis distinguishes three fundamental temporal experiences, *tempus*, *aevum*, and *aeternitas*.
 
-- **Temporal creatures** like ourselves experience time as **successive duration**, a flowing sequence of moments where past, present, and future are genuinely distinct. We live *in* time, carried along by its current.
+*Tempus* is Aristotlean, a measure of change in relations, such as position. *Tempus* is analogous to proper time.
 
-- **Angels** experience time as *aeviternity*, **discrete duration**. They can apprehend extended sequences simultaneously while still experiencing genuine temporal succession in their choices and actions. They live *with* time rather than *in* it.
+*Aevus* is subjective time, and is naturally proportionate to *Tempus*. It may be thought of as an experience of time that transcends relational, proper time.
 
-- **God** experiences *tota simul*, **eternity**. Eternity isn't endless time but the complete possession of unlimited life all at once. From the divine perspective, all temporal moments are equally present. God lives *beyond* time while being intimately present to every temporal moment.
+*Aeternitas* comes from the philosopher Boethius (AD 480-524) wrote *Consolation of Philosophy* while imprisoned. He wrote *Aeternitas igitar interminabilis vitae tota simul et perfecta possessio...*, *Eternitiy is the complete and perfect possession of all life all at once...*
+
+According to Aquinas therefore:
+
+- **Temporal creatures** like ourselves experience time as **successive duration**, a flowing sequence of moments where past, present, and future are genuinely distinct. We live *in* time, carried along by its current. 
+- **Angels** experience time as *aeviternity*, **discrete duration**. They can apprehend extended sequences simultaneously while still experiencing genuine temporal succession in their choices and actions. They live *with* time rather than *in* it. 
+- **God** experiences *tota simul*, *aeternitas*, **eternity**. God lives *beyond* time while being intimately present to every temporal moment.
 
 ### The Mathematical Intuition
 
@@ -115,7 +110,7 @@ Thus, for Aquinas, *finality* is a genuine explanatory principle, on a par with 
 
 ---
 
-## 2. Final Causes Are **Ontologically Prior**, Not Temporally Prior
+## 2. Final Causes Are Ontologically Prior, Not Temporally Prior
 
 Aquinas makes a crucial distinction between **temporal order** (what comes first in time) and **ontological order** (what is more fundamental in the structure of being).
 
@@ -138,6 +133,7 @@ Aquinas extends the notion of final causality to the whole created order:
   God’s goodness is the ultimate end toward which all creatures are directed. This is a recurring theme in the Summa Theologiae (e.g., ST I, q. 6, a. 1, ad 2; ST I-II, q. 1, a. 8)
 * **Providence**: God “moves all things to their proper ends”. This is a *continuous* act of sustaining and directing, not a one‑time push from the future.
 * **God as causality and eternity**: God is outside time (*aeviternitas*) and sees the whole course of time in a single, simultaneous intuition. This idea is rooted in Boethius and adopted by Aquinas (ST I, q. 10, a. 1-2).
+
 
 Because his eternity is not bound by temporal succession, God's final causality is not a "pull from the future" or a one-time event. Instead, his eternal, providential will infuses every moment with an orientation toward the ultimate end. He directs things to their ends "not by a temporal motion, but eternally".
 
