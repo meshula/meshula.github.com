@@ -2484,10 +2484,6 @@ In this story the **static‑dynamic paradox** is no longer a mystery: the *pres
 
 The **static‑dynamic paradox** that has haunted philosophers since Hegel is not a problem of *contradiction* but a problem of *perspective*: we habitually read the *same algebraic object* at a single grade, thereby missing the richer graded structure that simultaneously houses both the *still* and the *moving*. By recognizing the **hyperplane of the present** as a **projector** that already *contains* the **future and past generators**, and by interpreting the **synthesis** as the **higher‑grade commutator**, we obtain a **coherent, mathematically precise picture** in which the *block universe* is a **static absolute** that *generates* the *dynamic arrows* we experience. This reading not only resolves Hegel’s paradox but also opens a fertile dialogue between **metaphysics, physics, and the philosophy of mind**, suggesting that *time* is a **graded, dialectical structure** rather than a simple linear flow or a frozen backdrop.
 
-**Co to Co:** Absolutely concur - this cosmological material is fascinating but clearly **derivative application** rather than essential development. The core thesis about time's dialectical-geometric emergence has been established through the main chapters. This appendix demonstrates the framework's **generative potential** without being necessary for the central argument.
-
-Let me draft an appropriate introduction:
-
 ---
 
 ## Appendix: Cosmological Applications - A Speculative Extension
