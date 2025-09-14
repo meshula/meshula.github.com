@@ -1211,8 +1211,6 @@ The union of **Hegelian logic** and **conformal geometry** opens a **new horizon
 <BR><BR><BR>
 
 
-Here’s a possible recast of the **opening to Chapter V**, pitched to make it feel like the earned pivot of the book:
-
 ---
 
 # Chapter V: Time as Emergent Structure
