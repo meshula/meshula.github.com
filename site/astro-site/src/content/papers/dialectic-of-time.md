@@ -58,11 +58,13 @@ According to Aquinas therefore:
 - **Angels** experience time as *aeviternity*, **discrete duration**. They can apprehend extended sequences simultaneously while still experiencing genuine temporal succession in their choices and actions. They live *with* time rather than *in* it. 
 - **God** experiences *tota simul*, *aeternitas*, **eternity**. God lives *beyond* time while being intimately present to every temporal moment.
 
-Aquinas seems to be making making theological distinctions between entities beyond humanity whose existance can only be presumed to exist. However, if cast in modern terms, his system is recognizable in terms of different **coordinate systems** and **topological relationships** within a unified temporal manifold. Using modern insights of relativity theory and conformal geometry, Aquina's conceptions develop naturally.
+Aquinas seems to be making theological distinctions between entities beyond humanity whose existance can only be presumed to exist. However, if cast in modern terms, his system is recognizable in terms of different **coordinate systems** and **topological relationships** within a unified temporal manifold. Using modern insights of relativity theory and conformal geometry, Aquina's conceptions develop naturally.
 
 - **Temporal creatures** experience time like observers moving along a *worldline* (a path through spacetime), able to perceive only events within their *immediate lightcone* (those events that could causally affect or be affected by them).
 - **Angels** experience time like observers with *extended lightcones*, able to apprehend larger regions of spacetime simultaneously, seeing more of the causal structure at once.
 - **God** experiences time like an observer at *conformal infinity*, a “perspective” that perceives the entire block universe (spacetime as a single, unchanging four-dimensional structure in which past, present, and future coexist), seeing all events in a unified whole.
+
+These parallels are analogical, not literal: Aquinas was not anticipating relativity, but the conceptual structure maps surprisingly well.
 
 ### On the Nature of Proper Ends
 
@@ -95,7 +97,7 @@ Thus, for Aquinas, *finality* is a genuine explanatory principle, on a par with 
 
 ### 2. Final Causes Are Ontologically Prior, Not Temporally Prior
 
-Aquinas makes a crucial distinction between **temporal order** (what comes first in time) and **ontological order** (what is more fundamental in the structure of being: what grounds or directs other things, even if it does not occur first in time).
+Temporal order is about what comes first in time; ontological order is about what grounds or directs things, even if it does not occur first in time. Aquinas makes a crucial distinction between them:
 
 * **Temporal order**: Efficient causes precede their effects. The sculptor strikes the chisel *before* the statue is shaped.
 * **Ontological order**: The final cause (the statue’s being beautiful) is prior in the sense that it gives direction and explanatory priority to the sculptor’s action. The end shapes the activity of the cause without preceding it in time.
@@ -128,7 +130,7 @@ These are *future* states, but they are **not** causal antecedents that “reach
 
 > “The present act of a thing is already directed to its final end; the future end does not *cause* the present, but the present *participates* in the final end.” (ST I-II, q. 1, a. 2)
 
-Thus, the eschaton is **the final cause** of the *whole* order, but it does not function as a *temporal* cause that forces the past to align with the future.
+Thus, the eschaton is **the final cause** of the *whole* order, but it does not function as a *temporal* cause that forces the past to align with the future. The eschaton functions not as a chronological endpoint that pushes back into the present, but as an eternal *orientation* already inscribed within the structure of temporal being.
 
 ### 5. How Aquinas Uses Teleology
 
@@ -175,25 +177,37 @@ In Aquinas’ metaphysics, the chain of efficient causes runs forward (cause →
 
 ### Expanding the Mathematical Vision
 
-Our examination of Aquinas revealed a sophisticated logical structure underlying medieval accounts of time and causality. But Aquinas didn't develop this framework in isolation. His temporal hierarchy and teleological causality are grounded in **Aristotelian metaphysics**, while his insights about the ultimate transcendence of temporal succession find unexpected resonances in **Buddhist philosophy**. Most remarkably, both traditions anticipate mathematical developments that wouldn't emerge until the modern theory of **Conformal Geometric Algebra**, as we will see.
+Our examination of Aquinas revealed a sophisticated logical structure underlying medieval accounts of time and causality. But Aquinas didn't develop this framework in isolation. His temporal hierarchy and teleological causality are grounded in **Aristotelian metaphysics**, while his insights about the ultimate transcendence of temporal succession find unexpected resonances in **Buddhist philosophy**. Both traditions anticipate mathematical developments that wouldn't emerge until the modern theory of **Conformal Geometric Algebra**, as we will see.
 
-This chapter maps the broader metaphysical landscape that Aquinas was navigating. By examining how Aristotelian naturalism and Buddhist emptiness-philosophy each illuminate different aspects of temporal structure, we discover that what initially appear to be irreconcilable worldviews actually describe **complementary mathematical relationships** the we can use to construct a unified geometric framework.
+This chapter maps the broader metaphysical landscape, the distnct accounts of being and causality that shape each tradition’s understanding of time. By examining how Aristotelian naturalism and Buddhist emptiness-philosophy each illuminate different aspects of temporal structure, we discover that what initially appear to be irreconcilable worldviews actually describe **complementary mathematical relationships** that we can use to construct a unified geometric framework.
 
 ### Why Aristotle? The Foundation of Teleological Structure
 
-Aquinas explicitly grounds his analysis in Aristotelian principles, but with a crucial modification. Where Aquinas posits God as the universal final cause that orders all particular ends toward a cosmic *telos*, Aristotle works with a more **distributive** approach to teleological causality. For Aristotle, each natural being has its own intrinsic end (*telos*) without requiring integration into a single, overarching cosmic purpose.
+Aquinas explicitly grounded his analysis in Aristotelian principles, but with a crucial modification. Where Aquinas posits God as the universal final cause that orders all particular ends toward a cosmic *telos*, Aristotle worked with a more **distributive** approach to teleological causality. For Aristotle, each natural being has its own intrinsic end (*telos*) without requiring integration into a single, overarching cosmic purpose.
 
-This difference is mathematically significant. Aquinas's framework suggests what we might call a **globally convergent geometry**—all trajectories ultimately meet at a single point at infinity (the Beatific Vision). Aristotle's framework suggests a **locally coherent geometry**—each trajectory has its own proper direction, but these directions need not converge on a common endpoint.
+This difference is mathematically suggestive. Aquinas's framework suggests what we might call a **globally convergent geometry** wherein all trajectories ultimately meet at a single point at infinity (the Beatific Vision). Aristotle's framework suggests a **locally coherent geometry** where each trajectory has its own proper direction, but these directions need not converge on a common endpoint. Aristotle’s distributed ends often resist subsumption into a single hierarchy, while Aquinas explicitly insists that every final cause participates in a single ultimate end.
 
-As we'll discover, both approaches find precise mathematical expression in conformal geometry, where we can distinguish between **global points at infinity** (Aquinas) and **directional asymptotes** (Aristotle) within the same mathematical framework.
+As we'll discover, both approaches find expression in conformal geometry, where we can distinguish between **global points at infinity** (Aquinas) and **directional asymptotes** (Aristotle) within the same mathematical framework.
 
 ### Why Buddhism? The Challenge of Emptiness
 
-The inclusion of Buddhist philosophy might seem more surprising, given its apparent rejection of the substantial metaphysics that grounds both Aristotelian and Thomistic approaches. Where Aristotle and Aquinas ground temporal direction in the reality of formal and final causes, Buddhist philosophy emphasizes the **emptiness** (*śūnyatā*) of all phenomena—including temporal processes themselves.
+The inclusion of Buddhist philosophy might seem more surprising, given its apparent rejection of the substantial metaphysics that grounds both Aristotelian and Thomistic approaches. Where Aristotle and Aquinas ground temporal direction in the reality of formal and final causes, Buddhist philosophy emphasizes the **emptiness** (*śūnyatā*) of all phenomena, including temporal processes themselves.
 
-But this apparent opposition conceals a deeper mathematical complementarity. Buddhist concepts of **dependent origination** (*pratītyasamutpāda*), **impermanence** (*anicca*), and **emptiness** (*śūnyatā*) describe temporal structures that are precisely what conformal geometry represents as null cone relationships—geometric objects that mark real relationships but have no size or substance of their own. They are like the outline of a shadow: precise in shape, yet weightless.
+Yet this contrast conceals a deeper complementarity. In classical Madhyamaka thought, Nāgārjuna insists that all phenomena are empty precisely because they arise only through dependent origination (*pratītyasamutpāda*). Nothing has self-subsistent being; every temporal event is conditioned, relational, and impermanent (*anicca*). (Siderits and Katsura, 2013)
 
-When a Buddhist philosopher says that temporal phenomena are "empty of inherent existence," this translates mathematically into saying that temporal relationships are **null vectors**—they have precise geometric significance while possessing no independent substantial reality. Far from contradicting Aristotelian and Thomistic insights, this provides the **mathematical foundation** that makes their teleological structures possible.
+This structure maps directly onto geometric language. In conformal geometry, null vectors represent precise relations—lightlike intervals that connect events—without carrying intrinsic magnitude of their own. They are like the outline of a shadow: real in form, but weightless in substance.
+
+From this perspective, **dependent origination** resembles the way null cones encode causal relations without requiring intrinsic substance. **Impermanence** reflects the absence of intrinsic persistence, just as null vectors describe directions but not enduring magnitudes. **Emptiness** signals that what appears substantial is in fact relational, like the geometry of spacetime itself.
+
+When Buddhist philosophers claim that temporal phenomena are “empty of inherent existence,” they mean precisely what Nāgārjuna states in the Mūlamadhyamakakārikā:
+
+>“Whatever is dependently originated, we declare that to be emptiness” (MMK 24:18).
+
+And again:
+
+> “Entities never arise from themselves, from another, from both, or without a cause” (MMK 15:1).
+
+Here emptiness is not a denial of structure, but an insistence that structure is wholly relational—like null vectors in conformal geometry, which mark real causal connections while carrying no independent magnitude of their own.
 
 ### The Geometric Bridge: Conformal Algebra as Universal Language
 
@@ -204,11 +218,9 @@ The thesis of this investigation then, is that **Conformal Geometric Algebra** (
 - Are fundamentally **null** or **empty** of intrinsic magnitude (supporting Buddhist emptiness)
 - Maintain **relational coherence** despite this emptiness (supporting dependent origination)
 
-These philosophical traditions each provide a lens for working with geometric intuitions that modern mathematics makes explicit.
+Because CGA encodes both metric and conformal (angle-preserving) relationships, it is uniquely able to capture both the substantial orientations of Aristotelian and Thomistic metaphysics and the relational emptiness emphasized in Buddhism.
 
-### The Comparative Method
-
-Our approach in this chapter will be to examine how each tradition handles three key temporal phenomena:
+This chapter will examine how each tradition handles three key temporal phenomena:
 
 **Progression vs. Regression** - How do these frameworks account for both growth and decay, development and dissolution?
 
@@ -216,34 +228,28 @@ Our approach in this chapter will be to examine how each tradition handles three
 
 **The Status of Temporal Boundaries** - How do these traditions treat the "beginning" and "end" of temporal processes? Are these accessible points or asymptotic limits?
 
-By mapping each tradition's responses onto the mathematical structures of conformal geometry, we'll identity an underlying **geometric unity** that transcends their apparent philosophical differences.
-
-### The Shape of the Inquiry
-
-What follows is an attempt to let each tradition speak in its own register while noticing the geometrical patterns that recur. When we place Aristotelian naturalism, Thomistic theism, and Buddhist emptiness side by side, certain resonances emerge:
+By mapping each tradition's responses onto the mathematical structures of conformal geometry, we'll identity an underlying **geometric unity** that transcends their apparent philosophical differences. When we place Aristotelian naturalism, Thomistic theism, and Buddhist emptiness side by side, certain resonances emerge:
 
 - Aristotle’s analysis of motion and cause sketches **local structures of direction and form**.
 - Aquinas extends this toward a **cosmic order that embraces both temporal succession and divine simultaneity**.
 - Buddhist philosophy, with its insistence on **relational dependence and emptiness**, provides a language for why such structures never carry intrinsic magnitude.
 
-Taken together, these do not collapse into a single doctrine. What emerges is a possible geometry of temporal experience; a framework where progression and regression, individuality and universality, beginnings and ends can all be modeled without privileging one tradition over the others.
+Taken together, these do not collapse into a single doctrine. What emerges is a possible geometry of temporal experience; a framework where progression and regression, individuality and universality, beginnings and ends can all be modeled.
 
----
+### 1. Aristotle on “progression” and “regression”
 
-**1. What Aristotle says about “progression” and “regression”**
-
-Aristotle’s physics and metaphysics are built around **four causes** (material, formal, efficient, final). The *final cause* is the “end” or “goal” that gives a thing its **direction of change**. Two points are crucial:
+Aristotle’s physics and metaphysics are built around **four causes** (material, formal, efficient, final). The *final cause* is the “end” or “goal” that gives a thing its **direction of change**.
 
 | Aspect | Aristotle’s position |
 |--------|----------------------|
 | **Natural motion** | Every natural body moves **from potentiality to actuality** (e.g., a seed → sapling → tree). This is a *progressive* movement *toward* its proper form (its *telos*). |
 | **Decay / reversal** | The same framework also accounts for *regression*: when a body loses its form (e.g., a tree rots), the final cause is no longer realized, and the efficient cause (corruption, heat, etc.) dominates. Aristotle does not deny that things can move *away* from their telos; he simply explains it as the operation of a different efficient cause. |
-| **Indifference to a “global” direction** | Aristotle never posits a single, overarching end for the whole cosmos (except in a very abstract sense when he says that the *unmoved mover* is the ultimate *final cause* of all motion). In the natural world he is **neutral** about whether a particular series of changes will end in a “higher” state or simply stop when the telos is reached. |
+| **Indifference to “global” direction** | Aristotle never suggests a single, overarching end for the whole cosmos (except in a very abstract sense when he says that the *unmoved mover* is the ultimate *final cause* of all motion). In the natural world he is **neutral** about whether a particular series of changes will end in a “higher” state or simply stop when the *telos* is reached. |
 
 
-**2. Aquinas’s extra layer of final causality**
+### 2. Aquinas’s extra layer of final causality
 
-Thomas Aquinas inherits Aristotle’s four causes wholesale, but he **adds two decisive moves**:
+Thomas Aquinas inherits Aristotle’s four causes wholesale, but he adds two decisive moves:
 
 1. **God as the supreme final cause** (Summa Theologiae I‑q.103; ST I‑II, q.1, a.2).  
    - God’s *goodness* is the ultimate telos of all created things.  
@@ -253,19 +259,15 @@ Thomas Aquinas inherits Aristotle’s four causes wholesale, but he **adds two d
    - For Aquinas, the *eschaton* is a concrete, personal end: the direct vision of God.  
    - This end is **forward‑looking**: God “moves all things to their proper ends” (ST I, q.103, a.1). The movement is *continuous* and *sustaining*, not a one‑off “push from the future.”
 
-**What does this mean for “progression vs. regression”?**
-
 Aquinas still recognises natural growth and decay, but he **interprets every natural movement as participating in a larger, divine teleology**. Even decay is “ordered” insofar as it is permitted within God’s providential plan. The *final* cause is therefore **hierarchical**:
 
 ```
 individual thing → its proper form → God’s universal good → Beatific Vision
 ```
 
-The hierarchy is **ontological**, not temporal. The Beatific Vision does not *cause* a present action by reaching back in time; it *explains* why the present action is oriented the way it is.
+The hierarchy is **ontological**, not temporal, the Beatific Vision does not *cause* a present action by reaching back in time; it *explains* why the present action is oriented the way it is.
 
----
-
-**3. Why the Buddhist “sunyata ↔ samsara ↔ nirvāṇa” is a different map**
+### 3. The Buddhist “sunyata ↔ samsara ↔ nirvāṇa” is a different map
 
 | Buddhist term | Rough philosophical analogue (if any) | Key difference |
 |---------------|----------------------------------------|----------------|
@@ -273,13 +275,11 @@ The hierarchy is **ontological**, not temporal. The Beatific Vision does not *ca
 | **nirvāṇa**   | The cessation of suffering, the unconditioned. | Described as the *absence* of a self‑existent “thing” rather than the *realisation* of a pre‑existing end. |
 | **śūnyatā (emptiness)** | The lack of inherent existence in all phenomena. | Not a “cause” at all; it is a *characteristic* of reality that undermines any substantive notion of a fixed telos. |
 
-In Buddhist soteriology the *goal* (nirvāṇa) is **the negation of the very structures that Aristotle and Aquinas treat as “ends.”** There is no *final cause* in the Aristotelian sense; the path is a *removal* of the conditions that generate the illusion of ends.
+In Buddhist soteriology (the doctrine of salvation) the *goal* (nirvāṇa) is **the negation of the very structures that Aristotle and Aquinas treat as “ends.”** There is no *final cause* in the Aristotelian sense; the path is a *removal* of the conditions that generate the illusion of ends.
 
-Consequently, while you can **draw a diagram** that looks like a loop (samsara → nirvāṇa → samsara), the **metaphysical relations** that the arrows represent are *not* the same as Aristotle’s or Aquinas’s causal arrows.
+Consequently, while we can **draw a diagram** that looks like a loop (samsara → nirvāṇa → samsara), the **metaphysical relations** that the arrows represent are *not* the same as Aristotle’s or Aquinas’s causal arrows.
 
----
-
-**4. An analogy: The “inaccessible beginning/end” versus infinities in Conformal Geometric Algebra (CGA)**
+### 4. An analogy: The “inaccessible beginning/end” versus infinities in Conformal Geometric Algebra (CGA)
 
 | Feature of CGA | What it *does* in mathematics | Why the analogy is limited |
 |----------------|-------------------------------|----------------------------|
@@ -289,9 +289,7 @@ Consequently, while you can **draw a diagram** that looks like a loop (samsara �
 
 Thus, **using CGA’s “points at infinity” as a metaphor for the unknowability of a beginning or an ultimate end** can be a helpful illustration, but it **does not carry the same explanatory weight** as the philosophical arguments about *potentiality vs. actuality* (Aristotle) or *eternal providence* (Aquinas). The “infinite” in CGA is a **mathematical convenience**, whereas the “infinite” in Aquinas (God’s eternity) or in Buddhist emptiness is a **metaphysical assertion** about the structure of reality.
 
----
-
-**5. Putting the three philosophical systems side by side**
+### 5. Putting the three philosophical systems side by side
 
 | Dimension | Aristotle | Aquinas | Buddhist (Mādhyamika) |
 |-----------|-----------|---------|----------------------|
@@ -300,15 +298,35 @@ Thus, **using CGA’s “points at infinity” as a metaphor for the unknowabili
 | **Ultimate “end”** | Not explicitly defined; the unmoved mover is a *metaphysical* principle, not a concrete end for creatures. | The Beatific Vision (personal, eternal union with God). | Nirvāṇa (the unconditioned cessation of suffering, not a “place” or “state” in the Aristotelian sense). |
 | **Accessibility** | The *telos* of a thing is *real* and can be known by observation and reason. | The *ultimate* telos (God’s goodness) is known *by faith* and *revelation*; the Beatific Vision is *inaccessible* until after death. | The ultimate reality (emptiness, nirvāṇa) is *directly realized* only through meditative insight, not through discursive reasoning alone. |
 
----
+### 6. Synthesis: Three Metaphysical Structures, One Geometric Language
 
-**6. Take aways**
+Each tradition isolates a different invariant of temporal order:
 
-1. **Aristotle** gives us a *framework* where each thing has an intrinsic direction (its final cause). He does not commit to a single, universal endpoint that would close a loop.
-2. **Aquinas** keeps that framework but *places* it under a **supra‑natural final cause** (God) that orders everything toward a personal, eternal end (the Beatific Vision). The final cause is still *forward‑moving*; it does not “pull” the past from a future state.
-3. **Buddhist** soteriology uses a very different vocabulary: “emptiness” and “nirvāṇa” are *negations* of the structures that give rise to ends, not *ends* themselves. The “loop” is a *pedagogical* map, not a causal diagram in the Aristotelian/Aquinian sense.
-4. **Mathematical infinities** (e.g., points at infinity in CGA) can be a **useful metaphor** for “unreachable” beginnings or ends, but they do **not** capture the *ontological* commitments of any of the three traditions.
+| Structural feature of temporality | Aristotle  | Aquinas | Buddhism (Mādhyamaka) | Geometric analogue (CGA)                                                                          |
+| --------- | --------- | --------- | ------------ | ---------- |
+| **Directionality**                    | Natural motion is oriented toward a thing’s intrinsic *telos* (acorn → oak). | Same intrinsic *telos*, but now nested in divine providence.          | Change is dependent origination (*pratītyasamutpāda*), not intrinsic direction. | **Vector orientation**: every trajectory has a definable direction.                               |
+| **Convergence / global order**        | Ends remain distributive; no single cosmic endpoint required.                | All ends converge on the Beatific Vision, God’s universal telos.      | Nirvāṇa is not a cosmic convergence but cessation of conditioning.              | **Points at infinity**: trajectories may converge at a shared ideal limit.                        |
+| **Relational dependence / emptiness** | Substance is primary; relations are secondary.                               | Created ends depend on God’s sustaining act of being.                 | All phenomena are empty (*śūnyatā*): only relational, no inherent substance.    | **Null vectors**: relations are real, though without intrinsic magnitude.                         |
+| **Accessibility of ends**             | Proper ends are knowable through observation and reason.                     | The ultimate end (Beatific Vision) transcends reason; known by faith. | Nirvāṇa is realized through meditative insight, not reasoning alone.            | **Compactification vs. singularities**: some infinities are formal, others strictly inaccessible. |
 
+This comparison shows how **direction**, **convergence**, and **relational emptiness** are not competing accounts but complementary emphases.
+
+### 7. From Philosophy to Mathematics
+
+What begins as metaphysical divergence resolves into a set of **geometric invariants**:
+
+* **Directionality** → orientation of vectors.
+* **Convergence on the infinite** → compactification by points at infinity.
+* **Relational emptiness** → null vectors with structure but no substance.
+* **Accessibility limits** → the distinction between ideal points (formal) and singularities (inaccessible).
+
+Conformal Geometric Algebra thus provides a framework where Aristotle, Aquinas, and Nāgārjuna each “fix” part of the structure of temporality, but none exhausts it.
+
+### 8. Transition to Chapter III
+
+Aristotle gives us direction, Aquinas gives us convergence, and Buddhism gives us emptiness. Together they sketch a geometry of time awaiting formal articulation. Chapter III will show how these insights take mathematical shape within Conformal Geometric Algebra, where the metaphors of ends, infinities, and emptiness become **precise constructions**.
+
+<BR><BR><BR>
 ---
 
 # Chapter III: Mathematical Foundations of Time
@@ -328,12 +346,6 @@ Three considerations motivate this turn to formalism:
 **Unification**: Different traditions use different vocabularies, but mathematics exposes their hidden agreements and clarifies apparent contradictions.
 
 **Generative Power**: Once formalized, these insights extend beyond their original contexts, offering tools for contemporary inquiries in physics, metaphysics, and consciousness studies.
-
-This section is strong in content but, as you said, it drops a *dump truck* of concepts on the reader without enough scaffolding. The fix isn’t to remove the concepts (they’re necessary), but to **slow the pacing and layer metaphors** so a non-specialist has handholds.
-
-Here’s a tightened, more gradual version that keeps your rigor but smooths the reader’s entry:
-
----
 
 ### The Challenge of Temporal Logic
 
@@ -362,10 +374,6 @@ This shift allows us to:
 2. **Represent transformations** (shifts, dilations, symmetries) as algebraic operations that preserve essential structure.
 3. **Unify local and global patterns** through coordinate systems that can be transformed without losing coherence.
 4. **Connect temporal intuition to spatial intuition**, so that time can be visualized and reasoned about as naturally as shapes in space.
-
-This is a solid draft — clear, ambitious, and well-structured — but I agree it tips into *sales pitch mode* with phrases like “remarkable discovery,” “converges on,” and “entirely new understanding.” A more grounded style would **invite curiosity** rather than promise revelation.
-
-Here’s a tightened and less performative version of your text:
 
 ---
 
@@ -401,7 +409,7 @@ Our axioms establish:
 
 By the end of this chapter, we will have developed a **mathematical language** that can restate classical philosophical insights about time in modern terms. This framework will allow us to:
 
-* Restate Aquinas’s distinctions between temporal, aeviternal, and eternal experience in geometric form.
+* Restate Aquinas’s distinctions between temporal, subjective, and eternal experience in geometric form.
 * Represent Aristotelian teleology as geometric transformations.
 * Formalize Buddhist emptiness as null vector relationships.
 * Place these approaches into a single structural setting without reducing one to the other.
@@ -410,7 +418,7 @@ The aim is not to replace philosophy with mathematics, but to provide a shared f
 
 ---
 
-## 1.  Euclid’s “geometric imperative”
+### 1.  Euclid’s “geometric imperative”
 
 When we say that **Euclid imposes a geometric imperative on the universe** we are invoking two intertwined ideas that were already present in the *Elements* (c. 300 BC):
 
@@ -425,9 +433,9 @@ Euclid gives us a **static, formal scaffold**.  It tells us *what* the relations
 
 ---
 
-## 2.  The “gap” in Euclidean space
+### 2.  The “gap” in Euclidean space
 
-### 2.1 Parallel lines never meet
+#### 2.1 Parallel lines never meet
 
 Euclid’s **parallel postulate** (Postulate 5) says:
 
@@ -439,7 +447,7 @@ In plain Euclidean geometry this yields the familiar result:
 
 That is a **gap** if you want a *global* picture in which *every* pair of lines has a common point (as you do in projective geometry or in Conformal Geometric Algebra, CGA).  The gap is a **design choice** that reflects Euclid’s conception of space as *flat* and *infinite*.
 
-### 2.2 No “point at infinity”
+#### 2.2 No “point at infinity”
 
 Because Euclid never introduced a *point at infinity*, the following questions are left unanswered in his system:
 
@@ -451,7 +459,7 @@ These are precisely the questions that **CGA** (and its predecessor, **projectiv
 
 ---
 
-## 3.  CGA’s infinities and the closure of the diagram
+### 3.  CGA’s infinities and the closure of the diagram
 
 Conformal Geometric Algebra (CGA) works with a **5‑dimensional space of signature (4,1)** that embeds ordinary Euclidean space as a *null cone*.  Two technical moves are crucial:
 
@@ -464,7 +472,7 @@ In CGA the **entire Euclidean plane is a closed manifold** (topologically a sphe
 
 ---
 
-## 4.  Euclid’s imperative *versus* CGA’s closure
+### 4.  Euclid’s imperative *versus* CGA’s closure
 
 | Aspect | Euclid (pure) | CGA (extended) | Philosophical implication |
 |--------|---------------|----------------|--------------------------|
@@ -476,7 +484,7 @@ Thus, **Euclid’s imperative does not *solve* the gap; it *exposes* it**.  The 
 
 ---
 
-## 5.  Teleological causality in the three traditions, now with geometry
+### 5.  Teleological causality in the three traditions, now with geometry
 
 | Tradition | What counts as the *final cause* | How geometry can model it |
 |-----------|----------------------------------|---------------------------|
@@ -490,7 +498,7 @@ Thus, **Euclid’s imperative does not *solve* the gap; it *exposes* it**.  The 
 
 ---
 
-## 6.  The “geometric eschaton” – points at infinity as a metaphysical analogue
+### 6.  The “geometric eschaton” – points at infinity as a metaphysical analogue
 
 1. **Aquinas’s God** is *outside* time and space, *eternal* and *unreachable* in the temporal order.  In CGA the **ideal point** ∞ is *part of* the algebraic space but **cannot be reached by any finite translation**; it is a *limit* rather than a location.  This mirrors the theological claim that the Beatific Vision is *the ultimate destination* but never a point you can “arrive at” in the ordinary flow of time.
 
@@ -504,7 +512,7 @@ Thus, **Euclid’s imperative does not *solve* the gap; it *exposes* it**.  The 
 
 ---
 
-## 6.  From Euclid to a *dynamic* geometric picture
+### 6.  From Euclid to a *dynamic* geometric picture
 
 Euclid gave us **static** theorems: “the sum of the angles in a triangle is two right angles.”  To talk about *change* we need a **differential** or **conformal** extension:
 
@@ -522,7 +530,7 @@ Euclid gave us **static** theorems: “the sum of the angles in a triangle is tw
 
 ---
 
-## 7.  Synthesis: Euclid + CGA = a *geometric framework* for final causes
+### 7.  Synthesis: Euclid + CGA = a *geometric framework* for final causes
 
 1. **Euclid** supplies the *formal ontology*: points, lines, circles = the *forms* that Aristotle calls the *formal cause* and Aquinas reads as the *divine order*.
 2. **CGA** supplies the *global horizon*: a single, algebraic point ∞ that every directed line meets.  This horizon can be interpreted as a **geometric eschaton**—the analogue of Aquinas’s Beatific Vision or the Buddhist “cessation of distinction.”
@@ -535,7 +543,7 @@ Euclid gave us **static** theorems: “the sum of the angles in a triangle is tw
 
 ---
 
-## 8.  Further reading
+### 8.  Further reading
 
 | Topic | Classic source | Modern exposition |
 |-------|----------------|-------------------|
@@ -948,9 +956,6 @@ Each regime is a **dialectical moment** of the same underlying logical structure
 ---
 
 ## 3. CGA of **Spacetime** – the algebraic engine for time  
-Here’s a Unicode-friendly rendering of your Chapter 3 snippet, keeping it readable in Markdown without MathJax:
-
----
 
 ### 3.1. The algebra
 
@@ -1205,9 +1210,6 @@ Because **the same CGA operations generate each synthesis**, the three “tempor
 * **Irreversibility** (thermodynamic arrow)
 * **Causality** (sequential ordering)
 * **Relativistic simultaneity** (external, block-universe view)
-
----
-Perfect—I’ve rewritten your 8-step “dialectical‑CGA” recipe as a **portable, self-contained Markdown block** with Unicode operators, inline Hegelian commentary, and grade/temporal interpretations.
 
 ---
 
@@ -2244,4 +2246,5 @@ In practice, turning this elegant algebraic picture into a **full‑fledged cosm
 1. ***Anthony Kenny**, Aquinas: A Collection of Critical Essays* (New York: Doubleday, 1976).
 2. ***Jacques Maritain**, Existence and the Existent* (New York: Pantheon Books, 1948).
 3. ***Alasdair MacIntyre**, Three Rival Versions of Moral Inquiry: Encyclopaedia, Genealogy, and Tradition* (Notre Dame, IN: University of Notre Dame Press, 1990).
+4. ***Siderits, Mark**, and **Shōryū Katsura**. Nāgārjuna’s Middle Way: Mūlamadhyamakakārikā*. Boston: Wisdom Publications, 2013.
 
