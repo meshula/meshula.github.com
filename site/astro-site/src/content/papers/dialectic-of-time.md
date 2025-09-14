@@ -159,29 +159,19 @@ In Aquinas’ metaphysics, the chain of efficient causes runs forward (cause →
 | **What is the role of the eschaton?** | It is the *ultimate* telos toward which all created things are oriented, grounded in God’s providence. It provides the *explanatory* final cause, not a *temporal* antecedent. |
 | **How does this differ from a “future‑to‑past” causal model?** | Aquinas’ model keeps causation fundamentally *forward* (efficient) while allowing *final* orientations that are prior in the order of being, not in time. |
 
-### For Further Reading on Aquinas
-
-* **Summa Theologiae**  
-  * I, q.2, a.3: The Fifth Way, which argues for God's existence from the governance of things by an intelligent being.
-  * I-II, q.1, a.2: Argues that every agent acts for an end, and that the final cause is the first cause in intention.
-  * I, q.103: Discusses God's governance of the world through providence, ordering all things toward their proper ends.
-* **Commentary on Aristotle’s *Physics*** – In Book II, Aquinas provides detailed commentary on Aristotle's four causes, providing the philosophical framework for his understanding of final causality.
-* **Aquinas, *De Ente et Essentia* (On Being and Essence)** – Essential for understanding Aquinas's foundational metaphysical distinction between essence and existence in created beings.
-* **Edward Feser, *Aquinas: A Beginner's Guide* (Oneworld Publications, 2009)**: Offers a clear overview of Aquinas's metaphysics, including his account of final causality.
-* **Steven A. Long, *Teleological Grammar: The Ultimate Finality of Nature in Aquinas* (Catholic University of America Press, 2017)**: A focused and rigorous modern analysis of the topic.
 
 <BR><BR><BR>
 ---
 
 # Chapter II: A Metaphysical Landscape - Aristotle, Buddhism, and Geometric Algebra
 
-### Expanding the Mathematical Vision
+### 1. Expanding the Mathematical Vision
 
 Our examination of Aquinas revealed a sophisticated logical structure underlying medieval accounts of time and causality. But Aquinas didn't develop this framework in isolation. His temporal hierarchy and teleological causality are grounded in **Aristotelian metaphysics**, while his insights about the ultimate transcendence of temporal succession find unexpected resonances in **Buddhist philosophy**. Both traditions anticipate mathematical developments that wouldn't emerge until the modern theory of **Conformal Geometric Algebra**, as we will see.
 
 This chapter maps the broader metaphysical landscape, the distnct accounts of being and causality that shape each tradition’s understanding of time. By examining how Aristotelian naturalism and Buddhist emptiness-philosophy each illuminate different aspects of temporal structure, we discover that what initially appear to be irreconcilable worldviews actually describe **complementary mathematical relationships** that we can use to construct a unified geometric framework.
 
-### Why Aristotle? The Foundation of Teleological Structure
+### 2. Why Aristotle? The Foundation of Teleological Structure
 
 Aquinas explicitly grounded his analysis in Aristotelian principles, but with a crucial modification. Where Aquinas posits God as the universal final cause that orders all particular ends toward a cosmic *telos*, Aristotle worked with a more **distributive** approach to teleological causality. For Aristotle, each natural being has its own intrinsic end (*telos*) without requiring integration into a single, overarching cosmic purpose.
 
@@ -189,7 +179,33 @@ This difference is mathematically suggestive. Aquinas's framework suggests what 
 
 As we'll discover, both approaches find expression in conformal geometry, where we can distinguish between **global points at infinity** (Aquinas) and **directional asymptotes** (Aristotle) within the same mathematical framework.
 
-### Why Buddhism? The Challenge of Emptiness
+| Aspect | Aristotle’s position |
+|--------|----------------------|
+| **Natural motion** | Every natural body moves **from potentiality to actuality** (e.g., a seed → sapling → tree). This is a *progressive* movement *toward* its proper form (its *telos*). |
+| **Decay / reversal** | The same framework also accounts for *regression*: when a body loses its form (e.g., a tree rots), the final cause is no longer realized, and the efficient cause (corruption, heat, etc.) dominates. Aristotle does not deny that things can move *away* from their telos; he simply explains it as the operation of a different efficient cause. |
+| **Indifference to “global” direction** | Aristotle never suggests a single, overarching end for the whole cosmos (except in a very abstract sense when he says that the *unmoved mover* is the ultimate *final cause* of all motion). In the natural world he is **neutral** about whether a particular series of changes will end in a “higher” state or simply stop when the *telos* is reached. |
+
+### 3. Why Aquinas? Orientation to Final Causes
+
+Thomas Aquinas inherits Aristotle’s four causes wholesale, but he adds two decisive moves:
+
+1. **God as the supreme final cause** (Summa Theologiae I‑q.103; ST I‑II, q.1, a.2).  
+   - God’s *goodness* is the ultimate telos of all created things.  
+   - This is a *transcendent* final cause that orders the whole order, not merely the immanent telos of each individual thing.
+
+2. **Providential direction toward the Beatific Vision** (the “ultimate happiness” of the rational soul).  
+   - For Aquinas, the *eschaton* is a concrete, personal end: the direct vision of God.  
+   - This end is **forward‑looking**: God “moves all things to their proper ends” (ST I, q.103, a.1). The movement is *continuous* and *sustaining*, not a one‑off “push from the future.”
+
+Aquinas still recognises natural growth and decay, but he **interprets every natural movement as participating in a larger, divine teleology**. Even decay is “ordered” insofar as it is permitted within God’s providential plan. The *final* cause is therefore **hierarchical**:
+
+```
+individual thing → its proper form → God’s universal good → Beatific Vision
+```
+
+The hierarchy is **ontological**, not temporal, the Beatific Vision does not *cause* a present action by reaching back in time; it *explains* why the present action is oriented the way it is.
+
+### 4. Why Buddhism? The Challenge of Emptiness
 
 The inclusion of Buddhist philosophy might seem more surprising, given its apparent rejection of the substantial metaphysics that grounds both Aristotelian and Thomistic approaches. Where Aristotle and Aquinas ground temporal direction in the reality of formal and final causes, Buddhist philosophy emphasizes the **emptiness** (*śūnyatā*) of all phenomena, including temporal processes themselves.
 
@@ -209,7 +225,17 @@ And again:
 
 Here emptiness is not a denial of structure, but an insistence that structure is wholly relational—like null vectors in conformal geometry, which mark real causal connections while carrying no independent magnitude of their own.
 
-### The Geometric Bridge: Conformal Algebra as Universal Language
+| Buddhist term | Rough philosophical analogue (if any) | Key difference |
+|---------------|----------------------------------------|----------------|
+| **samsara**   | The cycle of conditioned existence, driven by ignorance and craving. | No intrinsic *final* cause; the cycle is sustained by *dependent origination* (pratītyasamutpāda), not by an external telos. |
+| **nirvāṇa**   | The cessation of suffering, the unconditioned. | Described as the *absence* of a self‑existent “thing” rather than the *realisation* of a pre‑existing end. |
+| **śūnyatā (emptiness)** | The lack of inherent existence in all phenomena. | Not a “cause” at all; it is a *characteristic* of reality that undermines any substantive notion of a fixed telos. |
+
+In Buddhist soteriology (the doctrine of salvation) the *goal* (nirvāṇa) is **the negation of the very structures that Aristotle and Aquinas treat as “ends.”** There is no *final cause* in the Aristotelian sense; the path is a *removal* of the conditions that generate the illusion of ends.
+
+Consequently, while we can **draw a diagram** that looks like a loop (samsara → nirvāṇa → samsara), the **metaphysical relations** that the arrows represent are *not* the same as Aristotle’s or Aquinas’s causal arrows.
+
+### 5. The Geometric Bridge: Conformal Algebra as Universal Language
 
 The thesis of this investigation then, is that **Conformal Geometric Algebra** (CGA) provides a mathematical language in which Aristotelian formal causality, Thomistic final causality, and Buddhist emptiness can all be expressed with precision. CGA deals with geometric objects that:
 
@@ -236,50 +262,7 @@ By mapping each tradition's responses onto the mathematical structures of confor
 
 Taken together, these do not collapse into a single doctrine. What emerges is a possible geometry of temporal experience; a framework where progression and regression, individuality and universality, beginnings and ends can all be modeled.
 
-### 1. Aristotle on “progression” and “regression”
-
-Aristotle’s physics and metaphysics are built around **four causes** (material, formal, efficient, final). The *final cause* is the “end” or “goal” that gives a thing its **direction of change**.
-
-| Aspect | Aristotle’s position |
-|--------|----------------------|
-| **Natural motion** | Every natural body moves **from potentiality to actuality** (e.g., a seed → sapling → tree). This is a *progressive* movement *toward* its proper form (its *telos*). |
-| **Decay / reversal** | The same framework also accounts for *regression*: when a body loses its form (e.g., a tree rots), the final cause is no longer realized, and the efficient cause (corruption, heat, etc.) dominates. Aristotle does not deny that things can move *away* from their telos; he simply explains it as the operation of a different efficient cause. |
-| **Indifference to “global” direction** | Aristotle never suggests a single, overarching end for the whole cosmos (except in a very abstract sense when he says that the *unmoved mover* is the ultimate *final cause* of all motion). In the natural world he is **neutral** about whether a particular series of changes will end in a “higher” state or simply stop when the *telos* is reached. |
-
-
-### 2. Aquinas’s extra layer of final causality
-
-Thomas Aquinas inherits Aristotle’s four causes wholesale, but he adds two decisive moves:
-
-1. **God as the supreme final cause** (Summa Theologiae I‑q.103; ST I‑II, q.1, a.2).  
-   - God’s *goodness* is the ultimate telos of all created things.  
-   - This is a *transcendent* final cause that orders the whole order, not merely the immanent telos of each individual thing.
-
-2. **Providential direction toward the Beatific Vision** (the “ultimate happiness” of the rational soul).  
-   - For Aquinas, the *eschaton* is a concrete, personal end: the direct vision of God.  
-   - This end is **forward‑looking**: God “moves all things to their proper ends” (ST I, q.103, a.1). The movement is *continuous* and *sustaining*, not a one‑off “push from the future.”
-
-Aquinas still recognises natural growth and decay, but he **interprets every natural movement as participating in a larger, divine teleology**. Even decay is “ordered” insofar as it is permitted within God’s providential plan. The *final* cause is therefore **hierarchical**:
-
-```
-individual thing → its proper form → God’s universal good → Beatific Vision
-```
-
-The hierarchy is **ontological**, not temporal, the Beatific Vision does not *cause* a present action by reaching back in time; it *explains* why the present action is oriented the way it is.
-
-### 3. The Buddhist “sunyata ↔ samsara ↔ nirvāṇa” is a different map
-
-| Buddhist term | Rough philosophical analogue (if any) | Key difference |
-|---------------|----------------------------------------|----------------|
-| **samsara**   | The cycle of conditioned existence, driven by ignorance and craving. | No intrinsic *final* cause; the cycle is sustained by *dependent origination* (pratītyasamutpāda), not by an external telos. |
-| **nirvāṇa**   | The cessation of suffering, the unconditioned. | Described as the *absence* of a self‑existent “thing” rather than the *realisation* of a pre‑existing end. |
-| **śūnyatā (emptiness)** | The lack of inherent existence in all phenomena. | Not a “cause” at all; it is a *characteristic* of reality that undermines any substantive notion of a fixed telos. |
-
-In Buddhist soteriology (the doctrine of salvation) the *goal* (nirvāṇa) is **the negation of the very structures that Aristotle and Aquinas treat as “ends.”** There is no *final cause* in the Aristotelian sense; the path is a *removal* of the conditions that generate the illusion of ends.
-
-Consequently, while we can **draw a diagram** that looks like a loop (samsara → nirvāṇa → samsara), the **metaphysical relations** that the arrows represent are *not* the same as Aristotle’s or Aquinas’s causal arrows.
-
-### 4. An analogy: The “inaccessible beginning/end” versus infinities in Conformal Geometric Algebra (CGA)
+### 6. An analogy: The “inaccessible beginning/end” versus infinities in Conformal Geometric Algebra (CGA)
 
 | Feature of CGA | What it *does* in mathematics | Why the analogy is limited |
 |----------------|-------------------------------|----------------------------|
@@ -289,16 +272,12 @@ Consequently, while we can **draw a diagram** that looks like a loop (samsara �
 
 Thus, **using CGA’s “points at infinity” as a metaphor for the unknowability of a beginning or an ultimate end** can be a helpful illustration, but it **does not carry the same explanatory weight** as the philosophical arguments about *potentiality vs. actuality* (Aristotle) or *eternal providence* (Aquinas). The “infinite” in CGA is a **mathematical convenience**, whereas the “infinite” in Aquinas (God’s eternity) or in Buddhist emptiness is a **metaphysical assertion** about the structure of reality.
 
-### 5. Putting the three philosophical systems side by side
-
 | Dimension | Aristotle | Aquinas | Buddhist (Mādhyamika) |
 |-----------|-----------|---------|----------------------|
 | **Final cause** | Immanent, natural telos of each thing (e.g., acorn → oak). | Both immanent telos **and** a transcendent, divine telos (God’s goodness, Beatific Vision). | No final cause; the *goal* is the cessation of the very conditions that generate “goals.” |
 | **Direction of change** | From potentiality → actuality; regression is explained by a different efficient cause. | Same natural direction, but *all* natural movement is subsumed under God’s providential direction toward the ultimate end. | Change is understood as *dependent origination*; liberation is the *ending* of that chain. |
 | **Ultimate “end”** | Not explicitly defined; the unmoved mover is a *metaphysical* principle, not a concrete end for creatures. | The Beatific Vision (personal, eternal union with God). | Nirvāṇa (the unconditioned cessation of suffering, not a “place” or “state” in the Aristotelian sense). |
 | **Accessibility** | The *telos* of a thing is *real* and can be known by observation and reason. | The *ultimate* telos (God’s goodness) is known *by faith* and *revelation*; the Beatific Vision is *inaccessible* until after death. | The ultimate reality (emptiness, nirvāṇa) is *directly realized* only through meditative insight, not through discursive reasoning alone. |
-
-### 6. Synthesis: Three Metaphysical Structures, One Geometric Language
 
 Each tradition isolates a different invariant of temporal order:
 
@@ -320,18 +299,14 @@ What begins as metaphysical divergence resolves into a set of **geometric invari
 * **Relational emptiness** → null vectors with structure but no substance.
 * **Accessibility limits** → the distinction between ideal points (formal) and singularities (inaccessible).
 
-Conformal Geometric Algebra thus provides a framework where Aristotle, Aquinas, and Nāgārjuna each “fix” part of the structure of temporality, but none exhausts it.
-
-### 8. Transition to Chapter III
-
-Aristotle gives us direction, Aquinas gives us convergence, and Buddhism gives us emptiness. Together they sketch a geometry of time awaiting formal articulation. Chapter III will show how these insights take mathematical shape within Conformal Geometric Algebra, where the metaphors of ends, infinities, and emptiness become **precise constructions**.
+Conformal Geometric Algebra thus provides a framework where Aristotle, Aquinas, and Nāgārjuna each “fix” part of the structure of temporality, but none exhausts it. Aristotle gives us direction, Aquinas gives us convergence, and Buddhism gives us emptiness. Together they sketch a geometry of time awaiting formal articulation. Chapter III will show how these insights take mathematical shape within Conformal Geometric Algebra, where the metaphors of ends, infinities, and emptiness become **precise constructions**.
 
 <BR><BR><BR>
 ---
 
 # Chapter III: Mathematical Foundations of Time
 
-### From Philosophical Insight to Mathematical Precision
+### From Philosophy to Mathematics
 
 Our study of Aquinas, Aristotle, and Buddhist philosophy revealed remarkable convergences. Each tradition sees temporal structure as relational rather than substantial, directional rather than merely sequential, and hierarchical rather than uniform.
 
@@ -2247,4 +2222,16 @@ In practice, turning this elegant algebraic picture into a **full‑fledged cosm
 2. ***Jacques Maritain**, Existence and the Existent* (New York: Pantheon Books, 1948).
 3. ***Alasdair MacIntyre**, Three Rival Versions of Moral Inquiry: Encyclopaedia, Genealogy, and Tradition* (Notre Dame, IN: University of Notre Dame Press, 1990).
 4. ***Siderits, Mark**, and **Shōryū Katsura**. Nāgārjuna’s Middle Way: Mūlamadhyamakakārikā*. Boston: Wisdom Publications, 2013.
+
+
+### For Further Reading on Aquinas
+
+* **Summa Theologiae**  
+  * I, q.2, a.3: The Fifth Way, which argues for God's existence from the governance of things by an intelligent being.
+  * I-II, q.1, a.2: Argues that every agent acts for an end, and that the final cause is the first cause in intention.
+  * I, q.103: Discusses God's governance of the world through providence, ordering all things toward their proper ends.
+* **Commentary on Aristotle’s *Physics*** – In Book II, Aquinas provides detailed commentary on Aristotle's four causes, providing the philosophical framework for his understanding of final causality.
+* **Aquinas, *De Ente et Essentia* (On Being and Essence)** – Essential for understanding Aquinas's foundational metaphysical distinction between essence and existence in created beings.
+* **Edward Feser, *Aquinas: A Beginner's Guide* (Oneworld Publications, 2009)**: Offers a clear overview of Aquinas's metaphysics, including his account of final causality.
+* **Steven A. Long, *Teleological Grammar: The Ultimate Finality of Nature in Aquinas* (Catholic University of America Press, 2017)**: A focused and rigorous modern analysis of the topic.
 
