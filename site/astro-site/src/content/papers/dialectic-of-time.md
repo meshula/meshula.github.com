@@ -1230,9 +1230,6 @@ To make this case, we will:
 
 In short, this chapter marks a transition: from comparative philosophy to metaphysical proposal. What follows is less about juxtaposing traditions and more about constructing a model—one that attempts to reveal **why time appears as it does, and why it cannot be taken as the final ground of reality**.
 
-Here’s a draft for **Chapter V, Section 2: Re-articulating the Problem of Time’s Emergence** in the same voice and structure as your manuscript so far:
-
----
 
 ### 2. Re-articulating the Problem of Time’s Emergence
 
@@ -1251,9 +1248,6 @@ The traditions we have examined each tilt toward one side of the tension. Aristo
 
 This is the role of **dialectical geometry**. By combining the logical resources of dialectics with the formal resources of geometric algebra, we gain a framework that does not force us to choose between structure and openness. Instead, we can model them as complementary aspects of a single order. Dialectical geometry allows us to treat time not as an absolute background, nor as a mere illusion, but as an **emergent structure**—a relational pattern that arises when opposites are held together in a coherent space.
 
-Great — here’s a draft for **Chapter V, Section 3: Introducing Dialectical Geometry Proper**:
-
----
 
 ### 3. Introducing Dialectical Geometry Proper
 
