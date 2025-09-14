@@ -225,7 +225,7 @@ And again:
 
 Here emptiness is not a denial of structure, but an insistence that structure is wholly relational—like null vectors in conformal geometry, which mark real causal connections while carrying no independent magnitude of their own.
 
-| Buddhist term | Rough philosophical analogue (if any) | Key difference |
+| Buddhist term | Philosophical analogue | Key difference |
 |---------------|----------------------------------------|----------------|
 | **samsara**   | The cycle of conditioned existence, driven by ignorance and craving. | No intrinsic *final* cause; the cycle is sustained by *dependent origination* (pratītyasamutpāda), not by an external telos. |
 | **nirvāṇa**   | The cessation of suffering, the unconditioned. | Described as the *absence* of a self‑existent “thing” rather than the *realisation* of a pre‑existing end. |
@@ -306,15 +306,13 @@ Conformal Geometric Algebra thus provides a framework where Aristotle, Aquinas, 
 
 # Chapter III: Mathematical Foundations of Time
 
-### From Philosophy to Mathematics
+### 1. From Philosophy to Mathematics
 
 Our study of Aquinas, Aristotle, and Buddhist philosophy revealed remarkable convergences. Each tradition sees temporal structure as relational rather than substantial, directional rather than merely sequential, and hierarchical rather than uniform.
 
-The task before us is not to impose mathematics on philosophy, but to show how mathematics offers a natural language for ideas these traditions were already circling. Aquinas’ distinction between creatures, angels, and God becomes recognizable as **different coordinate systems** within a unified temporal manifold. Aristotle’s account of teleological causality anticipates what we now describe as **geometric invariants**. Buddhist reflections on emptiness find their analogue in conformal geometry’s **null vector relationships**.
+The task before us is not to impose mathematics on philosophy, but to show how mathematics offers a natural language for ideas these traditions were already circling. Aquinas’ distinction between *tempus*, *aevus*, and *aeternitas*, creatures, angels, and God, becomes recognizable as **different coordinate systems** within a unified temporal manifold. Aristotle’s account of teleological causality anticipates what we now describe as **geometric invariants**. Buddhist reflections on emptiness find their analogue in conformal geometry’s **null vector relationships**.
 
-### Why Mathematical Foundations Matter
-
-Three considerations motivate this turn to formalism:
+Three considerations motivate this chapter's turn to formalism:
 
 **Precision**: Philosophical language, however subtle, invites ambiguity. Mathematics supplies unambiguous structures that can be reasoned with directly.
 
@@ -322,7 +320,7 @@ Three considerations motivate this turn to formalism:
 
 **Generative Power**: Once formalized, these insights extend beyond their original contexts, offering tools for contemporary inquiries in physics, metaphysics, and consciousness studies.
 
-### The Challenge of Temporal Logic
+### 2. The Challenge of Temporal Logic
 
 Most modern discussions of time in philosophy and computer science start from **temporal logic**, especially the framework developed by Saul Kripke. In that view, time is pictured as a **network of discrete points** (moments) connected by logical relations of possibility or necessity. This is elegant and useful for many purposes—like reasoning about computer programs or modal possibilities—but it misses something crucial.
 
@@ -335,13 +333,97 @@ Our earlier analysis of Aquinas, Aristotle, and Buddhist philosophy showed that 
 
 Kripke-style logic asks: *“At which point in time does a proposition hold?”* But the traditions we are studying push us toward deeper questions: *“How do intervals of time relate to one another?”* *“What geometric structures give time its orientation?”* *“How do local relationships participate in global temporal order?”*
 
-To ask and answer such questions, we need tools beyond logic. We need geometry.
+### 1. **Saul Kripke’s Temporal Logic**
+
+Kripke is best known for **possible-world semantics** in modal logic. When applied to **temporal logic**, his approach gives us:
+
+* **Syntax:** Modal operators like $\Box$ (necessarily) and $\Diamond$ (possibly) can be interpreted over **time points** or **states**.
+
+  * For temporal logic specifically, we often see operators like:
+
+    * $$G \phi$$ (“Globally, $$\phi$$ is always true”)
+    * $$F \phi$$ (“Finally, $$\phi$$ will eventually be true”)
+    * $$X \phi$$ (“Next, $$\phi$$ is true”)
+    * $$\phi U \psi$$ (“$$\phi$$ is true until $\psi$ becomes true”)
+
+* **Semantics:** Kripke frames are tuples $$(W, R, V)$$, where:
+
+  * $$W$$ = set of worlds (or states)
+  * $$R$$ = accessibility relation (here: temporal “comes after”)
+  * $$V$$ = valuation function assigning truth to propositions at worlds
+
+For temporal logic, you usually specialize $$R$$ to a **linear or branching time relation**. Kripke’s genius was showing how modal statements could be evaluated over these structures in a systematic, semantic way.
+
+**Key point:** Kripke’s temporal logic deals with **truth values at individual points in time**, with relations specifying which points are accessible from which others.
+
+---
+
+### 2. **James F. Allen / James F. Irwin’s Interval Algebra**
+
+Irwin and Allen’s **Interval Algebra** (IA) is a **qualitative temporal reasoning framework**:
+
+* **Basic idea:** Instead of focusing on points in time, it models **intervals** and their **relations**.
+* **Thirteen basic relations** between two intervals $$A$$ and $$B$$:
+
+* e.g., *before, after, meets, overlaps, during, starts, finishes, equals*, and inverses of some of these.
+* These relations can be composed and reasoned about to infer constraints on larger temporal networks.
+
+**Key point:** Interval Algebra treats **time intervals as first-class objects** and captures the **qualitative ordering and overlap** of intervals, without needing exact timestamps.
+
+---
+
+### 3. **Relationship**
+
+At a high level:
+
+| Aspect                        | Kripke Temporal Logic                                     | Interval Algebra                                                                                                   |
+| ----------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Primitive temporal entity** | Time points / states                                      | Time intervals                                                                                                     |
+| **Focus**                     | Truth of propositions at points over time                 | Relations between intervals (qualitative)                                                                          |
+| **Operators / relations**     | Modal operators $$F, G, X, U$$                             | 13 interval relations (before, meets, overlaps, etc.)                                                              |
+| **Reasoning style**           | Deductive, semantic evaluation over Kripke frames         | Constraint propagation / composition tables                                                                        |
+| **Expressive overlap**        | Can encode some point-based orderings (e.g., $$t_1 < t_2$$) | Can encode some interval-based temporal logic, but may be less natural for propositional truth at a single instant |
+
+**Bridging them:**
+
+* **Intervals as sets of points:** Any interval relation can, in principle, be encoded in point-based temporal logic, e.g.,
+
+  * “Interval A **before** interval B” becomes: $$\forall t \in A, \forall t' \in B: t < t'$$.
+* **Kripke-style accessibility:** The “accessible worlds” in temporal logic can be interpreted as **successive moments along a timeline**, which is analogous to the start/end points in IA.
+* **Temporal operators vs. interval constraints:**
+
+  * $$F \phi$$ (“eventually”) corresponds roughly to “some interval in the future satisfies $\phi$”.
+  * $$G \phi$$ (“always”) corresponds to “every subinterval satisfies $\phi$”.
+
+**Limitations of direct translation:**
+
+* IA excels at **qualitative ordering of intervals**, including overlapping intervals, which can be awkward in simple linear temporal logic.
+* Point-based Kripke semantics can encode intervals, but **extra machinery** is required to track the start/end points and to enforce relations like “A meets B” or “A overlaps B.”
+
+---
+
+### 4. **Summary**
+
+1. **Kripke temporal logic**: Truth at points in time, evaluated over an accessibility relation (linear or branching).
+2. **Interval Algebra**: Qualitative relations between intervals (before, overlaps, meets, etc.).
+3. **Relation:**
+
+   * Intervals can be decomposed into points, allowing Kripke-style logics to **simulate IA**.
+   * IA provides a **more natural framework for reasoning about overlapping events** or actions of duration.
+   * Both can be integrated in systems like **temporal constraint networks with modal logic** or **interval temporal logic**, which generalizes Kripke’s point-based semantics to intervals.
+
+**References:**
+
+* Kripke, Saul A. *Semantical Considerations on Modal Logic*, 1963.
+* Allen, James F. *Maintaining Knowledge about Temporal Intervals*, 1983.
+* Venema, Yde. *Temporal Logic*, 1990s.
+* Gabbay, Dov, et al. *Temporal Logic: Mathematical Foundations and Computational Aspects*, 1994.
 
 ---
 
 ### The Geometric Turn
 
-The guiding idea of this chapter is that **time is fundamentally geometric**, not merely logical. Instead of treating temporal relations as abstract links between propositions, we treat them as **geometric relationships** inside a structured mathematical space.
+We will return later to the question of temporal logic and the interval algebra. The guiding idea of this chapter is that **time is fundamentally geometric**. Here, we will treat temporal relations as abstract links between propositions; **geometric relationships** inside a structured mathematical space.
 
 This shift allows us to:
 
@@ -356,7 +438,7 @@ This shift allows us to:
 
 Our mathematical development follows a natural historical progression that parallels the philosophical journey we have traced. Just as our earlier analysis moved from particular insights (Aquinas), through comparative frameworks (Aristotle and Buddhism), toward broader synthesis, our mathematical treatment moves from elementary foundations (Euclidean space), through extensions (projective and conformal geometry), into a comprehensive algebraic framework (Conformal Geometric Algebra).
 
-This is not only a matter of pedagogy. Each mathematical stage reflects a structural feature of temporal experience emphasized in the philosophies we examined:
+Each mathematical stage reflects a structural feature of temporal experience emphasized in the philosophies we examined:
 
 * **Euclidean foundations** capture the basic **relational structure** of temporal experience.
 * **Interval algebra** reflects the **directionality** that Aristotle and Aquinas associated with teleology.
@@ -389,7 +471,7 @@ By the end of this chapter, we will have developed a **mathematical language** t
 * Formalize Buddhist emptiness as null vector relationships.
 * Place these approaches into a single structural setting without reducing one to the other.
 
-The aim is not to replace philosophy with mathematics, but to provide a shared formal language in which their insights can be compared, clarified, and extended. In doing so, we prepare the ground for dialogue with contemporary fields such as physics and consciousness studies, where similar questions about the structure of time are now being explored.
+The aim is to provide a shared formal language in which these systems' insights can be compared, clarified, and extended. In doing so, we prepare the ground for dialogue with contemporary fields such as physics and consciousness studies, where similar questions about the structure of time are now being explored.
 
 ---
 
@@ -397,7 +479,7 @@ The aim is not to replace philosophy with mathematics, but to provide a shared f
 
 When we say that **Euclid imposes a geometric imperative on the universe** we are invoking two intertwined ideas that were already present in the *Elements* (c. 300 BC):
 
-| Idea | What Euclid actually says | What philosophers have read into it |
+| Idea | What Euclid says | What philosophers have read into it |
 |------|---------------------------|-------------------------------------|
 | **Axiomatic order** | Starts from a handful of postulates (the famous five) and derives every theorem. | The cosmos itself must be ordered in the same way: a set of self‑evident “geometric truths” underlies all physical facts. |
 | **Form as reality** | Geometry is the study of *forms* (points, lines, circles) that exist independently of any material substrate. | The *forms* of things are the very ends toward which matter moves – a proto‑Aristotelian “final cause.” |
