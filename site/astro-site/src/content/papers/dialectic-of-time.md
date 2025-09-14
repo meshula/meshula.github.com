@@ -2170,12 +2170,10 @@ Below is a **toy model** that captures the essential ingredients while staying a
    $$
    The *imaginary* part is directly proportional to $$\langle\mathcal{T}\rangle$$ and would show up as a **statistical anisotropy** in the CMB.
 
-This **minimal model** already exhibits the three hallmarks of the statement you quoted:
+This **minimal model** already exhibits three hallmarks:
 
 1. **Latent arrows** (the two bivectors) are present from the start.  
 2. **Dialectical synthesis** (the trivector) is the only quantity that can be *measured* after the projector has been applied.  
----
-
 3. **Cosmic becoming** (the observed arrow, structure growth, etc.) is encoded in the *non‑zero* expectation value of that trivector.
 
 ## 6.  Philosophical Take‑aways  
@@ -2212,9 +2210,10 @@ If these steps can be carried out, the **CGQ cosmology** would move from a compe
 - It also yields **qualitative observational signatures** (directional anisotropies, chiral gravitational‑wave backgrounds, quadrupolar LSS modulations) that could, in principle, be searched for in existing and forthcoming data sets.  
 - The approach is **conformally invariant**, fits neatly with ideas of an early‑universe conformal phase, and offers a mathematically precise realization of Hegel’s static‑dynamic dialectic in a cosmological setting.
 
-In practice, turning this elegant algebraic picture into a **full‑fledged cosmological model** will require (i) a concrete field‑theoretic embedding on the null cone, (ii) a systematic derivation of effective metric dynamics from the spinor level, and (iii) a careful confrontation with the wealth of precision cosmological data. Nonetheless, the statement you quoted captures a **powerful unifying insight**: the universe’s “beginning” can be viewed as a **logical projection** that already contains, in latent form, the *entire causal tapestry* from which the observed cosmic history *dialectically* unfolds.
+In practice, turning this elegant algebraic picture into a **full‑fledged cosmological model** will require (i) a concrete field‑theoretic embedding on the null cone, (ii) a systematic derivation of effective metric dynamics from the spinor level, and (iii) a careful confrontation with the wealth of precision cosmological data. Nonetheless, this captures a **powerful unifying insight**: the universe’s “beginning” can be viewed as a **logical projection** that already contains, in latent form, the *entire causal tapestry* from which the observed cosmic history *dialectically* unfolds.
 
 <BR><BR><BR>
+
 ---
 # Bibliography
 
