@@ -7,23 +7,31 @@ export async function GET(context) {
   const papers = await getCollection("papers");
   const references = await getCollection("references");
 
+  // Combine all posts and sort by pubDate descending
   const posts = [...blog, ...papers, ...references];
   posts.sort((a, b) => b.data.pubDate - a.data.pubDate);
+
+  const lastBuildDate = new Date().toUTCString();
 
   return rss({
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
     site: context.site,
     items: posts.map((post) => ({
-      title: entry.data.title,
-      pubDate: entry.data.pubDate,
-      description: entry.data.description,
-      link: `/$[entry.collection}/${entry.id}/`,
+      title: post.data.title,
+      pubDate: post.data.pubDate,
+      description: post.data.description,
+      link: `/${post.collection}/${post.id}/`,
     })),
-    customData:
-      '\
-       <atom:link href="${context.site}rss.xml"\
-       rel="self" type = "application/rss+xml" xmlns:atom="http://www.w3.org/2005/Atom" />\
-       <lastBuildDate>${lastBuildDate}</lastBuildDate>',
+    // Cleanly formatted XML for RSS
+    customData: `
+      <atom:link
+        href="${context.site}rss.xml"
+        rel="self"
+        type="application/rss+xml"
+        xmlns:atom="http://www.w3.org/2005/Atom"
+      />
+      <lastBuildDate>${lastBuildDate}</lastBuildDate>
+    `,
   });
 }
