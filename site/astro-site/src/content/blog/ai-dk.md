@@ -7,8 +7,6 @@ author: "Nick Porcino"
 draft: false
 ---
 
-# Proceed With Elevate
-
 (c) 2025 Nick Porcino
 
 #### prompt
