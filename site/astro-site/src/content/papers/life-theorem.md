@@ -13,6 +13,8 @@ tags: ['thermodynamics', 'life', 'entropy', 'autocatalysis', 'consciousness', 's
 
 *— Nick Porcino, November 2008*
 
+- revised October 2025 to improved the mathematical formulation
+
 ## Introduction
 
 How can events in space and time which take place within the spatial boundary of a living organism be accounted for by physics and chemistry?
@@ -33,7 +35,14 @@ An intriguing experiment by Brailsford Robertson in 1921 compared the growth and
 
 A plant's seed is another autocatalytic system. The seed, in the presence of the right resources, will begin a reaction under which catalysts for further reaction are produced, and the plant begins to grow.
 
-Since the formation of a quartz crystal or a snowflake is autocatalytic, might it correspond to life? Crystals are formed in a solution of material around a seed. Ions in the solution are deposited in a growing lattice as energy is given up by the system yielding structure and form. The crystal alters local conditions, particularly the atomic structure of matter at the surface of the crystal, to sustain and accelerate the creation of more crystalline structure. This process is auto-catalytic and might seem life-like. A forest fire is also autocatalytic, once it starts it propagates itself. To determine if the crystal or the fire is alive however, we need also to consider the effect on local entropy, in other words, the thermodynamic aspects. We will return to the crystal and the fire shortly.
+### The Crystal and the Fire
+
+Since the formation of a quartz crystal or a snowflake is autocatalytic, might it correspond to life? Crystals are formed in a solution of material around a seed. Ions in the solution are deposited into a growing lattice, an exothermic process that releases energy as heat and yields a highly ordered structure. The crystal alters local conditions at its surface to sustain and accelerate the creation of more crystalline structure. This process is auto-catalytic and yields structure, but it is **not life** by the theorem's definition, for two reasons:
+
+1.  **Work and Feedback ($w$ and $\Delta G$):** The system's growth process does not generate positive power ($w$ in Equation 2) that feeds back to actively **increase or sustain the boundary gradient ($\Delta G$)** against equilibrium. Crystal growth is a spontaneous process governed by the minimization of Gibbs Free Energy; it moves *toward* equilibrium, albeit slowly.
+2.  **Autocatalytic Constant ($\alpha$):** While the crystal forms a catalyst, its growth does not increase the **efficiency** or **rate constant ($\alpha$)} of the underlying chemical process; it simply provides a surface template.
+
+A forest fire also demonstrates autocatalytic propagation, but it is not life as it transfers nearly all of its stored energy immediately to the environment and surroundings as disorganized heat, failing to extract work that reduces local entropy in a structured, sustained manner.
 
 ## Thermodynamics
 
@@ -47,36 +56,45 @@ The permeable boundary of the entity imposes an energy potential - matter can be
 
 Life in this formulation can be considered a **heat engine**. Unlike a textbook heat engine, in which work is defined in the entity's contribution to the energy potential of an external system, work is defined here with respect to the internal energy potential of the entity with respect to the environment (Garrett, 2008). Now we can state some simple mathematics to describe the system:
 
-### Mathematical Formulation
+## Mathematical Formulation
 
-The temperature of the surroundings is cooler than the temperature of the environment:
-$$T_s < T_e$$
+Life in this formulation can be considered a **heat engine**. Unlike a textbook heat engine, in which work is defined in the entity's contribution to the energy potential of an external system, work is defined here with respect to the internal energy potential of the entity with respect to the environment (Garrett, 2008). Now we can state some simple mathematics to describe the system:
 
-The energy potential between the entity and its environment is the gradient of temperature and pressure across the permeable boundary:
-$$\Delta G(T_e, p)$$
+### Core Thermodynamic Equations
 
-This boundary is defined to be positive:
-$$\Delta G(T_e, p) > 0 \qquad \text{(Equation 1)}$$
+The system operates across a favorable $\mathbf{G}$-gradient (potential energy difference) between the entity and its environment, where $\mathbf{G}$ is the measure of **Gibbs Free Energy** (or exergy), which quantifies the available work extracted from the environment. This gradient is constrained to be positive at the permeable boundary:
+$$\Delta G_{\text{boundary}} = G_{\text{environment}} - G_{\text{entity}} > 0 \qquad \text{(Equation 1)}$$
 
-Work is the rate at which the boundary gradient changes:
-$$w = \frac{d(\Delta G)}{dt} \qquad \text{(Equation 2)}$$
+The **Power** ($w$) (the rate of energy conversion or work done) is defined by the rate at which the boundary gradient is exploited:
+$$w = \frac{dW}{dt} = -\frac{d(\Delta G_{\text{boundary}})}{dt} \qquad \text{(Equation 2)}$$
+(Note: Since $\Delta G_{\text{boundary}}$ is decreasing as energy is consumed, $w$ is positive, representing power generated.)
 
-The entity converts available energy to work, $w$, at the rate $a$ (the rate of energy consumption). The boundary potential is related to work by:
-$$a = \alpha \Delta G \qquad \text{where } \alpha \text{ is some entity specific constant (Equation 3)}$$
+The entity consumes available energy at the rate $a$ (power consumption). This consumption rate is directly proportional to the available gradient:
+$$a = \alpha \Delta G_{\text{boundary}} \qquad \text{(Equation 3)}$$
+Where $\alpha$ is the **autocatalytic rate constant** (with units of $\text{time}^{-1}$), an entity-specific constant reflecting the system's current efficiency at extracting power from the potential.
 
-The entity's efficiency is the ratio of work to the rate of conversion:
+The entity's efficiency is the unitless ratio of power output to the rate of consumption:
 $$e = \frac{w}{a}$$
 
-Heat is radiated to the surroundings (and is lost to the system) at the rate:
+Heat ($H$) is radiated to the surroundings (lost to the system) as a requirement of the Second Law of Thermodynamics:
 $$H = a - w$$
 
-Since Equation 3 relates $a$ to $G$ directly, the system is a **positive feedback loop**.
+Since Equation 3 relates the power consumption ($a$) to the gradient ($\Delta G$), and the work done ($W$) structurally enhances the catalytic constant ($\alpha$) or the boundary condition itself, the system forms a **positive feedback loop**. This autocatalytic positive feedback means that the system's action **increases the autocatalytic rate constant ($\alpha$)} or actively **maintains and enhances the boundary potential** ($\Delta G_{\text{boundary}}$). Such a system evolves exponentially and sustains its $\mathbf{G}$-gradient against environmental equilibrium, consistent with many life processes.
 
-We can see that since the boundary gradient is defined to be positive, if $w$ is also positive, the potential at the boundary between the entity and its environment will continuously move to a higher level, and will correspondingly increase energy consumption (Garrett, 2008). Such a system evolves exponentially, and many life processes can be described within this formulation as both Schrödinger and Thompson argued.
+***
+
+### Generalization and Specification of the $\mathbf{G}$-Gradient
+
+The $\mathbf{G}$-gradient (Gibbs Free Energy) is the **generalized potential** that drives all forms of life, including both known and hypothetical life forms (e.g., in geometric or informational spaces).
+
+* **Life-in-General (The $\mathbf{G}$-Gradient):** The formalism is agnostic about the source of the gradient. $\Delta G$ represents the available free energy differential, regardless of whether it arises from thermal, chemical, gravitational, or dimensional sources. This sublated view defines **life-in-general** as any system operating via the autocatalytic exploitation of *any* available $\Delta G$.
+* **Biological Life (The $\Delta \mu$ Specification):** For known terrestrial biological life, the $\mathbf{G}$-gradient is primarily manifested as a **chemical potential difference** ($\Delta \mu$, a critical component of $\Delta G$). The permeable boundary (the cell membrane) achieves this by **selective permeability**, actively concentrating low-entropy, high-potential chemicals inside the entity while expelling waste. Thus, biological life is best described not as a **thermal engine** (one based solely on temperature differential), but as a **chemo-mechanical engine** operating on chemical free energy gradients. This distinction ensures the theorem is applicable to both terrestrial and hypothetical life forms.
+
+***
 
 ### The Life Theorem
 
-And thus the second part of the definition of life is derived. **Life, in these thermodynamic terms, is decreasing local entropy by maximizing the conversion of available resources to work, and conserving global entropy by radiating heat to the surroundings.**
+And thus the second part of the definition of life is derived. **Life, in these thermodynamic terms, is decreasing local entropy by maximizing the conversion of available resources to work, and obeying the Second Law of Thermodynamics by ensuring the overall entropy change of the system and surroundings is positive.**
 
 Our example crystal is therefore not alive by the definition, because the energy gradient between the crystal and its environment does not change as the crystal grows, and so $w$ in equation 2 is zero. As the crystal lattice grows energy is bound into the lattice, heat is radiated to the environment, but these are in equilibrium. In fact, the form of the crystal is governed by a process that minimizes the stored energy (cf. Libbrecht, 2005). The forest fire also is not alive; it transfers all of its energy to the environment and surroundings as heat, the opposite of what an alive thing would do.
 

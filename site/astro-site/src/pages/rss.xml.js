@@ -2,14 +2,18 @@ import rss from "@astrojs/rss";
 import { getCollection } from "astro:content";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 
-export async function GET(context) {
-  const blog = await getCollection("blog");
-  const papers = await getCollection("papers");
-  const references = await getCollection("references");
+export const GET = async (context) => {
+  const collections = await Promise.all([
+    getCollection("blog"),
+    getCollection("papers"),
+    getCollection("references"),
+  ]);
 
-  // Combine all posts and sort by pubDate descending
-  const posts = [...blog, ...papers, ...references];
-  posts.sort((a, b) => b.data.pubDate - a.data.pubDate);
+  const posts = collections.flat().sort((a, b) => {
+    const dateA = a.data.pubDate ? new Date(a.data.pubDate).getTime() : 0;
+    const dateB = b.data.pubDate ? new Date(b.data.pubDate).getTime() : 0;
+    return dateB - dateA;
+  });
 
   const lastBuildDate = new Date().toUTCString();
 
@@ -21,9 +25,8 @@ export async function GET(context) {
       title: post.data.title,
       pubDate: post.data.pubDate,
       description: post.data.description,
-      link: `/${post.collection}/${post.id}/`,
+      link: `/${post.collection}/${post.id}/`.replace(/\/+$/, "/"),
     })),
-    // Cleanly formatted XML for RSS
     customData: `
       <atom:link
         href="${context.site}rss.xml"
@@ -34,4 +37,4 @@ export async function GET(context) {
       <lastBuildDate>${lastBuildDate}</lastBuildDate>
     `,
   });
-}
+};
