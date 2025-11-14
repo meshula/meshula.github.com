@@ -26,7 +26,7 @@ const papers = defineCollection({
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
 		// Academic paper specific fields
-		category: z.enum(['foundation', 'research', 'application', 'creative']).optional(),
+		category: z.enum(['foundation', 'research', 'application', 'creative', 'philosophy']).optional(),
 		triadic_domain: z.enum(['motion', 'memory', 'field', 'emergence']).optional(),
 		mathematical_content: z.boolean().optional(),
 		sanskrit_terms: z.array(z.string()).optional(),
