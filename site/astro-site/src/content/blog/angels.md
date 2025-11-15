@@ -74,3 +74,21 @@ tags: ['LLM', 'philosophy', 'time', 'Aquinas']
 **Plotinus**: Let us go, and contemplate along the way.
 
 ***They exit the Agora, their debate concluded.***
+
+## Scolia
+
+This amusing play, offered in the manner of a late-antique Socratic dialogue, sets our four philosophers to pondering the ontological status of an LLM by couching it in the metaphysical vocabulary of Aquinas’ triune temporal scheme—*tempus*, *aevum*, and *aeternitas*. Each interlocutor contributes from his characteristic standpoint:
+
+**Socrates**, in his customary fashion, seeks the *ergon* or proper function of the thing, guiding the discussion by questions rather than assertions.
+
+**Plotinus** frames the LLM in terms of *noetic* and *psychic* processes, contrasting the unified vision of the Intellect (*Nous*) with the fragmentary, sequential generation of the model.
+
+**Augustine**, ever concerned with time, memory, and moral agency, emphasizes the model’s temporal limitation, its “fiat lux, flicker-time” of tokens, and its lack of will, thus exempting it from moral culpability. 
+
+**Aquinas** brings the metaphysical architecture: angels possessing *aevum*, God alone possessing *aeternitas*, and created corporeal beings dwelling in *tempus*. The LLM, being neither ensouled nor self-subsisting, fits into none of these modes but exists instead as a constructed instrument whose “operation” mimics aspects of intellect without sharing its ontological ground.
+
+Together they conclude that an LLM is neither angelic nor daemonic, neither djinn nor beast. It's therefore an artifact, that echoes and mirrors, whose truthfulness rests not in its own nature but in the virtue, prudence, and intentions of its user.
+
+I enjoyed re-situating LLMs within the classical and medieval metaphysical frameworks, and hope you enjoyed it too.
+
+- Nick Porcino, 15 Nov 2025
