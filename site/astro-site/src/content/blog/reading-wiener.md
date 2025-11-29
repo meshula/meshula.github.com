@@ -224,3 +224,9 @@ Examines how technical protocols mediate power in networked systems. Useful for 
 
 **Lyon, David**. Surveillance Society: Monitoring Everyday Life. Open University Press, 2001.
 A sociological analysis of pervasive monitoring practices and their social implications. Adds empirical support to claims about the reduction of unmonitored spaces and the invisibility of autonomous collectives.
+
+**Chaplin, Charlie**, The Great Dictator, 1940.
+Norbert Wiener’s warnings about a society exchanging purpose for stability were rooted in the post-war moral fallout of the machine age. Yet, the deep cultural anxiety he formalized had been voiced years earlier. In the film’s climactic speech, Chaplin’s character appeals directly to the soldiers of the totalitarian state, urging them to reject the "unnatural men" who *"regiment your lives - tell you what to do - what to think and what to feel!"* He demands they not give themselves to *"machine men with machine minds and machine hearts!"* 
+
+Chaplin’s term, "machine men," is the moral premonition of Wiener’s *homo cyberneticus*. "Regimented lives" mirrors Wiener's focus on control and feedback. The totalitarian state functions as a brute-force cybernetic system, using command to enforce uniformity. The "machine heart" is the loss of purpose, the system's focus on efficiency and stability over meaning. It decries the individual stripped of interiority, reduced to a function devoid of empathy or ethical orientation.
+
