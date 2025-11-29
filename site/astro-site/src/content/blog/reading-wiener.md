@@ -1,7 +1,7 @@
 #---
 title: "Reading Wiener in 2025"
 description: "Cybernetic Power, the Dividual, and the End of Purpose"
-pubDate: 2025-11-28
+pubDate: "2025-11-28"
 tags: ["Norbert Wiener", "Cybernetics"]
 author: "Nick Porcino"
 draft: false
