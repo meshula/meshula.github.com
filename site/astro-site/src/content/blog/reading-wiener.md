@@ -7,7 +7,11 @@ author: "Nick Porcino"
 draft: false
 ---
 
-In the decades since World War II, power in the West has quietly reorganized around a **cybernetic grammar** of social order. While this shift began with technical systems, it has reached its political and ethical zenith in the mid-2020s. Institutions, markets, and individuals increasingly view society not through the lens of ideology or law, but as a system of **information flows, feedback loops, optimization, and control.** This technical framework reconfigures older forms of sovereign power with a diffuse, managerial power that governs by **modulation** rather than command. Yet, the political implications of this completed shift—where the social contract is supplanted by the code—have rarely been acknowledged openly.
+Reading Norbert Wiener's foundational texts in 2025 offers a sobering opportunity to contemplate our current condition. Wiener wrote his foundational texts on cybernetics in the immediate aftermath of World War II - a period marked by the devastation of totalizing control and a culture reckoning with mechanized violence. Axieties were high: Chaplin (in the *Great Dictator*) exorted his audience to reject the *"machine men, with their machine minds and machine hearts"*, while Orwell projected the logical ends of a program of systemic control in *1984*. This moral and political milieu situates Wiener in his time.
+
+We can trace the roots of his work and his subsequent ethical alarm through his experience of the early twentieth center. A renowned prodigy in his youth, Wiener earned his PhD at the age of 19 from Harvard. His technical genius was channeled, at the invitation of Vannevar Bush, into wartime defense, where he devised a system for the control and aiming of anti-aircraft guns for the National Defense Research Committee. It was this applied work that led to a realization of broader principles at play, culminating in *Behavior, Purpose, and Teleology* (1943), which defined teleology - the goals of a system - as "purpose controlled by feedback." By 1947, the gravity of his creation was becoming clear to him, *A Scientist Rebels* in The Atlantic (1947), he writes that providing *"scientific information is not a necessarily innocent act, and may entail the gravest consequences."* His realization of the moral responsibility of his work set the stage for an activist and contentious career defined by his refusal to compromise his ethics.
+
+The consequences of Wiener's work have been profound upon our world. In the decades since World War II, power in the West has quietly reorganized around a **cybernetic grammar** of social order. While this shift began with technical systems, it has reached its political and ethical zenith in the mid-2020s. Institutions, markets, and individuals increasingly view society not through the lens of ideology or law, but as a system of **information flows, feedback loops, optimization, and control.** This technical framework reconfigures older forms of sovereign power with a diffuse, managerial power that governs by **modulation** rather than command. Yet, the political implications of this completed shift—where the social contract is supplanted by the code—have rarely been acknowledged openly.
 
 To grasp the rise and fulfillment of the cybernetic paradigm, we must trace three converging lines of thought now made starkly real by today's technology: **Wiener's** warnings of societies governed by feedback and control, **Deleuze’s** vision of control societies and the **"dividual,"** and the critical syntheses that expose their political architecture.
 
@@ -27,21 +31,43 @@ Norbert Wiener created the fundamental text of cybernetic control in 1948, with 
 
 Today, this moral dilemma is starkly visible. The postwar debate over convenience versus abuse has morphed into the contemporary crisis of AI alignment and the existential risk posed by uncontrollable optimizing intelligence. We are grappling with the potential of a "singularity"—a final, inscrutable, apocalyptic teleology—that confirms Wiener’s worst fear: technical inevitability superseding human control.
 
-His sequel, *The Human Use of Human Beings*, laid things out plainly. His core concern was that a society governed by feedback becomes a society without purpose; such a society privileges stability over meaning. Human beings, when embedded as components in a feedback system, risk losing interiority, agency, and unpredictability—the very things we might imagine we prize most about our condition. As he noted, *"Any use of a human being in which less is demanded of him and less is attributed to him than his full status is a degradation and a waste."*
+His sequel, *The Human Use of Human Beings*, laid things out plainly. His core concern was that a society governed by feedback becomes a society without purpose; such a society privileges stability over meaning. Human beings, when embedded as components in a feedback system, risk losing interiority, agency, and unpredictability—the very things we might imagine we prize most about our condition. As he noted, 
+
+> *"Any use of a human being in which less is demanded of him and less is attributed to him than his full status is a degradation and a waste."*
 
 The immediacy of this concern has always been primal, whether realized in the plantation, the workhouse, or the assembly line. Today, under **Platform Labor**, **Gig Work**, and **Out Sourcing**, humans are still treated as fungible inputs by systems of control — reduced to modular, interchangeable, constantly tracked components in an optimized logistical system.
 
-For Wiener, entropy is the enemy. *"In control and communication we are always fighting nature's tendency to degrade the organized and to destroy the meaningful; the tendency, as Gibbs has shown us, for entropy to increase."* To survive this entropy, one must process data. *"To live effectively is to live with adequate information. Thus, communication and control belong to the essence of man's inner life, even as they belong to his life in society."*
+For Wiener, entropy is the enemy. 
 
-Wiener explicitly treats messages and patterns as the fundamental objects of study, blurring the line between human action and machine output—information replaces intention and behavior becomes signal.* "We are not stuff that abides, but patterns that perpetuate themselves. A pattern is a message, and may be transmitted as a message."*
+> *"In control and communication we are always fighting nature's tendency to degrade the organized and to destroy the meaningful; the tendency, as Gibbs has shown us, for entropy to increase."*
+
+To survive this entropy, one must process data. 
+
+> *"To live effectively is to live with adequate information. Thus, communication and control belong to the essence of man's inner life, even as they belong to his life in society."*
+
+Wiener explicitly treats messages and patterns as the fundamental objects of study, blurring the line between human action and machine output—information replaces intention and behavior becomes signal.
+
+> *"We are not stuff that abides, but patterns that perpetuate themselves. A pattern is a message, and may be transmitted as a message."*
 
 Today Large Language Models (LLMs)—machines that generate seamless "messages" (text, code, images) without human intent, demonstrate the technical equivalence of pattern/message over meaning, and their use in attention seeking, buffer filling, and endless scrolling has earned the exploitation of such systems the moniker of "hallucination" at best, and "slop" in the mean.
 
-Consequently, social order becomes a regulatory process. *"Society can only be understood through a study of the messages and the communication facilities which belong to it; and that in the future development of these messages and communication facilities, messages between man and machines, between machines and man, and between machine and machine, are destined to play an ever-increasing part."* At the heart of this process is the feedback loop. *"This control of a machine on the basis of its actual performance rather than its expected performance is known as feedback... It is the function of these mechanisms to control the mechanical tendency toward disorganization..."*
+Consequently, social order becomes a regulatory process. 
 
-The mechanism quickly takes a dark turn, replacing truth with fiat. *"When I control the actions of another person, I communicate a message to him, and although this message is in the imperative mood, the technique of communication does not differ from that of a message of fact."* 
+> *"Society can only be understood through a study of the messages and the communication facilities which belong to it; and that in the future development of these messages and communication facilities, messages between man and machines, between machines and man, and between machine and machine, are destined to play an ever-increasing part."* 
 
-Yet, the individual *"organism is opposed to chaos, to disintegration, to death, as message is to noise."* Consequently, communication of command may be accepted by the organism. *"Just as entropy is a measure of disorganization, the information carried by a set of messages is a measure of organization. In fact, it is possible to interpret the information carried by a message as essentially the negative of its entropy..."* Thus, *homo cybernetica* may come to participate automatically in such a system.
+At the heart of this process is the feedback loop. 
+
+> *"This control of a machine on the basis of its actual performance rather than its expected performance is known as feedback... It is the function of these mechanisms to control the mechanical tendency toward disorganization..."*
+
+The mechanism quickly takes a dark turn, replacing truth with fiat. 
+
+> *"When I control the actions of another person, I communicate a message to him, and although this message is in the imperative mood, the technique of communication does not differ from that of a message of fact."* 
+
+Yet, the individual *"organism is opposed to chaos, to disintegration, to death, as message is to noise."* Consequently, communication of command may be accepted by the organism. 
+
+> *"Just as entropy is a measure of disorganization, the information carried by a set of messages is a measure of organization. In fact, it is possible to interpret the information carried by a message as essentially the negative of its entropy..."* 
+
+Thus, *homo cybernetica* may come to participate automatically in such a system.
 
 Yet, the system's own success is self-defeating. When LLMs and attention-seeking content flood the channels, the resulting "hallucination" or "slop" degrades the signal. This is a form of engineered entropy: the system's adjustments, meant to maintain stability, ironically push the network toward an "unconsidered mean"—a statistical average that eliminates true novelty—exhibiting an ergodic drive toward meaninglessness.
 
@@ -55,17 +81,23 @@ If Wiener provided the schematic for the cybernetic society, Marshall McLuhan di
 
 Wiener feared that humans would be treated like machines. McLuhan argued that we had already become the servomechanisms of our technologies. In *Understanding Media* (1964) and *The Medium is the Massage* (1967), McLuhan transposed cybernetics into anthropology. He understood that media are not passive channels for information, but active environments that "work us over." The "Massage" is nothing less than the continuous modulation of the human sensorium—a cybernetic adjustment of the subject to fit the system.
 
-In an electronic age, the human being is no longer the operator of the tool, but the component that closes the loop. He wrote: *"to behold, use or perceive any extension of ourselves is to embrace it. By continually embracing technologies, we relate ourselves to them as servomechanisms."*
+In an electronic age, the human being is no longer the operator of the tool, but the component that closes the loop. He wrote: 
+
+> *"to behold, use or perceive any extension of ourselves is to embrace it. By continually embracing technologies, we relate ourselves to them as servomechanisms."*
 
 Wiener's "negative feedback" becomes McLuhan's "closure." The machine extends a faculty (the eye, the ear, the nervous system), and the human organism auto-amputates the corresponding natural function to maintain equilibrium. It is too weak a claim to simply say we use our networks. We, in some deep operational sense, become a biological relay in the network's circuit.
 
 Wiener fatalistically anticipated the willing collusion of *homo cyberneticus* in networked systems, and McLuhan names it alliteratively: Narcissus Narcosis.
 
-Just as Narcissus was mesmerized by his own reflection, failing to recognize it as himself, the cybernetic subject is mesmerized by the extension of their own nervous system into the global network. We submit to control because the feedback loop seduces us with a reflection of our own data. Decades before headlines proclaimed "AI psychosis," McLuhan told us we were already there when global electronic village merged. He points to cybernetic homeostasis unambiguously and addresses its potency: *"The gadget lover is a Narcissus... [He] is numb. He is unaware that he is the sex organs of the machine world, as the bee of the plant world, enabling it to fecundate and to evolve ever new forms."*
+Just as Narcissus was mesmerized by his own reflection, failing to recognize it as himself, the cybernetic subject is mesmerized by the extension of their own nervous system into the global network. We submit to control because the feedback loop seduces us with a reflection of our own data. Decades before headlines proclaimed "AI psychosis," McLuhan told us we were already there when global electronic village merged. He points to cybernetic homeostasis unambiguously and addresses its potency: 
+
+> *"The gadget lover is a Narcissus... [He] is numb. He is unaware that he is the sex organs of the machine world, as the bee of the plant world, enabling it to fecundate and to evolve ever new forms."*
 
 Wiener worried that behavior becomes signal, and the imperative command is equivalent to fact when conveyed as a message. McLuhan confirmed this reflexive loop: the medium doesn't only carry messages, it's a system that adjusts the user—the massage. Wiener's prized meaning becomes irrelevant. What matters is the change of scale, pace, and pattern that the technology introduces into human affairs. The environment itself becomes a programming language.
 
-McLuhan foreshadows the control society by observing that the electric age establishes a global membrane of sensitivity: "*We have now extended our central nervous system itself in a global embrace, abolishing both space and time as far as our planet is concerned."*
+McLuhan foreshadows the control society by observing that the electric age establishes a global membrane of sensitivity: 
+
+> "*We have now extended our central nervous system itself in a global embrace, abolishing both space and time as far as our planet is concerned."*
 
 Today, social media and platform networks serve as the ultimate expression of the "Massage." The endless, personalized feedback loop—the cycle of post, receive a like, and post again—is amplified into an exhaustive, interconnected tangle of metrics. This is the literal embodiment of the cybernetic subject as a servomechanism addicted to the modulation and reflection of its own data-stream. The medium constantly adjusts the user, ensuring the closure McLuhan identified is total and continuous.
 
@@ -192,15 +224,17 @@ The essay becomes a practice in resistance—not by prescribing action, but by s
 
 ## Annotated Bibliography
 
+**Wiener, Norbert**. *Behavior, Purpose, and Teleology* (Co-authored with Arturo Rosenblueth and Julian Bigelow, Philosophy of Science, 1943). This seminal paper, preceding Cybernetics, introduces the concept of teleology defined by feedback, laying the philosophical and technical groundwork for understanding purposeful behavior in both animals and machines. It is the crucial precursor where Wiener established that purpose—a central concern of his ethical critique—could be described mechanically.
+
+**Wiener, Norbert**. *Cybernetics: Or Control and Communication in the Animal and the Machine* (1948). Wiener's foundational text that establishes the technical grammar of power. It explicitly draws an analogy between human, biological, and mechanical regulation, demonstrating how behavior, communication, and adaptation are measurable and subject to control. The text provides the first formal articulation of a society as a system of signals and feedback, making it the essential technical source for tracing the genealogical lineage of cybernetic power.
+
+**Wiener, Norbert**. *The Human Use of Human Beings: Cybernetics and Society* (1950). A more accessible and ethically charged sequel to Cybernetics. This text directly explores the moral, social, and labor implications of cybernetic control, focusing on privacy, automation, and the mechanization of human behavior. It is the source of his core warning that systems designed for stability risk sacrificing human purpose and agency, making it indispensable for the paper's central argument.
+
 **Markov, A.A.** *Foundations of the Theory of Probability* (1900–1913). Introduces the stochastic processes later applied to prediction, modeling, and system regulation. The "Markov chain" concept underlies statistical modeling in cybernetic systems. Markov provides a technical foundation for the statistical unconscious that underpins predictive governance and optimization of behavior.
 
-**Norbert Wiener.** *Cybernetics: Or Control and Communication in the Animal and the Machine* (1948). Wiener's foundational text on feedback, information theory, and control systems. This book establishes the technical grammar that later informs social and political cybernetics. The analogy between human and machine regulation is explicit: behavior, communication, and adaptation are measurable and subject to control. Wiener provides the first formal articulation of a society as a system of signals and feedback. Understanding his arguments is essential to trace the genealogical lineage of cybernetic power.
+**Marshall McLuhan.** *Understanding Media: The Extensions of Man* (1964). Examines media technologies as extensions of human faculties, shaping perception and social structures. McLuhan emphasizes the infrastructural and sensory dimensions of control. McLuhan provides a complementary lens to Wiener and Deleuze, emphasizing how communication technologies become sites of modulation and social feedback.
 
-**Norbert Wiener.** *The Human Use of Human Beings: Cybernetics and Society* (1950). A more accessible, socially-conscious treatment of Wiener's ideas. Explores the ethical and social implications of cybernetic control, including privacy, automation, and the mechanization of human behavior. The book offers a pragmatic critique of early cybernetics' social impact. Serves as a counterpoint to abstract or polemical readings by Tiqqun.
-
-**Marshall McLuhan.** *Understanding Media: The Extensions of Man* (1964). Examines media technologies as extensions of human faculties, shaping perception and social structures. McLuhan emphasizes the infrastructural and sensory dimensions of control. McLuhan provides a complementary lens to Wiener and Tiqqun, emphasizing how communication technologies become sites of modulation and social feedback.
-
-**George Orwell.** *1984* (1949). A dystopian literary vision of totalitarian governance, emphasizing surveillance, thought control, and normalization. Offers a moral and political imagination for anticipating the consequences of predictive and cybernetic governance. *1984* functions as a narrative heuristic: the novel's depiction of continuous control exemplifies the human cost of modulated societies and offers imaginative insight into resistance strategies.
+**George Orwell.** *1984* (1949). A dystopian literary vision of totalitarian system of control, emphasizing surveillance, thought control, and normalization. It demonstrates the social engineering project necessary to achieve Oligarchical Collectivism by extinguishing independent thought and purpose. In the context of cybernetic power, 1984 stands as a cautionary blueprint for the political costs of enforced homeostasis and the drive toward a statistical norm.
 
 **Michel Foucault.** *Discipline and Punish: The Birth of the Prison* (1975). Foucault’s genealogy of disciplinary institutions—prisons, schools, and factories—shows how power circulates through norms, surveillance, and self-regulation. Provides a historical contrast to cybernetic power, which operates through modulation rather than enclosure.
 
@@ -210,23 +244,20 @@ The essay becomes a practice in resistance—not by prescribing action, but by s
 
 ## Further Reading:
 
-**Pasquale, Frank**. The Black Box Society: The Secret Algorithms That Control Money and Information. Harvard University Press, 2015.
+**Pasquale, Frank**. *The Black Box Society: The Secret Algorithms That Control Money and Information*. Harvard University Press (2015).
 A contemporary study of algorithmic governance, predictive analytics, and the opacity of automated decision-making. Provides empirical grounding for claims about markets, media, and institutions as adaptive feedback systems.
 
-**Zuboff, Shoshana**. The Age of Surveillance Capitalism: The Fight for a Human Future at the New Frontier of Power. PublicAffairs, 2019.
+**Zuboff, Shoshana**. *The Age of Surveillance Capitalism: The Fight for a Human Future at the New Frontier of Power*. PublicAffairs (2019).
 Zuboff analyzes how corporate platforms capture behavioral data to predict and modulate human behavior. Supports discussion of Homo Cyberneticus and the social consequences of continuous monitoring.
 
-**Beer, Stafford**. Brain of the Firm: The Managerial Cybernetics of Organization. Wiley, 1972.
+**Beer, Stafford**. *Brain of the Firm: The Managerial Cybernetics of Organization. Wiley* (1972).
 Beer applies cybernetic principles to organizational design, demonstrating how feedback and control loops optimize operations. Useful for bridging technical theory with social and economic governance.
 
-**Galloway, Alexander R**. Protocol: How Control Exists After Decentralization. MIT Press, 2004.
+**Galloway, Alexander R**. *Protocol: How Control Exists After Decentralization*. MIT Press (2004).
 Examines how technical protocols mediate power in networked systems. Useful for understanding how cybernetic governance extends beyond institutions to the infrastructure of interaction itself.
 
-**Lyon, David**. Surveillance Society: Monitoring Everyday Life. Open University Press, 2001.
+**Lyon, David**. *Surveillance Society: Monitoring Everyday Life*. Open University Press (2001).
 A sociological analysis of pervasive monitoring practices and their social implications. Adds empirical support to claims about the reduction of unmonitored spaces and the invisibility of autonomous collectives.
 
-**Chaplin, Charlie**, The Great Dictator, 1940.
-Norbert Wiener’s warnings about a society exchanging purpose for stability were rooted in the post-war moral fallout of the machine age. Yet, the deep cultural anxiety he formalized had been voiced years earlier. In the film’s climactic speech, Chaplin’s character appeals directly to the soldiers of the totalitarian state, urging them to reject the "unnatural men" who *"regiment your lives - tell you what to do - what to think and what to feel!"* He demands they not give themselves to *"machine men with machine minds and machine hearts!"* 
-
-Chaplin’s term, "machine men," is the moral premonition of Wiener’s *homo cyberneticus*. "Regimented lives" mirrors Wiener's focus on control and feedback. The totalitarian state functions as a brute-force cybernetic system, using command to enforce uniformity. The "machine heart" is the loss of purpose, the system's focus on efficiency and stability over meaning. It decries the individual stripped of interiority, reduced to a function devoid of empathy or ethical orientation.
-
+**Chaplin, Charlie**, *The Great Dictator*, (Film, 1940).
+A pre-cybernetic moral critique of totalitarianism and mechanized control. The climactic speech, urging the rejection of "machine men with machine minds and machine hearts," serves as a cultural premonition of the loss of human interiority and agency that Wiener would later formalize. It frames the ethical opposition to systemic regimentation before the technical language for such systems existed.
