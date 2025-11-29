@@ -1,13 +1,11 @@
-#---
+---
 title: "Reading Wiener in 2025"
 description: "Cybernetic Power, the Dividual, and the End of Purpose"
-pubDate: "2025-11-28"
+pubDate: 2025-11-28
 tags: ["Norbert Wiener", "Cybernetics"]
 author: "Nick Porcino"
 draft: false
 ---
-
- Reading Wiener in 2025: Cybernetic Power, the Dividual, and the End of Purpose
 
 In the decades since World War II, power in the West has quietly reorganized around a **cybernetic grammar** of social order. While this shift began with technical systems, it has reached its political and ethical zenith in the mid-2020s. Institutions, markets, and individuals increasingly view society not through the lens of ideology or law, but as a system of **information flows, feedback loops, optimization, and control.** This technical framework reconfigures older forms of sovereign power with a diffuse, managerial power that governs by **modulation** rather than command. Yet, the political implications of this completed shift—where the social contract is supplanted by the code—have rarely been acknowledged openly.
 
