@@ -9,7 +9,7 @@ draft: false
 
 Reading Norbert Wiener's foundational texts in 2025 offers a sobering opportunity to contemplate our current condition. Wiener wrote his foundational texts on cybernetics in the immediate aftermath of World War II - a period marked by the devastation of totalizing control and a culture reckoning with mechanized violence. Axieties were high: Chaplin (in the *Great Dictator*) exorted his audience to reject the *"machine men, with their machine minds and machine hearts"*, while Orwell projected the logical ends of a program of systemic control in *1984*. This moral and political milieu situates Wiener in his time.
 
-We can trace the roots of his work and his subsequent ethical alarm through his experience of the early twentieth center. A renowned prodigy in his youth, Wiener earned his PhD at the age of 19 from Harvard. His technical genius was channeled, at the invitation of Vannevar Bush, into wartime defense, where he devised a system for the control and aiming of anti-aircraft guns for the National Defense Research Committee. It was this applied work that led to a realization of broader principles at play, culminating in *Behavior, Purpose, and Teleology* (1943), which defined teleology - the goals of a system - as "purpose controlled by feedback." By 1947, the gravity of his creation was becoming clear to him, *A Scientist Rebels* in The Atlantic (1947), he writes that providing *"scientific information is not a necessarily innocent act, and may entail the gravest consequences."* His realization of the moral responsibility of his work set the stage for an activist and contentious career defined by his refusal to compromise his ethics.
+We can trace the roots of his work and his subsequent ethical alarm through his experience of the early twentieth center. A renowned prodigy in his youth, Wiener earned his PhD at the age of 19 from Harvard. His technical genius was channeled, at the invitation of Vannevar Bush, into wartime defense, where he devised a system for the control and aiming of anti-aircraft guns for the National Defense Research Committee. It was this applied work that led to a realization of broader principles at play, culminating in *Behavior, Purpose, and Teleology* (1943), which defined teleology - the goals of a system - as "purpose controlled by feedback." By 1947, the gravity of his creation was becoming clear to him, in *A Scientist Rebels* in The Atlantic (1947), he writes that providing *"scientific information is not a necessarily innocent act, and may entail the gravest consequences."* His realization of the moral responsibility of his work set the stage for an activist and contentious career defined by his refusal to compromise his ethics.
 
 The consequences of Wiener's work have been profound upon our world. In the decades since World War II, power in the West has quietly reorganized around a **cybernetic grammar** of social order. While this shift began with technical systems, it has reached its political and ethical zenith in the mid-2020s. Institutions, markets, and individuals increasingly view society not through the lens of ideology or law, but as a system of **information flows, feedback loops, optimization, and control.** This technical framework reconfigures older forms of sovereign power with a diffuse, managerial power that governs by **modulation** rather than command. Yet, the political implications of this completed shift—where the social contract is supplanted by the code—have rarely been acknowledged openly.
 
@@ -31,7 +31,7 @@ Norbert Wiener created the fundamental text of cybernetic control in 1948, with 
 
 Today, this moral dilemma is starkly visible. The postwar debate over convenience versus abuse has morphed into the contemporary crisis of AI alignment and the existential risk posed by uncontrollable optimizing intelligence. We are grappling with the potential of a "singularity"—a final, inscrutable, apocalyptic teleology—that confirms Wiener’s worst fear: technical inevitability superseding human control.
 
-His sequel, *The Human Use of Human Beings*, laid things out plainly. His core concern was that a society governed by feedback becomes a society without purpose; such a society privileges stability over meaning. Human beings, when embedded as components in a feedback system, risk losing interiority, agency, and unpredictability—the very things we might imagine we prize most about our condition. As he noted, 
+His sequel, *The Human Use of Human Beings*, laid things out plainly. His core concern was that a society governed by feedback becomes a society without purpose; such a society privileges stability over meaning. Human beings, when embedded as components in a feedback system, risk losing **interiority**, **agency**, and **unpredictability**—the very things we might imagine we prize most about our condition. As he noted, 
 
 > *"Any use of a human being in which less is demanded of him and less is attributed to him than his full status is a degradation and a waste."*
 
@@ -49,7 +49,7 @@ Wiener explicitly treats messages and patterns as the fundamental objects of stu
 
 > *"We are not stuff that abides, but patterns that perpetuate themselves. A pattern is a message, and may be transmitted as a message."*
 
-Today Large Language Models (LLMs)—machines that generate seamless "messages" (text, code, images) without human intent, demonstrate the technical equivalence of pattern/message over meaning, and their use in attention seeking, buffer filling, and endless scrolling has earned the exploitation of such systems the moniker of "hallucination" at best, and "slop" in the mean.
+Today Large Language Models (LLMs)—machines that generate seamless "messages" (text, code, images) without human intent, demonstrate the technical equivalence of pattern and message over meaning, and their use in attention seeking, buffer filling, and endless scrolling has earned the exploitation of such systems the moniker of "hallucination" at best, and "slop" in the mean.
 
 Consequently, social order becomes a regulatory process. 
 
@@ -218,7 +218,7 @@ By leaving the synthesis unresolved—by proposing an anti-ergodic design withou
 
 If, as Wiener feared, the greatest threat is the elimination of purpose, then the counter-politics cannot be an efficient manual. It must be a structure designed for difficulty. It requires the reader, the drifting mind, to perform the ultimate act of agency: the articulation of purpose outside the system's given goals.
 
-The essay becomes a practice in resistance—not by prescribing action, but by structuring the impossibility of total capture. May the reader embrace that ineffable spark, the ignis interioris, that eludes all metrics, all loops, and all control, and dedicate it to the rupture (ruptura) necessary to build a new, purposeful form.
+The essay becomes a practice in resistance—not by prescribing action, but by structuring the impossibility of total capture. May the reader embrace that ineffable spark, the ignis interioris, that eludes all metrics, all loops, and all control, and dedicate it to the rupture necessary to build a new, purposeful form.
 
 ---
 
