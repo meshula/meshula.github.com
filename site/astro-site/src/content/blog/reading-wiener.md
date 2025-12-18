@@ -221,7 +221,7 @@ The impasse is real. But if cybernetic power operates through optimization, then
 
 Governance must be designed to preserve unpredictability. This is not an argument against governance, but against governance that confuses stability with legitimacy. Unpredictability is not an absence of order, but a condition that must be deliberately maintained if institutions are to remain corrigible, plural, and humane.
 
-This is the only way to answer the questions left by the journey: the drifting, improvisational, and individual mind requires structures designed for purpose, structures that elevate those qualities that give coherence and spark to our existence: **interiority**, **agency**, and **unpredictability**.
+To call back to *Machines of Loving Grace*, we are the "mammals" in Brautigan's meadow, not because we are components of the machine, but because we possess the unpredictability that the machine serves but can never possess.
 
 ![](assets/17660360184589.jpg)
 ## All Watched Over By Machines Of Loving Grace
