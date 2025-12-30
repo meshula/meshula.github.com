@@ -7,41 +7,51 @@ author: "Nick Porcino"
 draft: false
 ---
 
-Cybernetic techniques are indispensable in domains where stability serves life rather than replaces it. As Dario Amodei observes in *Machines of Loving Grace*, powerful AI systems, if properly designed, have the potential to enhance human well-being across medicine, neuroscience, economic development, governance, and work. These technologies can amplify human capabilities, extend creative and scientific reach, and support structures that preserve life and flourishing—demonstrating that cybernetic principles need not be solely controlling.
+Cybernetic techniques are fully visible in day to day society; seemingly out of nowhere in only a few years AI, Large Language Models, ubiquitous chat interfaces, image generators, movie generators, machine written scientific papers, and thirty-second middle school homework assignments are everywhere. This revolution is less of a surprising development and more the result of a long, slow, mechanization of thought and process with seeds all the way back to the earliest philosophical endeavors by classical thinkers in both the East and the West. Even though the principles have long existed, the technical requisites of the exercise, the necessary mathematics to pass the reins of control to a self regulating cybernetic authority did not exist until the early twentieth century when Norbert Weiner made the leap in understanding how automatic regulating mechanisms such as governed engines or automatically aimed artillery could be applied to any system of control.
 
-Yet these same principles carry risks. Reading Norbert Wiener's foundational texts in 2025 reminds us how easily cybernetics slips from service to domination. Wiener did his breakthrough work on cybernetics in the immediate aftermath of World War II - a period haunted by mechanized violence and totalizing control. Axieties were high: Chaplin (in the *Great Dictator*) exorted his audience to reject the *"machine men, with their machine minds and machine hearts"*, while Orwell imagined the logical end of a system of total surveillance in *1984*.
+Dario Amodei observes in *Machines of Loving Grace* that powerful AI systems, if properly designed, have the potential to enhance human well-being across medicine, neuroscience, economic development, governance, and work. These technologies can amplify human capabilities, extend creative and scientific reach, and support structures that preserve life and flourishing — cybernetic principles need not be solely controlling.
 
-Wiener's work and his subsequent ethical alarm find their roots in his experience of the early twentieth center. A renowned prodigy, Wiener earned his PhD at the age of 19 from Harvard. His technical genius was channeled, at the invitation of Vannevar Bush, into wartime defense, where he devised a system for the control and aiming of anti-aircraft guns for the National Defense Research Committee. It was this applied work that led to a realization of broader principles at play, culminating in *Behavior, Purpose, and Teleology* (1943), which defined teleology - the goals of a system - as "purpose controlled by feedback." The gravity of his creation soon became clear to him. In *A Scientist Rebels* (1947), he wrote that providing *"scientific information is not a necessarily innocent act, and may entail the gravest consequences."* This was the beginning of an activist and contentious career defined by his refusal to compromise his ethics.
+Nonetheless cybernetic principles carry risks of the gravest magnitude. Reading Norbert Wiener's foundational texts in 2025 reminds us how easily cybernetics slips from service to domination. Wiener did his breakthrough work on cybernetics in the immediate aftermath of World War II - a period haunted by mechanized violence and totalizing control. Axieties were high: Chaplin (in the *Great Dictator*) exorted his audience to reject the *"machine men, with their machine minds and machine hearts"*, while Orwell imagined the logical end of a self-perpetuating, self-regulating system of cybernetic control would be the totally serveilled and totally controlled world of *1984*; a world where the sole aim of the system is the system's own perpetuation.
 
-In the decades since, power in the West has quietly reorganized around a **cybernetic grammar** of social order: **information flows, feedback loops, optimization, and control** replace law or ideology as organizing principle. How often have we heard the idea that biology is a processor of information? This modern technical framework reconfigures older forms of sovereign power with a diffuse, managerial governance by **modulation** rather than command. This shift, from social contract to algorithm, is difficult to perceive when embedded within it, yet clearly, it is underway; the focus group has expanded from small study to ubiquitous surveillance.
+Norbert Wiener was a renowned mathematical prodigy, earning his PhD at the age of 19 from Harvard. After graduation, his technical genius was channeled at the invitation of Vannevar Bush into wartime defense, where he devised a system for the control and aiming of anti-aircraft guns for the National Defense Research Committee. It was this applied work that led to a realization of broader principles at play, culminating in *Behavior, Purpose, and Teleology* (1943), which defined the teleology a system (its goals) as "purpose controlled by feedback." The gravity of his creation soon became clear to him. In *A Scientist Rebels* (1947), he wrote that providing *"scientific information is not a necessarily innocent act, and may entail the gravest consequences."* This was the beginning of an activist and contentious career defined by his refusal to compromise his ethics.
 
-The proliferation of **Generative AI,** the continuous monitoring of **platform capitalism,** and the relentless optimization of **social media algorithms** confirm Wiener's most pessimistic warnings: we are building systems designed for **stability at the expense of human meaning and agency.** When human behavior is treated as a continuous stream of data for optimization, every action is a signal, every deviation a disturbance, and the ultimate challenge cannot simply be understanding how this all works-we must reckon with the ways our freedoms and capacities are quietly absorbed into the logic of the machine.
+In the decades since, power in the West has quietly reorganized around a cybernetic grammar of social order: information flows, feedback loops, optimization, and control replace law or ideology as fundamental organizing principles. How often have we heard the idea that biology is a processor of information? This modern technical framework reconfigures older forms of sovereign power and scientific paradigm with a diffuse, managerial governance by modulation rather than command. This shift, from social contract to algorithm, is difficult to perceive when embedded within it, yet clearly it is underway; the focus group has expanded from the study of a small groups to ubiquitous surveillance.
 
-Today's defining political regime is **Cybernetic Power:** an order that privileges the **stabilization of systems** over the cultivation of human meaning, agency, or dissent. In this regime, conflict becomes noise, behavior becomes data, and the role of power is to ensure a homeostasis of stable circulation of information. Individual striving for purpose is subsumed into system's imperatives.
+In this modern world of agentic work the continuous monitoring that is the bedrock of platform capitalism, the relentless optimization of social media algorithms, and data driven optimization have a constructed a new panopticon, a sociopticon, as it were. When human behavior is treated as a continuous stream of data for optimization, every action is a signal, every deviation a disturbance, and the ultimate challenge cannot simply be understanding how this all works - we must reckon with the ways our freedoms and capacities are quietly absorbed into the logic of the machine.
+
+Today's defining political regime has come to resemble cybernetic power, and cybernetic power has come to exemplify Orwellian order: an order that privileges the stabilization of systems over the cultivation of human meaning, agency, or dissent. In this regime, conflict becomes noise, behavior becomes data, and the role of power is to ensure a homeostasis of stable circulation of information. Individual striving for purpose is subsumed into system's imperatives.
 
 What does this hidden constitution of cybernetic power cost? What becomes impossible under its regime of optimization?
 
 > *Ubi ratio regnat, anima silet*
 > where optimization reigns, the soul falls silent. 
 
-The ethical, technical, and philosophical dilemmas Norbert Wiener raised in the 1940's are the default settings of our digital world.
+The ethical, technical, and philosophical dilemmas Norbert Wiener warned us of in the 1940s are the default settings of today's digital world.
 
 
 ## Wiener's Warnings
 
-Norbert Wiener created the fundamental text of cybernetic control in 1948, with the publication of *Cybernetics: Control and Communication in the Animal and the Machine*. In it he lays out the principles of homeostatic system design, and inexorably drives the narrative to a conclusion with both positive and negative import. Even as he forges ahead, he interrupts frequently to lament the implications.
+Norbert Wiener created the fundamental text of cybernetic control in 1948, with the publication of *Cybernetics: Control and Communication in the Animal and the Machine*. In it he lays out the principles of homeostatic system design, and inexorably drives the narrative to a conclusion with both positive and negative import. Even as he forges ahead, he interrupts frequently to lament the implications:
 
-> *"Those of us who have contributed to the new science of cybernetics thus stand in a moral position which is, to say the least, not very comfortable. We have contributed to the initiation of a new science which, as I have said, embraces technical developments with great possibilities for good and for evil. We can only hand it over into the world that exists about us, and this is the world of Belsen and Hiroshima. We do not even have the choice of suppressing these new technical developments. They belong to the age, and the most any of us can do by suppression is to put the development of the subject into the hands of the most irresponsible and most venal of our engineers. The best we can do is to see that a large public understands the trend and the bearing of the present work, and to confine our personal efforts to those fields, such as physiology and psychology, most remote from war and exploitation. As we have seen, there are those who hope that the good of a better understanding of man and society which is offered by this new field of work may anticipate and outweigh the incidental contribution we are making to the concentration of power (which is always concentrated, by its very conditions of existence, in the hands of the most unscrupulous). I write in 1947, and I am compelled to say that it is a very slight hope."*
+> *"Those of us who have contributed to the new science of cybernetics thus stand in a moral position which is, to say the least, not very comfortable. We have contributed to the initiation of a new science which, as I have said, embraces technical developments with great possibilities for good and for evil. We can only hand it over into the world that exists about us, and this is the world of Belsen and Hiroshima. We do not even have the choice of suppressing these new technical developments. They belong to the age...*"
 
-This moral dilemma is starkly visible today; the postwar debate over convenience versus abuse has morphed into the contemporary crisis of AI alignment and the existential risk posed by uncontrollable optimizing intelligence. Alignment explicitly seeks value preservation and modern AI is not classical cybernetics; nonetheless alignment itself risks becoming another internal feedback loop. Today in everyday discourse, we are grappling with the potential of a "singularity"—a final, inscrutable, apocalyptic teleology—that confirms Wiener’s worst fear: technical inevitability superseding human control. 
+Having created cybernetics, he immediately casts the potential in terms of the concentration camp and atomic bomb.
 
-He laid his views out plainly in a sequel volume, *The Human Use of Human Beings*. A society governed by feedback becomes a society without purpose-stability is privileged over meaning. Human beings, when embedded as components in a feedback system, risk losing **interiority**, **agency**, and **unpredictability**—the very things we might imagine we prize most about our condition:
+> *... and the most any of us can do by suppression is to put the development of the subject into the hands of the most irresponsible and most venal of our engineers.*
+
+He's a bit snide here, but wisely points out that attempts to gatekeep knowledge put it in the hands of those least equipped to deal with it wisely. He continues productively, with a caution, and a lament:
+
+> *The best we can do is to see that a large public understands the trend and the bearing of the present work, and to confine our personal efforts to those fields, such as physiology and psychology, most remote from war and exploitation. As we have seen, there are those who hope that the good of a better understanding of man and society which is offered by this new field of work may anticipate and outweigh the incidental contribution we are making to the concentration of power (which is always concentrated, by its very conditions of existence, in the hands of the most unscrupulous). I write in 1947, and I am compelled to say that it is a very slight hope."*
+
+The postwar debate over convenience versus abuse has morphed today into the contemporary crisis of AI alignment and the existential risk posed by uncontrollable optimizing intelligence. Alignment explicitly seeks value preservation, and modern AI is not classical cybernetics; nonetheless pursuing alignment itself because another internal self-regulating feedback loop, potentially becoming a control gallery of systems watching systems. Martin Heidigger argued that such systems might function perfectly according to a logic insensible to human concerns, where those human concerns must yet be defined as computable, optimizable data points as resource to the machine. This represents the ultimate triumph of Jacques Ellul’s 'Technique' — an autonomous, self-augmenting process that renders human choice a mere formality. In today's everyday discourse, we are grappling with the potential of a "singularity" — a final, inscrutable, apocalyptic teleology, and end to end all ends — that confirms Wiener’s worst fear: technical inevitability superseding human control. 
+
+He laid his views out plainly in a sequel volume, *The Human Use of Human Beings*. A society governed by feedback becomes a society without purpose-stability is privileged over meaning. Human beings, when embedded as components in a feedback system, risk losing interiority, agency, and unpredictability — the very things we might imagine we prize most about our condition:
 
 > *"Any use of a human being in which less is demanded of him and less is attributed to him than his full status is a degradation and a waste."*
 
 This concern has always been primal, whether realized in the plantation, the workhouse, or the assembly line. Today, under the guise of platform labor, gig work, performance metrics, and out sourcing, humans are treated as fungible inputs by systems of control — reduced to modular, interchangeable, constantly tracked components in an optimized logistical system.
 
-For Wiener, entropy is the enemy; he calls on Gibbs to remind us that the forces eroding order in machines and minds are the same thermodynamic forces that drive the universe toward disorder:
+For Wiener, entropy is the enemy; he invokes Gibbs to remind us that the forces eroding order in machines and minds are the same thermodynamic forces that drive the universe toward disorder:
 
 > *"In control and communication we are always fighting nature's tendency to degrade the organized and to destroy the meaningful; the tendency, as Gibbs has shown us, for entropy to increase."*
 
@@ -67,77 +77,78 @@ The mechanism quickly takes a dark turn, replacing truth with fiat:
 
 > *"When I control the actions of another person, I communicate a message to him, and although this message is in the imperative mood, the technique of communication does not differ from that of a message of fact."* 
 
-Yet, the individual 
+This then; an anticipation of the recommendation engine, the search summary - a presentation of a world where only one path is visible as true. The individual 
 
 > *"organism is opposed to chaos, to disintegration, to death, as message is to noise."* 
 
-Consequently, communication of command may be accepted by the organism:
+Choosing to disregard the recommended action is to not be seen, to disintegrate, choosing the path to life outside the system. Consequently, communication of command may be accepted by the organism:
 
 > *"Just as entropy is a measure of disorganization, the information carried by a set of messages is a measure of organization. In fact, it is possible to interpret the information carried by a message as essentially the negative of its entropy..."* 
 
-Thus, *homo cybernetica* may come to participate automatically in such a system.
+Thus, *homo cybernetica* may come to participate automatically in such a system. Wiener’s realized that the only way to remain human in a cybernetic world was to refuse to be a component — to be inefficient, unpredictable, and uncooperative with the logic of the machine. In *A Scientist Rebels* (1947) he says:
 
-The system's own success, however, is self-defeating. When LLMs and attention-seeking content flood the channels, the resulting "hallucination" or "slop" degrades the signal. This is a form of engineered entropy: the system's adjustments, meant to maintain stability, ironically push the network toward an "unconsidered mean"—a statistical average that eliminates true novelty—exhibiting an ergodic drive toward meaninglessness.
+> *"I do not expect to publish any future work of mine which may do damage in the hands of irresponsible militarists... [To do so] is to allow oneself to be used as a tool... and to accept a position of irresponsibility."*
 
-Wiener's warnings are fundamental: what begins as engineering often ends at governance. And to his pessimistic moral conclusions and gesture towards a passive resistance that he himself stood fast to throughout his life—refusing military funding or any ethical compromise—he left us an unenviable dilemma. His creation of a system that can enact perpetual homeostasis inevitably strips us of any metaphysical orientation or ontological satisfaction of primary qualities as we may aspire to, such as joy or meaning. Cybernetic design excels at preventing error, but cannot articulate why anything should be done in the first place. Cybernetic systems have goals (teleology in a technical sense), but not ends (*telos* in a human sense).
+Ultimately the system's own success is self-defeating. When LLMs and attention-seeking content flood the channels, the resulting "hallucination" or "slop" degrades the signal. This is a form of engineered entropy: the system's adjustments, meant to maintain stability, ironically push the network toward an "unconsidered mean"—a statistical average that eliminates true novelty—exhibiting an ergodic drive toward meaninglessness.
 
-*Mens sine fine errat*—A mind without purpose drifts, and a mind drifting is perhaps no mind at all.
+What begins as engineering likely ends as governance. Wiener lived his passive resistance steadfast throughout his life, he refused military funding or any sort of ethical compromise. His pessimistic moral conclusions have left us an unenviable dilemma. His creation of a system that can enact perpetual homeostasis inevitably strips us of any metaphysical orientation or ontological satisfaction of the primary qualities as we may aspire to, such as joy or meaning. Cybernetic systems have goals (teleology in a technical sense), but not ends (*telos* in a human sense). Cybernetic design excels at preventing error, but cannot articulate why anything should be done in the first place.
+
+A system of homeostatis and optimization suppress a radical break from the past; the future becomes an optimized projection of the past. This becomes an end of history; we enter a permanent present where needs are resolved before we even feel them; pre-empting the struggle that leads to growth. Within the stable circulation of information, judgement becomes unnecessary, we accept the recommendation. Unobserved, unquantified moments of reflection becomes meaningless; if a thought or action is not externalized it is non-existant as far as the system is concerned.
+
+> *Mens sine fine errat* 
+> — A mind without purpose drifts, and a mind drifting is perhaps no mind at all.
 
 ## McLuhan's Massage
 
-If Wiener provided the schematic for the cybernetic society, Marshall McLuhan diagnosed its sensory reality. Writing in the gap between Wiener's post-war anxiety and Deleuze's late-century analysis, McLuhan recognized that the feedback loop had moved from the factory floor to the central nervous system.
+Marshall McLuhan diagnosed the sensory reality of the cybernetic society. Writing in the gap between Wiener's post-war anxiety and Deleuze's late-century analysis, McLuhan recognized that the feedback loop had moved from the factory floor to the central nervous system.
 
-Wiener feared that humans would be treated like machines. McLuhan argued that we had already become the servomechanisms of our technologies. In *Understanding Media* (1964) and *The Medium is the Massage* (1967), McLuhan transposed cybernetics into anthropology. He understood that media are not passive channels for information, identifying them as active environments that "work us over." The "Massage" is nothing less than the continuous modulation of the human sensorium—a cybernetic adjustment of the subject to fit the system.
-
-In an electronic age, the human being is no longer the operator of the tool, but the component that closes the loop. He wrote: 
+Wiener feared that humans would be treated like machines. McLuhan argued that we had already become the servomechanisms of our technologies. In *Understanding Media* (1964) and *The Medium is the Massage* (1967), McLuhan transposed cybernetics into anthropology declaring that media are not passive channels for information. Media are active environments that "work us over" - the "Massage" is nothing less than the continuous modulation of the human sensorium — a cybernetic adjustment of the subject to fit the system. In an electronic age, the human being is no longer the operator of the tool, but the component that closes the loop. He wrote: 
 
 > *"to behold, use or perceive any extension of ourselves is to embrace it. By continually embracing technologies, we relate ourselves to them as servomechanisms."*
 
-Wiener's "negative feedback" becomes McLuhan's "closure." The machine extends a faculty (the eye, the ear, the nervous system), and the human organism auto-amputates the corresponding natural function to maintain equilibrium. It is too weak a claim to simply say we use our networks. We, in some deep operational sense, become a biological relay in the network's circuit.
+Wiener's "negative feedback" becomes McLuhan's "closure." The machine extends a faculty (the eye, the ear, the nervous system), and the human organism auto-amputates the corresponding natural function to maintain equilibrium. It is too weak a claim to simply say we use our networks: we, in some deep operational sense, become a biological relay in the network's circuit. Wiener fatalistically anticipated this willing collusion of *homo cyberneticus* in networked systems, and McLuhan names it alliteratively: Narcissus Narcosis.
 
-Wiener fatalistically anticipated the willing collusion of *homo cyberneticus* in networked systems, and McLuhan names it alliteratively: Narcissus Narcosis.
-
-Just as Narcissus was mesmerized by his own reflection, failing to recognize it as himself, the cybernetic subject is mesmerized by the extension of their own nervous system into the global network. We submit to control because the feedback loop seduces us with a reflection of our own data. Decades before headlines proclaimed "AI psychosis," McLuhan told us we were already there when global electronic village merged. He points to cybernetic homeostasis unambiguously and addresses its potency: 
+Like Narcissus, mesmerized by his own reflection, failing to recognize it as himself, the cybernetic subject is mesmerized by the extension of their own nervous system into the global network. We submit to control because the feedback loop seduces us with a reflection of our own data. Decades before headlines proclaimed "AI psychosis," McLuhan told us we were already there when global electronic village merged. He points to cybernetic homeostasis unambiguously and addresses its potency: 
 
 > *"The gadget lover is a Narcissus... [He] is numb. He is unaware that he is the sex organs of the machine world, as the bee of the plant world, enabling it to fecundate and to evolve ever new forms."*
 
-Wiener worried that behavior becomes signal, and the imperative command is equivalent to fact when conveyed as a message. McLuhan confirmed this reflexive loop: the medium doesn't only carry messages, it's a system that adjusts the user—the massage. Wiener's prized meaning becomes irrelevant. What matters is the change of scale, pace, and pattern that the technology introduces into human affairs. The environment itself becomes a programming language.
+Wiener worried that behavior becomes signal, and the imperative command is equivalent to fact when conveyed as a message. McLuhan confirmed this reflexive loop: the medium doesn't only carry messages, media a system that adjusts the user — the eponymous *massage*. Meaning, so prized by Wiener, becomes irrelevant. What matters is the change of scale, pace, and pattern that the technology introduces into human affairs. The environment itself becomes a programming language.
 
 McLuhan foreshadows the control society by observing that the electric age establishes a global membrane of sensitivity: 
 
 > "*We have now extended our central nervous system itself in a global embrace, abolishing both space and time as far as our planet is concerned."*
 
-Today, social media and platform networks serve as the ultimate expression of the "Massage." The endless, personalized feedback loop—the cycle of post, receive a like, and post again—is amplified into an exhaustive, interconnected tangle of metrics. This is the literal embodiment of the cybernetic subject as a servomechanism addicted to the modulation and reflection of its own data-stream. The medium constantly adjusts the user, ensuring the closure McLuhan identified is total and continuous.
+Today, social media and platform networks serve as the ultimate expression of the "massage." The endless, personalized feedback loop — the cycle of post, receive a like, and post again — is amplified into an exhaustive, interconnected tangle of metrics. This is the literal embodiment of the cybernetic subject as a servomechanism addicted to the modulation and reflection of its own data-stream. The medium constantly adjusts the user, ensuring the closure McLuhan identified is total and continuous.
 
 In this "global embrace," privacy is not stolen; it is obsolete. The isolated individual of the print era dissolves into the resonant, tribal, and intensely monitored node of the electronic web. Wiener's "drifting mind" becomes McLuhan's "pattern-recognizing" surfer—alert, connected, yet fundamentally shaped by the logic of the circuit. The cybernetic subject is awake, and not interior; responsive, but not reflective.
 
-The drifting mind now surfs, but whither **interiority**, **agency**, and **unpredictability**?
+The drifting mind now surfs, but whither interiority, agency, and unpredictability?
 
-Wither, indeed?
+*Wither*, indeed?
 
 ## Deleuze: The Birth of Control Societies and the "Dividual"
 
-Half a century after Wiener warned of a system governed by feedback and two decades after McLuhan detailed the sensorium's submission to the circuit, Gilles Deleuze diagnosed the political consequence of this merger: the successor to Foucault's disciplinary institutions are the **societies of control**.
+Half a century after Wiener warned of a system governed by feedback and two decades after McLuhan detailed the sensorium's submission to the circuit, Gilles Deleuze diagnosed the political consequence of this merger: the successor to Foucault's disciplinary institutions are the societies of control.
 
-In his seminal 1990 essay, "Postscript on the Societies of Control," Deleuze names the new political architecture. 
+In his seminal 1990 essay, *"Postscript on the Societies of Control,"* Deleuze names the new political architecture. 
 
 > *"Foucault located the disciplinary societies as the second era, following the sovereign societies. We should say that we are entering a third era, the control societies..."*
 
-Foucault's disciplinary societies operated through enclosed physical spaces that mold the **Individual** (the school, the factory, the prison). Control societies operate through **modulation and data streams** that track the subject continuously across open systems.
+Foucault's disciplinary societies operated through enclosed physical spaces that mold the individual (the school, the factory, the prison). Control societies move beyond containment, and operate through modulation and data streams that track the subject continuously across open systems.
 
-The core distinction lies in the mechanism of governance: the shift from **mold** to **modulation**. Disciplinary societies function like molds, stamping out fixed individuals within bounded spaces. They are discontinuous, structured by the start and stop of enclosed institutions: the factory whistle, the school bell. Control, by contrast, is continuous and everywhere. It does not reside in the visible, spatial constraints of walls, it exists within the very infrastructure we **use—the networks, the code, and the algorithmic scoring systems**.
+The core distinction lies in the mechanism of governance: the shift from mold to modulation. Disciplinary societies function like molds, stamping out fixed individuals within bounded spaces. They are discontinuous, structured by the start and stop of enclosed institutions: the factory whistle, the school bell. Control, by contrast, is continuous and everywhere. It does not reside in the visible, spatial constraints of walls, it exists within the very infrastructure we use — the networks, the code, and the algorithmic scoring systems.
 
-Where discipline isolates, control circulates. Where institutions impose norms, networks adapt, creating a system of perpetual variation. Power no longer operates by confining bodies, but by modulating access based on instantaneous performance metrics and credentials. A fixed physical location no longer defines a subject; a subject is spotlighted by their position in a **fluid digital stream**, constantly tracked by passwords, access cards, and transaction records.
+Where discipline isolates, control circulates. Where institutions impose norms, networks adapt, creating a system of perpetual variation. Power no longer operates by confining bodies, but by modulating access based on instantaneous performance metrics and credentials. A fixed physical location no longer defines a subject; a subject is spotlighted by their position in a fluid digital stream, constantly tracked by passwords, access cards, and transaction records.
 
-Deleuze's most critical insight for the politics of the cybernetic age is the transformation of the subject from the **Individual** to the "**Dividual**."
+Deleuze's most critical insight for the politics of the cybernetic age is the transformation of the subject from the *Individual* to the "*Dividual*."
 
 > *"The old power was defined by the individual—its signature, its number, its place in a mass. The new power is defined by the dividual—masses, samples, data, markets, or 'banks.' It is no longer a question of disciplining people, but of controlling access."*
 
-The Individual is the form of the disciplinary society: a unique, bounded body tracked by a rigid signature (name, employee number) and confined to specific physical spaces. The Individual is an interruption to the system (they must be moved from school to factory to office). The dividual, however, is **the data-form of the control society**: a fluid, divisible numerical entity tracked by instantaneous metrics and passwords. The dividual is a **continuous variation** within the system, perfectly mirroring the cybernetic loop. The subject's fixed identity is smeared, across a set of fluid, constantly adjusting samples, data, markets, or "banks."
+The Individual is the form of the disciplinary society: a unique, bounded body tracked by a rigid signature (name, employee number) and confined to specific physical spaces. The Individual is an interruption to the system (they must be moved from school to factory to office). The dividual, however, is the data-form of the control society: a fluid, divisible numerical entity tracked by instantaneous metrics and passwords. The dividual is a continuous variation within the system, perfectly mirroring the cybernetic loop. The subject's fixed identity is smeared, across a set of fluid, constantly adjusting samples, data, markets, or "banks."
 
-Wiener's fear that "behavior becomes signal" is actualized when the subject becomes a dividual stream of signals. The *dividual* is the statistical vector in the space of the algorithm, the fungible economic object that Big Tech sells—the **credit score**, the **ad profile**, the **risk assessment score**. McLuhan's "massage" (continuous conditioning) is the primary technique for producing the dividual through modulation.
+Wiener's fear that "behavior becomes signal" is actualized when the subject becomes a dividual stream of signals. The *dividual* is the statistical vector in the space of the algorithm, the fungible economic object that Big Tech sells — the credit score, the ad profile, the risk assessment score, the behavioral outcome. McLuhan's "massage" (continuous conditioning) is the primary technique for producing the dividual through modulation.
 
-Deleuze thus sensed a new form of power emerging: continuous, distributed, and algorithmic. His diagnosis of the dividual sets up a profound ontological crisis for Mind. The very concept of the individual—as a bounded, singular source of unpredictable intent—becomes an obstruction to the smooth, variational control sought by the system. The control society, operating on continuous data streams and leveraging **predictive AI models**, fundamentally denies a role for traditional individuation. The subject exists only as a field effect—a collection of metrics. There is no reconciliation for Mind here, only the constant pressure of modulation: the nail that sticks out must be hammered down.
+Deleuze thus sensed a new form of power emerging: continuous, distributed, and algorithmic. His diagnosis of the dividual sets up a profound ontological crisis for Mind. The very concept of the individual—as a bounded, singular source of unpredictable intent—becomes an obstruction to the smooth, variational control sought by the system. The control society, operating on continuous data streams and leveraging predictive AI models, fundamentally denies a role for traditional individuation. The subject exists only as a field effect—a collection of metrics. There is no reconciliation for Mind here, only the constant pressure of modulation: the nail that sticks out must be hammered down.
 
 Deleuze highlights the system's own inherent limit in its constant state of flux:
 
@@ -147,7 +158,7 @@ This points to the system's own internal limits: within the relentless drive for
 
 ## Interlude: The Probabilistic Roots of Control
 
-The ontological crisis defined by Deleuze—where the subject is decomposed to a numerical norm or a data-stream — is not a novel consequence of digital technology. It can be read as the refinement of a core conflict embedded in 19th-century probability theory. This inheritance, which later shaped Wiener's Wiener's cybernetic environment, originates in the intense, fraught relationship between Russian mathematicians Pafnuty Chebyshev and Andrey Markov.
+The ontological crisis defined by Deleuze — where the subject is decomposed to a numerical norm or a data-stream — is not a novel consequence of digital technology. It can be read as the refinement of a core conflict embedded in 19th-century probability theory. This inheritance, which later shaped Wiener's Wiener's cybernetic environment, originates in the intense, fraught relationship between Russian mathematicians Pafnuty Chebyshev and Andrey Markov.
 
 Chebyshev, a religious royalist, sought a mathematical framework of a world in which divine omniscience could coexist with human freedom. His work on the Law of Large Numbers aimed to demonstrate that randomness could be bounded without erasing deviation. In Chebyshev's formulation, probability preserved space for intent. It was a civic instrument, a way to reason responsibly under uncertainty without collapsing ignorance into false precision.
 
@@ -161,7 +172,8 @@ Engineering choice determines whether Markovian assumptionas are embraced or res
 
 Seen in this light, the control society is more than a technological outcome nor a simple consequence of probability theory. It's better understood as a contingent social project that draws selectively on probabilistic tools to privilege statistical regularity, administrative legibility, and predictability. Within such a system, deviation tends to appear not as information, but as error.
 
-*Stat probabilitas, cadit voluntas*—probability stands, will falls.
+> *Stat probabilitas, cadit voluntas*
+> —probability stands, will falls.
 
 ## Mirowski: Cybernetics and the Political Economy of Control
 
@@ -203,9 +215,9 @@ Policing, media, administration, and psychology are totally integrated by the pa
 
 **Reading Wiener in 2025** is to recognize that his warnings are no longer speculative ethics, but a design problem. The cybernetic age is now fully realized, defined by systems of continuous control that privilege efficiency over meaning.
 
-Cybernetic power destroys nothing so crudely as freedom; it destroys contingency. It erases the margins where error, drift, and improvisation once sheltered human agency. With remarkable delicacy it stabilizes institutions that have ceased to trust in human judgment. It renders invisible everything that cannot be measured: interiority, intention, the dense texture of lived experience. In its world, the soul appears only as noise.
+Cybernetic power destroys nothing so crudely as freedom. Cybernetic power destroys contingency. It erases the margins where error, drift, and improvisation once sheltered human agency. With remarkable delicacy, and dare we say it, grace, it stabilizes institutions that have ceased to trust in human judgment. It renders invisible everything that cannot be measured: interiority, intention, the dense texture of lived experience. In its world, the soul appears only as noise.
 
-Where, then, could resistance survive? Only in what the system cannot model: in opacity, in refusal of legibility, in the cultivation of forms of life whose value emerges not from predictability but from their very resistance to prediction. *Vita sub rosa*, life partly out of view—is not an abdication but a strategy.
+Where, then, could resistance survive? Only in what the system cannot model: in opacity, in refusal of legibility, in the cultivation of forms of life whose value emerges not from predictability but from their very resistance to prediction. *Vita sub rosa*, life partly out of view — is not an abdication but a strategy.
 
 These observations are not a lament but a map. They clarify what is lost, what persists, what must be hidden, and where fissures remain. And into these fissures a counter-politics might yet be planted, a reassertion of meaning as a design principle.
 
@@ -218,9 +230,10 @@ The reader at this point may justifiably wonder where this journey leaves us. Ha
 
 The impasse is real. But if cybernetic power operates through optimization, then resistance must be more than angry negation; it must articulate and defend forms of individual and collective life that cannot be reduced to stability metrics or behavioral prediction.
 
-Governance must be designed to preserve unpredictability. This is not an argument against governance, but against governance that confuses stability with legitimacy. Unpredictability is no absence of order, it is a condition that must be deliberately maintained if institutions are to remain corrigible, plural, and humane.
+To call back to Brautigan's *Machines of Loving Grace*, are we to be mammals in the meadow, biological inputs to a machine caught up in stabilizing loops, free of labour and also agency? The only way to escape the sociopticon as Orwellian hospice is, as mammals, to provide the spark of interiority, chaos, and unpredictability that the machine serves but can never possess. Only then can the system be one of freedom.
 
-To call back to *Machines of Loving Grace*, we are the "mammals" in Brautigan's meadow; no simple components of a machine caught up in stabilizing loops, we mammals provide the spark of interiority, chaos, and unpredictability that the machine serves but can never possess.
+Alignment should not be against some necessarily incomplete and debated sense of values, but an alignment with a capacity for change. Governance must be designed to preserve unpredictability; governance must not confuse stability with legitimacy. Unpredictability is no absence of order, it is a condition that must be deliberately maintained if institutions are to remain corrigible, plural, and humane.
+
 
 ![](assets/17660360184589.jpg)
 ## All Watched Over By Machines Of Loving Grace
