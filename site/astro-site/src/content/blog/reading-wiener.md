@@ -23,27 +23,18 @@ Some time after stepping away from that physical stage, I began to look back on 
 
 ## Abstract
 
-Cybernetics did not emerge ex nihilo in 1948; it represents the technical crystallization of an ancient tension between systems of control and human autonomy. From the recursive Nous of Anaxagoras and the "managed cave" of Plato to the rigid verticality of the Great Chain and the industrial acceleration of Metropolis, proto-cybernetic thinking has repeatedly surfaced as a response to perceived chaos. By tracing this lineage through the "asymmetrical feedback" of religious orthodoxy and the "lateral sensors" of Enlightenment satire, we find that Norbert Wiener did not merely invent a science—he formalized a historical impasse. Today, as we navigate the "Sociopticon" of 2025, reading Wiener becomes an act of architectural diagnosis: a way to see the ancient cave walls hidden within our modern digital streams.
+Cybernetics did not emerge ex nihilo in 1948; it represents the technical crystallization of an ancient tension between systems of control and human autonomy. From the recursive Nous of Anaxagoras and the "managed cave" of Plato to the rigid verticality of the Great Chain and the industrial acceleration of Metropolis, proto-cybernetic thinking has repeatedly surfaced as a response to systems falling to disorder. By tracing this lineage through the "asymmetrical feedback" of religious orthodoxy and the "lateral sensors" of Enlightenment satire, we find that Norbert Wiener did more than invent a new science, he formalized a historical impasse and gave us the mathematical tools to understand it. Today, as we navigate the "Sociopticon" of 2025, reading Wiener becomes an act of architectural diagnosis, a way to see the ancient cave walls hidden within our modern digital streams.
 
 ## I. Cybernetics Before Cybernetics
 
-> *We have decided to call the entire field of control and communication
-theory, whether in the machine or in the animal, by the name
-Cybernetics, which we form from the Greek χυβερνήτης or steers-
-man. In choosing this term, we wish to recognize that the first
-significant paper on feedback mechanisms is an article on gover-
-nors, which was published by Clerk Maxwell in 1868, and that
-governor is derived from a Latin corruption of χυβερνήτης. We also
-wish to refer to the fact that the steering engines of a ship are
-indeed one of the earliest and best-­ developed forms of feedback
-mechanisms.*
+> *We have decided to call the entire field of control and communication theory, whether in the machine or in the animal, by the name Cybernetics, which we form from the Greek χυβερνήτης or steersman. In choosing this term, we wish to recognize that the first significant paper on feedback mechanisms is an article on governors, which was published by Clerk Maxwell in 1868, and that governor is derived from a Latin corruption of χυβερνήτης. We also wish to refer to the fact that the steering engines of a ship are indeed one of the earliest and best-­ developed forms of feedback mechanisms.*
 > - Norbert Wiener, Cybernetics: or Control and Communication in the Animal and Machine (1948)
 
 Wiener's definition of cybernetics announces a theory of control and communication applicable to machine and animal, only to anchor its genealogy in mechanical apparatus - the steering engines of ships and the governors of steam engines. The animal, in this definition feels rhetorical and it is often overlooked that Cybernetics is articulated from the outset as a fundamental property of life and applicable to animals, societies, as well as machines.
 
-To read Wiener in 2025 is to realize he was reaching for a deeper, older lineage: the biological concept of homeostais. Before the vacuum tube, there was Claude Bernard's milieu intérieur - the internal environment that remains stable despite in a changing world, and Walter Cannon's formalization of the "wisdom of the body".
+To read Wiener in 2025 is to realize he was reaching for a deeper, older idea, the biological concept of homeostais. Before the vacuum tube, there was Claude Bernard's milieu intérieur - the internal environment that remains stable despite in a changing world, and Walter Cannon's formalization of the "wisdom of the body".
 
-Wiener’s project was an attempt to find the biological soul within the machine, to bridge the gap between the living organism’s "wisdom" and the governor’s "logic." However, by grounding his proof in the mechanical, Wiener inadvertently prepared the way for the very thing he feared: the reduction of the biological to the algorithmic. If the animal is merely a set of feedback loops, then the animal can be optimized, modulated, and eventually, replaced by the more evidential renderings of mechanism in brass, steel, and steam.
+Wiener’s project was an attempt to find the biological soul within the machine, to bridge the gap between the living organism’s "wisdom" and the governor’s "logic." However, by grounding his proof in the mechanical, Wiener inadvertently prepared the way for the very thing he feared, the reduction of the biological to the algorithmic. If the animal is merely a set of feedback loops, then the animal can be optimized, modulated, and eventually, replaced by the more evidential renderings of mechanism in brass, steel, and steam.
 
 Long before Maxwell, control existed as metaphysics, theology, ritual, and governance. Religious orthodoxy functioned as a closed-loop system designed to suppress deviation. Political theory organized populations through corrective feedback: reward, punishment, surveillance, spectacle. Philosophical cosmologies, from Pythagorean harmony to Platonic order, posited self-regulating universes whose stability depended on proportion, hierarchy, and return to form.
 
