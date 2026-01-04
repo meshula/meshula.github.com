@@ -1,13 +1,11 @@
 ---
-title: "From the Great Chain to the Sociopticon: The Governance of Shadows"
+title: "Cybernetics: From the Great Chain to the Sociopticon"
 description: "The origins of cybernetics - the formal theory of control, from its seeds in the ancient Greek recursive mind, through the "Great Chain" of the Middle Ages, the wartime anxieties of the 1940s, and the Narcissus Narcosis of the Electronic Age. What follows is an attempt to understand the "Permanent Present", a system of governance 2,500 years in the making."
 pubDate: 2025-11-28
 tags: ["Wiener", "Cybernetics", "Delouze", "Foucault", "Chaplin", "Anaxagoras", "Markov", "Mirowski", "Orwell", "McLuhan"]
 author: "Nick Porcino"
 draft: false
 ---
-
-# From the Great Chain to the Sociopticon: The Governance of Shadows
 
 ## Author's Preface
 
@@ -42,7 +40,7 @@ The steersman is an interpreter of signals, watching the wind, current, stars, t
 
 Biological feedback, embodied in homeostasis, adaptation, and learning, was conceptually present in antiquity but suffered fracture from formal philosophy in the post-Roman period. The dominance of teleology and theology, which framed regulation as purpose-driven or divinely mandated stood in tension with the notion of dynamically emergent structure. To acknowledge feedback in animals and Nature was to threaten fixed hierarchies, between body and soul, ruler and ruled, Creator and creation.
 
-Proto-cybernetics thus appears historically as a recurring pattern that repeatedly encounters resistance. More than simply steering a vessel, cybernetics has existed in one form or another as a system meant to produce order out of chaos. Here we will trace cybernetics in its broader form where it appears as a means of governance and control As we shall see, whenever systems appear to self-regulate and thereby evade command, orthodoxy intervenes. When control becomes distributed rather than centralized, it is reabsorbed into doctrine, myth, or mechanism.
+More than simply steering a vessel, cybernetics has existed in one form or another as a system meant to produce order out of chaos. Proto-cybernetics appears historically as a recurring pattern that repeatedly encounters resistance from the governed system. As we shall see, whenever systems appear to self-regulate and thereby evade command, orthodoxy intervenes - whenever control becomes distributed rather than centralized, it is reabsorbed into doctrine, myth, or mechanism.
 
 ⸻
 
