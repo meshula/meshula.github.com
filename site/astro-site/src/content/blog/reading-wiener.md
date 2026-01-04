@@ -1,5 +1,5 @@
 ---
-title: "From the Great Chain to the Sociopticon: The Governance of Shadows"
+title: "Cybernetics: From the Great Chain to the Sociopticon"
 description: "The origins of cybernetics - the formal theory of control, from its seeds in the ancient Greek recursive mind, through the Great Chain of the Middle Ages, the wartime anxieties of the 1940s, and the Narcissus Narcosis of the Electronic Age. What follows is an attempt to understand the Permanent Present, a system of governance 2,500 years in the making."
 pubDate: 2025-11-28
 tags: ["Wiener", "Cybernetics", "Delouze", "Foucault", "Chaplin", "Anaxagoras", "Markov", "Mirowski", "Orwell", "McLuhan"]
