@@ -1,4 +1,13 @@
 
+---
+title: "Synthetic Intelligence: Distributed Control of Intelligent Systems"
+description: "Syntelligence architecture from 1990-present"
+pubDate: 1990
+tags: ["InsectAI", "Neural Networks", "Synthetic Intelligence"]
+author: "Nick Porcino"
+draft: false
+---
+
 # Synthetic Intelligence
 ## Distributed Control of Intelligent Systems
 
