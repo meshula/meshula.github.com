@@ -1,5 +1,5 @@
 
-# Insect AI 3
+# Synthetic Intelligence
 ## Distributed Control of Intelligent Systems
 
 (c) 1990-2013 Nick Porcino
@@ -8,7 +8,13 @@
 Keywords: distributed control, neural networks, subsumption, Braitenberg, games, artificial intelligence, robotics, mechatronics, neuroethology                           
 <hr />
 
-#### The Complexity Trap
+This article has appeared in various editions on the web since the early 1990s. It grew out of a formalization of research for a "Synthetic Intelligence Pet", a so-called Syntelligence Pet, or a Syntellipet, conducted in 1990 at the Strategic Research & Development Group of Bandai, in Kanda Tokyo.
+
+Originally meant to be a revolutionary toy, possibly one of the first to embed a CPU for general intelligence, the syntellipet would have been a small, cute robot driven by a neural network controller modulated by basic needs such as hunger, fatigue, curiosity, and happiness. The development took a turn when it was noticed that the simulation looked an awful lot like a video game, and the idea of a game cartridge with a battery and real time clock took hold. The pet, no longer embodied in a robot body would be awake when inserted in the game console, and the player would take care of it. Someone suggested that if a screen were to be attached to the cartridge, and some buttons, there'd be no need for a game console, and kids could carry the pet with them everywhere. The project migrated then from R&D to product development, and Tamagotchi was born.
+
+The architecture described is directly descended from that seminal research, and the author continues work on this style of artificial intelligence, known as computational neuroethology to this date. Since then the architecture has been deployed in other projects, such as Star Wars Super Bombad Racing, Lucas Learning, 2000.
+
+### The Complexity Trap
 
 AI has advanced as far as it has through the successful application and exploitation of reductionism. John von Neumann said that if something can be described precisely enough in A implies B language, it can be programmed [^von-neumann-1958]. Accordingly it should be possible to fully describe a task through a decomposition of fine enough detail. Early practitioners of AI soon discovered that task decomposition quickly becomes monstrous for a task of any significance. The difficulty, or even the impossibility, of making precise enough system descriptions is the Complexity Trap.
 
@@ -28,7 +34,7 @@ Unfortunately, as task complexity increases, the Subsumption Architecture falls 
 
 Nagata et al in Japan proposed a solution to the hierarchical control problem in reactive architectures in 1990 [^Nagata-1990]. The difference in character between autonomous, strictly reactive reflexes and the more complex behaviours which are a result of the interactions of lower level reflexes suggests a functional split for the proposed architecture. By splitting control problems into two parts - a _reason_ module, and an _instinct_ module. _Reflexes_ implementing simple or atomic tasks are arranged within each module. The _instinct_ module implements those basic behaviors such as _Steer Towards Light_ for which any of the common reactive architectures excel. The _reflexes_ in the _instinct_ module can affect the environment directly, and also outputs a self-awareness vector encoding its activity. The _reflexes_ in the _reason_ module monitor the self-awareness vector and the environment, and output an _intention_ vector that selects amongst the behaviors carried out by the _instinct_ module. The _reason_ module cannot affect the environment directly.
 
-![Insect AI 3](../../posts/syntFigure1.gif "Figure 1.")
+*FIGURE MISSING*
 
 
 ##Insect AI 3
@@ -63,7 +69,7 @@ Development of Insect AI 3 architectures incorporating the reason-instinct split
 
 Whereas external senses are of primary importance only to the reason module, the internal senses must be divided into a self-awareness vector for the reason module, and peripheral senses for the instinct module. The self-awareness signals are the means by which the reason module's meta-reflex can monitor (be aware of) the activity of the reflexes in the instinct module. The peripheral senses and intention vector drive the instinct module, which in turn controls the effectors, completing the loop by providing a means whereby a robotic or other intelligent system can modify, and be modified by, the total environment.
 
-> ![Insect AI 3, Level I](../../posts/syntFigure1.gif "Figure 1.")
+*FIGURE MISSING*
 
 The Insect AI 3 architecture is modelled after the invertebrate nervous system. The __reason__ module is analogous to the invertebrate's cerebral ganglia, the __instinct__ module corresponds to the thoracic or sub-cerebral ganglia. The __intention vector__ is the means by which __meta-reflexes__ control __reflexes__, and the __self-awareness vector__ allows the reflexes to influence the meta-reflexes.
 
