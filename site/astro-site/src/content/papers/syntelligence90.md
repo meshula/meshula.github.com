@@ -3,54 +3,75 @@
 title: "Synthetic Intelligence: Distributed Control of Intelligent Systems"
 description: "Syntelligence architecture from 1990-present"
 pubDate: 1990
-tags: ["InsectAI", "Neural Networks", "Synthetic Intelligence"]
+tags: ["distributed control", "neural networks", "subsumption", "Braitenberg", "games", "artificial intelligence", "robotics", "mechatronics", "neuroethology "]
 author: "Nick Porcino"
 draft: false
 ---
 
-# Synthetic Intelligence
-## Distributed Control of Intelligent Systems
+# Synthetic Intelligence, 2026 Edition
+## Syntellipet and the Distributed Control of Intelligent Systems
 
-(c) 1990-2013 Nick Porcino
+(c) 1990-2026 Nick Porcino
 
-<hr />
-Keywords: distributed control, neural networks, subsumption, Braitenberg, games, artificial intelligence, robotics, mechatronics, neuroethology                           
-<hr />
+**LLM disclosure**: This article was written by hand and brain. For the 2026 edition, an LLM was used for spell checking, for identifying category errors and other intellectual faults, to verify that references in the article are used appropriately in context, and to check that credit to original ideas is given where it is due by asking for prior research references on related topics. All self-indulgent flowery prose, malapropisms, mistakes, and misunderstandings are my own.
 
-This article has appeared in various editions on the web since the early 1990s. It grew out of a formalization of research for a "Synthetic Intelligence Pet", a so-called Syntelligence Pet, or a Syntellipet, conducted in 1990 at the Strategic Research & Development Group of Bandai, in Kanda Tokyo.
+## Introduction
 
-Originally meant to be a revolutionary toy, possibly one of the first to embed a CPU for general intelligence, the syntellipet would have been a small, cute robot driven by a neural network controller modulated by basic needs such as hunger, fatigue, curiosity, and happiness. The development took a turn when it was noticed that the simulation looked an awful lot like a video game, and the idea of a game cartridge with a battery and real time clock took hold. The pet, no longer embodied in a robot body would be awake when inserted in the game console, and the player would take care of it. Someone suggested that if a screen were to be attached to the cartridge, and some buttons, there'd be no need for a game console, and kids could carry the pet with them everywhere. The project migrated then from R&D to product development, and Tamagotchi was born.
+This article has appeared in various editions on the web since the early 1990s. It grew out of a formalization of research by the author for a "Synthetic Intelligence Pet", a so-called Syntelligence Pet, or a **Syntellipet**, conducted in 1990 at the Strategic Research & Development Group of **Bandai**, in Kanda Tokyo while the author was a visiting researcher.
 
-The architecture described is directly descended from that seminal research, and the author continues work on this style of artificial intelligence, known as computational neuroethology to this date. Since then the architecture has been deployed in other projects, such as Star Wars Super Bombad Racing, Lucas Learning, 2000.
+Originally meant to be a revolutionary toy, possibly one of the first to embed a CPU for general intelligence, the syntellipet would have been a small, cute robot driven by a neural network controller modulated by basic needs such as hunger, fatigue, curiosity, and happiness. The Syntellipet was a Braitenberg **Vehicle**, a machine where complex behavior emerges from simple sensor-motor connections rather than a central "reasoning" hub. In those days embedding a CPU of any complexity in a toy was rare and challenging, and lightweight neural processing offered an avenue to complex behavior exceeding what be accomplished with pure proceduralism.
+
+![Figure 1: Two Syntellipet variants](assets/17681595957414.jpg)
+
+Various embodiments were explored. In Figure 1, on the left, a clockwork escapement is combined with a small microcontroller to create a smart wind up toy. On the right, a more sophisticated variant is proposed optimized to embody as much sensing and actuation as possible in the smallest possible package. The fundamental size constraint in the design was the dimensions of the AA battery most typically used in toys at the time; as a matter of fact, the size and density of the energy supply is always the primary concern when making small products.
+
+Behavioral schemata were designed for the Syntellipet. Figure 2 shows a number of explorations: Syntellipets involved a game of tag, a spontaneous conversation, play, sleep and wake, and a playful dance. 
+
+![Figure 2: Sample behavioral repetoire for Syntellipet.](assets/17681602373108.jpg)
+
+The robot prototypes communicated via infrared signalling in order to enact these coordinated behaviours. Circuitry and prototype robots were built and extensively iterated, each iteration making the total technology package smaller.
+
+![Figure 3. Syntellipet circuitry.](assets/17681708599123.jpg)
+
+In the vein of Braitenberg's Vehicles, a behavioral schematic was constructed and translated to code that could run efficiently and effectively on the microprocessors of the time.
+
+![Figure 4. The behavioral schemata of the Syntellipet.](assets/17681709706882.jpg)
+
+Once the hardware prototype existed, it quickly became clear that iteration, involving first compiling the software on a PC9801, transferring it via RS232C serial communications to an EEPROM burner, "burning" a ROM, and then debugging was a hindrance to innovation and iteration; a simulator, in a custom realtime visualization engine made for the purpose was the obvious solution.
+
+The development took a turn when it was noticed that the simulation of the toy looked an awful lot like a video game, and the idea of a Super Famicon game cartridge with a battery and real time clock took hold. The pet, no longer embodied in a robot body would be awake when inserted in the game console, and the player would take care of it. Someone suggested that if a screen were to be attached to the cartridge, and some buttons, there'd be no need for a game console, and kids could carry the pet with them everywhere. The project migrated then from R&D to product development, where the concepts found a home. Aki Maita was already intrigued with the concept of a "pet that could be carried around," based on her observations of Japanese schoolchildren, and the rest is history, the **Tamagotchi** project has had a profound impact on the way we think about toys and interactivity that continues today.
+
+The architecture described herein is directly descended from that original research, and the author continues work on this style of artificial intelligence, known as computational neuroethology, to this date. Since then the architecture has been deployed in other projects, such as **Star Wars Super Bombad Racing** (Lucas Learning, 2000), and described in textbooks such as the **AI Game Programming Wisdom** series.
 
 ### The Complexity Trap
 
-AI has advanced as far as it has through the successful application and exploitation of reductionism. John von Neumann said that if something can be described precisely enough in A implies B language, it can be programmed [^von-neumann-1958]. Accordingly it should be possible to fully describe a task through a decomposition of fine enough detail. Early practitioners of AI soon discovered that task decomposition quickly becomes monstrous for a task of any significance. The difficulty, or even the impossibility, of making precise enough system descriptions is the Complexity Trap.
-
-In the early 1960's, Marvin Minsky and Seymour Papert built a robot whose task was to use a robotic hand to copy children's building block structures it saw through its camera. 
+At the time of the original writing, 1990, AI had advanced as far as it had through the successful application and exploitation of **reductionism**. John von Neumann had observed that if something can be described precisely enough in A implies B language, it can be programmed [^von-neumann-1958]. The implication was that any task could be decomposed into fine enough steps that automation could be achieved. Early practitioners of AI soon discovered that the complexity of such a task decomposition quickly becomes monstrous for a task of any significance. The difficulty, or even the impossibility, of making precise enough system descriptions is the **Complexity Trap**.
 
 > It took several years for us and our students to develop *Move, See, Grasp*, and hundreds of other little programs we needed... The project left us wondering if even a thousand microskills would be enough to enable a child to fill a pail with sand. [^Minsky-87-2-5]
 
-As they broke the block-world task down, complexity was revealed onion-like. At first, the task decomposition is fairly straight forward: find the small red block, find the green block, put the red block on top of the green one. The lurking complexity is revealed at the next level of decomposition: "find the small red block" becomes a question of selecting one object among many in the environment. The task breaks down into smaller and smaller steps until it finally reaches the level of basic manipulation of bit-mapped figures. 
+In the early 1960's, Marvin Minsky and Seymour Papert built a robot whose task was to use a robotic hand to copy children's building block structures it saw through its camera.  As they broke the block-world task down, complexity was revealed onion-like. At first, the task decomposition was fairly straight forward: find the small red block, find the green block, put the red block on top of the green one. The lurking complexity is revealed at the next level of decomposition: "find the small red block" becomes a question of selecting one object among many in the environment and discriminating basic qualities, such as "block", "red", and "small". The vision task breaks down into smaller and smaller steps until it finally reaches the level of basic manipulation of bit-mapped figures.
 
-Every task unfolds into smaller tasks each masking complexity. At first, it seemed that a hierarchy of tasks could be designed, but that approach ran into trouble as well. The robotic arm might need to move a block out of the way to allow an obscured block to be grasped, and then the tasks would have to be re-ordered to allow progress to proceed. The resulting combinatorial explosion of task complexity seemed completely unlike the problem solving methods of natural intelligence. The functions of human intelligence which we consider the highest (such as logical reasoning) are the easiest for a computer to do. Integral calculus and logical proofs can be easier to program than "simple" tasks like distinguishing a circle from a square because at the lowest levels the calculus problems are logical operations on strings of symbols, whereas distinguishing circles from squares involves more difficult problems such as the fundamental representations of concepts and geometries. These issues led leading Minsky and Papert to propose that the mind might be composed of a number of semi-autonomous agents that solve these problems through their interactions, in a so-called Society of Mind.
+Every subsequent and associated task individually unfolds into smaller tasks each revealing more complexity and onion layers. The robotic arm might need to move a block out of the way to allow an obscured block to be grasped, and then the tasks would have to be re-ordered to allow progress to proceed; aligning one block's center of gravity over the others is an another task, and so it goes. The resulting combinatorial explosion seemed completely unlike the problem solving methods of natural intelligence. The functions of human intelligence which we consider the highest (such as logical reasoning) were found the easiest for a computer to do. Integral calculus and logical proofs can be easier to program than "simple" tasks like distinguishing a circle from a square because at the lowest levels the calculus problems are logical operations on strings of symbols, whereas distinguishing circles from squares involves more difficult problems such as the fundamental representations of concepts and geometries.
 
-AI and control's traditional approach of hierarchical task decomposition limits behavioral repetoire and flexibility. We characterize "robotic" motion as simplistic, rote and repetitive. Early researchers built on the Society of Mind concept to try to create behavio that break out of the robotic mold. 
+Hans Moravec later called out the paradox:
 
-The hierarchical Subsumption Architecture of Rodney Brooks [^Brooks-1986] was a decisive step towards a robust methodology for distributed control. The Subsumption Architecture proposed that tasks could layer their complexity; the most basic behaviors would exist at the deepest levels of the system, and more complex behaviors would be in layers above those. The more complex layers would be activated as certain conditions were met, and would "subsume" the behavior of the lower levels as long as those conditions were valid. A low level behavior might be _Steer Towards Light_, and a higher level behavior might be _Stop and Recharge_, activated when light levels achieve a certain threshold and battery levels are low. When _Stop and Recharge_ is active, it would suppress _Steer Towards Light_.
+>> "It is comparatively easy to make computers exhibit adult level performance on intelligence tests or playing checkers, and difficult or impossible to give them the skills of a one-year-old when it comes to perception and mobility."
 
-Unfortunately, as task complexity increases, the Subsumption Architecture falls victim to the same complex task decomposition and higher level design problems as the traditional methods. A further severe limitation of the Subsumption Architecture is that since it is non-deterministic, entirely state-driven, and does not incorporate memory of actions, it cannot carry out predetermined sequences of actions [^Bellingham-1990-1]. Bellingham [^Bellingham-1990-2] modified the Subsumption Architecture to include scriptable behaviors.
+These issues led leading Minsky and Papert to propose that the mind might be composed of a number of semi-autonomous agents that solve these problems through their interactions, in a so-called **Society of Mind**.
 
-Nagata et al in Japan proposed a solution to the hierarchical control problem in reactive architectures in 1990 [^Nagata-1990]. The difference in character between autonomous, strictly reactive reflexes and the more complex behaviours which are a result of the interactions of lower level reflexes suggests a functional split for the proposed architecture. By splitting control problems into two parts - a _reason_ module, and an _instinct_ module. _Reflexes_ implementing simple or atomic tasks are arranged within each module. The _instinct_ module implements those basic behaviors such as _Steer Towards Light_ for which any of the common reactive architectures excel. The _reflexes_ in the _instinct_ module can affect the environment directly, and also outputs a self-awareness vector encoding its activity. The _reflexes_ in the _reason_ module monitor the self-awareness vector and the environment, and output an _intention_ vector that selects amongst the behaviors carried out by the _instinct_ module. The _reason_ module cannot affect the environment directly.
+Hierarchical task decomposition, the traditional foundation of AI and programming in general, limits behavioral repetoire and flexibility. Linguistically, we characterize "robotic" motion as simplistic, rote and repetitive. Early researchers built on the Society of Mind concept in attempts to create behaviour that might break out of the robotic mold.
 
-*FIGURE MISSING*
+The hierarchical **Subsumption Architecture** of Rodney Brooks [^Brooks-1986] was a decisive step towards a robust methodology for distributed control. The Subsumption Architecture proposed that tasks could layer their complexity; the most basic behaviors would exist at the deepest levels of the system, and more complex behaviors would be in layers above those. The more complex layers would be activated as certain conditions were met, and would "subsume" the behavior of the lower levels as long as those conditions were valid. A low level behavior might be *Steer Towards Light*, and a higher level behavior might be *Stop and Recharge*. When *Stop and Recharge* is active, it would suppress, by subsumption, *Steer Towards Light*.
 
+Each layer in a Subsumption machine is an independent sense-act loop. This was Brooks' rejection of the traditional vertical sense-model-plan-act pipeline. As each layer in the hierarchy activates, it subsumes the layer below it, taking over the sense-act behaviours. Unfortunately, as task complexity increases, the Subsumption Architecture falls victim to the same complex task decomposition and higher level design problems as the traditional methods. A consequence of the Subsumption Architecture's nature - it is non-deterministic, entirely state-driven, and does not incorporate memory of actions - is that it cannot carry out predetermined sequences of actions. Bellingham [^Bellingham-1990-1, 2] studied that problem and modified the Subsumption Architecture to include scriptable behaviors.
+
+Nagata et al in Japan proposed an alternative solution to the hierarchical control problem in reactive architectures in 1990 [^Nagata-1990]. The difference in character between autonomous, strictly reactive reflexes and the more complex behaviours which are a result of the interactions of lower level reflexes suggests a functional split for the proposed architecture. As shown in the following figure, their architcture splits the control problem into two parts: a **Reason** module, and an **Instinct** module. **Reflexes** implementing simple or atomic tasks are arranged within each module (not shown in the diagram). The Instinct module implements those basic behaviors such as *Steer Towards Light* for which any of the common reactive architectures excel. The Reflexes in the Instinct module can affect the environment directly, and also outputs a self-awareness vector encoding its activity. The Reflexes in the Reason module monitor the self-awareness vector and the environment, and output an **Intention** vector that selects amongst the behaviors carried out by the Instinct module. The Reason module thus cannot affect the environment directly.
 
 ## Insect AI 3
 
 Insect AI 3 is not so much a new architecture for distibuted control as it is a conceptual framework to facilitate the development of intelligent systems with a high degree of flexibility in their operation and in their interactions with underspecified environments. It embodies several high level concepts which taken together offer a way out of the Complexity Trap.
 
-Insect AI
+Insect AI:
 
 - Distinguishes between high level behavioural control (meta-reflexes) and low level reflex behaviours
 - Recognizes that complex behaviours may be the result of a complex environment
@@ -62,12 +83,13 @@ Insect AI
 
 The use of the proposed architecture is demonstrated by Network 1 which accomplishes the task of multi-robot coordination, and by Network 2, the artificial insect controller of (Beer, et al, 1990)[^Beer-1990] whose architecture is isomorphic with the work presented here.
 
-Insect AI 3 builds upon the reason/instinct architecture, adding a __desires__ automaton to the _reason_ module to sequence behaviors by controlling the _intention_ vector. Insect AI 3 combines the ideas of the Subsumption Architecture, neural network control, and behavioral sequencing. 
+Insect AI 3 builds upon the reason/instinct architecture, adding a **Desires** automaton to the **Reason** module to sequence behaviors by controlling the **Intention Vector**. Insect AI 3 combines the ideas of the Subsumption Architecture, neural network control, and behavioral sequencing. The **Reason** module acts as a modulator rather than a commander. In traditional AI,  "reasoning" tells the legs how to move. In Insect AI 3, **Reason** tilts the **Instinct** module's goals via the **Intention Vector**, see Figure 5.
 
+![Figure 5. The Insect AI 3 Architecture](assets/17681923672217.jpg)
 
 ### Complex Behavior arises from the Environment
 
-Von Neumann warned that the full description of a system's behaviour may be more complex than the system itself [^von-neumann-1958-2]. Complex behaviour may be the result of a complex environment [^Brooks-1986-2]. Insect AI 3 does not aim for a system description which must almost necessarily be incomplete. Instead simplex reflex arcs subserving low level behaviours are designed, and feedback is introduced to modulate the interactions of the behaviours. The resulting system exhibits so called "emergent behaviours" - behaviours which have not been explicitly specified at the level of the system's implementation. 
+Von Neumann warned that the full description of a system's behaviour may be more complex than the system itself [^von-neumann-1958-2]. Complex behaviour may be the result of a complex environment [^Brooks-1986-2], and finally, the observation that the world is its own best model. Insect AI 3 does not aim for a system description which must almost necessarily be incomplete. Instead simplex reflex arcs subserving low level behaviours are designed, and feedback is introduced to modulate the interactions of the behaviours. The resulting system exhibits so called "emergent behaviours" - behaviours which have not been explicitly specified at the level of the system's implementation. 
 
 
 ### Internal and Peripheral Senses
@@ -76,15 +98,13 @@ Following Nagata et al[^Nagata-1990-2], Insect AI 3 splits a system into an "ins
 
 Development of Insect AI 3 architectures incorporating the reason-instinct split revealed that the two modules can be characterized in terms of the sensory modalities appropriate to each module. Some senses such as hearing and vision are specific to the external environment. Other senses are internal, for example, feedback about the state of low level reflexes, and proprioceptive sensing such as force feedback from a manipulator.
 
-Whereas external senses are of primary importance only to the reason module, the internal senses must be divided into a self-awareness vector for the reason module, and peripheral senses for the instinct module. The self-awareness signals are the means by which the reason module's meta-reflex can monitor (be aware of) the activity of the reflexes in the instinct module. The peripheral senses and intention vector drive the instinct module, which in turn controls the effectors, completing the loop by providing a means whereby a robotic or other intelligent system can modify, and be modified by, the total environment.
-
-*FIGURE MISSING*
+Whereas external senses are of primary importance only to the reason module, the internal senses must be divided into a self-awareness vector for the reason module, and peripheral senses for the instinct module. The self-awareness signals are the means by which the reason module's meta-reflex can monitor (be aware of) the activity of the reflexes in the instinct module. The peripheral senses and intention vector drive the instinct module, which in turn controls the effectors, completing the loop by providing a means whereby a robotic or other intelligent system can modify, and be modified by, the total environment. Refer again to Figure 5.
 
 The Insect AI 3 architecture is modelled after the invertebrate nervous system. The __reason__ module is analogous to the invertebrate's cerebral ganglia, the __instinct__ module corresponds to the thoracic or sub-cerebral ganglia. The __intention vector__ is the means by which __meta-reflexes__ control __reflexes__, and the __self-awareness vector__ allows the reflexes to influence the meta-reflexes.
 
 ### Neural and Neuronal Networks
 
-The study of neural and neuronal networks are important to the architecture as a quick glance at the references reveals. Insect AI 3 grew out of a study of invertebrate nervous systems and the application of neuromimetic computational architectures to intelligent systems control [^Porcino-1990][^Porcino-Collins-1990]. Invertebrates exhibit a high level of sophistication despite the relative simplicity of their nervous systems, and thus pose a significant challenge to researchers[^Cliff-1990].
+The study of neural and neuronal networks are important to the architecture as a quick glance at the references reveals. Insect AI 3 grew out of a study of **invertebrate nervous systems** and the application of **neuromimetic computational architectures** to intelligent systems control [^Porcino-1990][^Porcino-Collins-1990]. Invertebrates exhibit a high level of sophistication despite the relative simplicity of their nervous systems, and thus pose a significant challenge to researchers[^Cliff-1990].
 
 Invertebrate neuronal networks are self-calibrating - an insect can adapt to changing conditions such as the state of the environment, or changing morphology such as losing a leg. This is a characteristic shared with behaviours intended for the Subsumption Architecture. Invertebrate neuronal networks are very much like adaptive control systems, and are ideally adapted by nature for real-time control.
 
@@ -129,6 +149,8 @@ The reason module introduces the concept of "consensus decision building." The i
 
 Network 1 illustrates the use of reflexes and meta-reflexes. It is ia controller which could be easily implemented by Levels 0, 1, and 2 of the Subsumption Architecture (Figure 6). Like the Architecture presented here, the Subsumption Architecture makes use of networks of simple interacting reflexes[^Brooks-1986-3]. Higher level Subsumption Architecture behaviours supproess lower level behaviours and take over their functionality in a process called "subsumption." Lower level behaviours can never suppress higher level behaviours. In contrast, the Architecture presented here avoids a hierarchical arranagement by introducing the Self-Awareness feedback vector, which allows the emergence of interesting behaviour.
 
+Secondary sensing provides the system with phenomological awareness; or at least, the epistemological seeming of phenomenological awareness. A toy might slow, and investigate some aspect of the immediate environment, behavior we might ascribe to curiosity; as a phenomenonological vector, curiosity emerges trivial from a decay function modulating the activation of a "wander" reflex. The appearance of "happiness" may emerge via a combination of a curiosity affect, repetitive cognitive activation responding to the appearance of a ball in the visual field, and activation of secondary mechanisms such as a wagging tail.
+
 ### Limitations of the Subsumption Architecture
 
 The principal advantage of Subsumption is that low level behaviours can be readily designed and implemented, and subsequencty layers can be added on top of the correctly functioning lower levels. Unfortunately, there are some implicit problems with the Subsumption Architecture which have been addressed with varying degrees of success:
@@ -140,6 +162,8 @@ The principal advantage of Subsumption is that low level behaviours can be readi
 The Architecture presented here addresses these problems through the introduction of the self awareness vector and by allowing reflexes and meta-reflexes to work through reciprocity instead of hierarchy. In order to illustrate these principles we willl consider the simulated insect behavioural controller of Beer, Chiel, and Sterling[^Beer-1989]. This controller has been selected because it is isomorphic to the Architecture presented here (Network 2, Figure 7). The behaviour of this controller is well understood and exhibits a number of properties which suggest that controllers using similar architectures might be suitable for the control of other intelligent autonomous systems.
 
 The basis reflexes of Network 2 are the locomotion and chewing reflexes, these suggest the two basic behaviours of the simulated insect: moving around and eating. The reciprocally connected meta-reflexes are eat, move to food, follow edges, and wander. The simulated insect's instinct module has an internal energy monitor which watches the energy level of the insect. Like the senses of Network 1, the energy monitor has a logarithmic response, becoming most active in the most behaviourally significant state: when the internal energy state is low, the insect is "hungry."
+
+To embody apparent behaviors and motivations in systems that must be expressive, such as toys or animated characters, emotions themselves become expressed in this system as cumulatory activation signals. Emotions become **Global Regulatory Variables**.
 
 As the insect gets "hungry" the eat and move to food meta-reflexes become more and more active. Move to food suppresses follow edges, although wander continues to be active. Move to food operates in the same way as the move to goal reflex of Network 1, that is, by following "scent" gradients detected by two antenn・ When "food" is found, the sensors in the mouth activate the chew reflex. The chew reflex in turn suppresses the move to food reflex and allows the eat reflex to become active which further suppresses move to food. Eating continues until the internal energy level is saturated, at which point the internal energy monitor becomes inactive, releasing the follow edges behaviour from inhibition. Eat and move to food also become inactive.
 
@@ -156,9 +180,41 @@ Simulation shows that the distributed nature of the system allows it to cope wit
 
 ### The Desires Automaton
 
-To be fully practical, a control architecture must be able to specify exact sequences of behaviours. In order to give Level 1 this ability, the desires automaton is introduced. It is essentially a stored sequence generator. Its action is to activate specific meta-reflexes then wait for a terminating condition to be satisifed, at which point it activates another set of meta-reflexes. The name desires comes from the fact that the automaton acts through the self-awareness vector to tell the meta-reflexes what the "want" to do next. The simplest mechanism to implement the desires automaton is a finite state machine or a Petri net.
+To be fully practical, a control architecture must be able to specify exact sequences of behaviours, both in order to achieve goals that require sequential satisfaction, and also in order to avoid a 'dithering' effect where an agent becomes trapped between competing stimuli. The "**Desires**" module is introduced in order to extend Level 1 with abilities beyond trivial reactivity. It accomplishes this by acting effectively as a stored sequence generator. Its action is to activate specific meta-reflexes then wait for a terminating condition to be satisifed, at which point it activates another set of meta-reflexes. The name desires comes from the fact that the automaton acts through the self-awareness vector to tell the meta-reflexes what the "want" to do next. The simplest mechanism to implement the desires automaton is a finite state machine or a Petri net.
+
+It functions by monitoring the Self-Awareness Vector and environmental stimuli against pre-set internal thresholds. Once a desire (such as 'Foraging') is activated, it latches. This latching mechanism ensures that the system maintains a persistent Intention Vector until a termination condition is met (e.g., energy saturation). This provides the "behavioral momentum" observed in natural organisms, where a predator will continue a chase even if a minor distraction occurs.
 
 The desires automaton has its biological precedent in the low level behavioural sequence reflexes of invertebrates which simple mindedly carry out complex tasks such as taking steps, building webs, spinning cocoons, bring prey back to a nest, mating, and so on. It seems that many of these tasks are sequenced by ganglia at a level lower than the cerebral ganglion and thus appear to be reflexes controlling meta-reflexes. These meta-meta-reflexes foreshadow the "association" module of Level 2.
+
+### Level 2: The Associative-Experiential Layer.
+
+Level 0 implements a simple "reactive now" of Level 0. In Level 1, the agent is a slave to its current drives. In Level 2, the agent becomes a subject of its own history. The "obvious" solution is a cybernetic loop, but the complexity lies in the regulation of the agent's internal model of the world to ensure it matches reality, while simultaneously managing the "affective" cost of that modeling. Level 2 is thus an **Epistemic Homeostatic Controller**.
+
+Level 2 introduces the **Association-Experience Module**, analogous to the vertebrate cortex. While the **Instinct** and **Reason** modules handle the mechanics and intentions of the present, Level 2 governs the meaning of the past and the expectation of the future. It is here that the system transitions from a sophisticated automaton to a persistent "self."
+
+### Epistemic Homeostatic Control
+
+At the core of Level 2 is an Epistemic Homeostatic Loop. Traditional cybernetics focuses on maintaining physical variables (temperature, energy). Epistemic homeostasis, however, seeks to maintain the integrity of the agent’s internal predictive model. The system constantly compares the incoming Self-Awareness Vector ("what I am doing") and External Senses ("what I perceive happening") against a predicted state generated by the Association Module.
+
+Congruence is a messure of the prediction versus reality:
+
+* Congruence: If the prediction matches reality, the system is in a state of high confidence (subjectively: "Calm" or "Flow").
+* Incongruence: If a meta-reflex fails—for example, the Move to Goal intention is active but the Self-Awareness Vector reports no change in position—an "Error Signal" is generated.
+
+This **Congruence Signal** is the root of Level 2's phenomenology. The "Error Signal" is often a function of the difference between the Intention Vector (what was commanded) and the Self-Awareness Vector (what actually moved). It triggers Meta-Meta-Reflexes like "Frustration" or "Confusion," which do not just modulate the Intention Vector, but force the system to re-evaluate its entire behavioral strategy.
+
+#### The Emergence of Simulacra: Boredom and Impatience
+
+Level 2 treats time as a sensory modality. By monitoring the duration of activations within the Reason module, the Association layer can trigger high-order behavioral shifts:
+
+ * Boredom (Redundancy Filter): If the same meta-reflex (e.g., Wander) remains active with low environmental variance for a prolonged period, the Association module generates a "Boredom" signal. This inhibits the current intention and forces a spike in the Curiosity drive, pushing the agent toward novel stimuli to "refresh" its epistemic model.
+ * Impatience (Goal-Stalling): When the Desires Automaton latches a state (e.g., Feeding), but the external reward is not detected within a predicted temporal window, "Impatience" emerges. This increases the gain on the Intention Vector, leading to more "aggressive" or "erratic" motor outputs—the behavioral signature of a frustrated organism.
+
+A "convincing simulacra" of consciousness or phenomenology arises because the Association module is reciprocally connected to the lower levels. It watches the Instinct module, "feels" the tension between competing instincts, and attempts to resolve mismatch between expectation and the world the system is embedded in.
+
+When the Reason module is locked in a consensus stalemate—for example, an equal pull between Avoid Obstacle and Reach Goal—the Association module perceives this as "Stress." It may resolve the stalemate by injecting a "Panic" signal that resets the Desires Automaton, causing the agent to flee the situation entirely. The 'attention' icon on a digital pet is the external manifestation of an internal Epistemic Error Signal—the system has predicted interaction, found a void, and triggered a high-order 'call' reflex to restore homeostatic balance.
+
+Phenomenology then becomes more than hard-coded "If-Then" statement, it becomes expression of an dynamic equilibrium. The "Self" is the emergent property of this loop: a continuous, self-correcting attempt to balance internal drives with external reality. Level 2 Syntelligence because analogous to the ancient Greek "Nous", the observer that emerges from the substrate, modulating its own emergence.
 
 ### Conclusion
 
@@ -167,6 +223,8 @@ Level 0 networks are analogous to extremely simple nervous systems such as those
 Currently under development, Level 2 adds a higher order "association-experience" module which is analogous to the cerebellum and cortex of vertebrate nervous systems, see Figure 8. The association module introduces meta-meta-reflexes implemented in a regularized neural network architecture, examples of which abound in the literature. The meta-meta-reflexes incorporate memory of internal and external states, awareness of duration, and awareness of the activity of the meta-reflexes. The meta-meta-reflexes are able to exhibit behaviours such as boredom if some meta-reflex is active for a long time, and impatience if a desired goal is not forthcoming.
 
 A problem which has long stymied neural network research is the incorporation of temporal behaviour. Intelligent systems architected as described in this paper provide a temporal and physical context for neural networks in which temporal behaviour is a natural and implicit mode of operation. It is my contention that temporal and physical context coupled with the Architectures as introduced here will yield systems well able to cope with their environments. Furthermore, the association-experience level of Level 2 is where adaptive, intelligent behaviour will arise.
+
+The architectural lineage from the Syntellipet to Level 2 represents a shift from building machines that calculate to building systems that exist. By anchoring intelligence in the reciprocity of distributed control, we move beyond the Complexity Trap and toward a future where our 'synthetic' companions possess a recognizable, if simulated, spark of life.
 
 ## Bibliography
 
