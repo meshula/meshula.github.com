@@ -37,9 +37,19 @@ In the vein of Braitenberg's Vehicles, a behavioral schematic was constructed an
 
 ![Figure 4. The behavioral schemata of the Syntellipet.](assets/17681709706882.jpg)
 
-Once the hardware prototype existed, it quickly became clear that iteration, involving first compiling the software on a PC9801, transferring it via RS232C serial communications to an EEPROM burner, "burning" a ROM, and then debugging was a hindrance to innovation and iteration; a simulator, in a custom realtime visualization engine made for the purpose was the obvious solution.
+Once the hardware prototype existed, it quickly became clear that iteration, involving first compiling the software on a PC9801, transferring it via RS232C serial communications to an EEPROM burner, "burning" a ROM, and then debugging was a hindrance to innovation and iteration; a simulator, in a custom realtime visualization engine made for the purpose was the obvious solution. The visual development of the Syntellipets shows a clear trend towards a familiar product (Figure 5).
 
-The development took a turn when it was noticed that the simulation of the toy looked an awful lot like a video game, and the idea of a Super Famicon game cartridge with a battery and real time clock took hold. The pet, no longer embodied in a robot body would be awake when inserted in the game console, and the player would take care of it. Someone suggested that if a screen were to be attached to the cartridge, and some buttons, there'd be no need for a game console, and kids could carry the pet with them everywhere. The project migrated then from R&D to product development, where the concepts found a home. Aki Maita was already intrigued with the concept of a "pet that could be carried around," based on her observations of Japanese schoolchildren, and the rest is history, the **Tamagotchi** project has had a profound impact on the way we think about toys and interactivity that continues today.
+![Figure 5. The Syntellipets would have been cute!](assets/17685428898190.jpg)
+
+
+An editor for the pets' mind was created. The development took a turn when it was noticed that the simulation of the toy looked an awful lot like a video game, and the idea of a Super Famicon game cartridge with a battery and real time clock took hold (Figures 6a, 6b). The pet, no longer embodied in a robot body would be awake when inserted in the game console, and the player would take care of it. It's mind would be persistent.
+
+![Figure 6a: Syntellipets with a persistent mind editor](assets/17685426907800.jpg)
+
+![Figure 6b: Syntellipets with a mind editor](assets/17685426908294.jpg)
+
+
+Someone suggested that if a screen were to be attached to the cartridge, and some buttons, there'd be no need for a game console, and kids could carry the pet with them everywhere. The project migrated then from R&D to product development, where the concepts found a home. Aki Maita was already intrigued with the concept of a "pet that could be carried around," based on her observations of Japanese schoolchildren, and the rest is history, the **Tamagotchi** project has had a profound impact on the way we think about toys and interactivity that continues today.
 
 The architecture described herein is directly descended from that original research, and the author continues work on this style of artificial intelligence, known as computational neuroethology, to this date. Since then the architecture has been deployed in other projects, such as **Star Wars Super Bombad Racing** (Lucas Learning, 2000), and described in textbooks such as the **AI Game Programming Wisdom** series.
 
@@ -83,9 +93,9 @@ Insect AI:
 
 The use of the proposed architecture is demonstrated by Network 1 which accomplishes the task of multi-robot coordination, and by Network 2, the artificial insect controller of (Beer, et al, 1990)[^Beer-1990] whose architecture is isomorphic with the work presented here.
 
-Insect AI 3 builds upon the reason/instinct architecture, adding a **Desires** automaton to the **Reason** module to sequence behaviors by controlling the **Intention Vector**. Insect AI 3 combines the ideas of the Subsumption Architecture, neural network control, and behavioral sequencing. The **Reason** module acts as a modulator rather than a commander. In traditional AI,  "reasoning" tells the legs how to move. In Insect AI 3, **Reason** tilts the **Instinct** module's goals via the **Intention Vector**, see Figure 5.
+Insect AI 3 builds upon the reason/instinct architecture, adding a **Desires** automaton to the **Reason** module to sequence behaviors by controlling the **Intention Vector**. Insect AI 3 combines the ideas of the Subsumption Architecture, neural network control, and behavioral sequencing. The **Reason** module acts as a modulator rather than a commander. In traditional AI,  "reasoning" tells the legs how to move. In Insect AI 3, **Reason** tilts the **Instinct** module's goals via the **Intention Vector**, see Figure 7.
 
-![Figure 5. The Insect AI 3 Architecture](assets/17681923672217.jpg)
+![Figure 7. The Insect AI 3 Architecture](assets/17681923672217.jpg)
 
 ### Complex Behavior arises from the Environment
 
