@@ -1,6 +1,7 @@
+---
 title: "Reading Turing in 2026"
 description: "The Turing Test and the fall of Dualism."
-pubDate: 2025-11-28
+pubDate: 2026-1-27
 tags: ["Turing", "Descartes", "Delouze", "Anaxagoras", "Sunyata", "Buddhism", "Searle", "Dunnett", "Penrose"]
 author: "Nick Porcino"
 draft: false
