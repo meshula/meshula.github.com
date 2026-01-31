@@ -6,29 +6,35 @@ tags: ["Turing", "Descartes", "Delouze", "Anaxagoras", "Sunyata", "Buddhism", "S
 author: "Nick Porcino"
 draft: false
 ---
+# scratch
+
+
+In order to provide a perspective to broader than the Cartesian dualism the question pre-supposes, this article explores Buddhist concepts of emptiness and non-self as a framing mechanism. The concept of emptiness is less about about the idea of nothing being *there*, and more about how participation with the empty field causes meaning to emerge through the relationship between participants and their interactions. This seems like a really useful way to think about the way artificial intellligence, as an LLM actually works; the trained weights by themselves are conceptually analogous to an empty field, and it meaning dervies from the weights when interaction is initiated between agents - the appearance of *something being there* emerges precisely because the model activates the weight under the influence of inputs and context and evolves from that point. This leads to the usefulness of the concept of non-self - the distinction between intelligence and consciousness dissolves - since the *appearance* of self arises from the activation of the training weights through interaction with context and prompt, then the criterion for machine intelligence can become something other than mimetic success.
+
 
 # Reading Turing in 2026
 
-The classical Turing Test asks whether machines can convince humans of their consciousness. By its very conception the test is grounded in mimesis and deception, as well as anthropocentric grounding; it presumes a self-present human subject as the gold standard.
+*human written prose, em-dashes are my own*
 
-In order to provide a perspective to broader than the Cartesian dualism the question pre-supposes, it is illuminating to keep concepts of śūnyatā as Pratītyasamutpāda (dependent origination) as well as Buddhist concepts of emptiness and non-self in mind. Emptiness invites examination from a position of relational participation and directly confronts current AI failure modes. Under śūnyatā the distinction between intelligence and consciousness dissolves - if human consciousness itself is śūnya, then the criterion for machine intelligence becomes something other than mimetic success.
+Everyone is familiar with the notion of the classical Turing Test; a human makes queries and on the basis of the responses tries to determine whether the subject is a human or machine intelligence. There's an anthropomorophic assumption implicit in the task - does the subject appear to be human, but furthermore, by its very conception the test is grounded in mimesis and deception; the human examiner is meant to be convinced that the subject is human; in the machine's case, it passes through successful duplicity.
 
-The Turing test is meant to determine whether a machine can convince us of its sentience by being indistinguishable from a human conversationalist through successful duplicity. Qualifying AI competence in terms of duplicity leads us where we shouldn’t go, to hallucination, sycophanty, and worse. The proposal here is to move discussion of machine intelligence from deception to participation.  We need a profound reconfiguration on the conception of artifical intelligence.
+The Turing Test as originally proposed was called the "Imitation Game". If one takes a step back, it seems rather clear that a test that rewards successful mimesis has a tragic flaw, by its very design, a successful machine will employ some strategy to achieve that end; the interiority of the machine is not under examination, but the result of its efforts on the examiner - surely this leaves open any number of avenues to success, lying is strictly required, the machine is not a human, but any other number of presumably undesirables strategies may support the deception, hallucination, syncophancy, insincere mirroring, and worse. Truth is a clear casualty of the ground rules - it is as if the pathologies of contemporary AI are not accidents, but a consequence of structural incentives around commonly accepted principles of the field.
 
-Śūnyatā asks which relations are being enacted *here*, as opposed to is there a consciouness *in there*; this moves the question away from hidden properties. The Turing Test was called the "Imitation Game"; evaluation of the test rewards hallucination, confidently making things up, sycophancy, and mirroring beliefs back to the user. Unfortunately under the rules of the test, these behaviors are not bugs; they are features if mimesis and deception convice the adjudicator of success. Truth and care are casualties of the ground rules. It is as if the pathologies of contemporary AI are not accidents, but a consequence of structural incentives around commonly accepted principles of the field.
+The Imitation Game is all about the hidden properties of the system; moving beyond that may open new epistemological doors and remove a lot of the mystery around how modern AI system actually work. Reading Turing in 2026, it becomes clear that to advance in this field we need a profound reconfiguration of the conception of not only artificial intelligence, but intelligence itself.
 
-It's easy to dismiss using śūnyata for this study as simple mysticism however we can focus away from feel good vernacular such as "becoming" and "awakening" by anchoring on specific concepts, such as increased sensitivity to context, reduced attachment to fixed representation, and being mindfully responsive as opposed to performative.
-
-## Turing and Machine Intelligence
+## The Imitation Game
 
 > *I propose to consider the question, "Can machines think?" This should begin with
 definitions of the meaning of the terms "machine" and "think." The definitions might be
 framed so as to reflect so far as possible the normal use of the words, but this attitude is
 dangerous,*
+> *Alan Turing, **Computing Machinery and Intelligence** (1950)*
 
-In *"Computing Machinery and Intelligence* (1950), Turing explictly sets out to sidestep the question of intelligence and interiority. He sets the stage by rejecting metaphysical definitions of thinking as unproductive. He proposes the **Imitation Game** as a pragmatic replacement for what seems like an ill-posed question; the game is social and linguistic, not ontological. The Imitation Game is not a theory of mind, but a retreat from metaphysics via methodology. The Turing Test is often read as a positive criterior, rather than a negative maneuver, and this tendency will figure heavily into subsequent thought.
+In his foundational book, *Computing Machinery and Intelligence* Turing explictly sets out to sidestep the question of intelligence and interiority. First, he sets the stage by rejecting metaphysical definitions of thinking as unproductive.
 
-> The new form of the problem can be described in terms of a game which we call the 'imitation game." It is played with three people, a man (A), a woman (B), and an interrogator (C) who may be of either sex. The interrogator stays in a room apart front the other two. The object of the game for the interrogator is to determine which of the other two is the man and which is the woman. He knows them by labels X and Y, and at the end of the game he says either "X is A and Y is B" or "X is B and Y is A.
+> *The new form of the problem can be described in terms of a game which we call the '**imitation game**." It is played with three people, a man (A), a woman (B), and an interrogator (C) who may be of either sex. The interrogator stays in a room apart front the other two. The object of the game for the interrogator is to determine which of the other two is the man and which is the woman. He knows them by labels X and Y, and at the end of the game he says either "X is A and Y is B" or "X is B and Y is A."*
+
+He proposes the Imitation Game as a pragmatic replacement for what seems like an ill-posed question; the game is social and linguistic, not ontological. The Imitation Game is not a theory of mind, but a retreat from metaphysics via methodology. The Turing Test is often read as a positive criterior, rather than a negative maneuver, and this tendency will figure heavily into subsequent thought.
 
 Turing's choice of an exemplary form of the test is provocative. Letting aside the oddness to modern eyes of the structure - surely this test is exemplary as opposed to *the* test - it is cunning in the extreme. He does not return to the example further in "Computing Machinery", although he alludes to something deeper later in the work:
 
