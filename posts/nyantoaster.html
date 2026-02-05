@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nyan Toaster (c) Nick Porcino 2026</title>
+    <style>
+        body { margin: 0; background: #000; overflow: hidden; }
+        canvas { display: block; image-rendering: pixelated; }
+    </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+window.addEventListener('resize', resize);
+resize();
+
+// --- SIMULATION STATE ---
+const stars = Array.from({ length: 80 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    speed: Math.random() * 1.5 + 0.5,
+    size: Math.random() * 6
+}));
+
+// Space Plankton (Nebula Particles)
+const plankton = Array.from({ length: 150 }, () => ({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    life: Math.random()
+}));
+
+const toasters = Array.from({ length: 5 }, (_, i) => ({
+    x: Math.random() * canvas.width,
+    y: (canvas.height / 6) * (i + 1),
+    speed: 2 + Math.random() * 1.5,
+    wingUp: false,
+    flapTimer: 0,
+    trail: []
+}));
+
+const toastCrumbs = [];
+let manta = { active: false, x: -400, y: 0, speed: 1.2, trail: [], timer: 50 };
+
+const shockwaves = [];
+
+function triggerSonicBoom(x, y) {
+    shockwaves.push({
+        x: x,
+        y: y,
+        radius: 0,
+        maxRadius: 600,
+        speed: 15,
+        life: 1.0
+    });
+}
+
+// 1. Jellyfish State
+const jellyfish = [];
+
+function spawnJellyfishGroup() {
+    const count = 3 + Math.floor(Math.random() * 3);
+    const startX = Math.random() * canvas.width;
+    const startY = canvas.height + 100;
+    
+    for (let i = 0; i < count; i++) {
+        jellyfish.push({
+            x: startX + (Math.random() - 0.5) * 200,
+            y: startY + Math.random() * 100,
+            size: 5 + Math.random() * 5,
+            phase: Math.random() * Math.PI * 2,
+            speed: 0.5 + Math.random() * 0.5,
+            trail: [] // For tentacles
+        });
+    }
+}
+
+// 2. Jellyfish Drawing & Update Logic
+function updateJellyfish(time) {
+    for (let i = jellyfish.length - 1; i >= 0; i--) {
+        const j = jellyfish[i];
+        const flow = getFlow(j.x, j.y, time);
+        
+        // Pulsing movement: Swim up when pulse is strong
+        const pulse = Math.sin(time * 2 + j.phase);
+        const pulseFactor = pulse * 0.5 + 0.5; // 0 to 1
+        
+        j.y -= j.speed + (pulseFactor * 2); // Swim up
+        j.x += flow.u * 2 - 1.0; // Drift with nebula/stars
+        
+        // Tentacle tracking
+        j.trail.unshift({ x: j.x, y: j.y });
+        if (j.trail.length > 20) j.trail.pop();
+
+        // Draw Tentacles
+        ctx.beginPath();
+        ctx.strokeStyle = `rgba(150, 255, 255, 0.3)`;
+        ctx.lineWidth = 1;
+        j.trail.forEach((pos, index) => {
+            const invRatio = 1 - (index / j.trail.length);
+            const wave = Math.sin(time * 5 + index * 0.5) * 5 * invRatio;
+            if (index === 0) ctx.moveTo(pos.x + wave, pos.y);
+            else ctx.lineTo(pos.x + wave, pos.y);
+        });
+        ctx.stroke();
+
+        // Draw Bell
+        ctx.fillStyle = `rgba(100, 200, 255, ${0.4 + pulseFactor * 0.3})`;
+        ctx.beginPath();
+        // The bell flattens and widens based on the pulse
+        const bellWidth = j.size + (pulseFactor * 4);
+        const bellHeight = j.size - (pulseFactor * 2);
+        ctx.ellipse(j.x, j.y, bellWidth, bellHeight, 0, 0, Math.PI * 2);
+        ctx.fill();
+        
+        // Glow Core
+        ctx.fillStyle = "white";
+        ctx.globalAlpha = pulseFactor * 0.5;
+        ctx.fillRect(j.x - 1, j.y - 2, 2, 2);
+        ctx.globalAlpha = 1.0;
+
+        // Cleanup
+        if (j.y < -100) jellyfish.splice(i, 1);
+    }
+}
+
+// 1. Whale State
+let whale = {
+    active: false,
+    x: -600, y: 0,
+    speed: 0.6,
+    timer: 600, // Twice as long as manta
+    mouthOpen: 0, // 0 to 1 for animation
+    isFeeding: false,
+    glow: 0
+};
+
+function drawWhale(w) {
+    const { x, y, mouthOpen, isFeeding, glow } = w;
+    
+    // Calculate Shake: Only vibrates when feeding
+    let shakeX = 0;
+    let shakeY = 0;
+    if (isFeeding) {
+        shakeX = (Math.random() - 0.5) * 4;
+        shakeY = (Math.random() - 0.5) * 4;
+    }
+
+    ctx.save();
+    ctx.translate(shakeX, shakeY);
+
+    // Apply the "Power Surge" glow effect
+    // We'll use brightness and a bit of blue saturation
+    ctx.filter = `brightness(${1 + glow * 2}) saturate(${1 + glow})`;
+
+    // 1. Body
+    ctx.fillStyle = isFeeding ? `rgb(${30 + glow * 155}, ${50 + glow * 155}, 70)` : "#3a4a6a";
+    ctx.beginPath();
+    ctx.ellipse(x + 150, y + 40, 160, 60, 0, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 2. Tail Fin with "Power" highlights when glowing
+    ctx.beginPath();
+    const tailWiggle = Math.sin(Date.now() * 0.001) * 20;
+    ctx.moveTo(x, y + 40);
+    ctx.lineTo(x - 60, y + 10 + tailWiggle);
+    ctx.lineTo(x - 60, y + 70 - tailWiggle);
+    ctx.fill();
+
+    // 3. Mouth (The Void)
+    ctx.fillStyle = "#000";
+    ctx.beginPath();
+    ctx.moveTo(x + 240, y + 40);
+    ctx.lineTo(x + 310, y + 20 - (mouthOpen * 40));
+    ctx.lineTo(x + 310, y + 60 + (mouthOpen * 40));
+    ctx.closePath();
+    ctx.fill();
+
+    // 4. Eye - Turns white/bright when feeding
+    ctx.fillStyle = isFeeding ? `rgb(${100 + glow * 155}, 255, 255)` : "#4af";
+    ctx.fillRect(x + 250, y + 25, 6, 6);
+    
+    ctx.restore();
+}
+
+function updateWhale(time) {
+    if (whale.active) {
+        whale.x += whale.speed;
+
+        const progress = whale.x / canvas.width;
+        if (progress > 0.1 && progress < 0.4) {
+            whale.isFeeding = true;
+            whale.mouthOpen = Math.min(1, whale.mouthOpen + 0.05);
+            // Ramp up glow
+            whale.glow = Math.min(1.5, whale.glow + 0.02);
+        } else {
+            whale.isFeeding = false;
+            whale.mouthOpen = Math.max(0, whale.mouthOpen - 0.02);
+            // Slowly fade glow
+            whale.glow = Math.max(0, whale.glow - 0.01);
+        }
+
+        // --- THE INHALE LOGIC (Same as before) ---
+        const mouthX = whale.x + 300;
+        const mouthY = whale.y + 40;
+
+        if (whale.isFeeding) {
+            plankton.forEach(p => {
+                const dx = mouthX - p.x;
+                const dy = mouthY - p.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 250) { // Increased pull radius
+                    p.x += dx * 0.07; 
+                    p.y += dy * 0.07;
+                    if (dist < 30) p.x = -100;
+                }
+            });
+
+            jellyfish.forEach((j, i) => {
+                const dx = mouthX - j.x;
+                const dy = mouthY - j.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                if (dist < 180) {
+                    j.x += dx * 0.04;
+                    j.y += dy * 0.04;
+                    if (dist < 40) jellyfish.splice(i, 1);
+                }
+            });
+        }
+
+        drawWhale(whale);
+
+        if (whale.x > canvas.width + 500) {
+            whale.active = false;
+            whale.timer = 1200 + Math.random() * 1000;
+            whale.glow = 0;
+        }
+    } else {
+        whale.timer--;
+        if (whale.timer <= 0) {
+            whale.active = true;
+            whale.x = -600;
+            whale.y = Math.random() * (canvas.height - 200) + 100;
+        }
+    }
+}
+
+// --- HELPER: Kolmogorov Flow ---
+function getFlow(x, y, t) {
+    // Summing harmonics to create turbulent drift
+    const scale1 = 0.002;
+    const scale2 = 0.005;
+    const u = Math.sin(y * scale1 + t) + Math.sin(y * scale2 + t * 0.8);
+    const v = Math.cos(x * scale1 + t) + Math.cos(x * scale2 + t * 0.7);
+    return { u: u * 0.5, v: v * 0.5 };
+}
+
+// --- DRAWING FUNCTIONS ---
+
+function drawToaster(x, y, wingUp) {
+    ctx.fillStyle = "#CCC"; ctx.fillRect(x, y, 30, 20);
+    ctx.fillStyle = "#888"; ctx.fillRect(x + 22, y + 4, 4, 12);
+    ctx.fillStyle = "#FFF";
+    if (wingUp) { ctx.fillRect(x + 5, y - 10, 10, 10); ctx.fillRect(x + 15, y - 5, 10, 10); }
+    else { ctx.fillRect(x + 5, y + 15, 10, 10); ctx.fillRect(x + 15, y + 10, 10, 10); }
+}
+
+function drawRainbow(t, idx) {
+    const colors = ["#FF0000", "#FF7F00", "#FFFF00", "#00FF00", "#0000FF", "#4B0082"];
+    const time = Date.now() * 0.005;
+    t.trail.forEach((pos, i) => {
+        const invRatio = 1 - (i / t.trail.length);
+        const weight = Math.pow(Math.E, -Math.pow(invRatio - 0.5, 2) / 0.05);
+        const offset = (Math.sin(time + (i * -0.4) + idx) * 10 + Math.sin(time * -2.5 + (i * 0.85)) * 4) * weight;
+        ctx.globalAlpha = invRatio * 0.8; 
+        colors.forEach((color, ci) => {
+            ctx.fillStyle = color;
+            ctx.fillRect(pos.x - 5, pos.y + (ci * 3) + offset * 0.5, 4, 3 + i * 0.2);
+        });
+    });
+    ctx.globalAlpha = 1.0;
+}
+
+function drawManta(m) {
+    const { x, y } = m;
+    const wingUp = Math.sin(Date.now() * 0.002) > 0;
+    const wingY = wingUp ? -15 : 15;
+    
+    // Plasma Glow
+    ctx.shadowBlur = 20; ctx.shadowColor = "#0FF";
+    ctx.strokeStyle = "#8FF"; ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(x + 60, y + 10); ctx.lineTo(x, y - 20 + wingY);
+    ctx.moveTo(x + 60, y + 10); ctx.lineTo(x, y + 40 - wingY);
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+
+    // Body
+    ctx.fillStyle = "#00050a";
+    ctx.beginPath();
+    ctx.moveTo(x + 60, y + 10); ctx.lineTo(x, y - 20 + wingY); 
+    ctx.lineTo(x + 15, y + 10); ctx.lineTo(x, y + 40 - wingY); 
+    ctx.fill();
+    ctx.fillStyle = "#0FF"; ctx.fillRect(x + 45, y + 8, 4, 4);
+}
+
+// --- UPDATE LOOP ---
+
+function update() {
+    const time = Date.now() * 0.001;
+    ctx.fillStyle = '#000015'; 
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Update and Draw Shockwaves
+    for (let i = shockwaves.length - 1; i >= 0; i--) {
+        let sw = shockwaves[i];
+        sw.radius += sw.speed;
+        sw.life -= 0.02;
+
+        // Visual Ring
+        ctx.setLineDash([5, 15]); // Creates a "fragmented" energy ring look
+        ctx.beginPath();
+        ctx.arc(sw.x, sw.y, sw.radius, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(130, 255, 255, ${sw.life * 0.95})`;
+        ctx.lineWidth = 4;
+        ctx.stroke();
+        ctx.setLineDash([]); // Reset for other drawing
+
+        // Displace Plankton
+        plankton.forEach(p => {
+            const dx = p.x - sw.x;
+            const dy = p.y - sw.y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            // If particle is near the shockwave front
+            if (Math.abs(dist - sw.radius) < 20) {
+                p.x += (dx / dist) * 10; // Push outward
+                p.y += (dy / dist) * 10;
+            }
+        });
+
+        if (sw.life <= 0) shockwaves.splice(i, 1);
+    }
+
+    // 1. DEBUG: Space Plankton (Bright & Large)
+    plankton.forEach(p => {
+        const flow = getFlow(p.x, p.y, time);
+        
+        // Let's make the drift very obvious
+        p.x -= (2.0 + flow.u * 3); 
+        p.y += flow.v * 3;
+        
+        // Wrap around logic for all 4 sides
+        if (p.x < -50) p.x = canvas.width + 50;
+        if (p.x > canvas.width + 50) p.x = -50;
+        if (p.y < -50) p.y = canvas.height + 50;
+        if (p.y > canvas.height + 50) p.y = -50;
+
+        // High visibility style
+        ctx.fillStyle = "#1F3ffF";
+        ctx.globalAlpha = 0.25;     // Fully opaque
+        ctx.fillRect(p.x, p.y, 6, 6); // Large squares
+    });
+
+    updateWhale(time);
+
+    // 2. Stars
+    ctx.fillStyle = "white";
+    stars.forEach(s => {
+        s.x -= s.speed;
+        if (s.x < 0) s.x = canvas.width;
+        ctx.fillRect(s.x, s.y, s.size, s.size);
+    });
+
+    // 3. Toast Crumbs (Iterate backwards)
+    for (let i = toastCrumbs.length - 1; i >= 0; i--) {
+        const p = toastCrumbs[i];
+        p.x += p.vx; p.y += p.vy; p.life -= 0.01;
+        ctx.fillStyle = `rgba(210, 105, 30, ${p.life})`;
+        ctx.fillRect(p.x, p.y, p.size, p.size);
+        if (p.life <= 0) toastCrumbs.splice(i, 1);
+    }
+
+    if (Math.random() < 0.005) spawnJellyfishGroup(); // Occasional spawn
+    updateJellyfish(time);
+
+    // 4. Manta Ray
+    if (manta.active) {
+        manta.x += manta.speed;
+        manta.trail.unshift({ x: manta.x, y: manta.y });
+        if (manta.trail.length > 120) manta.trail.pop();
+        
+        // --- WARP DISTORTION (Constant faint ripples) ---
+        if (Math.random() < 0.1) { // 10% chance per frame to leave a micro-distortion
+            shockwaves.push({
+                x: manta.x + 30, y: manta.y + 10,
+                radius: 0, maxRadius: 100, speed: 8, life: 0.4
+            });
+        }
+
+        // --- FLAP BOOM LOGIC ---
+        const currentWingUp = Math.sin(Date.now() * 0.002) > 0;
+        if (currentWingUp !== manta.lastWingUp) {
+            // State just changed (a flap occurred)
+            if (Math.random() < 0.25) {
+                triggerSonicBoom(manta.x + 30, manta.y + 10);
+            }
+            manta.lastWingUp = currentWingUp;
+        }
+
+        // Draw Trail (restored from previous step)
+        manta.trail.forEach((pos, i) => {
+            const invRatio = 1 - (i / manta.trail.length);
+            const weight = Math.pow(Math.E, -Math.pow(invRatio - 0.5, 2) / 0.08);
+            const flow = getFlow(pos.x, pos.y, time);
+            const whip = Math.sin(time * 4 + (i * 0.2)) * 30;
+            const totalOffset = (whip + (flow.v * 40)) * weight;
+
+            ctx.globalAlpha = invRatio * 0.4;
+            ctx.fillStyle = "#0af";
+            ctx.fillRect(pos.x, pos.y + 5 + totalOffset, 8, 15);
+            ctx.globalAlpha = invRatio;
+            ctx.fillStyle = "#001";
+            ctx.fillRect(pos.x + 2, pos.y + 8 + totalOffset, 4, 9);
+        });
+        
+        ctx.globalAlpha = 1.0;
+        drawManta(manta);
+
+        if (manta.x > canvas.width + 400) {
+            manta.active = false;
+            manta.timer = 300 + Math.random() * 500;
+        }
+    } else {
+        manta.timer--;
+        if (manta.timer <= 0) {
+            manta.active = true;
+            manta.x = -400;
+            manta.y = Math.random() * (canvas.height - 100) + 50;
+            manta.trail = [];
+            manta.lastWingUp = false; // Initialize state
+            triggerSonicBoom(0, manta.y + 10);
+        }
+    }
+
+
+    // 5. Toasters
+    toasters.forEach((t, idx) => {
+        t.x += t.speed;
+        if (t.x > canvas.width + 100) { t.x = -100; t.trail = []; }
+        t.trail.unshift({ x: t.x, y: t.y }); 
+        if (t.trail.length > 60) t.trail.pop();
+        
+        t.flapTimer++;
+        if (t.flapTimer > 15) { 
+            t.wingUp = !t.wingUp; t.flapTimer = 0;
+            toastCrumbs.push({ x: t.x, y: t.y + 10, vx: -2, vy: (Math.random()-0.5), life: 1, size: 2 });
+        }
+        drawRainbow(t, idx);
+        drawToaster(t.x, t.y, t.wingUp);
+    });
+
+    requestAnimationFrame(update);
+}
+update();
+</script>
+</body>
+</html>
