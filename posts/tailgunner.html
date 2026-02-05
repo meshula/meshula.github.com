@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tailgunner: Vector Targeting</title>
+    <style>
+        body { margin: 0; background: #000; overflow: hidden; display: flex; justify-content: center; align-items: center; height: 100vh; cursor: none; }
+        canvas { display: block; }
+        #ui { position: absolute; top: 20px; color: #00ffff; font-family: 'Courier New', monospace; pointer-events: none; text-shadow: 0 0 5px #00ffff; font-size: 20px; letter-spacing: 2px; }
+    </style>
+</head>
+<body>
+    <div id="ui">SCORE: <span id="score">0000</span></div>
+    <canvas id="gameCanvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let score = 0;
+        let enemies = [];
+        let lasers = [];
+        let stars = [];
+        let fragments = [];
+        let mouseX = canvas.width / 2;
+        let mouseY = canvas.height / 2;
+
+        // Setup Stars
+        for(let i=0; i<150; i++) {
+            stars.push({ x: (Math.random()-0.5)*3000, y: (Math.random()-0.5)*2000, z: Math.random()*2000 });
+        }
+
+        function project(x, y, z) {
+            const fov = 600;
+            const scale = fov / Math.max(z, 0.1);
+            return { x: (x * scale) + canvas.width / 2, y: (y * scale) + canvas.height / 2, s: scale };
+        }
+
+        class Fragment {
+            constructor(p1, p2) {
+                this.p1 = p1; this.p2 = p2;
+                this.life = 1.0;
+                this.v = { x: (Math.random()-0.5)*20, y: (Math.random()-0.5)*20, z: (Math.random()-0.5)*20 };
+            }
+            update() {
+                this.p1.x += this.v.x; this.p1.y += this.v.y; this.p1.z += this.v.z;
+                this.p2.x += this.v.x; this.p2.y += this.v.y; this.p2.z += this.v.z;
+                this.life -= 0.03;
+            }
+            draw() {
+                let s1 = project(this.p1.x, this.p1.y, this.p1.z);
+                let s2 = project(this.p2.x, this.p2.y, this.p2.z);
+                ctx.strokeStyle = `rgba(0, 255, 255, ${this.life})`;
+                ctx.lineWidth = 1;
+                ctx.beginPath(); ctx.moveTo(s1.x, s1.y); ctx.lineTo(s2.x, s2.y); ctx.stroke();
+            }
+        }
+
+        class Enemy {
+            constructor() {
+                this.startTime = Date.now();
+                this.duration = 4000 + Math.random() * 2000;
+                this.p0 = { x: (Math.random()-0.5)*1500, y: (Math.random()-0.5)*1000, z: 2500 };
+                this.p1 = { x: (Math.random()-0.5)*1000, y: (Math.random()-0.5)*800, z: 1200 };
+                this.p2 = { x: (Math.random()-0.5)*4000, y: (Math.random()-0.5)*2000, z: -500 };
+                this.pos = { ...this.p0 };
+                this.dead = false;
+                this.currentLines = [];
+            }
+
+            update() {
+                let t = (Date.now() - this.startTime) / this.duration;
+                if (t > 1) { this.dead = true; return; }
+                let oldPos = { ...this.pos };
+                this.pos.x = Math.pow(1-t, 2)*this.p0.x + 2*(1-t)*t*this.p1.x + t*t*this.p2.y; // Added curve
+                this.pos.y = Math.pow(1-t, 2)*this.p0.y + 2*(1-t)*t*this.p1.y + t*t*this.p2.y;
+                this.pos.z = Math.pow(1-t, 2)*this.p0.z + 2*(1-t)*t*this.p1.z + t*t*this.p2.z;
+                this.dir = { x: this.pos.x - oldPos.x, y: this.pos.y - oldPos.y, z: this.pos.z - oldPos.z };
+                this.draw();
+            }
+
+            draw() {
+                if (this.pos.z < 10) return;
+                const yaw = Math.atan2(this.dir.x, this.dir.z);
+                const pitch = -Math.atan2(this.dir.y, Math.sqrt(this.dir.x*this.dir.x + this.dir.z*this.dir.z));
+                
+                const rot = (v) => {
+                    let y1 = v.y * Math.cos(pitch) - v.z * Math.sin(pitch);
+                    let z1 = v.y * Math.sin(pitch) + v.z * Math.cos(pitch);
+                    let x2 = v.x * Math.cos(yaw) + z1 * Math.sin(yaw);
+                    let z2 = -v.x * Math.sin(yaw) + z1 * Math.cos(yaw);
+                    return { x: this.pos.x + x2, y: this.pos.y + y1, z: this.pos.z + z2 };
+                };
+
+                ctx.strokeStyle = "#0ff"; ctx.lineWidth = 1.5; ctx.shadowBlur = 10; ctx.shadowColor = "#0ff";
+                
+                const w = 40, h = 10, l = 60, cw = 12, ch = 8;
+                const m = [
+                    {x:-w, y:0, z:-l/2}, {x:w, y:0, z:-l/2}, {x:0, y:0, z:l/2}, {x:0, y:-h, z:0},
+                    {x:-cw, y:-h, z:l/4}, {x:cw, y:-h, z:l/4}, {x:0, y:-h-ch, z:l/2}
+                ];
+
+                const edges = [[0,1],[1,2],[2,0],[0,3],[1,3],[2,3],[4,5],[5,6],[6,4]];
+                this.currentLines = [];
+
+                edges.forEach(e => {
+                    let v1 = rot(m[e[0]]), v2 = rot(m[e[1]]);
+                    this.currentLines.push([v1, v2]);
+                    let p1 = project(v1.x, v1.y, v1.z), p2 = project(v2.x, v2.y, v2.z);
+                    ctx.beginPath(); ctx.moveTo(p1.x, p1.y); ctx.lineTo(p2.x, p2.y); ctx.stroke();
+                });
+                ctx.shadowBlur = 0;
+            }
+
+            explode() {
+                this.currentLines.forEach(line => {
+                    fragments.push(new Fragment({...line[0]}, {...line[1]}));
+                });
+            }
+        }
+
+        window.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        window.addEventListener('mousedown', () => {
+            lasers.push({ x: -200, y: canvas.height, tx: mouseX, ty: mouseY, t: 0 });
+            lasers.push({ x: canvas.width + 200, y: canvas.height, tx: mouseX, ty: mouseY, t: 0 });
+            
+            enemies.forEach(e => {
+                let s = project(e.pos.x, e.pos.y, e.pos.z);
+                if (Math.hypot(s.x - mouseX, s.y - mouseY) < 40 * s.s/100 && e.pos.z > 50) {
+                    e.explode(); e.dead = true; score += 100;
+                    document.getElementById('score').innerText = score.toString().padStart(4, '0');
+                }
+            });
+        });
+
+        function drawCrosshair() {
+            ctx.strokeStyle = "#0ff"; ctx.lineWidth = 2; ctx.shadowBlur = 15; ctx.shadowColor = "#0ff";
+            ctx.beginPath();
+            // Circle
+            ctx.arc(mouseX, mouseY, 20, 0, Math.PI * 2);
+            // Cross
+            ctx.moveTo(mouseX - 30, mouseY); ctx.lineTo(mouseX + 30, mouseY);
+            ctx.moveTo(mouseX, mouseY - 30); ctx.lineTo(mouseX, mouseY + 30);
+            ctx.stroke();
+            ctx.shadowBlur = 0;
+        }
+
+        function loop() {
+            ctx.fillStyle = "black"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            stars.forEach(s => {
+                s.z -= 20; if(s.z < 1) s.z = 2500;
+                let p = project(s.x, s.y, s.z);
+                ctx.fillStyle = "white"; ctx.fillRect(p.x, p.y, 1.5, 1.5);
+            });
+
+            fragments = fragments.filter(f => f.life > 0);
+            fragments.forEach(f => { f.update(); f.draw(); });
+
+            if (Math.random() < 0.04) enemies.push(new Enemy());
+            enemies = enemies.filter(e => !e.dead);
+            enemies.forEach(e => e.update());
+
+            lasers = lasers.filter(l => l.t < 1);
+            lasers.forEach(l => {
+                l.t += 0.2;
+                ctx.strokeStyle = "white"; ctx.lineWidth = 3;
+                ctx.beginPath();
+                // Laser starts from bottom corners and goes toward mouse click point
+                ctx.moveTo(l.x, l.y);
+                ctx.lineTo(l.tx, l.ty);
+                ctx.stroke();
+            });
+
+            drawCrosshair();
+            requestAnimationFrame(loop);
+        }
+        loop();
+    </script>
+</body>
+</html>
