@@ -1,7 +1,7 @@
 ---
 title: "An Architecture for A-Life"
 description: "Insect AI: a straightforward architecture, notation, and design methodology for agent design, drawing on computational neuroethology."
-pubDate: 2003
+pubDate: '1 Dec 2003'
 tags: ["insect AI", "neuroethology", "artificial life", "artificial intelligence", "games", "distributed control", "computational neuroethology", "agent design", "Braitenberg"]
 author: "Nick Porcino"
 draft: false
