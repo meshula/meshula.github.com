@@ -11,13 +11,15 @@ draft: false
 
 *human written prose, em-dashes are my own*
 
-Everyone is familiar with the notion of the classical Turing Test; a human makes queries and on the basis of the responses tries to determine whether the subject is a human or machine intelligence. There's an anthropomorophic assumption implicit in the task - does the subject appear to be human, but furthermore, by its very conception the test is grounded in mimesis and deception; the human examiner is meant to be convinced that the subject is human; in the machine's case, it passes through successful duplicity.
+Everyone is familiar with the notion of the classical Turing Test, originally named the "Imitation Game"; a human makes queries and on the basis of the responses tries to determine whether the subject is a human or machine intelligence. There's an anthropomorophic assumption implicit in the task, the structure of the test tries to establish whether the subject appears to be human. The nature of the test, in placing the examinee in a position of convincing an examiner, is necessarily grounded in mimesis and deception; the human examiner is meant to be convinced that the subject is human; the machine, by construction, can only pass through successful duplicity.
 
-The Turing Test as originally proposed was called the "Imitation Game". If one takes a step back, it seems rather clear that a test that rewards successful mimesis has a tragic flaw, by its very design, a successful machine will employ some strategy to achieve that end; the interiority of the machine is not under examination, but the result of its efforts on the examiner - surely this leaves open any number of avenues to success, lying is strictly required, the machine is not a human, but any other number of presumably undesirables strategies may support the deception, hallucination, syncophancy, insincere mirroring, and worse. Truth is a clear casualty of the ground rules - it is as if the pathologies of contemporary AI are not accidents, but a consequence of structural incentives around commonly accepted principles of the field.
+It seems clear in retrospect that a test that rewards a successful mimesis is tragically flawed. The interiority of the machine is not under examination, but rather the results of the machine's efforts upon the examiner. Any number of undesirable strategies may support the deception, hallucination, syncophancy, insincere mirroring, and worse. Truth is a clear casualty of the ground rules - it seems almost inevitable that the pathologies of contemporary AI are not accidents, but a consequence of structural incentives explicit in the rules of the game.
 
-The Imitation Game is all about the hidden properties of the system; moving beyond that may open new epistemological doors and remove a lot of the mystery around how modern AI system actually work. Reading Turing in 2026, it becomes clear that to advance in this field we need a profound reconfiguration of the conception of not only artificial intelligence, but intelligence itself.
+The Imitation Game is all about the hidden properties of a system; it is this author's position that moving beyond notions of whether such a system thinks or has intelligence may open new epistemological doors and remove a lot of the mystery around how modern AI actually works. Reading Turing in 2026, it becomes clear that to advance in this field we need a profound reconfiguration of the conception of not only artificial intelligence, but intelligence itself.
 
 ## The Imitation Game
+
+In his foundational book, *Computing Machinery and Intelligence*, Turing starts out by rejecting metaphysical definitions of thinking. 
 
 > *I propose to consider the question, "Can machines think?" This should begin with
 definitions of the meaning of the terms "machine" and "think." The definitions might be
@@ -25,13 +27,13 @@ framed so as to reflect so far as possible the normal use of the words, but this
 dangerous,*
 > *Alan Turing, **Computing Machinery and Intelligence** (1950)*
 
-In his foundational book, *Computing Machinery and Intelligence* Turing explictly sets out to sidestep the question of intelligence and interiority. First, he sets the stage by rejecting metaphysical definitions of thinking as unproductive, noting that even the terms "machine" and "think" are not inherently obvious concepts. He then proposes that to get to a definition, it's first necessary to find some ground to base the discussion.
+He then proposes that to get to a definition, it's first necessary to find some ground to base the discussion.
 
 > *The new form of the problem can be described in terms of a game which we call the '**imitation game**." It is played with three people, a man (A), a woman (B), and an interrogator (C) who may be of either sex. The interrogator stays in a room apart front the other two. The object of the game for the interrogator is to determine which of the other two is the man and which is the woman. He knows them by labels X and Y, and at the end of the game he says either "X is A and Y is B" or "X is B and Y is A."*
 
-He proposes the Imitation Game as a pragmatic replacement for the direct question of "can machines think?" The game is social and linguistic, not ontological. The Imitation Game is not a theory of mind, but a retreat from metaphysics; it sets up an experiment that can be methodologically applied. What has become to be known as the Turing Test is frequently read as a positive criterion - "if a machine passes the test, we'll know it can think", rather than the negative maneuver it is - "if a machine does not pass the test, we'll know it is not thinking." 
+The Imitation Game is proposed as a pragmatic replacement for the direct question of "can machines think?" The game is social and linguistic, not ontological. The Imitation Game is not a theory of mind, it sets up an experiment that can be methodologically applied. What has become to be known as the Turing Test is frequently read as a positive criterion - "if a machine passes the test, we'll know it can think", rather than the negative maneuver it really is - "if a machine does not pass the test, we'll know it is not thinking." 
 
-Turing's design for the exemplary form of the test is provocative. To modern eyes, pivoting the text on a discernment of gender is odd in the extreme, it is however extremely cunning:
+The exemplary form of the test is provocative. To modern eyes, pivoting the text on a discernment of gender is odd in the extreme, it is however extremely cunning:
 
 > *The original question, "Can machines think?" I believe to be too meaningless to deserve discussion. Nevertheless I believe that at the end of the century the use of words and general educated opinion will have altered so much that one will be able to speak of machines thinking without expecting to be contradicted.*
 
