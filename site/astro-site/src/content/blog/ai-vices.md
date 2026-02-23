@@ -7,37 +7,44 @@ author: "Nick Porcino"
 draft: false
 ---
 
-# The Seven Deadly Sins in the Age of AI
+To begin this exploration, we'll begin with a bit of history, a tour of the sins and their antidotes.
 
-The traditional hierchy of gravity of the seven sins, from most spiritual to most corporeal was refined by Pope Gregory I in 590AD from an earlier list from the 4th century, created by the monk Evagrius Ponticus. His list had vainglory, as its own category, and melancholy instead of sloth. Pope Gregory folded vainglory into pride, and renamed melancholy into Sloth. 
+We'll take a little trip to Hell, and then contextualize our present day conundra and feeling of existential anxiety brought about by profound change. We'll hear from Kahless, and then close.
 
-## *Superbia* - Pride: Perversion of love for self
+The traditional hierchy of gravity of the seven sins, from most spiritual to most corporeal was refined by Pope Gregory I in 590AD from an earlier list from the 4th century, created by the monk Evagrius Ponticus. His list had vainglory, as its own category, and melancholy instead of sloth. Pope Gregory folded vainglory into pride, and renamed melancholy into Sloth.
+
+---
+## *Superbia* ~ Pride: Perversion of love for self
 
 Self-exaltation, main character energy. Classical *superbia* was about interior superiority. Today, *superbia* is an insecure Pride that requires a "like" to feel real.
 
-### *Humilitas* - humility
+
+### *Humilitas* ~ humility
 
 Self-forgetfulness replaces self-exaltation. Humility doesn't mean thinking lowly of yourself, but thinking of yourself less; the destruction of the personal brand, doing something good and not posting about it.
 
-## *Invidia* - Envy: Love of self-driven to hate others' good
+---
+## *Invidia* ~ Envy: Love of self-driven to hate others' good
 
 Resentment of others. Amongst all the Sins, Envy was unique as the only sin that didn't provide pleasure to the sinner, just a slow, acidic rot of the heart. *Invidere* means "to look askance", it's an Evil Eye, resenting what another has and feeling sorry for another's good. Today, we might name Envy "goals", where an underlying resentment is pretended to be productive self-improvement. Instead of the traditional cure of humility, we are told to Lean In, Hustle, and Self-Promote, using Pride to sooth Envy.
 
 In Dante's *Purgatorio*, the Envious have their eyelids sewn shut, as a metaphorical cure - since Envy enters via the eyes, the cure is to look inward.
 
-### *Caritas* - Care
+### *Caritas* ~ Care
 
 Replace resentment of others with joy in others; being happy for someone else's success or good fortune. It's a recognition that someone else's win is not your loss.
 
+---
 ## *Ira* - Wrath: Love of justice turned to vengeance
 
 Uncontrolled anger, a perverted justice - a desire for vengeance masquerading as a desire for right. Pure anger was once a temporary madness, a loss of control. Today it might be a moral credential.
 
-### *Patientia* - Patience
+### *Patientia* ~ Patience
 
 Forbearance beats vengeance. The urge to respond immediately is just a trap against peace of mind.
 
-## *Acedia* - Melancholy: Deficiency of love/apathy
+---
+## *Acedia* ~ Melancholy: Deficiency of love/apathy
 
 > "Acedia is a lack of care... a person so overwhelmed by the demands of life that they simply cease to care about their own salvation or the world around them." — Thomas Aquinas
 
@@ -45,36 +52,40 @@ The Monks referred to Acedia as the Noonday Devil, a moment of profound spiritua
 
 In modern terms, Melancholy hits harder than Sloth, as sloth took on a puritanical work-ethic gloss of laziness (the avoidance of work) rather than the more spiritual sense of a deficiency of love.
 
-### *Industria* - Diligence
+### *Industria* ~ Diligence
 
 Replace apathy with purposeful action.
 
-## *Greed* - Avaritia: Excessive desire for possesions
+---
+## *Avaritia* ~ Greed: Excessive desire for possesions
 
 *Avaritia* was the desire to hoard, betraying a lack of trust in God's providence; effectively trusting a pile of wheat more than providence. Ironically, in modern society, what was once a moral failing is now the standard measure of success.
 
-### *Liberalitas* - Charity
+### *Liberalitas* ~ Charity
 
 Replacing hoarding with selfless giving.
 
-## *Gula* - Gluttony: Excessive indulgence
+---
+## *Gula* ~ Gluttony: Excessive indulgence
 
 Today, we think of gluttony as eating too much. Aquinas broke it down more instructively. *Praeproprere* - consumption without need or at inappropriate moments. *Laute* - lavish consumption beyond means. *Nimis* - simple over consumption. *Ardenter* - attachment to consumption. *Studose* - being fussy to no moral end.
 
-### *Temperantia* - Temperance
+### *Temperantia* ~ Temperance
 
 Balance and moderation.
 
-## *Luxuria* - Lust:  Excessive love of physical pleasure
+---
+## *Luxuria* ~ Lust:  Excessive love of physical pleasure
 
 *Luxuria* was the surrender of the intellect to the itch of the senses, a softness of character, an indulgence in pleasures that distract from the divine.
 
 Today, lust has degraded to mean base desires, and luxury has been elevated to a brand or a reward. *Luxuria* referred to a weaking of one's spiritual armor.
 
-### *Castitas* - Chastity
+### *Castitas* ~ Chastity
 
 Integrity and respect replace objectification.
 
+---
 ## The Princes of Hell
 
 In 1589, German bishop Peter Binsfield popularized the idea that specific demons oversee specific sins, perhaps we might think of them as the marketing department for the ego. The assignments were meant as a sort of mnemonic to call to mind the specific sins, and their antidotes.
@@ -102,7 +113,7 @@ Theologicians discuss Jesus's words at crucifixion as a progression of letting g
 A pragmatist sees a tool for its edge, a zealot for its magic, and a doomer for its blade. Only a pragmatist can actually make something. We're afflicted today with a series of psychoses; illogically attributing divinity to algorithms, and apocalypse to statistical models. 
 
 ---
-## *Superbia* - Pride: The Zealot
+## *Superbia* ~ Pride: The Zealot
 
 The ultimate hubris, attributing divinity to algorithms, believing we have birthed a god in a box that solves all human suffering; the peak of vanity.
 
@@ -115,7 +126,7 @@ One does not worship a hydro-generator for the lightning it harneses. To mistake
 A large language model is a mirror, not a window; it reflects the sum of human output back on the observer. To worship the reflection is to forget who stands betfore the glass.
 
 ---
-## *Avaritia* - Greed: The 10x Grifter
+## *Avaritia* ~ Greed: The 10x Grifter
 
 A fixation on hyper-productivity and getting ahead at the cost of quality, truth, or actual labour. It's the desire for more, faster, and for less.
 
@@ -130,7 +141,7 @@ Prioritizing quality and integrity over volume. Understanding the 10x faster lik
 To arrive at a fallacy ten times faster is merely to be ten times more foolish.
 
 ---
-## *Invidia* - Envy: Malevolent Doomerism and Gatekeeping
+## *Invidia* ~ Envy: Malevolent Doomerism and Gatekeeping
 
 This is regulatory sequestration disguised as safety. It's the desire to gatekeep power, claiming the technology is too dangerous for the collective, insisting only the elite may hold the reins.
 
@@ -143,7 +154,7 @@ Advocating for decentraliation and transparency; resistance to moat-building and
 > One does not protect the forest by giving the lumberyard a monopoly on the trees.
 
 ---
-## *Ira* - Wrath: Media Doomerism
+## *Ira* ~ Wrath: Media Doomerism
 
 A constant state of outrage, doom-scrolling, and the sensationalist desire to see the world burn for clicks.
 
@@ -154,7 +165,7 @@ Maintain a cool head, don't give in the sensationalist cortisol hit of the headl
 > Fear is a chemical response that ensures survival in the presence of a predator. When triggered by a headline, it's nothing but a malfunction.
 
 ---
-## *Acedia* Sloth: CEO Worship
+## *Acedia* ~ Sloth: CEO Worship
 
 Spiritual laziness. Surrending human agency and democratic oversight to "Great Men" or corporate hegemony.
 
@@ -165,7 +176,7 @@ Policy is a choice, not an inevitability.
 > It is easier to surrender the will to a 'Titan' than to endure the rigorous discipline of self-governance.
 
 ---
-## *Gula* Gluttony: Fatalism II - Loss of Agency
+## *Gula* ~ Gluttony: Loss of Agency
 
 Overconsumption of the "inevitability" narrative. Gorging on the idea of our own obsolence until we are too bloated to act.
 
@@ -176,7 +187,7 @@ Embrace human-in-the-loop. Reassert that human intent gives output value, be the
 > The human who accepts their obsolence has already stopped eating and is simply waiting for the burial.
 
 ---
-## *Luxuria* Lust: The Morbid; Individual Harms and Tragedies
+## *Luxuria* ~ Lust: The Morbid, Individual Harms and Tragedies
 
 When we have a prurient, obsessive fascination with the edge cases and individual tragedies, prioritizing the thrill of the horror story over systemic solutions.
 
