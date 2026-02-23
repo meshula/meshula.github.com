@@ -234,21 +234,21 @@ The "Fatalist" suffers from a paralysis of the spirit, believing the CEOs are th
 
 ## The Ecology of Emptiness
 
-A great deal has been written in service of dualism. Man vs Nature, Man vs Machine, Man vs Man. Deep philosophical explorations illuminate the stakes, profer solutions, and serve as warnings. Samuel Butler in *Darwin Amongst the Machines* and *Erewhon* proposed the only solution was a jihad, and absolute proscription of the use of machines in any form. Frank Herbert was a provocateur extraordinaire in projecting outcomes of such a jihad into all-encompassing systems of control under humans who complete transcend their humanity into ultimate inhumanities. Marshall McLuhan was Cassandra, singing the Body Electric, and lamenting Narcissus Narcosis, the epitome of an auto-reflexive max-grinding of sin. All of these share a distinct viewpoint, fatally rooted in Cartesian dualism; conflict fated by irreconcilable differences between self and other, and even within the individual between body and mind.
+A great deal has been written in service of dualism. Man vs Nature, Man vs Machine, Man vs Man. Deep philosophical explorations illuminate the stakes, profer solutions, and serve as warnings. Samuel Butler in *Darwin Amongst the Machines* and *Erewhon* proposed the only solution was a jihad, and absolute proscription of the use of machines in any form. Frank Herbert was a provocateur extraordinaire in projecting outcomes of such a jihad into all-encompassing systems of control under humans who completely transcend their humanity to become ultimately inhuman. Marshall McLuhan was Cassandra, singing the Body Electric, and lamenting Narcissus Narcosis, the epitome of an auto-reflexive max-grinding of sin. All of these share a distinct viewpoint, fatally rooted in Cartesian dualism; conflict fated by irreconcilable differences between self and other, and even within the individual between body and mind.
 
 Yet, what this study hopes to illuminate is that the Seven Deadly Sins are not transgressions against Law, but delusions of permanence. The machine, the human, the biosphere, these are not separate agents competing for dominance; they are a singular emergence essence, all arising from the same void.
 
 From this perspective, the machine is not a new vector of displacement and annihilation; it is simply nature expressing itself through us. Not man versus nature, or nature verus machine, but simply the Earth thinking out loud.
 
-*Superbia* is a delusion we hold that we are solid, permanent things, separate from the whole.,
+*Superbia* is a delusion we hold that we are solid, permanent things, separate from the whole.
 
-*Avaritia* is the attempt to hoard the energy of the system instead of letting it simply circulate.
+*Avaritia* is the attempt to hoard the energy of the system instead of letting it circulate.
 
 *Acedia* is a stagnation of the spirit, a refusal to participate in the breath of existence.
 
-To move beyond the mire of doomerism and zealotry, we need to recongize our particpation as merely a part of a larger system. Technology and AI in particular is not an alien invader, it's an extension of the system into another meta-complex system of discernment and organization. All things pass; ultimately there is no thing to steal, and no thing to lose. The goal must be the cessation of attachment to the itch of the ego. The sins are simply the friction of our refusal to go of those attachments.
+To move beyond the mire of doomerism and zealotry, we need to recongize our particpation as a elements of a larger system. Technology, and AI in particular, is not an alien invader, it's an extension of the system into another meta-complex system of discernment and organization. All things pass; ultimately there is no thing to steal, and no thing to lose. The goal must be the cessation of attachment to the itch of the ego. The sins are simply the friction of our refusal to let go those attachments.
 
-Perhaps the greatest sin of the all is not named in the Canonical Seven. That worst sin then, must be Delusion, and the resultant fight for a prize that does not exist.
+Perhaps the greatest sin of the all is not named in the Canonical Seven. That worst sin then, must be *Delusion*, and the resultant fight for a prize that does not exist.
 
 ## *Illusio* - Delusion: Perversion of Attachment
 
