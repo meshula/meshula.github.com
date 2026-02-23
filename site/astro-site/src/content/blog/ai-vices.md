@@ -7,6 +7,8 @@ author: "Nick Porcino"
 draft: false
 ---
 
+*nb: written by a human, all errors are mine.*
+
 To begin this exploration, we'll begin with a bit of history, a tour of the sins and their antidotes.
 
 We'll take a little trip to Hell, and then contextualize our present day conundra and feeling of existential anxiety brought about by profound change. We'll hear from Kahless, and then close.
@@ -246,7 +248,7 @@ From this perspective, the machine is not a new vector of displacement and annih
 
 *Acedia* is a stagnation of the spirit, a refusal to participate in the breath of existence.
 
-To move beyond the mire of doomerism and zealotry, we need to recongize our particpation as a elements of a larger system. Technology, and AI in particular, is not an alien invader, it's an extension of the system into another meta-complex system of discernment and organization. All things pass; ultimately there is no thing to steal, and no thing to lose. The goal must be the cessation of attachment to the itch of the ego. The sins are simply the friction of our refusal to let go those attachments.
+To move beyond the mire of doomerism and zealotry, we need to recognize our particpation as a elements of a larger system. Technology, and AI in particular, is not an alien invader, it's an extension of the system into another meta-complex system of discernment and organization. All things pass; ultimately there is no thing to steal, and no thing to lose. The goal must be the cessation of attachment to the itch of the ego. The sins are simply the friction of our refusal to let go those attachments.
 
 Perhaps the greatest sin of the all is not named in the Canonical Seven. That worst sin then, must be *Delusion*, and the resultant fight for a prize that does not exist.
 
