@@ -21,27 +21,30 @@ A second contribution of this article is a formal definition of encapsulation th
 
 ## Summary of Claims
 
-The following claims are established by the theorems in this paper. They are stated here informally as a reference point for readers engaging with the formal proofs, and as a concise technical rebuttal to common misconceptions about USD composition.
+The following claims are established by the theorems in this paper. They are stated here informally as a reference point for readers engaging with the formal proofs, and as a concise answer to common questions about USD composition.
 
-**Claim 1 — Total Order.**
+**Claim 1 — Namespace Path as Compositional Address.**
+A prim's namespace path is not an arbitrary human-readable label — it is a structural input to the ordering function. Lexicographic path ordering is the primary sort key for sibling opinion strength, and override binding is resolved by path identity. No reidentification scheme (such as GUIDs) can substitute for namespace paths without destroying the total order on which all other claims depend. Renaming is handled by `relocates`, which preserves path-as-address while allowing an asset's internal namespace to be remapped at the point of reference.
+
+**Claim 2 — Total Order.**
 For any stage and any fixed payload mask, the Prim Composition Pipeline (PCP) produces exactly one prim index per prim path. The index embodies a unique total ordering of opinions, derived from the LIVERPS arc-type hierarchy and lexicographic sibling ordering. There is no ambiguity in which opinion wins for any property.
 
-**Claim 2 — Arc Determinism.**
+**Claim 3 — Arc Determinism.**
 Each arc type (Local, Inherits, Variant Sets, rElocates, Payloads, References, Specializes) has a fixed strength relative to all others. The combination of arbitrarily many arcs — including recursive references and nested variants — produces a finite, acyclic prim index graph with a deterministic traversal order. No arc type can introduce a cycle or ambiguity in the final opinion set.
 
-**Claim 3 — Variant Selection Does Not Introduce Ambiguity.**
+**Claim 4 — Variant Selection Does Not Introduce Ambiguity.**
 Variant selection is an input to composition, not an output of it. A variant set selects at most one variant per authored or defaulted selection key; that selection is made during Phase 1 (index construction) and is complete before any value is resolved. Because selection is phase-separated from resolution, variants cannot create circular dependencies or ordering conflicts. The exponential explosion that would result from unrestricted cross-variant state leakage is provably avoided.
 
-**Claim 4 — Hermetic Decomposition.**
+**Claim 5 — Hermetic Decomposition.**
 Any stage can be partitioned into hermetically-encapsulated subgraphs. Each subgraph composes independently and deterministically. The union of hermetic subgraphs is itself deterministic and introduces no new opinion conflicts. This is the formal basis for scalable parallel and incremental composition.
 
-**Claim 5 — Instance Stability.**
-Instancing is a cache-level optimization. Instances share a prototype prim index that is itself subject to all the above invariants. Instance identity is preserved under relocation. The instancing mechanism does not alter the compositional result — it only deduplicates its computation.
+**Claim 6 — Instance Stability.**
+Prototype composition obeys all the same invariants as non-instanced composition, and the instance-to-prototype relationship is itself deterministic. Instancing is a cache-level optimization that deduplicates computation without altering the compositional result. Instance identity is preserved under relocation.
 
-**Claim 6 — Payload Masking is Monotonic.**
+**Claim 7 — Payload Masking is Monotonic.**
 The payload mask is a parameter to composition, not a product of it. Within any fixed mask, composition is fully deterministic. Changing the mask changes which subtrees are loaded and forces recomposition of affected prims, but introduces no non-determinism. The composition function $f(\text{stage}, \text{mask}) \to \text{prim\_index}$ is a pure function of its inputs.
 
-**Claim 7 — Uniqueness.**
+**Claim 8 — Uniqueness.**
 Given a fixed stage (layer stack and asset graph) and a fixed payload mask, there is exactly one valid composed result. There are no valid alternative orderings, no tie-breaking that could go either way, and no ordering-dependent outcomes. Composition is a confluent rewrite system: the result is independent of evaluation order.
 
 # Definitions
