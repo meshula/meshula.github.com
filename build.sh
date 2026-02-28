@@ -20,7 +20,7 @@ echo "📦 Building PCP Explorer..."
 cd ../pcp-explorer
 
 # Sync paper source so the deployed app always has the latest version
-cp ../../papers/encapsulation.md static/encapsulation.md
+cp ../papers/encapsulation.md static/encapsulation.md
 
 npm ci
 npm run build
