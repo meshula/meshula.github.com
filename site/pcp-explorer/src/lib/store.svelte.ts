@@ -1,3 +1,11 @@
+export interface OutlineEntry {
+  depth: number;
+  text: string;
+  id: string;
+}
+
+export const outline = $state<OutlineEntry[]>([]);
+
 export interface FocusState {
   nodeId: string | null;
   paperAnchor: string | null;

@@ -1,7 +1,8 @@
 <script lang="ts">
   import { marked, type Renderer } from 'marked';
   import { base } from '$app/paths';
-  import { focus } from './store.svelte';
+  import { focus, outline } from './store.svelte';
+  import type { OutlineEntry } from './store.svelte';
 
   // fetch and render the markdown source
   let html = $state('');
@@ -52,6 +53,17 @@
     const res = await fetch(`${base}/encapsulation.md`);
     if (!res.ok) return;
     const md = await res.text();
+
+    // Extract outline from headings before math protection (plain text, no LaTeX needed)
+    const entries: OutlineEntry[] = [];
+    for (const token of marked.lexer(md)) {
+      if (token.type === 'heading') {
+        const text = token.text.replace(/\$[^$]*\$/g, '').trim(); // strip inline math from display text
+        entries.push({ depth: token.depth, text, id: slugify(token.text) });
+      }
+    }
+    outline.splice(0, outline.length, ...entries);
+
     const { protected: safeMd, restore } = protectMath(md);
     html = restore(await marked.parse(safeMd));
   }
