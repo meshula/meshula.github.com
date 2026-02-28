@@ -144,6 +144,7 @@
     background: #181825;
     height: 100%;
     box-sizing: border-box;
+    overflow-y: auto;
   }
 
   .outline-header {
