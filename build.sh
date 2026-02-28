@@ -16,6 +16,18 @@ cp ../404.html dist/
 cp -r ../../posts dist/posts
 cp -r ../../meshula-net-archive dist/meshula-net-archive
 
+echo "📦 Building PCP Explorer..."
+cd ../pcp-explorer
+
+# Sync paper source so the deployed app always has the latest version
+cp ../../papers/encapsulation.md static/encapsulation.md
+
+npm ci
+npm run build
+
+echo "📄 Copying PCP Explorer output to dist/pcp-explorer/..."
+cp -r build/ ../astro-site/dist/pcp-explorer
+
 echo "✅ Build complete - combined output in site/astro-site/dist/"
 echo "📊 Contents:"
-ls -la dist/ | head -10
+ls -la ../astro-site/dist/ | head -15
