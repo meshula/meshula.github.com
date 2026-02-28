@@ -223,7 +223,7 @@
   /* Collapse button — top-left corner of the open panel */
   .collapse-btn {
     position: absolute;
-    top: 6px;
+    top: 48px;
     left: 6px;
     z-index: 20;
     background: #313244;
@@ -232,14 +232,14 @@
     color: #cdd6f4;
     font-size: 14px;
     line-height: 1;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     padding: 0;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.5;
+    opacity: 0.9;
     transition: opacity 0.15s;
   }
 
