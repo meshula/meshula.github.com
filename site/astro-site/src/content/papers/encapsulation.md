@@ -19,6 +19,31 @@ This article breaks down the relationship between state propagation and composit
 
 A second contribution of this article is a formal definition of encapsulation through the concepts of **Leakage** and **Infiltration**, establishing the conditions required for **Hermeticity** within a scene graph. This is not a change in USD semantics, but a proposal for formal language for reasoning about encapsulation. Furthermore, it validates the mechanism of **relocation** and **specializes** as essential mechanisms for maintaining namespace stability and referential transparency. We conclude by showing that through enforcing a strict phase separation between variant selection and value evaluation, USD avoids the exponential complexity explosion ($O(k^n)$) inherent in systems that allow unrestricted state leakage. The paper includes a technical appendix cross-referencing these theorems against the OpenUSD C++ implementation.
 
+## Summary of Claims
+
+The following claims are established by the theorems in this paper. They are stated here informally as a reference point for readers engaging with the formal proofs, and as a concise technical rebuttal to common misconceptions about USD composition.
+
+**Claim 1 — Total Order.**
+For any stage and any fixed payload mask, the Prim Composition Pipeline (PCP) produces exactly one prim index per prim path. The index embodies a unique total ordering of opinions, derived from the LIVERPS arc-type hierarchy and lexicographic sibling ordering. There is no ambiguity in which opinion wins for any property.
+
+**Claim 2 — Arc Determinism.**
+Each arc type (Local, Inherits, Variant Sets, rElocates, Payloads, References, Specializes) has a fixed strength relative to all others. The combination of arbitrarily many arcs — including recursive references and nested variants — produces a finite, acyclic prim index graph with a deterministic traversal order. No arc type can introduce a cycle or ambiguity in the final opinion set.
+
+**Claim 3 — Variant Selection Does Not Introduce Ambiguity.**
+Variant selection is an input to composition, not an output of it. A variant set selects at most one variant per authored or defaulted selection key; that selection is made during Phase 1 (index construction) and is complete before any value is resolved. Because selection is phase-separated from resolution, variants cannot create circular dependencies or ordering conflicts. The exponential explosion that would result from unrestricted cross-variant state leakage is provably avoided.
+
+**Claim 4 — Hermetic Decomposition.**
+Any stage can be partitioned into hermetically-encapsulated subgraphs. Each subgraph composes independently and deterministically. The union of hermetic subgraphs is itself deterministic and introduces no new opinion conflicts. This is the formal basis for scalable parallel and incremental composition.
+
+**Claim 5 — Instance Stability.**
+Instancing is a cache-level optimization. Instances share a prototype prim index that is itself subject to all the above invariants. Instance identity is preserved under relocation. The instancing mechanism does not alter the compositional result — it only deduplicates its computation.
+
+**Claim 6 — Payload Masking is Monotonic.**
+The payload mask is a parameter to composition, not a product of it. Within any fixed mask, composition is fully deterministic. Changing the mask changes which subtrees are loaded and forces recomposition of affected prims, but introduces no non-determinism. The composition function $f(\text{stage}, \text{mask}) \to \text{prim\_index}$ is a pure function of its inputs.
+
+**Claim 7 — Uniqueness.**
+Given a fixed stage (layer stack and asset graph) and a fixed payload mask, there is exactly one valid composed result. There are no valid alternative orderings, no tie-breaking that could go either way, and no ordering-dependent outcomes. Composition is a confluent rewrite system: the result is independent of evaluation order.
+
 # Definitions
 
 Unique terms have been chosen to clearly distinguish theoretical constructions from existing USD terms of art; this is intentional in service of clear exposition.
