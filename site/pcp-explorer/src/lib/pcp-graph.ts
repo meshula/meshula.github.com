@@ -336,7 +336,7 @@ export const nodes: PcpNode[] = [
       phase: 'resolution',
       refs: [{ file: 'primIndex.cpp', line: 5333, label: 'PcpComputePrimIndex' }],
       theory: 'Theorem 7.3 (Phase-Separation) · Prop 5.1 (LIVERPS as Sequential Channel)',
-      paperAnchor: 'proposition-51-liverps-as-a-sequential-channel',
+      paperAnchor: 'theorem-73-phase-separation-of-selection',
       description:
         'A single linear pass over the finalized node pool in strength order. ' +
         'The first node with a spec for the requested property wins. ' +
