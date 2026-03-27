@@ -9,6 +9,8 @@ tags: ["optics", "radiometry", "photometry", "physics", "light measurement", "co
 author: "Nick Porcino"
 draft: false
 ---
+import IntegralCube from '../../components/IntegralCube.astro';
+import RadiometryViz from '../../components/RadiometryViz.astro';
 
 # Measuring Light
 
@@ -49,6 +51,8 @@ The following sections will explore each of these radiometric quantities in deta
 | 110 | $A\Omega$ - | **Spectral Radiant Flux** | $\frac{W}{nm}$ |
 | 111 | $A\lambda\Omega$ | **Radiant Flux** | $W$ |
 
+<IntegralCube />
+
 In the equations that follow, these terms frequently appear:
 
 $E_\lambda$ is the spectral radiant exitance,
@@ -56,10 +60,12 @@ $d\Phi_\lambda(\lambda)$ represents the differential radiant flux at a specific 
 $dA$ is the differential area of the emitting surface.
 $d\lambda$ is the differential wavelength
 
-## 000 Spectral Radiance 
+## 000 Spectral Radiance
 Symbol: $L_\lambda$
- 
+
 ### Unit: Watt per steradian per square meter per nanometer $(\frac{W}{sr·m²·nm})$
+
+<RadiometryViz code="000" />
 
 Spectral Radiance measures the power emitted by a surface in a specific direction, per unit area, per unit solid angle, and per unit wavelength. It is a differential quantity with respect to wavelength, describing how radiance varies across the spectrum at a particular wavelength.
 
@@ -67,12 +73,12 @@ $$
 L_\lambda = \Phi_\lambda
 $$
 
-## 001 Radiance 
-
+## 001 Radiance
 Symbol: $L$
 
-
 ### Unit: Watt per steradian per square meter $(\frac{W}{sr·m²})$
+
+<RadiometryViz code="001" />
 
 Radiance integrates spectral radiance over wavelength ($\lambda). It measures the amount of power emitted by a surface in a specific direction, per unit area and per unit solid angle.
 
@@ -84,12 +90,13 @@ $$
 L = \int L_\lambda d\lambda
 $$
 
-## 010 Spectral Irradiance 
-
+## 010 Spectral Irradiance
 Symbol: $E_\lambda$
 
 ### Unit: Watt per square meter per nanometer $(\frac{W}{m²·nm})$
- 
+
+<RadiometryViz code="010" />
+
 Measures the power of electromagnetic radiation incident on a surface at a specific wavelength per unit area; in other words it is a differential quantity dependent on area and wavelength.
 
 $$
@@ -111,11 +118,12 @@ $$
 E_\lambda = \int L_\lambda d\Omega
 $$
 
-## 011 Irradiance 
-
+## 011 Irradiance
 Symbol: $E$
 
 ### Unit: Watt per square meter $(\frac{W}{m²})$
+
+<RadiometryViz code="011" />
 
 Measures the power of incoming electromagnetic radiation incident on a surface per unit area. It describes how much energy from a light source arrives at a surface, independent of direction.
 
@@ -141,12 +149,13 @@ E = \int \int E_\lambda(\lambda) d\Omega d\lambda
 $$
 
 
-## 100 Spectral Radiant Intensity 
-
+## 100 Spectral Radiant Intensity
 Symbol: $I_\lambda$
 
 ### Unit: Watt per steradian per nanometer $(\frac{W}{sr·nm})$
- 
+
+<RadiometryViz code="100" />
+
 Measures the power emitted by a source in a specific direction at a particular wavelength per unit solid angle. Radiant Intensity is a differential quantity with respect to solid angle.
 
 $$
@@ -154,10 +163,11 @@ I_\lambda = \int L_\lambda dA
 $$
 
 ## 101 Radiant Intensity
-
 Symbol: $I$
 
 ### Unit: Watt per steradian $(\frac{W}{sr})$
+
+<RadiometryViz code="101" />
 
 Measures the power emitted by a source in a specific direction per unit solid angle. This unit quantifies how much energy is radiated in a particular direction, making it useful for understanding directional emission patterns.
 
@@ -165,12 +175,13 @@ $$
 I_\lambda = \int \int L_\lambda dA d\lambda
 $$
 
-## 110 Spectral Radiant Flux 
-
+## 110 Spectral Radiant Flux
 Symbol: $Φ_\lambda$
- 
+
 ### Unit: Watt per nanometer $(\frac{W}{nm})$
- 
+
+<RadiometryViz code="110" />
+
 **Spectral Radiant Flux** measures the power of electromagnetic radiation at a specific wavelength. It is a differential quantity with respect to wavelength and provides detailed information about how the power is distributed across the spectrum.
 
 Radiant Flux can be obtained by integrating Spectral Radiant Flux over the entire wavelength range:
@@ -182,10 +193,11 @@ $$
 
 
 ## 111 Radiant Flux
-
 Symbol: $Φ$
 
 ### Unit: Watt ($W$)
+
+<RadiometryViz code="111" />
 
 **Radiant Flux** is the total power of electromagnetic radiation emitted, transferred, or received by a source. Unlike the other radiometric quantities discussed in this tutorial, Radiant Flux represents the total energy without considering the distribution over area, direction, or wavelength.
 

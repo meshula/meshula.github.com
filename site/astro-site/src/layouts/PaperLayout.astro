@@ -4,16 +4,24 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import TableOfContents from '../components/TableOfContents.astro';
 import { Image } from 'astro:assets';
 
-type Props = CollectionEntry<'papers'>['data'];
+interface Heading {
+	depth: number;
+	slug: string;
+	text: string;
+}
 
-const { title, description, pubDate, updatedDate, heroImage, category, triadic_domain, author, sanskrit_terms, tags } = Astro.props;
+type Props = CollectionEntry<'papers'>['data'] & {
+	headings?: Heading[];
+};
+
+const { title, description, pubDate, updatedDate, heroImage, category, triadic_domain, author, sanskrit_terms, tags, headings = [] } = Astro.props;
 
 const imageUrl = heroImage
   ? new URL(heroImage, Astro.site).toString()
   : new URL('/images/default-og-image.jpg', Astro.site).toString();
-
 ---
 
 <html lang="en">
@@ -38,24 +46,30 @@ const imageUrl = heroImage
 				border-radius: 12px;
 				box-shadow: var(--box-shadow);
 			}
+			.paper-container {
+				display: grid;
+				grid-template-columns: 220px 1fr;
+				gap: 2em;
+				max-width: 1100px;
+				margin: 0 auto;
+				padding: 0 1em;
+			}
 			.prose {
-				width: 800px; /* Wider for academic papers */
-				max-width: calc(100% - 2em);
-				margin: auto;
+				max-width: 800px;
 				padding: 1em;
 				color: rgb(var(--gray-dark));
-				line-height: 1.6; /* Better for academic reading */
+				line-height: 1.6;
+			}
+			.toc-sidebar {
+				display: block;
 			}
 			.paper-header {
+				margin-bottom: 1em;
+			}
 			.paper-title {
 				font-family: 'Michroma', 'Arial Black', Impact, sans-serif;
 				font-weight: 400;
 				font-size: 2.5em;
-				margin: 0 0 0.5em 0;
-				line-height: 1.2;
-				color: rgb(var(--black));
-				letter-spacing: 0.02em;
-			}
 				margin: 0 0 0.5em 0;
 				line-height: 1.2;
 				color: rgb(var(--black));
@@ -114,16 +128,8 @@ const imageUrl = heroImage
 				gap: 0.5em;
 				justify-content: center;
 				margin: 1em 0;
-			/* Academic paper specific spacing adjustments */
-			.prose h1 {
-				margin-top: 2em;
 			}
-			.prose h2 {
-				margin-top: 2em;
-			}
-			.prose h3 {
-				margin-top: 1.5em;
-			}
+			.tags .tag {
 				font-size: 0.75em;
 			}
 			.last-updated-on {
@@ -150,7 +156,7 @@ const imageUrl = heroImage
 				margin-top: 1.5em;
 				letter-spacing: 0.01em;
 			}
-			
+
 			/* Responsive images in content */
 			.prose img {
 				max-width: 100%;
@@ -159,13 +165,18 @@ const imageUrl = heroImage
 				margin: 1.5em auto;
 				border-radius: 8px;
 				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-				/* Limit very large images to a reasonable size */
 				max-height: 80vh;
 				object-fit: contain;
 			}
-			
+
 			/* Mobile responsiveness */
 			@media (max-width: 720px) {
+				.paper-container {
+					grid-template-columns: 1fr;
+				}
+				.toc-sidebar {
+					display: none;
+				}
 				.paper-title {
 					font-size: 1.8em;
 				}
@@ -187,46 +198,53 @@ const imageUrl = heroImage
 				<div class="hero-image">
 					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
 				</div>
-				<div class="prose">
-					<div class="paper-header">
-						<h1 class="paper-title">{title}</h1>
-						
-						<div class="paper-meta">
-							{author && <span class="author">{author}</span>}
-							<span class="date">
-								<FormattedDate date={pubDate} />
-							</span>
-							{category && <span class="category">{category}</span>}
-							{triadic_domain && <span class="triadic-domain">{triadic_domain}</span>}
+				<div class="paper-container">
+					{headings.length > 0 && (
+						<aside class="toc-sidebar">
+							<TableOfContents headings={headings} />
+						</aside>
+					)}
+					<div class="prose">
+						<div class="paper-header">
+							<h1 class="paper-title">{title}</h1>
+
+							<div class="paper-meta">
+								{author && <span class="author">{author}</span>}
+								<span class="date">
+									<FormattedDate date={pubDate} />
+								</span>
+								{category && <span class="category">{category}</span>}
+								{triadic_domain && <span class="triadic-domain">{triadic_domain}</span>}
+							</div>
+
+							{sanskrit_terms && sanskrit_terms.length > 0 && (
+								<div class="sanskrit-terms">
+									Sanskrit terms: {sanskrit_terms.map((term, i) => (
+										<span>
+											<span class="term">{term}</span>
+											{i < sanskrit_terms.length - 1 ? ', ' : ''}
+										</span>
+									))}
+								</div>
+							)}
+
+							{tags && tags.length > 0 && (
+								<div class="tags">
+									{tags.map((tag) => (
+										<span class="tag">{tag}</span>
+									))}
+								</div>
+							)}
+
+							{updatedDate && (
+								<div class="last-updated-on">
+									Last updated on <FormattedDate date={updatedDate} />
+								</div>
+							)}
 						</div>
-						
-						{sanskrit_terms && sanskrit_terms.length > 0 && (
-							<div class="sanskrit-terms">
-								Sanskrit terms: {sanskrit_terms.map((term, i) => (
-									<span>
-										<span class="term">{term}</span>
-										{i < sanskrit_terms.length - 1 ? ', ' : ''}
-									</span>
-								))}
-							</div>
-						)}
-						
-						{tags && tags.length > 0 && (
-							<div class="tags">
-								{tags.map((tag) => (
-									<span class="tag">{tag}</span>
-								))}
-							</div>
-						)}
-						
-						{updatedDate && (
-							<div class="last-updated-on">
-								Last updated on <FormattedDate date={updatedDate} />
-							</div>
-						)}
+
+						<slot />
 					</div>
-					
-					<slot />
 				</div>
 			</article>
 		</main>

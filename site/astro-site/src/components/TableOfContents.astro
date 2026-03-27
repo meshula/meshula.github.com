@@ -1,0 +1,132 @@
+---
+interface Heading {
+	depth: number;
+	slug: string;
+	text: string;
+}
+
+interface Props {
+	headings: Heading[];
+}
+
+const { headings } = Astro.props;
+const tocHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
+---
+
+{tocHeadings.length > 0 && (
+	<nav class="toc" aria-label="Table of Contents">
+		<h2 class="toc-title">Contents</h2>
+		<div class="toc-scroll-wrapper">
+			<div class="toc-scroll-indicator toc-indicator-up" aria-hidden="true">
+				<svg width="12" height="8" viewBox="0 0 12 8"><path d="M1 7L6 2L11 7" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+			</div>
+			<ul class="toc-list">
+				{tocHeadings.map((heading) => (
+					<li class:list={[`toc-depth-${heading.depth}`]}>
+						<a href={`#${heading.slug}`}>{heading.text}</a>
+					</li>
+				))}
+			</ul>
+			<div class="toc-scroll-indicator toc-indicator-down" aria-hidden="true">
+				<svg width="12" height="8" viewBox="0 0 12 8"><path d="M1 1L6 6L11 1" stroke="currentColor" stroke-width="1" fill="none"/></svg>
+			</div>
+		</div>
+	</nav>
+)}
+
+<script>
+	function initTocScroll() {
+		const wrapper = document.querySelector('.toc-scroll-wrapper');
+		const list = wrapper?.querySelector('.toc-list');
+		const upIndicator = wrapper?.querySelector('.toc-indicator-up');
+		const downIndicator = wrapper?.querySelector('.toc-indicator-down');
+		if (!wrapper || !list || !upIndicator || !downIndicator) return;
+
+		function update() {
+			const atTop = list!.scrollTop <= 2;
+			const atBottom = list!.scrollTop + list!.clientHeight >= list!.scrollHeight - 2;
+			const scrollable = list!.scrollHeight > list!.clientHeight;
+
+			(upIndicator as HTMLElement).style.opacity = (!atTop && scrollable) ? '1' : '0';
+			(downIndicator as HTMLElement).style.opacity = (!atBottom && scrollable) ? '1' : '0';
+		}
+
+		list.addEventListener('scroll', update, { passive: true });
+		window.addEventListener('resize', update, { passive: true });
+		update();
+	}
+
+	document.addEventListener('astro:page-load', initTocScroll);
+	initTocScroll();
+</script>
+
+<style>
+	.toc {
+		position: sticky;
+		top: 2em;
+		max-height: calc(100vh - 4em);
+		padding: 1em;
+		font-size: 0.85em;
+		border-right: 1px solid rgb(var(--gray-light));
+	}
+	.toc-title {
+		font-family: 'Michroma', 'Arial Black', Impact, sans-serif;
+		font-size: 0.85em;
+		font-weight: 400;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		color: rgb(var(--gray));
+		margin: 0 0 0.75em 0;
+	}
+	.toc-scroll-wrapper {
+		position: relative;
+	}
+	.toc-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		max-height: calc(100vh - 10em);
+		overflow-y: auto;
+		scrollbar-width: none;
+	}
+	.toc-list::-webkit-scrollbar {
+		display: none;
+	}
+	.toc-list li {
+		margin: 0;
+		padding: 0;
+	}
+	.toc-list a {
+		display: block;
+		padding: 0.35em 0;
+		color: rgb(var(--gray));
+		text-decoration: none;
+		border-left: 2px solid rgb(var(--gray-light));
+		padding-left: 0.75em;
+		transition: color 0.2s, border-color 0.2s;
+		line-height: 1.3;
+	}
+	.toc-list a:hover {
+		color: var(--accent);
+		border-left-color: var(--accent);
+	}
+	.toc-depth-3 a {
+		padding-left: 1.5em;
+		font-size: 0.9em;
+	}
+	.toc-scroll-indicator {
+		display: flex;
+		justify-content: center;
+		padding: 0.3em 0;
+		color: rgb(var(--gray));
+		opacity: 0;
+		transition: opacity 0.3s;
+		pointer-events: none;
+	}
+	.toc-indicator-up {
+		box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.08);
+	}
+	.toc-indicator-down {
+		box-shadow: 0 -4px 6px -2px rgba(0, 0, 0, 0.08);
+	}
+</style>

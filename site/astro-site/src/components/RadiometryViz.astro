@@ -1,0 +1,450 @@
+---
+interface Props {
+  code: '000' | '001' | '010' | '011' | '100' | '101' | '110' | '111';
+}
+
+const { code } = Astro.props;
+const id = `radiometry-viz-${code}`;
+---
+
+<div class="radiometry-viz">
+  <canvas id={id} width="240" height="240" data-code={code}></canvas>
+</div>
+
+<script>
+  function wavelengthToRGB(nm: number): string {
+    // Attempt approximate visible spectrum color
+    let r = 0, g = 0, b = 0;
+    if (nm >= 380 && nm < 440) {
+      r = -(nm - 440) / 60; b = 1;
+    } else if (nm < 490) {
+      g = (nm - 440) / 50; b = 1;
+    } else if (nm < 510) {
+      g = 1; b = -(nm - 510) / 20;
+    } else if (nm < 580) {
+      r = (nm - 510) / 70; g = 1;
+    } else if (nm < 645) {
+      r = 1; g = -(nm - 645) / 65;
+    } else if (nm <= 780) {
+      r = 1;
+    }
+    return `rgb(${Math.round(r*255)},${Math.round(g*255)},${Math.round(b*255)})`;
+  }
+
+  function initViz(canvas: HTMLCanvasElement) {
+    const code = canvas.dataset.code!;
+    const ctx = canvas.getContext('2d')!;
+    const W = canvas.width;
+    const H = canvas.height;
+    const cx = W / 2;
+    const cy = H / 2;
+
+    const ACCENT = '#2337ff';
+    const GRAY = 'rgb(96, 115, 159)';
+    const GRAY_LIGHT = 'rgb(229, 233, 240)';
+    const GRAY_DARK = 'rgb(34, 41, 57)';
+    const MONO_WL = 540; // green for "single wavelength" views
+    const MONO_COLOR = wavelengthToRGB(MONO_WL);
+
+    let frame = 0;
+    let animId: number;
+
+    function drawSurfacePatch(x: number, y: number, w: number, h: number) {
+      ctx.fillStyle = GRAY_LIGHT;
+      ctx.strokeStyle = GRAY;
+      ctx.lineWidth = 1;
+      // draw as a parallelogram for 3/4 view
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      ctx.lineTo(x + w, y - h * 0.25);
+      ctx.lineTo(x + w + w * 0.4, y + h * 0.35);
+      ctx.lineTo(x + w * 0.4, y + h * 0.6);
+      ctx.closePath();
+      ctx.fill();
+      ctx.stroke();
+    }
+
+    function drawCone(ox: number, oy: number, angle: number, spread: number, len: number, color: string, alpha: number = 1) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = 1.5;
+      // center ray
+      const ex = ox + Math.cos(angle) * len;
+      const ey = oy + Math.sin(angle) * len;
+      ctx.beginPath();
+      ctx.moveTo(ox, oy);
+      ctx.lineTo(ex, ey);
+      ctx.stroke();
+      // cone edges
+      ctx.lineWidth = 0.75;
+      ctx.setLineDash([3, 3]);
+      for (const s of [-spread, spread]) {
+        const sx = ox + Math.cos(angle + s) * len;
+        const sy = oy + Math.sin(angle + s) * len;
+        ctx.beginPath();
+        ctx.moveTo(ox, oy);
+        ctx.lineTo(sx, sy);
+        ctx.stroke();
+      }
+      // arc at end
+      ctx.beginPath();
+      ctx.arc(ox, oy, len * 0.85, angle - spread, angle + spread);
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.restore();
+    }
+
+    function drawHemisphereArrows(ox: number, oy: number, color: string, alpha: number = 0.6) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      const count = 9;
+      const baseAngle = -Math.PI;
+      const arcSpan = Math.PI;
+      for (let i = 0; i <= count; i++) {
+        const a = baseAngle + (arcSpan * i) / count;
+        const len = 50 + Math.sin(i * 1.3) * 8;
+        const ex = ox + Math.cos(a) * len;
+        const ey = oy + Math.sin(a) * len;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.2;
+        ctx.beginPath();
+        ctx.moveTo(ox, oy);
+        ctx.lineTo(ex, ey);
+        ctx.stroke();
+        // arrowhead
+        const ha = Math.atan2(oy - ey, ox - ex);
+        const hl = 5;
+        ctx.beginPath();
+        ctx.moveTo(ox, oy);
+        ctx.lineTo(ox + hl * Math.cos(ha - 0.5), oy + hl * Math.sin(ha - 0.5));
+        ctx.moveTo(ox, oy);
+        ctx.lineTo(ox + hl * Math.cos(ha + 0.5), oy + hl * Math.sin(ha + 0.5));
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function drawPointSource(x: number, y: number, color: string, pulse: number) {
+      const r = 4 + pulse * 2;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fillStyle = color;
+      ctx.fill();
+      // glow
+      const grad = ctx.createRadialGradient(x, y, r, x, y, r + 10 + pulse * 5);
+      grad.addColorStop(0, color.replace('rgb', 'rgba').replace(')', ',0.3)'));
+      grad.addColorStop(1, 'rgba(255,255,255,0)');
+      ctx.beginPath();
+      ctx.arc(x, y, r + 10 + pulse * 5, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
+    }
+
+    function drawStarburst(x: number, y: number, color: string, alpha: number, rayCount: number, phase: number) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      for (let i = 0; i < rayCount; i++) {
+        const a = (Math.PI * 2 * i) / rayCount + phase;
+        const len = 55 + Math.sin(a * 3 + phase * 2) * 12;
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        const ex = x + Math.cos(a) * len;
+        const ey = y + Math.sin(a) * len;
+        ctx.lineTo(ex, ey);
+        ctx.stroke();
+        // arrowhead
+        const hl = 5;
+        ctx.beginPath();
+        ctx.moveTo(ex, ey);
+        ctx.lineTo(ex - hl * Math.cos(a - 0.4), ey - hl * Math.sin(a - 0.4));
+        ctx.moveTo(ex, ey);
+        ctx.lineTo(ex - hl * Math.cos(a + 0.4), ey - hl * Math.sin(a + 0.4));
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
+    function drawRainbow(ox: number, oy: number, angle: number, len: number, spread: number) {
+      const wavelengths = [440, 470, 510, 540, 570, 590, 620, 660];
+      wavelengths.forEach((wl, i) => {
+        const t = (i / (wavelengths.length - 1)) - 0.5;
+        const a = angle + t * spread * 2;
+        const color = wavelengthToRGB(wl);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 1.5;
+        ctx.globalAlpha = 0.7;
+        const ex = ox + Math.cos(a) * len;
+        const ey = oy + Math.sin(a) * len;
+        ctx.beginPath();
+        ctx.moveTo(ox, oy);
+        ctx.lineTo(ex, ey);
+        ctx.stroke();
+      });
+      ctx.globalAlpha = 1;
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, W, H);
+      const t = frame * 0.02;
+      const pulse = (Math.sin(t * 2) + 1) / 2;
+
+      switch (code) {
+        case '000': {
+          // Spectral Radiance: surface patch + single colored ray in a narrow cone
+          drawSurfacePatch(cx - 40, cy + 25, 60, 30);
+          drawCone(cx - 5, cy + 20, -Math.PI / 2 - 0.3, 0.12, 75, MONO_COLOR);
+          // wavelength indicator: small spectrum bar with marker
+          const barY = H - 22;
+          const barX = 30;
+          const barW = W - 60;
+          for (let i = 0; i < barW; i++) {
+            const wl = 380 + (i / barW) * 400;
+            ctx.fillStyle = wavelengthToRGB(wl);
+            ctx.fillRect(barX + i, barY, 1, 8);
+          }
+          // marker at 540nm
+          const markerX = barX + ((MONO_WL - 380) / 400) * barW;
+          ctx.fillStyle = GRAY_DARK;
+          ctx.beginPath();
+          ctx.moveTo(markerX, barY - 4);
+          ctx.lineTo(markerX - 3, barY - 1);
+          ctx.lineTo(markerX + 3, barY - 1);
+          ctx.closePath();
+          ctx.fill();
+          break;
+        }
+
+        case '001': {
+          // Radiance: surface patch + rainbow collapsing into white beam
+          drawSurfacePatch(cx - 40, cy + 25, 60, 30);
+          // rainbow fan
+          drawRainbow(cx - 5, cy + 20, -Math.PI / 2 - 0.3, 50, 0.15);
+          // the white beam beyond
+          ctx.strokeStyle = GRAY_DARK;
+          ctx.lineWidth = 2.5;
+          const bAngle = -Math.PI / 2 - 0.3;
+          const bx = cx - 5 + Math.cos(bAngle) * 52;
+          const by = cy + 20 + Math.sin(bAngle) * 52;
+          const bx2 = cx - 5 + Math.cos(bAngle) * 82;
+          const by2 = cy + 20 + Math.sin(bAngle) * 82;
+          ctx.beginPath();
+          ctx.moveTo(bx, by);
+          ctx.lineTo(bx2, by2);
+          ctx.stroke();
+          // "∫λ" label
+          ctx.font = "italic 13px 'Lora', serif";
+          ctx.fillStyle = ACCENT;
+          ctx.textAlign = 'left';
+          ctx.fillText('∫dλ', bx2 + 6, by2 + 4);
+          break;
+        }
+
+        case '010': {
+          // Spectral Irradiance: hemisphere of same-colored arrows onto surface
+          drawSurfacePatch(cx - 40, cy + 20, 60, 30);
+          drawHemisphereArrows(cx - 5, cy + 15, MONO_COLOR, 0.55);
+          // wavelength bar
+          const barY = H - 22;
+          const barX = 30;
+          const barW = W - 60;
+          for (let i = 0; i < barW; i++) {
+            const wl = 380 + (i / barW) * 400;
+            ctx.fillStyle = wavelengthToRGB(wl);
+            ctx.fillRect(barX + i, barY, 1, 8);
+          }
+          const markerX = barX + ((MONO_WL - 380) / 400) * barW;
+          ctx.fillStyle = GRAY_DARK;
+          ctx.beginPath();
+          ctx.moveTo(markerX, barY - 4);
+          ctx.lineTo(markerX - 3, barY - 1);
+          ctx.lineTo(markerX + 3, barY - 1);
+          ctx.closePath();
+          ctx.fill();
+          // "∫Ω" label
+          ctx.font = "italic 13px 'Lora', serif";
+          ctx.fillStyle = ACCENT;
+          ctx.textAlign = 'right';
+          ctx.fillText('∫dΩ', W - 16, 28);
+          break;
+        }
+
+        case '011': {
+          // Irradiance: hemisphere of white arrows, surface glows
+          // glowing surface
+          const grad = ctx.createRadialGradient(cx, cy + 20, 5, cx, cy + 20, 55);
+          grad.addColorStop(0, 'rgba(255,255,255,0.7)');
+          grad.addColorStop(0.5, `rgba(229,233,240,${0.3 + pulse * 0.2})`);
+          grad.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = grad;
+          ctx.fillRect(0, 0, W, H);
+
+          drawSurfacePatch(cx - 40, cy + 20, 60, 30);
+          drawHemisphereArrows(cx - 5, cy + 15, GRAY_DARK, 0.45);
+          // "∫Ω∫λ" label
+          ctx.font = "italic 13px 'Lora', serif";
+          ctx.fillStyle = ACCENT;
+          ctx.textAlign = 'right';
+          ctx.fillText('∫dΩ dλ', W - 12, 28);
+          break;
+        }
+
+        case '100': {
+          // Spectral Radiant Intensity: point source + single colored beam
+          drawPointSource(cx, cy, MONO_COLOR, pulse);
+          drawCone(cx, cy, -Math.PI / 4, 0.15, 80, MONO_COLOR);
+          // wavelength bar
+          const barY = H - 22;
+          const barX = 30;
+          const barW = W - 60;
+          for (let i = 0; i < barW; i++) {
+            const wl = 380 + (i / barW) * 400;
+            ctx.fillStyle = wavelengthToRGB(wl);
+            ctx.fillRect(barX + i, barY, 1, 8);
+          }
+          const markerX = barX + ((MONO_WL - 380) / 400) * barW;
+          ctx.fillStyle = GRAY_DARK;
+          ctx.beginPath();
+          ctx.moveTo(markerX, barY - 4);
+          ctx.lineTo(markerX - 3, barY - 1);
+          ctx.lineTo(markerX + 3, barY - 1);
+          ctx.closePath();
+          ctx.fill();
+          // "∫A" label
+          ctx.font = "italic 13px 'Lora', serif";
+          ctx.fillStyle = ACCENT;
+          ctx.textAlign = 'left';
+          ctx.fillText('∫dA', 16, 28);
+          break;
+        }
+
+        case '101': {
+          // Radiant Intensity: point source + white beam
+          drawPointSource(cx, cy, GRAY_DARK, pulse);
+          // rainbow collapsing
+          drawRainbow(cx, cy, -Math.PI / 4, 50, 0.12);
+          ctx.strokeStyle = GRAY_DARK;
+          ctx.lineWidth = 2.5;
+          const a = -Math.PI / 4;
+          const sx = cx + Math.cos(a) * 52;
+          const sy = cy + Math.sin(a) * 52;
+          const ex = cx + Math.cos(a) * 82;
+          const ey = cy + Math.sin(a) * 82;
+          ctx.beginPath();
+          ctx.moveTo(sx, sy);
+          ctx.lineTo(ex, ey);
+          ctx.stroke();
+          // "∫A∫λ" label
+          ctx.font = "italic 13px 'Lora', serif";
+          ctx.fillStyle = ACCENT;
+          ctx.textAlign = 'left';
+          ctx.fillText('∫dA dλ', 16, 28);
+          break;
+        }
+
+        case '110': {
+          // Spectral Radiant Flux: monochromatic starburst
+          drawPointSource(cx, cy, MONO_COLOR, pulse);
+          drawStarburst(cx, cy, MONO_COLOR, 0.5, 16, t * 0.3);
+          // wavelength bar
+          const barY = H - 22;
+          const barX = 30;
+          const barW = W - 60;
+          for (let i = 0; i < barW; i++) {
+            const wl = 380 + (i / barW) * 400;
+            ctx.fillStyle = wavelengthToRGB(wl);
+            ctx.fillRect(barX + i, barY, 1, 8);
+          }
+          const markerX = barX + ((MONO_WL - 380) / 400) * barW;
+          ctx.fillStyle = GRAY_DARK;
+          ctx.beginPath();
+          ctx.moveTo(markerX, barY - 4);
+          ctx.lineTo(markerX - 3, barY - 1);
+          ctx.lineTo(markerX + 3, barY - 1);
+          ctx.closePath();
+          ctx.fill();
+          // "∫A∫Ω" label
+          ctx.font = "italic 13px 'Lora', serif";
+          ctx.fillStyle = ACCENT;
+          ctx.textAlign = 'left';
+          ctx.fillText('∫dA dΩ', 16, 28);
+          break;
+        }
+
+        case '111': {
+          // Radiant Flux: white starburst, pulsing glow, wattage
+          const glow = ctx.createRadialGradient(cx, cy, 3, cx, cy, 70 + pulse * 15);
+          glow.addColorStop(0, `rgba(34,41,57,${0.15 + pulse * 0.1})`);
+          glow.addColorStop(0.4, `rgba(229,233,240,${0.1 + pulse * 0.05})`);
+          glow.addColorStop(1, 'rgba(255,255,255,0)');
+          ctx.fillStyle = glow;
+          ctx.beginPath();
+          ctx.arc(cx, cy, 70 + pulse * 15, 0, Math.PI * 2);
+          ctx.fill();
+
+          drawPointSource(cx, cy, GRAY_DARK, pulse);
+          drawStarburst(cx, cy, GRAY_DARK, 0.4, 16, t * 0.3);
+
+          // "Φ  [W]" label
+          ctx.font = "bold 16px 'Michroma', sans-serif";
+          ctx.fillStyle = ACCENT;
+          ctx.textAlign = 'center';
+          ctx.fillText('Φ  [W]', cx, H - 18);
+          // "∫A∫Ω∫λ" label
+          ctx.font = "italic 13px 'Lora', serif";
+          ctx.fillStyle = ACCENT;
+          ctx.textAlign = 'left';
+          ctx.fillText('∫dA dΩ dλ', 12, 28);
+          break;
+        }
+      }
+
+      frame++;
+      // Only animate the codes that have pulsing/rotation
+      if (code === '011' || code === '100' || code === '101' || code === '110' || code === '111') {
+        animId = requestAnimationFrame(render);
+      }
+    }
+
+    // Observe visibility to pause offscreen animations
+    const observer = new IntersectionObserver((entries) => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          render();
+        } else {
+          cancelAnimationFrame(animId);
+        }
+      }
+    }, { threshold: 0.1 });
+    observer.observe(canvas);
+  }
+
+  function initAllViz() {
+    document.querySelectorAll<HTMLCanvasElement>('canvas[data-code]').forEach(initViz);
+  }
+
+  document.addEventListener('astro:page-load', initAllViz);
+  initAllViz();
+</script>
+
+<style>
+  .radiometry-viz {
+    float: right;
+    margin: 0 0 1em 1.5em;
+    text-align: center;
+  }
+  .radiometry-viz canvas {
+    border: 1px solid rgb(var(--gray-light));
+    border-radius: 8px;
+    max-width: 100%;
+    height: auto;
+  }
+  @media (max-width: 720px) {
+    .radiometry-viz {
+      float: none;
+      margin: 1em auto;
+    }
+  }
+</style>

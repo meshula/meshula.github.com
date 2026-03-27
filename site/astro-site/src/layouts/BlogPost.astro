@@ -4,11 +4,20 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import TableOfContents from '../components/TableOfContents.astro';
 import { Image } from 'astro:assets';
 
-type Props = CollectionEntry<'blog'>['data'];
+interface Heading {
+	depth: number;
+	slug: string;
+	text: string;
+}
 
-const { title, description, author, pubDate, updatedDate, heroImage } = Astro.props;
+type Props = CollectionEntry<'blog'>['data'] & {
+	headings?: Heading[];
+};
+
+const { title, description, author, pubDate, updatedDate, heroImage, headings = [] } = Astro.props;
 ---
 
 <html lang="en">
@@ -26,20 +35,27 @@ const { title, description, author, pubDate, updatedDate, heroImage } = Astro.pr
         <div class="hero-image">
           {heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
         </div>
-        <div class="prose">
-          <div class="title">
-            <div class="date">
-              <FormattedDate date={pubDate} />
-              {updatedDate && (
-                <div class="last-updated-on">
-                  Last updated on <FormattedDate date={updatedDate} />
-                </div>
-              )}
+        <div class="post-container">
+          {headings.length > 0 && (
+            <aside class="toc-sidebar">
+              <TableOfContents headings={headings} />
+            </aside>
+          )}
+          <div class="prose">
+            <div class="title">
+              <div class="date">
+                <FormattedDate date={pubDate} />
+                {updatedDate && (
+                  <div class="last-updated-on">
+                    Last updated on <FormattedDate date={updatedDate} />
+                  </div>
+                )}
+              </div>
+              <h1>{title}</h1>
+              <hr />
             </div>
-            <h1>{title}</h1>
-            <hr />
+            <slot />
           </div>
-          <slot />
         </div>
       </article>
     </main>
@@ -62,12 +78,21 @@ main {
   border-radius: 12px;
   box-shadow: var(--box-shadow);
 }
+.post-container {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 2em;
+  max-width: 1020px;
+  margin: 0 auto;
+  padding: 0 1em;
+}
 .prose {
-  width: 720px;
-  max-width: calc(100% - 2em);
-  margin: auto;
+  max-width: 720px;
   padding: 1em;
   color: rgb(var(--gray-dark));
+}
+.toc-sidebar {
+  display: block;
 }
 .title {
   margin-bottom: 1em;
@@ -100,5 +125,18 @@ main {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   max-height: 80vh;
   object-fit: contain;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 720px) {
+  .post-container {
+    grid-template-columns: 1fr;
+  }
+  .toc-sidebar {
+    display: none;
+  }
+  .prose {
+    width: 100%;
+  }
 }
 </style>
