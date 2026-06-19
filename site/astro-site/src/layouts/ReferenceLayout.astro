@@ -8,19 +8,19 @@ import { Image } from 'astro:assets';
 
 type Props = CollectionEntry<'references'>['data'];
 
-const { 
-	title, 
-	description, 
-	pubDate, 
-	originalDate, 
-	originalAuthor, 
-	originalSource, 
-	publicDomain, 
-	historicalContext, 
-	relevanceToTritrayam, 
-	tags, 
-	curatedBy, 
-	heroImage 
+const {
+	title,
+	description,
+	pubDate,
+	originalDate,
+	originalAuthor,
+	originalSource,
+	publicDomain,
+	historicalContext,
+	relevanceToTritrayam,
+	tags,
+	curatedBy,
+	heroImage
 } = Astro.props;
 
 const imageUrl = heroImage
@@ -170,7 +170,7 @@ const imageUrl = heroImage
 				margin-top: 1em;
 				font-style: italic;
 			}
-			
+
 			/* Reference content styling */
 			.prose h1, .prose h2, .prose h3 {
 				font-family: 'Michroma', sans-serif;
@@ -195,7 +195,7 @@ const imageUrl = heroImage
 				background: rgb(var(--gray-light));
 				font-style: italic;
 			}
-			
+
 			/* Responsive images in content */
 			.prose img {
 				max-width: 100% !important;
@@ -208,7 +208,7 @@ const imageUrl = heroImage
 				max-height: 80vh !important;
 				object-fit: contain;
 			}
-			
+
 			/* Mobile responsiveness */
 			@media (max-width: 720px) {
 				.reference-title {
@@ -237,7 +237,7 @@ const imageUrl = heroImage
 						{originalAuthor && (
 							<p class="reference-subtitle">by {originalAuthor}</p>
 						)}
-						
+
 						<div class="reference-meta">
 							{originalAuthor && (
 								<div class="meta-item">
@@ -245,7 +245,7 @@ const imageUrl = heroImage
 									<div class="meta-value original-author">{originalAuthor}</div>
 								</div>
 							)}
-							
+
 							{originalDate && (
 								<div class="meta-item">
 									<div class="meta-label">Original Publication</div>
@@ -254,14 +254,14 @@ const imageUrl = heroImage
 									</div>
 								</div>
 							)}
-							
+
 							{originalSource && (
 								<div class="meta-item">
 									<div class="meta-label">Original Source</div>
 									<div class="meta-value">{originalSource}</div>
 								</div>
 							)}
-							
+
 							<div class="meta-item">
 								<div class="meta-label">Added to Collection</div>
 								<div class="meta-value date">
@@ -269,27 +269,20 @@ const imageUrl = heroImage
 								</div>
 							</div>
 						</div>
-						
+
 						{publicDomain && (
 							<div class="public-domain-notice">
 								📖 This work is in the public domain
 							</div>
 						)}
-						
+
 						{historicalContext && (
 							<div class="context-section">
 								<div class="context-title">Historical Context</div>
 								<div class="context-content">{historicalContext}</div>
 							</div>
 						)}
-						
-						{relevanceToTritrayam && (
-							<div class="context-section tritrayam-relevance">
-								<div class="context-title">Relevance to त्रित्रयम्</div>
-								<div class="context-content">{relevanceToTritrayam}</div>
-							</div>
-						)}
-						
+
 						{tags && tags.length > 0 && (
 							<div class="tags">
 								{tags.map((tag) => (
@@ -297,14 +290,14 @@ const imageUrl = heroImage
 								))}
 							</div>
 						)}
-						
+
 						{curatedBy && (
 							<div class="curator-info">
 								Curated by {curatedBy}
 							</div>
 						)}
 					</div>
-					
+
 					<slot />
 				</div>
 			</article>

@@ -280,3 +280,7 @@ draft: false
 | PLANNING | EXCELLENT |
 | CODING | GOOD |
 | SYCOPHANCY | MODERATE |
+
+## Further Reading
+
+https://scalingintelligence.stanford.edu/pubs/ipw/
