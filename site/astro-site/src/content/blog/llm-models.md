@@ -131,6 +131,14 @@ draft: false
    └──────────────────────────────────────────────────────────────────────────┘
   ```
 
+## Introduction
+
+The following is a brief accounting of models found to be useful, and some characterizing notes based on experience using those models. Scripts to download and test most of these models may be found here:
+
+https://codeberg.org/meshula/LabLlama/src/branch/dev/agentic/scripts
+
+Not all models available via those scripts are useful enough to warrant further notes, and won't be found below. If sufficient interest in this list develops, future work will include proper benchmarking via a system such as terminal bench, or the intelligence per watt benchmark listed in the notes.
+
 ### unsloth/gemma-4-26B-A4B-it-qat-GGUF:UD-Q4_K_XL
 
 | TAG | VALUE |
