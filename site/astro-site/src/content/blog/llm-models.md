@@ -123,7 +123,7 @@ draft: false
    ├──────────────────────────────────────────────────────────────────────────┤
    │ SRC_AUTH : HMN                    │ SIG_STAT : UNSIGNED                  │
    │ AUTH_ID  : NICK PORCINO           │ TYPE     : SURVEY                    │
-   │ DATE     : 20260719               │ TYPE     : SURVEY                    │
+   │ DATE     : 20260619               │ TYPE     : SURVEY                    │
    ├──────────────────────────────────────────────────────────────────────────┤
    │ [ RIGHTS & PERMISSIONS MATRIX ]                                          │
    │ INDEX_ALLOW : YES                 │ CORP_TRAIN: NO                       │
@@ -144,7 +144,7 @@ Not all models available via those scripts are useful enough to warrant further 
 | TAG | VALUE |
 | --- | ----- |
 | MODEL | unsloth/gemma-4-26B-A4B-it-qat-GGUF:UD-Q4_K_XL |
-| DATE | 20260718 |
+| DATE | 20260618 |
 | PROC | M1 ULTRA 128GB |
 | SRV | LLAMA-SERVE —spec-type draft-mtp --spec-draft-n-max 2 |
 | PROMPT/GEN | 150/100 |
@@ -159,7 +159,7 @@ Not all models available via those scripts are useful enough to warrant further 
 | TAG | VALUE |
 | --- | ----- |
 | MODEL | Qwen3.6 27B NVFP4 |
-| DATE | 20260718 |
+| DATE | 20260618 |
 | PROC | DGX SPARK 128GB |
 | SRV | UNKNOWN |
 | PROMPT/GEN | N/A |
@@ -174,7 +174,7 @@ Not all models available via those scripts are useful enough to warrant further 
 | TAG | VALUE |
 | --- | ----- |
 | MODEL | Qwen3.6-27B-AEON-Ultimate-Uncensored-BF16-mlx-fp16 |
-| DATE | 20260710 |
+| DATE | 20260610 |
 | PROC | M5 MAX 128GB |
 | SRV | OMLX |
 | PROMPT/GEN | N/10 |
@@ -189,7 +189,7 @@ Not all models available via those scripts are useful enough to warrant further 
 | TAG | VALUE |
 | --- | ----- |
 | MODEL | gemma-4-26B-A4B-it-unsloth-mlx-oQ4-fp16 |
-| DATE | 20260710 |
+| DATE | 20260610 |
 | PROC | M5 MAX 128GB |
 | SRV | OMLX |
 | PROMPT/GEN | N/30 |
