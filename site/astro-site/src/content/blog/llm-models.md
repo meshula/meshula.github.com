@@ -1,11 +1,121 @@
 ---
 title: "LLM Usage notes"
 description: "Workplace safety posters for LLMS"
-pubDate: 2025-11-05
+pubDate: 2026-06-19
 tags: ["AI", "Dunning-Kruger", "LLM", "survey"]
 author: "Nick Porcino"
 draft: false
 ---
+
+<style>
+/* --- Provenance block: small typewriter --- */
+.prose pre:has(code.language-rfc-draft),
+.prose pre.language-rfc-draft {
+  font-size: 0.62em;
+  line-height: 1.25;
+}
+.prose pre:has(code.language-rfc-draft) code,
+.prose pre.language-rfc-draft code {
+  font-family: 'Courier New', Courier, 'Courier Prime', monospace;
+  font-size: inherit;
+}
+/* Fallback: this post only contains the one provenance code block */
+.prose pre {
+  font-size: 0.62em;
+  line-height: 1.25;
+}
+.prose pre code {
+  font-family: 'Courier New', Courier, 'Courier Prime', monospace;
+}
+
+/* --- Model section headings: smaller Michroma --- */
+.prose h3 {
+  font-family: 'Michroma', 'Arial Black', Impact, sans-serif;
+  font-size: 0.95em;
+  letter-spacing: 0.01em;
+  margin-top: 1.5em;
+}
+
+/* --- Tables: smaller Michroma --- */
+.prose table {
+  font-family: 'Michroma', 'Arial Black', Impact, sans-serif;
+  font-size: 0.6em;
+  line-height: 1.3;
+}
+.prose table th,
+.prose table td {
+  padding: 0.4em 0.6em;
+}
+
+/* --- Tested-models table of contents --- */
+.prose .model-toc {
+  margin: 0 0 2.5em 0;
+  padding: 1em 1.25em;
+  border: 1px solid rgb(var(--gray-light));
+  border-radius: 8px;
+  background-color: var(--color-surface);
+}
+.prose .model-toc-title {
+  font-family: 'Michroma', 'Arial Black', Impact, sans-serif;
+  font-size: 0.8em;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: rgb(var(--gray));
+  margin: 0 0 0.75em 0;
+}
+.prose .model-toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.prose .model-toc li {
+  margin: 0;
+}
+.prose .model-toc a {
+  display: block;
+  padding: 0.3em 0;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8em;
+  line-height: 1.3;
+  text-decoration: none;
+  color: rgb(var(--gray-dark));
+  border-left: 2px solid rgb(var(--gray-light));
+  padding-left: 0.75em;
+  transition: color 0.2s, border-color 0.2s;
+}
+.prose .model-toc a:hover {
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+</style>
+
+<nav class="model-toc" aria-label="Tested models">
+  <h2 class="model-toc-title">Tested Models</h2>
+  <ul id="model-toc-list"></ul>
+</nav>
+
+<script is:inline>
+(function () {
+  function buildModelToc() {
+    var list = document.getElementById('model-toc-list');
+    if (!list || list.childElementCount) return;
+    var prose = list.closest('.prose') || document;
+    var heads = prose.querySelectorAll('h3[id]');
+    heads.forEach(function (h) {
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + h.id;
+      a.textContent = h.textContent;
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+  }
+  document.addEventListener('DOMContentLoaded', buildModelToc);
+  document.addEventListener('astro:page-load', buildModelToc);
+  buildModelToc();
+})();
+</script>
 
 ```rfc-draft
    ┌──────────────────────────────────────────────────────────────────────────┐
@@ -28,7 +138,7 @@ draft: false
 | MODEL | unsloth/gemma-4-26B-A4B-it-qat-GGUF:UD-Q4_K_XL |
 | DATE | 20260718 |
 | PROC | M1 ULTRA 128GB |
-| SRV | LLAMA-SERVE |
+| SRV | LLAMA-SERVE —spec-type draft-mtp --spec-draft-n-max 2 |
 | PROMPT/GEN | 150/100 |
 | THINKING | EXCELLENT |
 | COHERENCE | EXCELLENT |

@@ -1,57 +1,165 @@
 ---
-// Stealth mode - low-key landing page
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>TRITRYAM</title>
-  <link href="https://fonts.googleapis.com/css2?family=Michroma&family=Bakbak+One&family=Kosugi+Maru&display=swap" rel="stylesheet" />
-  <style>
-    html, body {
-      margin: 0; padding: 0; height: 100%;
-      background: #111;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      user-select: none;
-      font-weight: 700;
-    }
-    #rotating-text {
-      transition: opacity 0.5s ease;
-      text-align: center;
-      line-height: 1;
-    }
-  </style>
-</head>
-<body>
-  <div id="rotating-text">TRITRYAM</div>
+	<head>
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="landing">
+				<header class="intro">
+					<h1>Nick Porcino</h1>
+					<p class="tagline">{SITE_DESCRIPTION}</p>
+				</header>
 
-  <script>
-    const texts = [
-      { text: 'TRITRYAM', font: "'Michroma', sans-serif", fontSize: '4rem' },
-      { text: 'त्रित्रयम्', font: "'Bakbak One', cursive", fontSize: '3rem' },
-      { text: '森トリトリャム', font: "'Kosugi Maru', sans-serif", fontSize: '3rem' }
-    ];
-    let index = 0;
-    const el = document.getElementById('rotating-text');
+				<nav class="indices" aria-label="Site sections">
+					<a class="index-card" href="/blog">
+						<span class="index-label">Blog</span>
+						<span class="index-desc">Essays and shorter notes.</span>
+					</a>
+					<a class="index-card" href="/papers">
+						<span class="index-label">Papers</span>
+						<span class="index-desc">Longer technical and academic work.</span>
+					</a>
+					<a class="index-card" href="/references">
+						<span class="index-label">References</span>
+						<span class="index-desc">Annotated primary sources.</span>
+					</a>
+				</nav>
 
-    function rotateText() {
-      el.style.opacity = 0;
-      setTimeout(() => {
-        index = (index + 1) % texts.length;
-        const item = texts[index];
-        el.textContent = item.text;
-        el.style.fontFamily = item.font;
-        el.style.fontSize = item.fontSize;
-        el.style.opacity = 1;
-      }, 500);
-    }
+				<section>
+					<h2>2025</h2>
+					<ul>
+						<li><a href="/blog/reading-bush/">Reading <em>As We May Think</em> in 2025</a></li>
+						<li><a href="/papers/usd-liverps/">OpenUSD's LIVERPS and Composition</a></li>
+						<li><a href="/papers/lastmile-v2/">Last Mile &amp; Interchange v2</a></li>
+						<li><a href="/papers/photometry-radiometry/">Measuring Light</a></li>
+					</ul>
+				</section>
 
-    setInterval(rotateText, 3000);
-  </script>
-</body>
+				<section>
+					<h2>Research</h2>
+					<ul>
+						<li><a href="/pcp-explorer/">Elements of Compositional Stability in USD</a> — interactive explorer: formal proofs, the PCP algorithm flow chart, and annotated C++ source</li>
+					</ul>
+				</section>
+
+				<section>
+					<h2>Articles</h2>
+					<ul>
+						<li><a href="/papers/life-theorem/">The Life Theorem (2008)</a></li>
+						<li><a href="https://www.aswf.io/bts/nick-porcino-pixar/">Interview at the Academy Software Foundation</a></li>
+						<li><a href="http://nickporcino.com/posts/csp.html">Notes on Communicating Sequential Processes</a></li>
+						<li><a href="http://nickporcino.com/posts/insect-ai3.html">Insect AI 3</a></li>
+						<li><a href="http://nickporcino.com/posts/hexapod90.html">Hexapod Gait Control by a Neural Network (1990)</a></li>
+						<li><a href="http://nickporcino.com/posts/sub90.html">Neural Network control of a freeswimming autonomous submersible (1990)</a></li>
+						<li><a href="http://nickporcino.com/posts/stonesoup.html">Stone Soup</a></li>
+						<li><a href="http://nickporcino.com/posts/futurist.html">Futurist Programming</a></li>
+						<li><a href="http://nickporcino.com/posts/nn-bibliography.html">Neural Networks 1990</a></li>
+						<li><a href="http://nickporcino.com/posts/contentpipeline.siggraph2007.html">SIGGRAPH 2007: Content Pipelines</a></li>
+						<li><a href="http://nickporcino.com/posts/last_mile_interchange.html">Last Mile and Interchange Formats for 3D</a></li>
+						<li><a href="http://nickporcino.com/posts/interviewing.md.html">Notes for Technical Interviews</a></li>
+					</ul>
+					<p><strong>Bio</strong> — <a href="http://nickporcino.com/posts/Resume.pdf">Resume (PDF)</a></p>
+				</section>
+
+				<section>
+					<h2>Contact</h2>
+					<ul>
+						<li><a href="http://github.com/meshula">GitHub</a></li>
+						<li><a href="http://www.linkedin.com/pub/nick-porcino/0/438/8b5">LinkedIn</a></li>
+						<li><a href="http://scholar.google.com/citations?user=_TDOVAQAAAAJ&hl=en">Google Scholar</a></li>
+						<li><a href="http://www.dadgum.com/giantlist/list.html">Giant List of Classic Game Programmers</a></li>
+						<li><a href="http://www.mobygames.com/developer/sheet/view/developerId,22520/">MobyGames</a></li>
+						<li><a href="http://www.dragongoserver.net/userinfo.php?uid=33">Dragon Go Server</a></li>
+						<li><a href="http://twitter.com/meshula">Twitter (archive)</a></li>
+					</ul>
+					<p><strong>Meshula.net</strong> — <a href="http://nickporcino.com/meshula-net-archive/archive.html">blog archive</a></p>
+				</section>
+			</div>
+		</main>
+		<Footer />
+	</body>
 </html>
+
+<style>
+	.landing {
+		max-width: 720px;
+		margin: 0 auto;
+	}
+	.intro {
+		text-align: center;
+		margin-bottom: 2.5em;
+	}
+	.intro h1 {
+		font-size: 2.5em;
+	}
+	.tagline {
+		color: rgb(var(--gray));
+		font-family: 'Michroma', 'Arial Black', Impact, sans-serif;
+		font-size: 0.9em;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		margin: 0;
+	}
+	.indices {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1em;
+		margin-bottom: 3em;
+	}
+	.index-card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.35em;
+		padding: 1.1em 1.2em;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 8px;
+		background-color: var(--color-surface);
+		text-decoration: none;
+		transition: border-color 0.2s, transform 0.2s;
+	}
+	.index-card:hover {
+		border-color: var(--accent);
+		transform: translateY(-2px);
+	}
+	.index-label {
+		font-family: 'Michroma', 'Arial Black', Impact, sans-serif;
+		font-size: 1em;
+		letter-spacing: 0.03em;
+		color: var(--color-text-primary);
+	}
+	.index-desc {
+		font-size: 0.8em;
+		line-height: 1.35;
+		color: rgb(var(--gray));
+	}
+	section {
+		margin-bottom: 2em;
+	}
+	section h2 {
+		border-bottom: 2px solid rgb(var(--gray-light));
+		padding-bottom: 0.25em;
+		margin-bottom: 0.6em;
+	}
+	.landing ul {
+		list-style: none;
+		padding-left: 0;
+	}
+	.landing li {
+		margin: 0.4em 0;
+	}
+
+	@media (max-width: 720px) {
+		.indices {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

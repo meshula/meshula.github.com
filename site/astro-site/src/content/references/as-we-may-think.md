@@ -7,7 +7,6 @@ originalAuthor: "Vannevar Bush"
 originalSource: "The Atlantic Monthly, July 1945"
 publicDomain: true
 historicalContext: "Written in the aftermath of WWII, Bush's essay envisioned how technology could augment human intellect and memory, directly inspiring Douglas Engelbart, Ted Nelson, and the development of hypertext systems"
-relevanceToTritrayam: "Bush's concept of associative trails and the Memex machine prefigures triadic consciousness architectures where memory, motion, and field interact to extend human cognitive capability"
 tags: ["hypertext", "memex", "information science", "human-computer interaction", "associative thinking", "information retrieval", "cognitive augmentation", "historical computing"]
 curatedBy: "Nick Porcino"
 draft: false

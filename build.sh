@@ -11,7 +11,7 @@ echo "📦 Building Astro site..."
 npm run build
 
 echo "📄 Copying standalone HTML files..."
-cp ../index.html dist/
+# Landing page (/) is now the Astro index.astro page — no standalone index.html to copy.
 cp ../404.html dist/
 cp -r ../../posts dist/posts
 cp -r ../../meshula-net-archive dist/meshula-net-archive
