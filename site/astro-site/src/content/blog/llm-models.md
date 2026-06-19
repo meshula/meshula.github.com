@@ -169,21 +169,6 @@ draft: false
 | DATE | 20260710 |
 | PROC | M5 MAX 128GB |
 | SRV | OMLX |
-| PROMPT/GEN | N/30 |
-| THINKING | EXCELLENT |
-| COHERENCE | EXCELLENT |
-| PLANNING | EXCELLENT |
-| CODING | UNTESTED |
-| SYCOPHANCY | VERY LOW |
-
-### Qwen3.6-27B-AEON-Ultimate-Uncensored-BF16-mlx-fp16
-
-| TAG | VALUE |
-| --- | ----- |
-| MODEL | Qwen3.6-27B-AEON-Ultimate-Uncensored-BF16-mlx-fp16 |
-| DATE | 20260710 |
-| PROC | M5 MAX 128GB |
-| SRV | OMLX |
 | PROMPT/GEN | N/10 |
 | THINKING | EXCELLENT |
 | COHERENCE | EXCELLENT |
@@ -195,7 +180,7 @@ draft: false
 
 | TAG | VALUE |
 | --- | ----- |
-| MODEL | Qwen3.6-27B-AEON-Ultimate-Uncensored-BF16-mlx-fp16 |
+| MODEL | gemma-4-26B-A4B-it-unsloth-mlx-oQ4-fp16 |
 | DATE | 20260710 |
 | PROC | M5 MAX 128GB |
 | SRV | OMLX |
