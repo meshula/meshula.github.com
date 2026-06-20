@@ -139,20 +139,7 @@ https://codeberg.org/meshula/LabLlama/src/branch/dev/agentic/scripts
 
 Not all models available via those scripts are useful enough to warrant further notes, and won't be found below. If sufficient interest in this list develops, future work will include proper benchmarking via a system such as terminal bench, or the intelligence per watt benchmark listed in the notes.
 
-### unsloth/gemma-4-26B-A4B-it-qat-GGUF:UD-Q4_K_XL
-
-| TAG | VALUE |
-| --- | ----- |
-| MODEL | unsloth/gemma-4-26B-A4B-it-qat-GGUF:UD-Q4_K_XL |
-| DATE | 20260618 |
-| PROC | M1 ULTRA 128GB |
-| SRV | LLAMA-SERVE —spec-type draft-mtp --spec-draft-n-max 2 |
-| PROMPT/GEN | 150/100 |
-| THINKING | EXCELLENT |
-| COHERENCE | EXCELLENT |
-| PLANNING | UNTESTED |
-| CODING | UNTESTED |
-| SYCOPHANCY | VERY LOW |
+## QWEN
 
 ### Qwen3.6 27B NVFP4
 
@@ -184,36 +171,6 @@ Not all models available via those scripts are useful enough to warrant further 
 | CODING | GOOD, SOME HALLUCINATION |
 | SYCOPHANCY | VERY LOW |
 
-### gemma-4-26B-A4B-it-unsloth-mlx-oQ4-fp16
-
-| TAG | VALUE |
-| --- | ----- |
-| MODEL | gemma-4-26B-A4B-it-unsloth-mlx-oQ4-fp16 |
-| DATE | 20260610 |
-| PROC | M5 MAX 128GB |
-| SRV | OMLX |
-| PROMPT/GEN | N/30 |
-| THINKING | EXCELLENT |
-| COHERENCE | EXCELLENT |
-| PLANNING | EXCELLENT |
-| CODING | GOOD, SOME HALLUCINATION |
-| SYCOPHANCY | MODERATE |
-
-### Codestral-22B-v0.1.Q4_K_M
-
-| TAG | VALUE |
-| --- | ----- |
-| MODEL | Codestral-22B-v0.1.Q4_K_M |
-| DATE | 20260524 |
-| PROC | M3 MAX 128GB |
-| SRV | LLAMA-SERVE |
-| PROMPT/GEN | N/30 |
-| THINKING | N/A |
-| COHERENCE | GOOD |
-| PLANNING | MODERATE |
-| CODING | MODERATE, HALLUCINATION |
-| SYCOPHANCY | LOW |
-
 ### Qwen3-Coder-Next-Q6_K
 
 | TAG | VALUE |
@@ -228,21 +185,6 @@ Not all models available via those scripts are useful enough to warrant further 
 | PLANNING | GOOD |
 | CODING | GOOD, HALLUCINATION |
 | SYCOPHANCY | LOW |
-
-### Mixtral-8x7B-Instruct-v0.1.Q4_K_M
-
-| TAG | VALUE |
-| --- | ----- |
-| MODEL | Mixtral-8x7B-Instruct-v0.1.Q4_K_M |
-| DATE | 20260524 |
-| PROC | M3 MAX 128GB |
-| SRV | LLAMA-SERVE |
-| PROMPT/GEN | N/30 |
-| THINKING | N/A |
-| COHERENCE | POOR |
-| PLANNING | N/A |
-| CODING | HIGH HALLUCINATION |
-| SYCOPHANCY | MARCH HARE |
 
 ### Qwen3.5-27B-Claude-4.6-Opus-Reasoning-Distilled-GGUF
 
@@ -259,6 +201,40 @@ Not all models available via those scripts are useful enough to warrant further 
 | CODING | GOOD |
 | SYCOPHANCY | LOW |
 
+## Gemma
+
+### unsloth/gemma-4-26B-A4B-it-qat-GGUF:UD-Q4_K_XL
+
+| TAG | VALUE |
+| --- | ----- |
+| MODEL | unsloth/gemma-4-26B-A4B-it-qat-GGUF:UD-Q4_K_XL |
+| DATE | 20260618 |
+| PROC | M1 ULTRA 64GB |
+| SRV | LLAMA-SERVE —spec-type draft-mtp --spec-draft-n-max 2 |
+| PROMPT/GEN | 800/70 |
+| THINKING | EXCELLENT |
+| COHERENCE | EXCELLENT |
+| PLANNING | UNTESTED |
+| CODING | UNTESTED |
+| SYCOPHANCY | VERY LOW |
+
+### gemma-4-26B-A4B-it-unsloth-mlx-oQ4-fp16
+
+| TAG | VALUE |
+| --- | ----- |
+| MODEL | gemma-4-26B-A4B-it-unsloth-mlx-oQ4-fp16 |
+| DATE | 20260610 |
+| PROC | M5 MAX 128GB |
+| SRV | OMLX |
+| PROMPT/GEN | N/30 |
+| THINKING | EXCELLENT |
+| COHERENCE | EXCELLENT |
+| PLANNING | EXCELLENT |
+| CODING | GOOD, SOME HALLUCINATION |
+| SYCOPHANCY | MODERATE |
+
+## GPT-OSS
+
 ### gpt-oss-120b-mxfp4
 
 | TAG | VALUE |
@@ -273,6 +249,38 @@ Not all models available via those scripts are useful enough to warrant further 
 | PLANNING | EXCELLENT |
 | CODING | GOOD |
 | SYCOPHANCY | MODERATE |
+
+## OTHER
+
+### Codestral-22B-v0.1.Q4_K_M
+
+| TAG | VALUE |
+| --- | ----- |
+| MODEL | Codestral-22B-v0.1.Q4_K_M |
+| DATE | 20260524 |
+| PROC | M3 MAX 128GB |
+| SRV | LLAMA-SERVE |
+| PROMPT/GEN | N/30 |
+| THINKING | N/A |
+| COHERENCE | GOOD |
+| PLANNING | MODERATE |
+| CODING | MODERATE, HALLUCINATION |
+| SYCOPHANCY | LOW |
+
+### Mixtral-8x7B-Instruct-v0.1.Q4_K_M
+
+| TAG | VALUE |
+| --- | ----- |
+| MODEL | Mixtral-8x7B-Instruct-v0.1.Q4_K_M |
+| DATE | 20260524 |
+| PROC | M3 MAX 128GB |
+| SRV | LLAMA-SERVE |
+| PROMPT/GEN | N/30 |
+| THINKING | N/A |
+| COHERENCE | POOR |
+| PLANNING | N/A |
+| CODING | HIGH HALLUCINATION |
+| SYCOPHANCY | MARCH HARE |
 
 ## Further Reading
 
