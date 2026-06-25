@@ -51,7 +51,7 @@ draft: false
 
 ```rfc-draft
    ┌──────────────────────────────────────────────────────────────────────────┐
-   │       ▓▓▓▒▒▒ PROVENANCE NODE 001-1 // ZONE: HMN_RESTRICTED ▒▒▒▓▓▓         │
+   │       ▓▓▓▒▒▒ PROVENANCE NODE 001-1 // ZONE: HMN_RESTRICTED ▒▒▒▓▓▓        │
    ├──────────────────────────────────────────────────────────────────────────┤
    │ SRC_AUTH : HMN                    │ SIG_STAT : UNSIGNED                  │
    │ AUTH_ID  : NICK PORCINO           │ TYPE     : SURVEY                    │
