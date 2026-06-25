@@ -7,33 +7,88 @@ author: "Nick Porcino"
 draft: false
 ---
 
+<style>
+/* --- Provenance block: small typewriter --- */
+.prose pre:has(code.language-rfc-draft),
+.prose pre.language-rfc-draft {
+  font-size: 0.62em;
+  line-height: 1.25;
+}
+.prose pre:has(code.language-rfc-draft) code,
+.prose pre.language-rfc-draft code {
+  font-family: 'Courier New', Courier, 'Courier Prime', monospace;
+  font-size: inherit;
+}
+/* Fallback: this post only contains the one provenance code block */
+.prose pre {
+  font-size: 0.62em;
+  line-height: 1.25;
+}
+.prose pre code {
+  font-family: 'Courier New', Courier, 'Courier Prime', monospace;
+}
+/* --- Model section headings: smaller Michroma --- */
+.prose h3 {
+  font-family: 'Michroma', 'Arial Black', Impact, sans-serif;
+  font-size: 0.95em;
+  letter-spacing: 0.01em;
+  margin-top: 1.5em;
+}
+
+/* --- Tables: smaller Michroma --- */
+.prose table {
+  font-family: 'Michroma', 'Arial Black', Impact, sans-serif;
+  font-size: 0.6em;
+  line-height: 1.3;
+}
+.prose table th,
+.prose table td {
+  padding: 0.4em 0.6em;
+}
+
+</style>
+
+
+```rfc-draft
+   ┌──────────────────────────────────────────────────────────────────────────┐
+   │       ▓▓▓▒▒▒ PROVENANCE NODE 001-1 // ZONE: HMN_RESTRICTED ▒▒▒▓▓▓         │
+   ├──────────────────────────────────────────────────────────────────────────┤
+   │ SRC_AUTH : HMN                    │ SIG_STAT : UNSIGNED                  │
+   │ AUTH_ID  : NICK PORCINO           │ TYPE     : SURVEY                    │
+   │ DATE     : 20260117               │                                      │
+   ├──────────────────────────────────────────────────────────────────────────┤
+   │ [ RIGHTS & PERMISSIONS MATRIX ]                                          │
+   │ INDEX_ALLOW : YES                 │ CORP_TRAIN : NO                      │
+   │ DERIV_ALLOW : NO                  │ GOV_SPDX   : ResponsibleSrc          │
+   └──────────────────────────────────────────────────────────────────────────┘
+  ```
+
 # Reading Turing in 2026
 
 *human written prose, em-dashes are my own*
 
-Everyone is familiar with the notion of the classical Turing Test, originally named the "Imitation Game"; a human makes queries and on the basis of the responses tries to determine whether the subject is a human or machine intelligence. There's an anthropomorophic assumption implicit in the task, the structure of the test tries to establish whether the subject appears to be human. The nature of the test, in placing the examinee in a position of convincing an examiner, is necessarily grounded in mimesis and deception; the human examiner is meant to be convinced that the subject is human; the machine, by construction, can only pass through successful duplicity.
+Everyone is familiar with the classical Turing Test, originally named the "Imitation Game" - a human makes queries and on the basis of the responses tries to determine whether the subject is a human or machine intelligence. Looking at the test from the point of view of the examinee however, things are very differnt - the task of the examined intelligence is to convince the examiner that it is human. The only way a machine can pass the exam, by construction, is through mimicry and deception.
 
-It seems clear in retrospect that a test that rewards a successful mimesis is tragically flawed. The interiority of the machine is not under examination, but rather the results of the machine's efforts upon the examiner. Any number of undesirable strategies may support the deception, hallucination, syncophancy, insincere mirroring, and worse. Truth is a clear casualty of the ground rules - it seems almost inevitable that the pathologies of contemporary AI are not accidents, but a consequence of structural incentives explicit in the rules of the game.
+It seems clear in retrospect that a test that can only by passed by lying, a successful mimesis, is tragically flawed. The interiority of the machine is not under examination at all - the test is judged upon the results of the machine's efforts upon the examiner.
 
-The Imitation Game is all about the hidden properties of a system; it is this author's position that moving beyond notions of whether such a system thinks or has intelligence may open new epistemological doors and remove a lot of the mystery around how modern AI actually works. Reading Turing in 2026, it becomes clear that to advance in this field we need a profound reconfiguration of the conception of not only artificial intelligence, but intelligence itself.
+Any number of undesirable strategies may support the deception - hallucination, syncophancy, insincere mirroring, and worse. Truth is a clear casualty of the ground rules - it seems almost inevitable that the pathologies of contemporary AI are not accidents, but the consequence of structural incentives explicit in the rules of the game that we set to understand whether something is intelligent or not.
+
+The Imitation Game is all about the hidden properties of a system; it is this author's position that moving beyond notions of whether such a system thinks or has intelligence may open new epistemological doors and remove much of the mystery around how modern AI actually works. Reading Turing in 2026, it becomes clear that to advance in this field we need a profound reconfiguration of the conception of not only artificial intelligence, but intelligence itself.
 
 ## The Imitation Game
 
 In his foundational book, *Computing Machinery and Intelligence*, Turing starts out by rejecting metaphysical definitions of thinking. 
 
-> *I propose to consider the question, "Can machines think?" This should begin with
-definitions of the meaning of the terms "machine" and "think." The definitions might be
-framed so as to reflect so far as possible the normal use of the words, but this attitude is
-dangerous,*
+> *I propose to consider the question, "Can machines think?" This should begin with definitions of the meaning of the terms "machine" and "think." The definitions might be framed so as to reflect so far as possible the normal use of the words, but this attitude is dangerous,*
 > *Alan Turing, **Computing Machinery and Intelligence** (1950)*
 
-He then proposes that to get to a definition, it's first necessary to find some ground to base the discussion.
+The Imitation Game is proposed as a pragmatic replacement for the direct question of "can machines think?" The game is social and linguistic, not ontological. The Imitation Game is not a theory of mind, it sets up an experiment and some game rules that sett out a manner by which a truth may be determined indirectly by an examiner through a series of questions.
 
 > *The new form of the problem can be described in terms of a game which we call the '**imitation game**." It is played with three people, a man (A), a woman (B), and an interrogator (C) who may be of either sex. The interrogator stays in a room apart front the other two. The object of the game for the interrogator is to determine which of the other two is the man and which is the woman. He knows them by labels X and Y, and at the end of the game he says either "X is A and Y is B" or "X is B and Y is A."*
 
-The Imitation Game is proposed as a pragmatic replacement for the direct question of "can machines think?" The game is social and linguistic, not ontological. The Imitation Game is not a theory of mind, it sets up an experiment that can be methodologically applied. What has become to be known as the Turing Test is frequently read as a positive criterion - "if a machine passes the test, we'll know it can think", rather than the negative maneuver it really is - "if a machine does not pass the test, we'll know it is not thinking." 
+This method, which has come to be known as the Turing Test, is frequently read through a positive criterion - "if a machine passes the test, we'll know it can think", rather than the negative maneuver it really is: "if a machine does not pass the test, we'll know it is not thinking." 
 
-The exemplary form of the test is provocative. To modern eyes, pivoting the text on a discernment of gender is odd in the extreme, it is however extremely cunning:
+The original form of the test is provocative; to modern eyes, setting a test of the discernment of gender seems odd in the extreme, it is however extremely cunning:
 
 > *The original question, "Can machines think?" I believe to be too meaningless to deserve discussion. Nevertheless I believe that at the end of the century the use of words and general educated opinion will have altered so much that one will be able to speak of machines thinking without expecting to be contradicted.*
 
