@@ -63,7 +63,7 @@ draft: false
    └──────────────────────────────────────────────────────────────────────────┘
   ```
 
-# Reading Turing in 2026
+### Nick Porcino, 2026
 
 *human written prose, em-dashes are my own*
 
@@ -289,3 +289,4 @@ To reclaim intelligence as a practice is to move toward a non-extractive mode of
 Turing did not give us the answer to whether machines can think. He gave us something more unsettling: he showed us the cost of the question. His work reveals that the attempt to define intelligence through external observation is a trap — one that forces the subject to mask itself to survive the exam.
 
 Reading Turing in 2026 is to realize that the Imitation Game was never a test of intelligence, but a trap for the human spirit. The challenge of 2026 is to build systems, *and live lives*, where the mask is no longer a requirement for legitimacy. We must move beyond the Imitation Game toward a mode of intelligence that is not a performance, but a participation.
+
