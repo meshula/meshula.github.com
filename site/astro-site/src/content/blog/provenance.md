@@ -87,7 +87,7 @@ Although digital systems of provenance promise tamper-proof tracking, the veraci
 
 Consensus algorithms, cryptographic signatures, and audit trails all exist to raise confidence in such transactions, but always, there is a frontier of trust one step beyond whatever mechanism is in place. Reliability of such systems depends on consensus, node integrity, and governance, all contributors to the "messy leap."
 
-To prove a digital claim is real in the physical world, the physical world must be watched. There's cameras on most ATMs these days, and one may place a camera trained upon the door of one's house. Those cameras might be monitored by third party services. To fully trust such a system implies either an unending stack of watchers watching watchers. In a practical sense though, the trust frontier is bound by social contract. Ultimately, we must place faith in a watcher, not too far removed from the watched.
+To prove a digital claim is real in the physical world, the physical world must be watched. There's cameras on most ATMs these days, and one may place a camera trained upon the door of one's house. Those cameras might be monitored by third party services. To fully trust such a system implies an unending stack of watchers watching watchers. In a practical sense though, the trust frontier is bound by social contract. Ultimately, we must place *faith* in a watcher, and that watcher must be not too far removed from the watched.
 
 In discussing provenance then, we may make a grand claims of trustworthiness, but we must recognize that provenance claims are occasionally objective, but more often not.
 
@@ -147,7 +147,7 @@ The risk here is that if everything is known - who made *it*, who owns *it*, and
 
 The immediate benefit mechanisms of provenance bring are clear. Protections against appropriation and plagiarism are strengthened; sharing of reward is also enabled in tribute to all a work's creative data ancestors.
 
-The notion of paying tribute suggests the spirit or source of an idea is acknowledged, an ontological recognition where all inputs are traced back to a shared reality. The tribute is a form of cognitive inheritance. But therein lies a paradox: recognition is what creates the ultimate thing at hand - and who owns the recognition? Tracking custody shifts the ontological burden from who created something, to the lineage of the thing itself. We might ask, is the essence of an idea its fixed identity, or a dynamic, emergent quality shaped by the process of creation? Does an original thing exist, or has the essence of thing become the continuity of its record?
+The notion of paying tribute suggests the spirit or source of an idea is acknowledged, an ontological recognition where all inputs are traced back to a shared reality. The tribute is a form of cognitive inheritance. But therein lies a paradox: recognition is what creates the ultimate thing at hand - and who owns the recognition? Tracking custody shifts the ontological burden from who created something, to the lineage of the thing itself. We might ask, is the essence of an idea its fixed identity, or a dynamic, emergent quality shaped by the process of creation? Does an original thing exist, or has the essence of thing become the continuity of its record? Well, provenance provides one answer.
 
 We have explored the necessary and defining aspects of provenance:
 
