@@ -65,6 +65,8 @@ draft: false
 ╰──────────────────────────────────────────────────────────────────────────╯
 ```
 
+Nick Porcino, 2026
+
 ## Introduction
 
 We live in an era obsessed with verification. We want to know where things came from, who made them, and who has them right now. The very nature of what is true is under scrutiny, from battles on Wikipedia over what constitutes a reliable source, to ambiguity about whether a search engine result reflects genuine knowledge, or a manufactured hook intended to sell something or bias a collective point of view.
