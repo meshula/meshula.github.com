@@ -14,7 +14,7 @@ const posts = (await getCollection('blog')).sort(
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`${SITE_TITLE} - Blog`} description="Exploring consciousness, technology, and contemplative computing" />
+		<BaseHead title={`${SITE_TITLE} - Blog`} description="Exploring technology and contemplative computing" />
 	</head>
 	<body>
 		<Header />
@@ -23,7 +23,7 @@ const posts = (await getCollection('blog')).sort(
 				<header class="blog-header">
 					<h1 class="blog-title">Blog</h1>
 					<p class="blog-description">
-						Exploring consciousness, technology, and the intersection of contemplative practice with modern computing.
+						Exploring technology, and the intersection of contemplative practice with modern computing.
 					</p>
 					<hr class="blog-rule" />
 				</header>
@@ -84,7 +84,7 @@ const posts = (await getCollection('blog')).sort(
 
 	.blog-title {
 		font-family: var(--font-heading-primary);
-		font-size: 3.5rem;
+		font-size: 2.5rem;
 		font-weight: 400;
 		color: var(--color-accent);
 		text-transform: uppercase;
@@ -95,8 +95,8 @@ const posts = (await getCollection('blog')).sort(
 
 	.blog-description {
 		font-family: var(--font-body);
-		font-size: 1.25rem;
-		line-height: 1.6;
+		font-size: 1.0rem;
+		line-height: 1.5;
 		color: var(--color-text-secondary);
 		margin-bottom: calc(var(--grid-unit) * 4);
 		max-width: 600px;
