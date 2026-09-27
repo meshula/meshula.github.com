@@ -7,7 +7,7 @@ author: "Nick Porcino"
 draft: false
 ---
 
-Nick Porcino – LucasArts, a division of the Lucasfilm Entertainment Company
+Nick Porcino
 
 This article presents Insect AI, a straight forward architecture, notation, and design methodology for agent design. Insect AI is a design tool for programmers and non-programmers alike, and can be easily tuned to generate specific behaviors.
 Insect AI agents exhibit a number of interesting properties which satisfy the characteristics of motivated behavior as defined in the ethological literature - behaviors can be grouped and sequenced, the agents are goal directed, behavior can change based on the internal state of the agent, and behaviors can persist if stimuli are removed.
