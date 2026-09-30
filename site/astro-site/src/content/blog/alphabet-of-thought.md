@@ -31,9 +31,9 @@ Each sought to reveal the invisible geometry of meaning. Leibniz pursued the *ch
 
 Leibniz’s lifelong ambition was to find a universal symbolic language, an *alphabetum cogitationum humanarum*, the alphabet of human thought. The *characteristica universalis* would be this symbolic language, a logical script encoding primitive concepts, and their relations. If all reasoning could be reduced to the manipulation of symbols, then disputes between philosophers could be settled one day by calculation. "*calculemus* - Let us calculate!" he imagined them saying.
 
-The *calculus ratiocinator* would be its procedural counterpart; this would be a formal system of rules for transforming and combining the symbols to produce new truths. Leibniz saw in this the possibility of transforming metaphysics into algebra. It would be possible to go beyond analyzing concepts through intuition and rhetoric; thought could be compuattion, and as precise as arithmetic.
+The *calculus ratiocinator* would be its procedural counterpart; this would be a formal system of rules for transforming and combining the symbols to produce new truths. Leibniz saw in this the possibility of transforming metaphysics into algebra. It would be possible to go beyond analyzing concepts through intuition and rhetoric; thought could be computation, and as precise as arithmetic.
 
-Centuries earlier, the Majorcan philosopher and mystic Ramon Llull (c. 1232–1315) attempted the first physical incarnation of this dream. In his Ars Magna, Llull constructed an apparatus of *volvelles*, rotating paper discs inscribed with divine attributes and categorical letters. By manually spinning these concentric wheels, arguments could be mechanically combined and generated. While the system ultimately produced tautologies rather than divine proofs, Llull had accomplished something radical: he treated logic not as a passive mental exercise, but as a physical, operational process.
+Centuries earlier, the Majorcan philosopher and mystic Ramon Llull (c. 1232–1315) attempted the first physical incarnation of this dream. In his *Ars Magna*, Llull constructed an apparatus of *volvelles*, rotating paper discs inscribed with divine attributes and categorical letters. By manually spinning these concentric wheels, arguments could be mechanically combined and generated. While the system ultimately produced tautologies rather than divine proofs, Llull had accomplished something radical: he treated logic not as a passive mental exercise, but as a physical, operational process.
 
 Leibniz, who studied Llull’s combinatory art as a young man, seized upon this mechanical intuition and elevated it from medieval mysticism to rigorous mathematics. Yet despite decades of effort, Leibniz never completed the project. His extant manuscripts show fragments of symbolic notation — geometric diagrams, mnemonic glyphs, and tentative semantic tables — but no full grammar. Yet even these sketches inspired the later development of symbolic logic, Boolean algebra, and eventually computation itself. His mechanical calculator, the *Stepped Reckoner*, embodied his conviction that reasoning could be automated.
 
@@ -55,7 +55,7 @@ The *Aṣṭādhyāyī* defines a program of operation:
 
 The entire system functions as a recursive, context-sensitive grammar. Each derivation is a miniature proof, showing how a surface form emerges from deep conceptual structures.
 
-Pāṇini’s work achieved what Leibniz could only imagine, and what we do not generally have for modern languages like ENglish: the full formalization of a natural language. Its precision led to generations of scholars studying and commenting on the system, leading to the vast grammatical and philosophical tradition of Vyākaraṇa.
+Pāṇini’s work achieved what Leibniz could only imagine, and what we do not generally have for modern languages like English: the full formalization of a natural language. Its precision led to generations of scholars studying and commenting on the system, leading to the vast grammatical and philosophical tradition of Vyākaraṇa.
 
 Ultimately, the Aṣṭādhyāyī is not simply a descriptive grammar; the study of the semantics emergent from symbology functioned in the way Leibniz reached for with the characteristica universalis - as a computation scheme for uncovering the cosmic order encoded in speech (*śabda-brahman*).
 
@@ -66,7 +66,7 @@ Nineteenth-century philologists recognized its rigor; Bloomfield and Chomsky lat
 
 ## IV. Semantics from Symbols
 
-Leibniz may not have been aware of Pāṇini's work, but their approach meets in formalizing axiomatic thought and constructive etymology. Both assume that complex meaning can be decomposed into simpler primitives, and that the valid combinations of these primitives follow syntactic laws. Both treat reasoning as constructive derivation.
+Leibniz may not have been aware of Pāṇini's work, but their approaches meet in formalizing axiomatic thought and constructive etymology. Both assume that complex meaning can be decomposed into simpler primitives, and that the valid combinations of these primitives follow syntactic laws. Both treat reasoning as constructive derivation.
 
 In Pāṇini’s grammar, the derivational structure of language is an *etymology of being*: each word unfolds from roots through lawful transformation. In Leibniz’s logic, the derivational structure of concepts is an *etymology of thought*: each proposition unfolds from primitive notions through lawful calculation.
 
@@ -82,7 +82,7 @@ In the Sanskrit tradition that birthed the Aṣṭādhyāyī, speech is not an a
 
 Leibniz’s characteristica universalis shares this hidden premise. His primitive symbols were meant to be the direct mirrors of human ideas before they are clothed in the chaotic noise of vernacular tongues.
 
-Whether through the divine resonance of Sanskrit roots or the pure arithmetic of conceptual primitives, both thinkers reach for the same insight. Language and logic are echoes of the underlying architecture of the world.
+Whether through the divine resonance of Sanskrit roots or the pure arithmetic of conceptual primitives, both thinkers reach for the same insight: language and logic are echoes of the underlying architecture of the world.
 
 > *Ex radicibus rationis nascitur verbum.*
 > From the roots of reason, the word is born.
