@@ -2,8 +2,8 @@
 ---
 title: "Synthetic Intelligence: Distributed Control of Intelligent Systems"
 description: "Syntelligence architecture from 1990-present"
-pubDate: 1990
-tags: ["distributed control", "neural networks", "subsumption", "Braitenberg", "games", "artificial intelligence", "robotics", "mechatronics", "neuroethology "]
+pubDate: 1990-12-16
+tags: ["distributed control", "neural networks", "subsumption", "Braitenberg", "games", "artificial intelligence", "robotics", "mechatronics", "neuroethology"]
 author: "Nick Porcino"
 draft: false
 ---
