@@ -255,9 +255,9 @@ This drive towards optimization suppresses any radical break from the past; the 
 
 In this state, unobserved and unquantified moments of reflection becomes meaningless. If a thought or action is not externalized as data, it is non-existant as far as the system is concerned. The mind is no longer an agent, it is a relay.
 
-> *Mens sine fine errat*\
-> \
-> A mind without purpose drifts, and a mind drifting is perhaps no mind at all.
+> *Mens sine fine errat - atque nulla mens est*
+
+The restless, boundless nature of the wandering mind is the source of creativity and novelty, yet a mind without purpose drifts, and a mind drifting is perhaps no mind at all.
 
 ***
 

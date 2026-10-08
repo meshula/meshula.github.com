@@ -63,6 +63,7 @@ draft: false
    └──────────────────────────────────────────────────────────────────────────┘
   ```
 
+
 ### Nick Porcino, 2026
 
 *human written prose, em-dashes are my own*
@@ -128,7 +129,7 @@ The Church-Turing hypothesis as posed isn't directly concerned with minds nor wh
 
 The Turing Test — originally a negative claim designed to circumvent metaphysical limits — combined with the Church-Turing hypothesis, facilitated a transition toward a positive, computational account of the mind. The logical conclusion is that if a system produces the right outputs, then whatever process produces them must be intelligence — because intelligence has been redefined as nothing more than the capacity to produce those outputs. This dissolves the question "Can machines think?" - the Imitation Game, at first a way of avoiding essence, becomes reinterpreted as evidence *of* essence.
 
-This the standpoint of functionalism, and any system that claims a symbolic basis for intelligence: through the elimination of subjective character, the substrate of intelligence becomes irrelevant - intelligence is no longer something a system *has* but something it *does*, and especially, under examination, something it *appears to do*.
+This is the standpoint of functionalism, and any system that claims a symbolic basis for intelligence: through the elimination of subjective character, the substrate of intelligence becomes irrelevant - intelligence is no longer something a system *has* but something it *does*, and especially, under examination, something it *appears to do*.
 
 Reading Turing in 2026, we may observe that the Turing Test is not too hard for a machine to pass, but it is too narrow to reveal intelligence. It forced an alien architecture (statistical pattern matching across massive high-dimensional spaces) to squeeze through the bottleneck of human cultural biases and linguistic idioms, creating a mirror that summons a convincing mirage, not a mind.
 
