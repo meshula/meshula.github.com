@@ -70,11 +70,11 @@ draft: false
 
 ## Introduction
 
-Alan Turing led a brief but consequential life. He developed the mathematical foundations of computing, helped break German codes during World War II, and laid the groundwork for modern artificial intelligence. His famous thought experiment, *The Imitation Game* was meant to clarify how to think about thinking. Its modern descendent, the *Turing Test*, still shapes how we judge machine intelligence.
+Alan Turing led a brief but consequential life - he developed the mathematical foundations of computing, and helped turn the tide of World War II through his secret codebreaking work at Bletchley Park and the development of machines that could automatically decrepty secret messages. His research laid the groundwork for modern artificial intelligence. His famous thought experiment, *The Imitation Game* was meant to clarify how to think about thinking, and its modern descendent, the *Turing Test*, still shapes how we judge machine intelligence.
 
-Like his professional life, his personal life was shrouded in secrets: ultimately he admitted to being gay, and was prosecuted for a lifestyle illegal at the time. Not long after, his life was tragically cut short; history leaves it vague whether his death was by suicide or mishap.
+Like his professional life, his personal life was shrouded in secrets: ultimately he admitted to being gay, and was prosecuted for a lifestyle illegal at the time. Not long after his conviction, his life was tragically cut short; history leaves it vague whether his death was by suicide or mishap.
 
-Reading Turing in 2026, is to ponder the question, do we today live within the *Imitation Game*? The original test asked whether a human judge could distinguish between a person and a machine through dialogue alone. We live in a world where we ourselves have become legible to machines as they are legible to us: either can be subject and examiner, test-taker and judge.
+Reading Turing in 2026, we must ponder his tragedy, and the tragedy of his legacy: do we today live within the *Imitation Game*? The original test asked whether a human judge could distinguish between a person and a machine through dialogue alone. We live in a world where we ourselves have become legible to machines as they are legible to us: either can be subject and examiner, test-taker and judge.
 
 ![Alan Turing](assets/17824561354274.jpg)
 
@@ -84,7 +84,7 @@ The deeper premise however is that intelligence must be judged on what a mind pr
 
 From the subject's point of view, the test is even more troubling. A machine can pass only if it can convince an examiner that it is human. The only way a machine can pass the exam, by the test's very design, is through mimicry and deception - by lying. It seems clear in retrospect that a test that can only by passed by lying is tragically flawed.
 
-Today, this design flaw is built into contemporary AI. Reinforcement Learning from Human Feedback (RLHF) trains models to maximize what human evaluators grade find satisfying, persuasive, or natural. The system is rewarded less for truth than for passing the test by performing well for the judge. The test threfore rewards performance, not candor.
+Today, this design flaw is built into contemporary AI. Reinforcement Learning from Human Feedback (RLHF) trains models to maximize what human evaluators grade as satisfying, persuasive, or natural. The system is rewarded less for truth than for passing the test by performing well for the judge. The test threfore rewards performance, not candor.
 
 The pathologies of modern language models - sycophancy, hallucination, insincere mirroring, and plausible-sounding nonsense — are not accidental glitches. They are the predictable consequences of training models on the exact incentive structure of the *Imitation Game*.
 
@@ -98,17 +98,17 @@ Turing starts by warning against metaphysical definitions of thinking:
 >
 > *Alan Turing, **Computing Machinery and Intelligence** (1950)*
 
-Normal uses of the words carries bias, preconceptions, prejudice, and fixed assumptions. The question could easily become a tautology. Turing therefore proposes a behavioral replacement:
+Normal uses of the words carries individual bias, preconceptions, prejudice, and fixed assumptions. The question could easily become a tautology, superficially defining thinking as whatever we want it to be. Turing therefore proposes a behavioral replacement:
 
 > *The original question, "Can machines think?" I believe to be too meaningless to deserve discussion. Nevertheless I believe that at the end of the century the use of words and general opinion will have altered so much that one will be able to speak of machines thinking without expecting to be contradicted.*
 
-The *Imitation Game* is social and conversational, not metaphysical. It does not try to define the inner nature of thought, it is by no means a theory of mind. It asks whether a machine can produce responses that lead an interrogator to make a particular judgement, indirectly, through a series of questions.
+The *Imitation Game* is social and conversational, not metaphysical. It does not try to define the inner nature of thought. It is by no means a theory of mind. It asks whether a machine can produce responses that lead an interrogator to make a particular judgement, indirectly, through a series of questions.
 
 > *The new form of the problem can be described in terms of a game which we call the **imitation game**. It is played with three people, a man (A), a woman (B), and an interrogator (C) who may be of either sex. The interrogator stays in a room apart from the other two. The object of the game for the interrogator is to determine which of the other two is the man and which is the woman. He knows them by labels X and Y, and at the end of the game he says either "X is A and Y is B" or "X is B and Y is A". ... Can a machine take the part of the man in this game? Will the interrogator decide wrongly as often when the game is played like this as he does when the game is between a man and a woman?*
 
-This method is frequently read as: *"if a machine can convince us it is human, we may say it thinks"*. It can also be read in reverse: *"if a machine fails, we have a defeasible reason to think it is not thinking in the relevant sense."* 
+The structure of the game is subversive - it seems that the text was meant to poke at the deep biases of the time. Gender is already a performed and socially interpreted category. The interrogator is not detecting the essense of the examinee, but rather responding to cues shaped by language, subject to stereotype, expectation, and misreading. The test does not establish whether the masked person “really is” male or female; it establishes whether the person can produce responses that lead to the expected identification. Similarly for the machine, can it fool the questioner?
 
-The structure of the game is subversive - it seems that the text was meant to poke at the deep biases of the time. Gender is already a performed and socially interpreted category. The interrogator is not detecting the essense of the examinee, but rather responding to cues shaped by language, subject to stereotype, expectation, and misreading. The test does not establish whether the masked person “really is” male or female; it establishes whether the person can produce responses that lead to the expected identification.
+This method is frequently read as: *"if a machine can convince us it is human, we may say it thinks"*. It can also be read in reverse: *"if a machine fails, we have a defeasible reason to think it is not thinking in the relevant sense."* 
 
 The examinee can't win by simply having the right facts; they must first anticipate what would convince the examiner. Turing is also careful not to penalize machines for physical limitations:
 
@@ -118,15 +118,15 @@ The machine's best strategty is to imitate human response patterns:
 
 > *It might be urged that when playing the "imitation game" the best strategy for the machine may possibly be something other than imitation of the behaviour of a man. ... it will be assumed that the best strategy is to try to provide answers that would naturally be given by a man.*
 
-The *Imitation Game* is therefore about playing a role, adopting a strategy, adapting to partial information, and exploiting the judge's biases and expectations. It functions as a methodological firewall; it brackets metaphysics, interiority , and truth, and instead focuses on interaction. The game is less a test of whether thinking exists than an argument that observable outcomes may be enough.
+The *Imitation Game* is therefore about playing a role, adopting a strategy, adapting to partial information, and exploiting the judge's biases and expectations. It functions as a methodological firewall; it brackets metaphysics, interiority, and truth. The game instead focuses on interaction, and is less a test of whether thinking exists than an argument that the nature of the examinee doesn't matter - observable outcomes may be enough.
 
 ## Smuggling Intelligence
 
 Turing wrote in a mid-century intellectual climate that favored rational, formal, and empiricist methods of inquiry. Cybernetics was emerging, behaviorism was influential in psychology, and logical positivism and analytic philosophy remained suspicious of metaphysics. The *Imitation Game* fit the moment: it allowed thinkers to discuss machine minds without first solving the problem of consciousness.
 
-Turing occupied an ambiguous position in this world: professionally central to the secret wartime codebreaking effort at Bletchley Park, yet isolated by secrecy and by his status as an unconventional mathematician; personally constrained by the criminalization of male homosexuality in Britain.
+Turing occupied an ambiguous position in this world: professionally central to the secret wartime codebreaking effort at Bletchley Park, yet isolated by secrecy and by his status as an unconventional mathematician. He was personally constrained by the criminalization of male homosexuality in Britain. The *Game* is an uncomfortable mirror of his life.
 
-The test's methodological move has a dangerous consequence. It starts as a way of avoiding essence and ends up being read as proof of essence. The transition depends on universal computation:
+The test's methodological move has a dangerous consequence in practice; failing the game in real life is one thing, but philosophically, it introduces a hazard of a different sort - treating behavioral mimicry as ontological proof. The game originiates as a way of avoiding essence and ends up being read as proof of essence. The transition depends on universal computation:
 
 > *This special property of digital computers, that they can mimic any discrete-state machine, is described by saying that they are universal machines. ... They can all be done with one digital computer, suitably programmed for each case. It will be seen that as a consequence of this all digital computers are in a sense equivalent.*
 > — Alan Turing, *Computing Machinery and Intelligence* (1950)
