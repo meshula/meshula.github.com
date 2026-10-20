@@ -67,26 +67,47 @@ draft: false
 Nick Porcino (c) 2026
 
 > The nights grow long, the crispness in the air tells us to prepare our stores for the winter to come. The door swings open, and a hoodied figure enters, the tools of his trade strung about his waist.
+> 
 > "Come hither friend, and rest a moment by my hearth, I see by your implements that you are a reverse engineer."
+> 
 > "Thank you, you have spied my domain. You may call me Rev, for I am known by my trade as my name is the same. I reave, I reverse, I reap, I revere."
+> 
 > "Sir, I see your dharma is that of Opener. What is that ichor I see dried upon your dissassembler? Is your work not a violence?"
+> 
 > "Indeed fellow. My work is an intervention, and not always welcome. Yet, I perform a necessary act of transformation."
+> 
 > "Well met," I said. From the mantle, I produced an ancient pack of cards, *Distant Early Warning* by Marshall McLuhan, preserved as new in its original cellophane plastic wrap. I handed the artifact to the Opener.
+> 
 > "Ah, now this is a prize, I do not have it's schemata amongst my scrolls." Delicately he slit the plastic wrap, and a gasp escaped, carrying air of the package's vintage.
+> 
 > "Oh, but what now was lost?" I asked.
+> 
 > "I observed nothing, therefore nothing was lost," he replied.
+> 
 > "The seal, then?" I asked.
+> 
 > "A boundary," he said. "Yes, that too was opened." He proceeded to draw the cards one by one, carefully noting their order.
+> 
 > "I have complete my examination, and here is its blueprint."
+> 
 > "And can you explain the game?"
+> 
 > "Strangely I cannot. The telos is missing."
+> 
 > "You have called it fairly," I said. "The game was a hybrid object; it was part game, part corporate briefing, and part subscription. It cannot be properly understood by itself."
+> 
 > "Well played," Rev said, smiling.
+> 
 > Just then, the door swung open, it had begun to snow. A woman entered, holding a dark lantern.
+> 
 > "My father made it, and it has lit my home for many years. Yet now the fire has waned, and the guild says we may not relight it, for the light is theirs."
+> 
 > Rev looked at the lock on the lantern. "That lock is no boundary, it is a prison." Quickly he picked it and fanned the flame back to life.
+> 
 > "You have broken the maker's ward," I said.
+> 
 > "I answered the need the ward extinguished," Rev said.
+> 
 > The woman thanked us and departed; we could see her lantern moving through the snow like a small bright window in the dark. 
 
 Reverse engineering is a morally charged act of opening that can be violent, liberatory, reductive, imperial, defensive, or all of these at once. By violence, I mean not only physical coercion but any forceful transformation of something’s mode of being or relation to others. To ignore boundaries, to erase context, and to dissolve opacity can all be violations of a system.
