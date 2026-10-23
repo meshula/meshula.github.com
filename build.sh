@@ -19,7 +19,7 @@ cp -r ../../meshula-net-archive dist/meshula-net-archive
 echo "📦 Building PCP Explorer..."
 cd ../pcp-explorer
 rm -rf node_modules
-mpn cache clean --force
+npm cache clean --force
 
 # Sync paper source so the deployed app always has the latest version
 cp ../papers/encapsulation.md static/encapsulation.md
