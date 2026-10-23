@@ -17,7 +17,7 @@ cp -r ../../posts dist/posts
 cp -r ../../meshula-net-archive dist/meshula-net-archive
 
 echo "📦 Building PCP Explorer..."
-cd site/pcp-explorer
+cd ../pcp-explorer
 rm -rf node_modules
 mpn cache clean --force
 
