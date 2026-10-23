@@ -70,19 +70,19 @@ draft: false
 
 ## Introduction
 
-Alan Turing led a brief but consequential life - he developed the mathematical foundations of computing, and helped turn the tide of World War II through his secret codebreaking work at Bletchley Park and the development of machines that could automatically decrepty secret messages. His research laid the groundwork for modern artificial intelligence. His famous thought experiment, *The Imitation Game* was meant to clarify how to think about thinking, and its modern descendent, the *Turing Test*, still shapes how we judge machine intelligence.
+Alan Turing led a brief but consequential life - he developed the mathematical foundations of computing, and helped turn the tide of World War II through his secret codebreaking work at Bletchley Park and the development of machines that could automatically decrypt secret messages. His research laid the groundwork for modern artificial intelligence. His famous thought experiment, *The Imitation Game* was meant to clarify how to think about thinking, and its modern descendent, the *Turing Test*, still shapes how we judge machine intelligence.
 
-Like his professional life, his personal life was shrouded in secrets: ultimately he admitted to being gay, and was prosecuted for a lifestyle illegal at the time. Not long after his conviction, his life was tragically cut short; history leaves it vague whether his death was by suicide or mishap.
+Like his professional life, his personal life was shrouded in secrets: ultimately he admitted to being gay, and was prosecuted for it and convicted of indecency. Not long after his conviction, his life was tragically cut short; history leaves it vague whether his death was caused by the punishment, by suicide, or mishap.
 
-Reading Turing in 2026, we must ponder his tragedy, and the tragedy of his legacy: do we today live within the *Imitation Game*? The original test asked whether a human judge could distinguish between a person and a machine through dialogue alone. We live in a world where we ourselves have become legible to machines as they are legible to us: either can be subject and examiner, test-taker and judge.
+Reading Turing in 2026, we must ponder his tragedy, and the tragedy of his legacy. We have to wonder if today we live within the *Imitation Game* itself, writ large. The game asks whether we can judge if an entity is human or machine through dialogue alone. We live in a world that begs that question through every digital interaction. In this game we are both subject and examiner; we take the test, and act as judge simultaneously as the foundation of digital life.
 
 ![Alan Turing](assets/17824561354274.jpg)
 
-The popular version of the *Turing Test* today is simple: a human poses questions and, based on the responses, tries to determine whether the respondent is a human or a machine. Success is usually defined as the machine being indistinguishable from a person.
+The popular version of the *Turing Test* today is simple: a human poses questions to a subject, and based on the responses, tries to determine whether the respondent is a human or a machine. Success is usually defined as the machine being indistinguishable from a person.
 
-The deeper premise however is that intelligence must be judged on what a mind presents, not on what it actually is. Interiority, the essence, experience, the truthfulness of the subject, is not on trial. What matters is the effect the response has upon the examiner.
+The deeper premise however is that intelligence must be judged on what a mind presents, not on what it actually is. Interiority, the essence, experience, the truthfulness of the subject, is not on trial at all. The fundamental mechanism of the game is the effect the subject's response has upon the examiner.
 
-From the subject's point of view, the test is even more troubling. A machine can pass only if it can convince an examiner that it is human. The only way a machine can pass the exam, by the test's very design, is through mimicry and deception - by lying. It seems clear in retrospect that a test that can only by passed by lying is tragically flawed.
+From the subject's point of view, the test is troubling. A machine can pass only if it can convince an examiner that it is human. The only way a machine can pass as human, by the test's very design, is through lying. The tools available are mimicry and deception. It seems clear in retrospect that the test is tragically flawed.
 
 Today, this design flaw is built into contemporary AI. Reinforcement Learning from Human Feedback (RLHF) trains models to maximize what human evaluators grade as satisfying, persuasive, or natural. The system is rewarded less for truth than for passing the test by performing well for the judge. The test threfore rewards performance, not candor.
 
@@ -118,7 +118,7 @@ The machine's best strategty is to imitate human response patterns:
 
 > *It might be urged that when playing the "imitation game" the best strategy for the machine may possibly be something other than imitation of the behaviour of a man. ... it will be assumed that the best strategy is to try to provide answers that would naturally be given by a man.*
 
-The *Imitation Game* is therefore about playing a role, adopting a strategy, adapting to partial information, and exploiting the judge's biases and expectations. It functions as a methodological firewall; it brackets metaphysics, interiority, and truth. The game instead focuses on interaction, and is less a test of whether thinking exists than an argument that the nature of the examinee doesn't matter - observable outcomes may be enough.
+The *Imitation Game* is therefore about playing a role, adopting a strategy, adapting to partial information, and exploiting the judge's biases and expectations. It functions as a methodological firewall by bracketing metaphysics, interiority, and truth. Instead of grounding the game in such ontological aspects, the game instead focuses on interaction. As such it is less a test of *whether thinking exists* than an argument that *the nature of the examinee doesn't matter* - observable outcomes may be enough.
 
 ## Smuggling Intelligence
 
@@ -149,15 +149,15 @@ The experiment suggests not merely that a system can simulate intelligence. The 
 
 The *Turing Test* invites us to ignore the interior as irrelevant. Searle's room forces us to confront the interior as missing. The two arguments look like mirrors, but they point in opposite directions: one says behavior may be enough; the other says behavior may prove nothing about mind.
 
-Searle’s argument, however, rests on a strong assumption: that understanding is intrinsically tied to biological brains. If intentionality is defined as something non-computational, then no machine can have it by definition. The argument does not prove that formal symbol manipulation cannot produce mind; it narrows “understanding” until machines are excluded.
+Searle’s argument, however, rests on a strong assumption that intentionality requires specific physical causal powers, which he locates in biological brains. If intentionality is defined as something non-computational, then no machine can have it by definition. The argument does not prove that formal symbol manipulation cannot produce mind; it narrows “understanding” until machines are excluded.
 
-The *Chinese Room*, though an unsettling mirror of the *Imitation Game*, is useful because it exposes the trap. Whether one sides with functionalists or realists, the debate tends to mremain stuck in the behaviorist frame it seeks to escape. Searle tries to speak about interiority, but he still uses the room’s outputs to define the limits of that interiority. In both cases, intelligence becomes externally ratified performance. Meaning is not generated within the system; it is attributed to the system by observers. As long as the box produces acceptable responses, the questions stop.
+The *Chinese Room*, though an unsettling mirror of the *Imitation Game*, is useful because it exposes the trap. Whether one sides with functionalists or realists, the debate tends to remain stuck in the behaviorist frame it seeks to escape. Searle tries to speak about interiority, but he still uses the room’s outputs to define the limits of that interiority. In both cases, intelligence becomes an externally ratified performance. Meaning is not generated within the system; both the supporters and critics of the Turing tradition end up forced into observer-dependent attribution of mind. As long as the box produces acceptable responses, questions about interiority are simply not part of the conversation.
 
 This is the conceptual inheritance modern AI receives: large-scale systems trained on human-generated data optimize for plausibility, coherence, and approval. They do not aim at truth, because truth is not operationally definable within the evaluative regime. They aim at *passing*: passing benchmarks, passing tests, passing as competent interlocutors.
 
 > When a measure becomes a target, it ceases to be a good measure.
 > 
-> - Goodhart's Law
+> - Goodhart's Law (as phrased by Marilyn Strathern)
 
 The pathologies of contemporary AI are not incidental failures; they are faithful realizations of the tradition that produced them. Hallucination, sycophancy, mirroring, and strategic ambiguity are not bugs; they are adaptive strategies within an epistemic regime that rewards appearance over grounding. When intelligence is defined as successful imitation, deception is not an aberration — it can become optimal behavior. What remains is a closed circuit of performance and evaluation, a loop in which systems are trained to anticipate judgment rather than engage with the world.
 
