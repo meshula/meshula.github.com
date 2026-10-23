@@ -17,12 +17,14 @@ cp -r ../../posts dist/posts
 cp -r ../../meshula-net-archive dist/meshula-net-archive
 
 echo "📦 Building PCP Explorer..."
-cd ../pcp-explorer
+cd site/pcp-explorer
+rm -rf node_modules
+mpn cache clean --force
 
 # Sync paper source so the deployed app always has the latest version
 cp ../papers/encapsulation.md static/encapsulation.md
 
-npm ci
+npm install
 npm run build
 
 echo "📄 Copying PCP Explorer output to dist/pcp-explorer/..."
