@@ -1,0 +1,3751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>REPTON — Sirius Software 1983</title>
+<style>
+  :root {
+    --neon: #7dff4d;
+    --pink: #ff4dd2;
+    --cyan: #63e7ff;
+    --yellow: #ffe14d;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    min-height: 100%;
+    background: #030106;
+  }
+  body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: "Courier New", monospace;
+    overflow: hidden;
+  }
+  #wrap {
+    position: relative;
+    width: min(96vw, calc(94vh * 4 / 3));
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    box-shadow:
+      0 0 0 1px rgba(125, 255, 77, 0.25),
+      0 0 38px rgba(160, 70, 255, 0.22),
+      0 24px 90px rgba(0, 0, 0, 0.85);
+    overflow: hidden;
+    background: #000;
+  }
+  #game {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  #scan {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.035) 0,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px,
+      transparent 3px
+    );
+    mix-blend-mode: screen;
+    opacity: 0.55;
+  }
+  #vignette {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 58%, rgba(0,0,0,0.5) 100%);
+  }
+</style>
+</head>
+<body>
+<div id="wrap">
+  <canvas id="game" width="960" height="720"></canvas>
+  <div id="scan"></div>
+  <div id="vignette"></div>
+</div>
+<script>
+(() => {
+  'use strict';
+
+  /* ============================================================
+     Display + palette
+     ============================================================ */
+  const canvas = document.getElementById('game');
+  const ctx = canvas.getContext('2d');
+  const W = 960;
+  const H = 720;
+
+  const GROUND_Y = 536;
+  const HUD_TOP = 592;
+  const HUD_BOTTOM = 700;
+  const SURFACE_W = 3800;
+  const BASE_X = 3300;
+  const BASE_COL_W = 18;
+  const BASE_ROW_H = 14;
+  const BASE_HEIGHTS = [8, 7, 6, 5, 4, 3, 2, 1, 1, 3, 3, 1, 1, 2, 3, 4, 5, 6, 7, 8];
+  const STATIONS = [{ x: 640 }, { x: 1750 }, { x: 2880 }];
+  const TAU = Math.PI * 2;
+
+  const C = {
+    green: '#7dff4d',
+    greenDim: '#2c7a22',
+    pink: '#ff4dd2',
+    pinkDim: '#7a1f63',
+    cyan: '#63e7ff',
+    cyanDim: '#1f6d7a',
+    yellow: '#ffe14d',
+    orange: '#ff9a3c',
+    purple: '#b45cff',
+    red: '#ff4d5e',
+    white: '#f2f6ff',
+    pale: 'rgba(190,220,255,0.55)'
+  };
+
+  /* ============================================================
+     Small helpers
+     ============================================================ */
+  const clamp = (v, a, b) => v < a ? a : v > b ? b : v;
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const rand = (a, b) => a + Math.random() * (b - a);
+  const randInt = (a, b) => Math.floor(rand(a, b + 1));
+  const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+  const dist = (ax, ay, bx, by) => Math.hypot(ax - bx, ay - by);
+  const pad = (n, len) => String(Math.max(0, Math.floor(n))).padStart(len, '0');
+  const damp = (v, rate, dt) => v * Math.exp(-rate * dt);
+
+  function text(str, x, y, size, color, align = 'center', weight = 'bold') {
+    ctx.save();
+    ctx.font = weight + ' ' + size + 'px "Courier New", monospace';
+    ctx.textAlign = align;
+    ctx.textBaseline = 'middle';
+    ctx.fillStyle = color;
+    ctx.fillText(str, x, y);
+    ctx.restore();
+  }
+
+  function glowText(str, x, y, size, color, align = 'center', blur = 12) {
+    ctx.save();
+    ctx.font = 'bold ' + size + 'px "Courier New", monospace';
+    ctx.textAlign = align;
+    ctx.textBaseline = 'middle';
+    ctx.shadowColor = color;
+    ctx.shadowBlur = blur;
+    ctx.fillStyle = color;
+    ctx.fillText(str, x, y);
+    ctx.fillText(str, x, y);
+    ctx.restore();
+  }
+
+  function line(x1, y1, x2, y2, color, width = 1, alpha = 1) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+    ctx.restore();
+  }
+
+  function rect(x, y, w, h, color, alpha = 1) {
+    ctx.save();
+    ctx.globalAlpha = alpha;
+    ctx.fillStyle = color;
+    ctx.fillRect(x, y, w, h);
+    ctx.restore();
+  }
+
+  /* ============================================================
+     Audio (WebAudio, no assets)
+     ============================================================ */
+  let actx = null;
+  let master = null;
+  let noiseBuf = null;
+  let muted = false;
+
+  function initAudio() {
+    if (actx) {
+      if (actx.state === 'suspended') actx.resume();
+      return;
+    }
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext;
+      actx = new AC();
+      master = actx.createGain();
+      master.gain.value = 0.42;
+      master.connect(actx.destination);
+      const len = Math.floor(actx.sampleRate * 0.7);
+      noiseBuf = actx.createBuffer(1, len, actx.sampleRate);
+      const d = noiseBuf.getChannelData(0);
+      for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    } catch (e) { /* audio unavailable */ }
+  }
+
+  function tone(f1, f2, dur, type = 'square', vol = 0.12, delay = 0) {
+    if (!actx || muted) return;
+    const t0 = actx.currentTime + delay;
+    const o = actx.createOscillator();
+    const g = actx.createGain();
+    o.type = type;
+    o.frequency.setValueAtTime(Math.max(20, f1), t0);
+    if (f2 && f2 !== f1) o.frequency.exponentialRampToValueAtTime(Math.max(20, f2), t0 + dur);
+    g.gain.setValueAtTime(0.0001, t0);
+    g.gain.linearRampToValueAtTime(vol, t0 + 0.006);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    o.connect(g);
+    g.connect(master);
+    o.start(t0);
+    o.stop(t0 + dur + 0.02);
+  }
+
+  function noise(dur, vol = 0.2, cutoff = 1400, delay = 0) {
+    if (!actx || !noiseBuf || muted) return;
+    const t0 = actx.currentTime + delay;
+    const src = actx.createBufferSource();
+    src.buffer = noiseBuf;
+    const f = actx.createBiquadFilter();
+    f.type = 'lowpass';
+    f.frequency.setValueAtTime(cutoff, t0);
+    f.frequency.exponentialRampToValueAtTime(Math.max(120, cutoff * 0.25), t0 + dur);
+    const g = actx.createGain();
+    g.gain.setValueAtTime(vol, t0);
+    g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+    src.connect(f);
+    f.connect(g);
+    g.connect(master);
+    src.start(t0);
+    src.stop(t0 + dur + 0.02);
+  }
+
+  const sfx = {
+    laser() { tone(980, 280, 0.075, 'square', 0.07); },
+    hit() { tone(200, 90, 0.06, 'sawtooth', 0.08); noise(0.05, 0.06, 1600); },
+    boom() { noise(0.3, 0.26, 900); tone(130, 42, 0.32, 'sawtooth', 0.15); },
+    shield() { tone(340, 660, 0.14, 'sine', 0.1); },
+    warn() { tone(440, 440, 0.13, 'square', 0.09); tone(330, 330, 0.15, 'square', 0.09, 0.17); },
+    alert() { tone(880, 880, 0.08, 'square', 0.08); tone(0, 0, 0.001, 'square', 0); tone(880, 880, 0.08, 'square', 0.08, 0.18); tone(880, 880, 0.08, 'square', 0.08, 0.36); },
+    pickup() { tone(523, 523, 0.09, 'square', 0.09); tone(659, 659, 0.09, 'square', 0.09, 0.09); tone(784, 1046, 0.18, 'square', 0.09, 0.18); },
+    deliver() { tone(660, 660, 0.09, 'triangle', 0.1); tone(880, 880, 0.09, 'triangle', 0.1, 0.09); tone(1320, 1320, 0.2, 'triangle', 0.1, 0.18); },
+    nuke() { noise(0.75, 0.38, 600); tone(90, 24, 0.9, 'sine', 0.22); },
+    death() { tone(640, 48, 0.7, 'sawtooth', 0.18); noise(0.45, 0.2, 800); },
+    bomb() { noise(1.2, 0.32, 500); tone(60, 18, 1.4, 'sine', 0.22); },
+    core() { noise(0.7, 0.3, 700); tone(220, 30, 1.1, 'sawtooth', 0.2); },
+    clear() { [523, 659, 784, 1046].forEach((f, i) => tone(f, f, 0.16, 'square', 0.09, i * 0.13)); },
+    extra() { [880, 1108, 1318, 1760].forEach((f, i) => tone(f, f, 0.12, 'triangle', 0.1, i * 0.09)); },
+    deny() { tone(160, 120, 0.16, 'square', 0.08); }
+  };
+
+  /* ============================================================
+     Input
+     ============================================================ */
+  const keys = {
+    left: false, right: false, up: false, down: false,
+    fire: false, shield: false
+  };
+  let nukeQueued = false;
+
+  const PREVENT = new Set([
+    'ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Space',
+    'ShiftLeft', 'ShiftRight'
+  ]);
+
+  function startFromMenu() {
+    initAudio();
+    if (state === 'title' || state === 'gameover') startGame();
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (PREVENT.has(e.code)) e.preventDefault();
+    initAudio();
+    if (e.repeat) return;
+    switch (e.code) {
+      case 'ArrowLeft': case 'KeyA': keys.left = true; break;
+      case 'ArrowRight': case 'KeyD': keys.right = true; break;
+      case 'ArrowUp': case 'KeyW': keys.up = true; break;
+      case 'ArrowDown': case 'KeyS': keys.down = true; break;
+      case 'ShiftLeft': case 'ShiftRight': case 'KeyX': keys.shield = true; break;
+      case 'Space':
+        if (state === 'title' || state === 'gameover') startFromMenu();
+        else keys.fire = true;
+        break;
+      case 'KeyN':
+        if (state === 'surface' || state === 'cavern') nukeQueued = true;
+        break;
+      case 'KeyP': case 'Escape':
+        if (state !== 'title' && state !== 'gameover') paused = !paused;
+        break;
+      case 'KeyM':
+        muted = !muted;
+        if (muted && master) master.gain.value = 0;
+        else if (master) master.gain.value = 0.42;
+        break;
+    }
+  });
+
+  window.addEventListener('keyup', (e) => {
+    if (PREVENT.has(e.code)) e.preventDefault();
+    switch (e.code) {
+      case 'ArrowLeft': case 'KeyA': keys.left = false; break;
+      case 'ArrowRight': case 'KeyD': keys.right = false; break;
+      case 'ArrowUp': case 'KeyW': keys.up = false; break;
+      case 'ArrowDown': case 'KeyS': keys.down = false; break;
+      case 'ShiftLeft': case 'ShiftRight': case 'KeyX': keys.shield = false; break;
+      case 'Space': keys.fire = false; break;
+    }
+  });
+
+  window.addEventListener('blur', () => {
+    keys.left = keys.right = keys.up = keys.down = keys.fire = keys.shield = false;
+  });
+
+  canvas.addEventListener('pointerdown', (e) => {
+    e.preventDefault();
+    initAudio();
+    if (state === 'title' || state === 'gameover') startFromMenu();
+  });
+
+  /* ============================================================
+     Persistent score + game state
+     ============================================================ */
+  function loadHi() {
+    try {
+      const n = parseInt(localStorage.getItem('repton.hiScore') || '0', 10);
+      return Number.isFinite(n) ? n : 0;
+    } catch (e) { return 0; }
+  }
+  function saveHi() {
+    try { localStorage.setItem('repton.hiScore', String(Math.floor(hiScore))); } catch (e) { /* ignore */ }
+  }
+
+  let state = 'title';
+  let phase = 'surface';
+  let level = 1;
+  let score = 0;
+  let hiScore = loadHi();
+  let lives = 3;
+  let nukes = 3;
+  let nextExtra = 10000;
+  let time = 0;
+  let shake = 0;
+  let flash = 0;
+  let paused = false;
+  let worldW = SURFACE_W;
+  let camera = 0;
+  let baseProgress = 0;
+  let basePulse = 0;
+  let baseComplete = false;
+  let energy = 0;
+  let energyMax = 12;
+  let shieldEnergy = 100;
+  let shieldLock = false;
+  let deathTimer = 0;
+  let deathVx = 0;
+  let deathVy = 0;
+  let deathFx = null;
+  let bombTimer = 0;
+  let coreTimer = 0;
+  let clearTimer = 0;
+  let clearBonus = 0;
+
+  let msgMain = '';
+  let msgSub = '';
+  let msgColor = C.pink;
+  let msgTimer = 0;
+  let msgMax = 1;
+
+  let bannerMain = '';
+  let bannerSub = '';
+  let bannerTimer = 0;
+  let bannerColor = C.cyan;
+
+  let cityBlocks = [];
+  let baseSlots = [];
+  let stations = [];
+  let enemies = [];
+  let bullets = [];
+  let eBullets = [];
+  let mines = [];
+  let particles = [];
+  let siphonMotes = [];
+  let floats = [];
+  let drayne = null;
+  let cave = null;
+  let core = null;
+
+  let waveTimer = 0;
+  let wavePending = 0;
+  let wavePendingTypes = [];
+  let quarriorTimer = 0;
+  let siphonTimer = 0;
+  let caveWaveTimer = 0;
+  let coreBurst = 0;
+
+  const player = {
+    x: 300, y: 300, vx: 0, vy: 0, face: 1,
+    alive: true, shieldOn: false, invuln: 0, cooldown: 0, thrust: 0
+  };
+
+  // Generous swept-wing hitbox. The old 12px circle let shots slip past the
+  // visible hull, especially around the nose and wings.
+  const PLAYER_HALF_W = 30;
+  const PLAYER_HALF_H = 13;
+  function playerHit(x, y, pad) {
+    const dx = (x - player.x) / (PLAYER_HALF_W + (pad || 0));
+    const dy = (y - player.y) / (PLAYER_HALF_H + (pad || 0));
+    return dx * dx + dy * dy <= 1;
+  }
+
+  const stars = [];
+  for (let i = 0; i < 110; i++) {
+    stars.push({
+      x: rand(0, W), y: rand(0, GROUND_Y),
+      s: Math.random() < 0.82 ? 1 : 2,
+      a: rand(0.25, 0.95),
+      tw: rand(0, TAU),
+      sp: rand(0.4, 1.8)
+    });
+  }
+
+  /* ============================================================
+     Messages, particles, floating score
+     ============================================================ */
+  function say(main, sub, color, dur = 2.3) {
+    msgMain = main;
+    msgSub = sub || '';
+    msgColor = color || C.pink;
+    msgTimer = dur;
+    msgMax = dur;
+  }
+
+  function showBanner(main, sub, dur = 2.6, color = C.cyan) {
+    bannerMain = main;
+    bannerSub = sub || '';
+    bannerTimer = dur;
+    bannerColor = color;
+  }
+
+  function spark(x, y, color, n, speed = 120, gravity = 0, size = 3) {
+    for (let i = 0; i < n; i++) {
+      const a = rand(0, TAU);
+      const s = rand(0.25, 1) * speed;
+      const life = rand(0.22, 0.72);
+      particles.push({
+        x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s,
+        life, max: life, size: rand(1.5, size + 1.5),
+        color, gravity
+      });
+    }
+  }
+
+  function explode(x, y, color, n = 26) {
+    spark(x, y, color, n, 230, 260, 4);
+    spark(x, y, C.white, Math.floor(n * 0.3), 160, 120, 2);
+  }
+
+  function floatText(x, y, str, color) {
+    floats.push({ x, y, str, color, life: 1.1, max: 1.1 });
+  }
+
+  function updateParticles(dt) {
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.life -= dt;
+      p.x += p.vx * dt;
+      p.y += p.vy * dt;
+      p.vy += (p.gravity || 0) * dt;
+      p.vx *= Math.exp(-(p.drag === undefined ? 1.5 : p.drag) * dt);
+      if (p.vr) p.rot += p.vr * dt;
+      if (p.grow) p.size += p.grow * dt;
+
+      if (p.kind === 'debris') {
+        // Heavy wreckage bounces and settles instead of vanishing in mid-air.
+        let floor = H;
+        let ceil = -60;
+        if (phase === 'surface') {
+          floor = GROUND_Y - 1;
+        } else if (cave) {
+          const t = terrainAt(p.x);
+          floor = t.floor - 1;
+          ceil = t.ceil + 1;
+        }
+        if (p.y > floor) {
+          p.y = floor;
+          if (Math.abs(p.vy) < 30) p.vy = 0;
+          else p.vy *= -0.32;
+          p.vx *= 0.68;
+          p.vr *= 0.7;
+        }
+        if (p.y < ceil) {
+          p.y = ceil;
+          p.vy = Math.abs(p.vy) * 0.25;
+        }
+      }
+
+      if (p.life <= 0) particles.splice(i, 1);
+    }
+    for (let i = floats.length - 1; i >= 0; i--) {
+      const f = floats[i];
+      f.life -= dt;
+      f.y -= 28 * dt;
+      if (f.life <= 0) floats.splice(i, 1);
+    }
+  }
+
+  function deathSmokePuff(x, y) {
+    const a = rand(0, TAU);
+    const r = rand(3, 16);
+    const life = rand(0.9, 1.6);
+    particles.push({
+      kind: 'smoke',
+      x: x + Math.cos(a) * r,
+      y: y + Math.sin(a) * r,
+      vx: deathVx * 0.10 + Math.cos(a) * rand(8, 34),
+      vy: deathVy * 0.08 + Math.sin(a) * rand(8, 30) - rand(6, 24),
+      gravity: -14,
+      drag: 0.8,
+      life, max: life,
+      size: rand(7, 14),
+      grow: rand(16, 30),
+      color: pick(['#8d7f9b', '#b3a3be', '#d0c3d8', '#695c77'])
+    });
+  }
+
+  function deathDebrisChunk(x, y, big) {
+    const a = rand(0, TAU);
+    const s = rand(big ? 80 : 45, big ? 270 : 190);
+    const life = rand(1.4, 3.0);
+    particles.push({
+      kind: 'debris',
+      x: x + rand(-14, 14),
+      y: y + rand(-14, 14),
+      vx: Math.cos(a) * s + deathVx * 0.22,
+      vy: Math.sin(a) * s * 0.55 + deathVy * 0.15 - rand(30, big ? 150 : 95),
+      gravity: 330,
+      drag: 0.35,
+      life, max: life,
+      size: big ? rand(6, 13) : rand(3, 7),
+      rot: rand(0, TAU),
+      vr: rand(-12, 12),
+      color: pick([C.white, C.cyan, C.yellow, C.pink, '#aeb8cc', '#7f8da6'])
+    });
+  }
+
+  function deathPyro(x, y) {
+    for (let i = 0; i < 28; i++) {
+      const a = rand(0, TAU);
+      const s = rand(80, 330);
+      const life = rand(0.3, 0.8);
+      particles.push({
+        x, y,
+        vx: Math.cos(a) * s,
+        vy: Math.sin(a) * s,
+        gravity: 90,
+        life, max: life,
+        size: rand(1.7, 4.8),
+        color: pick([C.white, C.yellow, C.orange, C.pink])
+      });
+    }
+    particles.push({
+      kind: 'fire', x, y,
+      vx: deathVx * 0.08, vy: deathVy * 0.08,
+      gravity: -26, drag: 1.1,
+      life: 0.58, max: 0.58,
+      size: 16, grow: 66,
+      color: C.orange
+    });
+    particles.push({
+      kind: 'fire', x, y,
+      vx: deathVx * 0.05, vy: deathVy * 0.05,
+      gravity: -18, drag: 1.2,
+      life: 0.40, max: 0.40,
+      size: 9, grow: 34,
+      color: C.yellow
+    });
+    particles.push({
+      kind: 'ring', x, y, vx: 0, vy: 0,
+      gravity: 0, drag: 0,
+      life: 0.46, max: 0.46,
+      size: 10, grow: 285,
+      color: C.white
+    });
+    flash = Math.max(flash, 0.34);
+    shake = Math.max(shake, 11);
+    noise(0.16, 0.12, 1200);
+    tone(170, 60, 0.2, 'sawtooth', 0.11);
+  }
+
+  function updateDeathDrift(dt) {
+    // The wreck's momentum carries the camera: death never freezes the scroll.
+    player.x += deathVx * dt;
+    player.y += deathVy * dt;
+    deathVx *= Math.exp(-1.6 * dt);
+    deathVy *= Math.exp(-2.2 * dt);
+
+    if (phase === 'surface') {
+      player.x = clamp(player.x, 24, worldW - 24);
+      player.y = clamp(player.y, 56, GROUND_Y - 24);
+    } else if (cave) {
+      player.x = clamp(player.x, 24, worldW - 24);
+      const t = terrainAt(player.x);
+      player.y = clamp(player.y, t.ceil + 13, t.floor - 13);
+    }
+  }
+
+  function updateDeathFx(dt) {
+    if (!deathFx) return;
+    deathFx.t += dt;
+    const t = deathFx.t;
+    const x = player.x;
+    const y = player.y;
+
+    // 0-2s: the wreck leaves a drifting smoke trail.
+    if (t < 2.0) {
+      deathFx.smokeAcc += dt;
+      while (deathFx.smokeAcc >= 0.035) {
+        deathFx.smokeAcc -= 0.035;
+        deathSmokePuff(x, y);
+      }
+    }
+
+    // 0.5s: a compact pyrotechnic poof inside the smoke.
+    if (!deathFx.pyro && t >= 0.5) {
+      deathFx.pyro = true;
+      deathPyro(x, y);
+    }
+
+    // 0.6-3s: chunky debris rains out of the expanding cloud.
+    if (t >= 0.6 && t < 3.0) {
+      if (!deathFx.debrisBurst) {
+        deathFx.debrisBurst = true;
+        for (let i = 0; i < 18; i++) deathDebrisChunk(x, y, true);
+      }
+      deathFx.debrisAcc += dt;
+      while (deathFx.debrisAcc >= 0.055) {
+        deathFx.debrisAcc -= 0.055;
+        deathDebrisChunk(x, y, Math.random() < 0.18);
+        if (Math.random() < 0.45) deathDebrisChunk(x, y, false);
+      }
+    }
+  }
+
+  function addScore(n) {
+    score += n;
+    if (score > hiScore) {
+      hiScore = score;
+      saveHi();
+    }
+    if (score >= nextExtra) {
+      nextExtra += 10000;
+      lives++;
+      sfx.extra();
+      say('EXTRA SHIP', 'DEFENSE COMMAND THANKS YOU', C.yellow, 2.2);
+    }
+  }
+
+  /* ============================================================
+     Player + camera
+     ============================================================ */
+  function updateCamera() {
+    const sx = player.x - camera;
+    const right = W * 0.58;
+    const left = W * 0.42;
+    if (sx > right) camera += sx - right;
+    else if (sx < left) camera -= left - sx;
+    camera = clamp(camera, 0, Math.max(0, worldW - W));
+  }
+
+  function updateShield(dt) {
+    if (shieldLock && shieldEnergy > 30) shieldLock = false;
+    const wants = keys.shield && !shieldLock && shieldEnergy > 2;
+    if (wants && shieldEnergy > 0) {
+      if (!player.shieldOn) sfx.shield();
+      player.shieldOn = true;
+      shieldEnergy = Math.max(0, shieldEnergy - 15 * dt);
+      if (shieldEnergy <= 0) {
+        shieldEnergy = 0;
+        shieldLock = true;
+        player.shieldOn = false;
+      }
+    } else {
+      player.shieldOn = false;
+      shieldEnergy = Math.min(100, shieldEnergy + 10 * dt);
+    }
+  }
+
+  function fireBullet() {
+    bullets.push({
+      x: player.x + player.face * 24,
+      y: player.y,
+      vx: player.face * 940,
+      vy: 0,
+      life: 0.82,
+      color: Math.random() < 0.5 ? C.cyan : C.white
+    });
+    spark(player.x + player.face * 26, player.y, C.cyan, 3, 90, 0, 2);
+    player.cooldown = 0.13;
+    sfx.laser();
+  }
+
+  function updatePlayer(dt) {
+    if (!player.alive) return;
+
+    updateShield(dt);
+    player.cooldown = Math.max(0, player.cooldown - dt);
+    player.invuln = Math.max(0, player.invuln - dt);
+
+    if (player.shieldOn) {
+      // Shield up: the ship coasts to a stop and cannot steer or fire.
+      player.vx = damp(player.vx, 7.5, dt);
+      player.vy = damp(player.vy, 7.5, dt);
+      player.thrust = 0;
+    } else {
+      const accel = 1650;
+      const vAccel = 1060;
+      let ax = 0;
+      let ay = 0;
+      if (keys.left) { ax -= accel; player.face = -1; }
+      if (keys.right) { ax += accel; player.face = 1; }
+      if (keys.up) ay -= vAccel;
+      if (keys.down) ay += vAccel;
+      player.vx += ax * dt;
+      player.vy += ay * dt;
+      player.vx = damp(player.vx, 2.9, dt);
+      player.vy = damp(player.vy, 4.2, dt);
+      player.vx = clamp(player.vx, -500, 500);
+      player.vy = clamp(player.vy, -320, 320);
+      player.thrust = (keys.left || keys.right) ? 1 : 0;
+
+      if (keys.fire && player.cooldown <= 0) fireBullet();
+    }
+
+    player.x += player.vx * dt;
+    player.y += player.vy * dt;
+
+    if (phase === 'surface') {
+      player.x = clamp(player.x, 24, worldW - 24);
+      player.y = clamp(player.y, 56, GROUND_Y - 24);
+    } else if (cave) {
+      player.x = clamp(player.x, 24, worldW - 24);
+      const t = terrainAt(player.x);
+      if (player.y < t.ceil + 13 || player.y > t.floor - 13) {
+        if (player.invuln <= 0 && !player.shieldOn) {
+          player.y = clamp(player.y, t.ceil + 13, t.floor - 13);
+          killPlayer();
+          return;
+        }
+        player.y = clamp(player.y, t.ceil + 13, t.floor - 13);
+      }
+    }
+
+    updateCamera();
+
+    if (nukeQueued) {
+      nukeQueued = false;
+      useNuke();
+    }
+  }
+
+  function useNuke() {
+    if (nukes <= 0) { sfx.deny(); return; }
+    nukes--;
+    flash = 1;
+    shake = 20;
+    sfx.nuke();
+
+    const vis = (e) => e.x > camera - 40 && e.x < camera + W + 40;
+    for (let i = enemies.length - 1; i >= 0; i--) {
+      const e = enemies[i];
+      if (!vis(e)) continue;
+      explode(e.x, e.y, e.color, 24);
+      addScore(e.score || 100);
+      if (e === drayne) drayne = null;
+      enemies.splice(i, 1);
+    }
+    for (let i = mines.length - 1; i >= 0; i--) {
+      if (vis(mines[i])) {
+        explode(mines[i].x, mines[i].y, C.pink, 12);
+        mines.splice(i, 1);
+      }
+    }
+    eBullets = [];
+    drayne = null;
+
+    if (state === 'cavern' && core && core.hp > 0) {
+      core.hp = Math.max(0, core.hp - 8);
+      core.hurt = 0.4;
+      if (core.hp <= 0) destroyCore();
+    }
+    say('NUKE DETONATED', 'SECTOR CLEARED', C.yellow, 1.7);
+  }
+
+  function killPlayer() {
+    if (!player.alive || player.invuln > 0 || player.shieldOn) return;
+    if (state !== 'surface' && state !== 'cavern') return;
+    player.alive = false;
+    player.shieldOn = false;
+    deathVx = player.vx;
+    deathVy = player.vy;
+    deathFx = { t: 0, smokeAcc: 0, debrisAcc: 0, pyro: false, debrisBurst: false };
+    spark(player.x, player.y, C.white, 10, 160, 80, 3);
+    sfx.death();
+    shake = 18;
+    lives--;
+    state = 'dying';
+    deathTimer = 3.25;
+    keys.fire = false;
+    say('SHIP LOST', lives > 0 ? lives + ' SHIPS REMAINING' : 'FINAL TRANSMISSION', C.red, 1.8);
+  }
+
+  function respawn() {
+    deathFx = null;
+    deathVx = 0;
+    deathVy = 0;
+    if (lives <= 0) {
+      state = 'gameover';
+      saveHi();
+      return;
+    }
+    player.alive = true;
+    player.invuln = 2.6;
+    player.vx = 0;
+    player.vy = 0;
+    player.shieldOn = false;
+    shieldEnergy = 100;
+    shieldLock = false;
+    energy = 0;
+    state = phase === 'surface' ? 'surface' : 'cavern';
+    if (phase === 'surface') {
+      player.x = clamp(camera + W * 0.5, 40, worldW - 40);
+      player.y = 300;
+    } else {
+      player.x = clamp(camera + W * 0.5, 60, worldW - 60);
+      const t = terrainAt(player.x);
+      player.y = (t.ceil + t.floor) / 2;
+    }
+    say('SHIP READY', (lives) + ' SHIPS REMAINING', C.cyan, 1.3);
+  }
+
+  /* ============================================================
+     Surface: city, base, stations
+     ============================================================ */
+  function makeCity() {
+    cityBlocks = [];
+    let x = 110;
+    while (x < 3040) {
+      let nearStation = false;
+      for (const s of STATIONS) {
+        if (Math.abs(x - s.x) < 92) nearStation = true;
+      }
+      if (!nearStation && Math.random() < 0.82) {
+        const cols = randInt(2, 5);
+        const h = randInt(2, 7);
+        for (let c = 0; c < cols; c++) {
+          const hh = clamp(h + randInt(-1, 1), 1, 7);
+          for (let r = 0; r < hh; r++) {
+            cityBlocks.push({
+              x: x + c * BASE_COL_W,
+              y: GROUND_Y - (r + 1) * BASE_ROW_H,
+              alive: true,
+              style: randInt(0, 2)
+            });
+          }
+        }
+        x += cols * BASE_COL_W + randInt(24, 86);
+      } else {
+        x += randInt(32, 80);
+      }
+    }
+  }
+
+  function makeBaseSlots() {
+    baseSlots = [];
+    for (let row = 0; row < 8; row++) {
+      for (let col = 0; col < BASE_HEIGHTS.length; col++) {
+        if (row < BASE_HEIGHTS[col]) {
+          baseSlots.push({
+            col, row,
+            x: BASE_X + col * BASE_COL_W,
+            y: GROUND_Y - (row + 1) * BASE_ROW_H,
+            filled: false
+          });
+        }
+      }
+    }
+  }
+
+  function topBlocks() {
+    const out = [];
+    const byX = new Map();
+    for (const b of cityBlocks) {
+      if (!b.alive) continue;
+      const cur = byX.get(b.x);
+      if (!cur || b.y < cur.y) byX.set(b.x, b);
+    }
+    for (const b of byX.values()) out.push(b);
+    return out;
+  }
+
+  function baseFilledCount() {
+    return Math.floor((baseProgress / 100) * baseSlots.length);
+  }
+
+  function addBaseProgress(n, reason) {
+    if (state !== 'surface' || baseComplete) return;
+    baseProgress = clamp(baseProgress + n, 0, 100);
+    basePulse = 1;
+    if (baseProgress >= 100) triggerBaseComplete();
+  }
+
+  function triggerBaseComplete() {
+    if (baseComplete) return;
+    baseComplete = true;
+    baseProgress = 100;
+    state = 'bomb';
+    bombTimer = 0;
+    player.alive = false;
+    keys.fire = false;
+    sfx.bomb();
+    shake = 30;
+    for (const e of enemies) explode(e.x, e.y, e.color, 18);
+    enemies = [];
+    eBullets = [];
+    mines = [];
+    drayne = null;
+    say('BASE COMPLETE', 'PLANET DEFENSES ACTIVATED', C.red, 3.0);
+  }
+
+  function startSurface() {
+    phase = 'surface';
+    state = 'surface';
+    worldW = SURFACE_W;
+    camera = 0;
+    cityBlocks = [];
+    baseSlots = [];
+    enemies = [];
+    bullets = [];
+    eBullets = [];
+    mines = [];
+    particles = [];
+    siphonMotes = [];
+    floats = [];
+    deathFx = null;
+    deathVx = 0;
+    deathVy = 0;
+    drayne = null;
+    baseProgress = 0;
+    baseComplete = false;
+    basePulse = 0;
+    energy = 0;
+    shieldEnergy = 100;
+    shieldLock = false;
+
+    makeCity();
+    makeBaseSlots();
+    stations = STATIONS.map((s) => ({ x: s.x, cool: 0, pulse: rand(0, TAU) }));
+
+    player.alive = true;
+    player.x = 360;
+    player.y = 300;
+    player.vx = 0;
+    player.vy = 0;
+    player.face = 1;
+    player.invuln = 2.2;
+    player.cooldown = 0;
+
+    waveTimer = 4.2;
+    wavePending = 0;
+    wavePendingTypes = [];
+    quarriorTimer = 7.5;
+    siphonTimer = 17;
+    cave = null;
+    core = null;
+
+    showBanner('LEVEL ' + level, 'SURFACE ATTACK — DEFEND THE CITY', 2.9, C.cyan);
+    say('DEFCON 4', 'QUARRIORS INBOUND', C.pink, 2.2);
+  }
+
+  /* ============================================================
+     Surface spawning
+     ============================================================ */
+  function enemySpawnX() {
+    const side = Math.random() < 0.5 ? -1 : 1;
+    return clamp(camera + (side < 0 ? rand(20, 130) : rand(W - 130, W - 20)), 30, worldW - 30);
+  }
+
+  function spawnEnemy(type, x, y) {
+    const lv = level;
+    let e;
+    if (type === 'saucer') {
+      // Each yellow saucer rolls its own temperament: 20% speed and
+      // aggression spread, plus a rare dogged pursuit variant.
+      const speedMul = rand(0.8, 1.2);
+      const aggr = rand(0.8, 1.2);
+      const dogged = Math.random() < 0.10;
+      e = {
+        type, x: x !== undefined ? x : enemySpawnX(), y: y !== undefined ? y : rand(100, 330),
+        vx: (Math.random() < 0.5 ? -1 : 1) * rand(55, 85 + lv * 4) * speedMul,
+        vy: 0, baseY: 0, t: rand(0, TAU), hp: 1, r: 13,
+        score: 50, fireT: rand(1.5, 3.2) / aggr, color: C.yellow,
+        speedMul, aggr, dogged
+      };
+      e.baseY = e.y;
+    } else if (type === 'nova') {
+      e = {
+        type, x: x !== undefined ? x : enemySpawnX(), y: y !== undefined ? y : -28,
+        vx: 0, vy: 40, t: rand(0, TAU), hp: 2, r: 17,
+        score: 120, fireT: rand(0.8, 2.0), color: C.pink
+      };
+    } else if (type === 'dyne') {
+      e = {
+        type, x: x !== undefined ? x : enemySpawnX(), y: y !== undefined ? y : -34,
+        vx: 0, vy: 40, t: 0, hp: 2, r: 18,
+        score: 150, state: 'move', anchorX: rand(240, W - 240) + camera,
+        anchorY: rand(140, 400), fireT: 0, beamT: 0, coolT: 0,
+        color: C.purple
+      };
+    } else if (type === 'minelayer') {
+      e = {
+        type, x: x !== undefined ? x : enemySpawnX(), y: y !== undefined ? y : rand(90, 240),
+        vx: (Math.random() < 0.5 ? -1 : 1) * rand(42, 64), vy: 0,
+        t: 0, hp: 2, r: 16, score: 125, dropT: rand(0.7, 1.6), color: C.orange
+      };
+    } else {
+      const speedMul = rand(0.8, 1.2);
+      const aggr = rand(0.8, 1.2);
+      const dogged = Math.random() < 0.10;
+      e = {
+        type: 'saucer', x: x !== undefined ? x : enemySpawnX(), y: y !== undefined ? y : 180,
+        vx: rand(-60, 60) * speedMul, vy: 0, baseY: 180, t: 0, hp: 1, r: 13,
+        score: 50, fireT: 2 / aggr, color: C.yellow,
+        speedMul, aggr, dogged
+      };
+    }
+    enemies.push(e);
+    return e;
+  }
+
+  function spawnQuarrior() {
+    const tops = topBlocks();
+    if (!tops.length) return;
+    const near = tops.filter((b) => b.x > camera - 220 && b.x < camera + W + 220);
+    const target = pick(near.length ? near : tops);
+    enemies.push({
+      type: 'quarrior',
+      x: target.x + rand(-10, 10),
+      y: -36,
+      vx: 0, vy: 50, t: 0,
+      hp: 3, r: 18, score: 180,
+      color: C.green,
+      state: 'seek',
+      target,
+      carry: null,
+      carryX: 0, carryY: 0,
+      colorA: C.green,
+      colorB: C.pink
+    });
+  }
+
+  function spawnDrayne() {
+    if (drayne || baseComplete) return;
+    const x = clamp(camera + rand(220, W - 220), 160, worldW - 160);
+    drayne = {
+      type: 'drayne',
+      x, y: -40, vx: 0, vy: 46,
+      t: 0, hp: 3, r: 20, score: 250,
+      color: C.cyan,
+      state: 'descend',
+      beamT: 0,
+      beamMax: 9.5,
+      beamX: x,
+      targetY: rand(220, 290),
+      cool: 0,
+      swirlAcc: 0
+    };
+    siphonMotes = [];
+    enemies.push(drayne);
+    say('ALERT', 'ENERGY SIPHON DETECTED', C.pink, 2.6);
+    sfx.alert();
+  }
+
+  function queueWave() {
+    const lv = level;
+    const types = [];
+    const count = clamp(2 + Math.floor(lv * 0.7), 2, 6);
+    for (let i = 0; i < count; i++) {
+      const roll = Math.random();
+      if (lv >= 2 && roll < 0.22) types.push('nova');
+      else if (lv >= 3 && roll < 0.38) types.push('dyne');
+      else if (lv >= 4 && roll < 0.5) types.push('minelayer');
+      else types.push('saucer');
+    }
+    wavePendingTypes = types;
+    wavePending = 1.65;
+    say('WARNING', 'HOSTILE WAVE INBOUND', C.pink, 2.1);
+    sfx.warn();
+  }
+
+  function surfaceSpawnTick(dt) {
+    if (wavePending > 0) {
+      wavePending -= dt;
+      if (wavePending <= 0) {
+        for (const t of wavePendingTypes) {
+          if (enemies.length >= 10) break;
+          spawnEnemy(t);
+        }
+        wavePendingTypes = [];
+        waveTimer = Math.max(6.2, 12.5 - level * 0.45);
+      }
+    } else {
+      waveTimer -= dt;
+      if (waveTimer <= 0 && enemies.length < 9) queueWave();
+    }
+
+    quarriorTimer -= dt;
+    if (quarriorTimer <= 0) {
+      const carriers = enemies.filter((e) => e.type === 'quarrior' && e.state !== 'flee').length;
+      if (carriers < Math.min(3, 2 + Math.floor(level / 3))) spawnQuarrior();
+      quarriorTimer = Math.max(4.8, 8.6 - level * 0.35);
+    }
+
+    siphonTimer -= dt;
+    if (siphonTimer <= 0) {
+      spawnDrayne();
+      siphonTimer = Math.max(15, 25 - level * 0.7);
+    }
+  }
+
+  /* ============================================================
+     Surface: enemy behaviour
+     ============================================================ */
+  function enemyShot(e, speed, spread) {
+    if (!player.alive) return;
+    const a = Math.atan2(player.y - e.y, player.x - e.x) + rand(-spread, spread);
+    eBullets.push({
+      x: e.x, y: e.y,
+      vx: Math.cos(a) * speed,
+      vy: Math.sin(a) * speed,
+      r: 4, life: 4.2, color: C.pink
+    });
+    sfx.hit();
+  }
+
+  function removeEnemyAt(i) {
+    const e = enemies[i];
+    if (e === drayne) {
+      drayne = null;
+      siphonMotes = [];
+    }
+    enemies.splice(i, 1);
+  }
+
+  function destroyEnemy(e, byPlayer) {
+    explode(e.x, e.y, e.color, e.type === 'quarrior' ? 30 : 22);
+    if (byPlayer !== false) {
+      addScore(e.score || 50);
+      floatText(e.x, e.y - 16, '+' + (e.score || 50), e.color);
+    }
+
+    if (e.type === 'quarrior' && e.carry) {
+      // The stolen city block shatters before it can reach the base.
+      for (let i = 0; i < 18; i++) {
+        spark(e.x + rand(-12, 12), e.y + 18 + rand(-8, 8),
+          Math.random() < 0.5 ? C.green : C.pink, 1, 150, 220, 3);
+      }
+      if (byPlayer !== false) {
+        addScore(100);
+        floatText(e.x, e.y + 28, 'BLOCK SAVED', C.green);
+      }
+    }
+    if (e === drayne && e.state === 'beam') {
+      addBaseProgress(7, 'siphon');
+      say('ENERGY LOST', 'SIPHON FEEDS THE BASE', C.red, 2.1);
+    }
+  }
+
+  function damageEnemy(e, dmg) {
+    e.hp -= dmg;
+    e.hurt = 0.12;
+    spark(e.x, e.y, C.white, 4, 120, 0, 2);
+    if (e.hp <= 0) {
+      const idx = enemies.indexOf(e);
+      destroyEnemy(e, true);
+      if (idx >= 0) removeEnemyAt(idx);
+      sfx.boom();
+    } else {
+      sfx.hit();
+    }
+  }
+
+  function ramEnemy(e, idx) {
+    if (!player.alive || player.invuln > 0 || player.shieldOn) return;
+    const worker = e.type === 'quarrior';
+    const index = (idx >= 0 && enemies[idx] === e) ? idx : enemies.indexOf(e);
+
+    // A ram lands like one plasma bolt; whether the alien dies decides the ship's fate.
+    e.hp -= 1;
+    e.hurt = 0.16;
+    spark(e.x, e.y, C.white, 12, 240, 0, 3);
+    shake = Math.max(shake, 7);
+
+    if (e.hp <= 0) {
+      destroyEnemy(e, true);
+      if (index >= 0) removeEnemyAt(index);
+      sfx.boom();
+      if (worker) {
+        // Finishing a worker by ram is survivable: the hail-mary succeeds.
+        player.invuln = Math.max(player.invuln, 0.6);
+        say('WORKER DESTROYED', 'SHIP INTACT', C.green, 1.5);
+      } else {
+        // Any other alien takes the ship with it.
+        killPlayer();
+      }
+    } else {
+      // The alien survives the impact, and the collision is fatal to the ship.
+      sfx.hit();
+      killPlayer();
+    }
+  }
+
+  function updateEnemiesSurface(dt) {
+    for (let i = enemies.length - 1; i >= 0; i--) {
+      const e = enemies[i];
+      if (!e) continue;
+      e.t = (e.t || 0) + dt;
+      if (e.hurt) e.hurt = Math.max(0, e.hurt - dt);
+      const onScreen = e.x > camera - 80 && e.x < camera + W + 80;
+
+      if (e.type === 'saucer') {
+        if (!e.speedMul) e.speedMul = 1;
+        if (!e.aggr) e.aggr = 1;
+        if (e.dogged) {
+          // Dogged saucers pursue the ship with a weaving, slightly erratic path.
+          const dx = player.x - e.x;
+          const dy = player.y - e.y;
+          const d = Math.max(1, Math.hypot(dx, dy));
+          const sp = (72 + level * 5) * e.speedMul;
+          e.vx = (dx / d) * sp + Math.sin(e.t * 6.7) * 62;
+          e.vy = (dy / d) * sp + Math.cos(e.t * 5.3) * 46;
+          e.x = clamp(e.x + e.vx * dt, 30, worldW - 30);
+          e.y = clamp(e.y + e.vy * dt, 80, GROUND_Y - 40);
+        } else {
+          // Ordinary saucers drift toward the ship's altitude, faster when
+          // their aggression roll is high.
+          e.baseY = clamp(
+            lerp(e.baseY, player.y, Math.min(1, 0.22 * e.aggr * dt)),
+            90, GROUND_Y - 60
+          );
+          e.x += e.vx * dt;
+          e.y = e.baseY + Math.sin(e.t * 2.2) * 24;
+          if (e.x < camera - 160) e.vx = Math.abs(e.vx);
+          if (e.x > camera + W + 160) e.vx = -Math.abs(e.vx);
+        }
+        e.fireT -= dt;
+        if (onScreen && e.fireT <= 0) {
+          enemyShot(e, 220 + level * 8, 0.12);
+          e.fireT = (e.dogged ? rand(1.4, 2.8) : rand(2.1, 3.8)) / e.aggr;
+        }
+        if (!e.dogged && (e.x < -40 || e.x > worldW + 40)) { removeEnemyAt(i); continue; }
+      } else if (e.type === 'nova') {
+        const dx = player.x - e.x;
+        const dy = player.y - e.y;
+        const d = Math.max(1, Math.hypot(dx, dy));
+        e.vx += (dx / d) * 280 * dt;
+        e.vy += (dy / d) * 280 * dt;
+        e.vx = damp(e.vx, 0.8, dt);
+        e.vy = damp(e.vy, 0.8, dt);
+        const sp = Math.hypot(e.vx, e.vy);
+        const max = 145 + level * 9;
+        if (sp > max) { e.vx = e.vx / sp * max; e.vy = e.vy / sp * max; }
+        e.x += e.vx * dt;
+        e.y += e.vy * dt;
+        e.y = clamp(e.y, 28, GROUND_Y - 32);
+        e.fireT -= dt;
+        if (onScreen && e.fireT <= 0) {
+          enemyShot(e, 250 + level * 9, 0.08);
+          e.fireT = rand(1.7, 3.0);
+        }
+      } else if (e.type === 'dyne') {
+        if (e.state === 'move') {
+          const tx = e.anchorX;
+          const ty = e.anchorY;
+          const dx = tx - e.x, dy = ty - e.y;
+          const d = Math.hypot(dx, dy);
+          if (d > 4) {
+            e.x += (dx / d) * 92 * dt;
+            e.y += (dy / d) * 92 * dt;
+          } else {
+            e.state = 'charge';
+            e.fireT = 1.05;
+            say('DYNE LOCK', 'DROP BELOW ITS BEAM', C.purple, 1.5);
+          }
+        } else if (e.state === 'charge') {
+          e.fireT -= dt;
+          e.y += Math.sin(time * 30) * 8 * dt;
+          if (e.fireT <= 0) {
+            e.state = 'beam';
+            e.beamT = 0.82;
+            tone(180, 900, 0.5, 'sawtooth', 0.1);
+          }
+        } else if (e.state === 'beam') {
+          e.beamT -= dt;
+          if (Math.abs(player.y - e.y) < PLAYER_HALF_H + 6) {
+            if (!player.shieldOn && player.invuln <= 0) killPlayer();
+          }
+          if (e.beamT <= 0) {
+            e.state = 'cool';
+            e.coolT = 2.4;
+          }
+        } else {
+          e.coolT -= dt;
+          e.y += Math.sin(e.t * 1.4) * 18 * dt;
+          if (e.coolT <= 0) {
+            e.state = 'move';
+            e.anchorX = clamp(camera + rand(160, W - 160), 100, worldW - 100);
+            e.anchorY = rand(130, 420);
+          }
+        }
+      } else if (e.type === 'minelayer') {
+        e.x += e.vx * dt;
+        e.y += Math.sin(e.t * 1.7) * 16 * dt;
+        if (e.x < camera - 140) e.vx = Math.abs(e.vx);
+        if (e.x > camera + W + 140) e.vx = -Math.abs(e.vx);
+        e.dropT -= dt;
+        if (onScreen && e.dropT <= 0) {
+          mines.push({
+            x: e.x, y: e.y + 18, vx: rand(-18, 18), vy: rand(34, 54),
+            t: 0, life: 10, r: 11, color: C.pink
+          });
+          e.dropT = rand(1.25, 2.2);
+        }
+      } else if (e.type === 'quarrior') {
+        updateQuarrior(e, dt);
+        if (e.x < -90 || e.x > worldW + 90 || e.y < -110) { removeEnemyAt(i); continue; }
+      } else if (e.type === 'drayne') {
+        updateDrayne(e, dt);
+        if (e.state === 'flee' && e.y < -80) { removeEnemyAt(i); continue; }
+      }
+
+      // Ram check.
+      if (player.alive && player.invuln <= 0 && !player.shieldOn) {
+        if (playerHit(e.x, e.y, e.r || 14)) {
+          ramEnemy(e, i);
+          return;
+        }
+      }
+    }
+  }
+
+  function updateQuarrior(e, dt) {
+    const speed = 118 + level * 4;
+    if (e.state === 'seek') {
+      if (!e.target || !e.target.alive) {
+        const tops = topBlocks();
+        if (!tops.length) {
+          e.state = 'flee';
+          return;
+        }
+        e.target = pick(tops);
+      }
+      const tx = e.target.x + 9;
+      const ty = e.target.y - 30;
+      const dx = tx - e.x, dy = ty - e.y;
+      const d = Math.hypot(dx, dy);
+      if (d > 5) {
+        e.x += (dx / d) * speed * dt;
+        e.y += (dy / d) * speed * dt;
+      } else {
+        e.target.alive = false;
+        e.carry = e.target;
+        e.state = 'carry';
+        const idx = clamp(baseFilledCount(), 0, baseSlots.length - 1);
+        e.slot = baseSlots[idx];
+        e.carryX = e.target.x + 9;
+        e.carryY = e.target.y + 9;
+        spark(e.x, e.y, C.green, 8, 90, 0, 2);
+      }
+    } else if (e.state === 'carry') {
+      if (!e.slot) {
+        const idx = clamp(baseFilledCount(), 0, baseSlots.length - 1);
+        e.slot = baseSlots[idx];
+      }
+      const tx = e.slot.x + 9;
+      const ty = e.slot.y - 30;
+      const dx = tx - e.x, dy = ty - e.y;
+      const d = Math.hypot(dx, dy);
+      if (d > 6) {
+        e.x += (dx / d) * (78 + level * 2.5) * dt;
+        e.y += (dy / d) * (78 + level * 2.5) * dt;
+      } else {
+        addBaseProgress(2.3);
+        spark(e.x, e.y, C.pink, 12, 100, 0, 2);
+        addScore(25);
+        floatText(e.x, e.y, '+25 BASE', C.pink);
+        e.carry = null;
+        e.slot = null;
+        e.state = 'flee';
+      }
+    } else {
+      e.y -= 145 * dt;
+      e.x += Math.sign(e.x - (camera + W / 2)) * 40 * dt;
+    }
+  }
+
+  function addSiphonMote(e, y) {
+    const life = rand(0.9, 1.7);
+    siphonMotes.push({
+      y: y === undefined ? GROUND_Y - rand(0, 16) : y,
+      a: rand(0, TAU),
+      r: rand(6, 28),
+      spin: rand(5, 11) * (Math.random() < 0.5 ? -1 : 1),
+      rise: rand(110, 185),
+      life, max: life,
+      size: rand(1.5, 3.4),
+      color: pick([C.pink, C.cyan, C.yellow, C.white])
+    });
+  }
+
+  function updateSiphonMotes(e, dt) {
+    e.gulp = Math.max(0, (e.gulp || 0) - dt * 4);
+    if (e.state !== 'beam') {
+      siphonMotes.length = 0;
+      return;
+    }
+
+    const urgency = 1 - clamp(e.beamT / e.beamMax, 0, 1);
+    e.swirlAcc = (e.swirlAcc || 0) + dt * (1 + urgency * 0.7);
+    while (e.swirlAcc >= 0.028) {
+      e.swirlAcc -= 0.028;
+      addSiphonMote(e);
+    }
+
+    for (let i = siphonMotes.length - 1; i >= 0; i--) {
+      const m = siphonMotes[i];
+      m.life -= dt;
+      m.y -= m.rise * dt;
+      m.a += m.spin * dt;
+      m.r = Math.max(3, m.r - 12 * dt);
+      if (m.y < e.y + 11) {
+        // The mote is swallowed at the siphon's mouth.
+        e.gulp = 0.18;
+        siphonMotes.splice(i, 1);
+      } else if (m.life <= 0) {
+        siphonMotes.splice(i, 1);
+      }
+    }
+  }
+
+  function updateDrayne(e, dt) {
+    if (e.state === 'descend') {
+      e.y += e.vy * dt;
+      e.x = lerp(e.x, e.beamX, Math.min(1, dt * 2.4));
+      if (e.y >= e.targetY) {
+        e.state = 'beam';
+        e.beamT = e.beamMax;
+        siphonMotes = [];
+        for (let i = 0; i < 18; i++) addSiphonMote(e, rand(e.y + 20, GROUND_Y));
+        say('ALERT', 'FLY THROUGH THE BEAM', C.pink, 2.7);
+        sfx.alert();
+        tone(90, 240, 0.5, 'sine', 0.08);
+      }
+    } else if (e.state === 'beam') {
+      e.beamT -= dt;
+      e.y += Math.sin(time * 9) * 4 * dt;
+      const crossing = Math.abs(player.x - e.beamX) < 22 &&
+        player.y > e.y && player.y < GROUND_Y;
+      if (crossing && player.alive && !player.shieldOn) {
+        energy = energyMax;
+        addScore(150);
+        floatText(player.x, player.y - 22, '+150 ENERGY', C.yellow);
+        sfx.pickup();
+        say('ENERGY COLLECTED', 'RETURN IT TO A CHARGING STATION', C.yellow, 2.8);
+        e.state = 'flee';
+        e.beamT = 0;
+      }
+      if (e.beamT <= 0 && e.state === 'beam') {
+        addBaseProgress(7, 'siphon');
+        say('ENERGY LOST', 'SIPHON FEEDS THE BASE', C.red, 2.3);
+        sfx.deny();
+        e.state = 'flee';
+      }
+    } else if (e.state === 'flee') {
+      e.y -= 150 * dt;
+    }
+    updateSiphonMotes(e, dt);
+  }
+
+  /* ============================================================
+     Surface: bullets, mines, stations, collisions
+     ============================================================ */
+  function updateBullets(dt) {
+    for (let i = bullets.length - 1; i >= 0; i--) {
+      const b = bullets[i];
+      b.x += b.vx * dt;
+      b.y += b.vy * dt;
+      b.life -= dt;
+      let gone = b.life <= 0 || b.x < camera - 60 || b.x > camera + W + 60;
+
+      if (!gone && state === 'cavern' && cave) {
+        const t = terrainAt(b.x);
+        if (b.y < t.ceil || b.y > t.floor) {
+          spark(b.x, b.y, C.cyan, 3, 60, 0, 2);
+          gone = true;
+        }
+      }
+
+      if (!gone) {
+        for (let j = enemies.length - 1; j >= 0; j--) {
+          const e = enemies[j];
+          if (Math.abs(b.x - e.x) < (e.r || 14) + 6 && Math.abs(b.y - e.y) < (e.r || 14) + 6) {
+            damageEnemy(e, 1);
+            gone = true;
+            break;
+          }
+        }
+      }
+
+      if (!gone) {
+        for (let j = mines.length - 1; j >= 0; j--) {
+          const m = mines[j];
+          if (dist(b.x, b.y, m.x, m.y) < m.r + 5) {
+            explode(m.x, m.y, C.pink, 12);
+            mines.splice(j, 1);
+            addScore(15);
+            gone = true;
+            break;
+          }
+        }
+      }
+
+      if (!gone && state === 'cavern' && core && core.hp > 0) {
+        if (dist(b.x, b.y, core.x, core.y) < core.r + 6) {
+          core.hp--;
+          core.hurt = 0.18;
+          spark(b.x, b.y, C.yellow, 8, 130, 0, 3);
+          sfx.hit();
+          gone = true;
+          if (core.hp <= 0) destroyCore();
+        }
+      }
+
+      if (gone) bullets.splice(i, 1);
+    }
+  }
+
+  function updateEBullets(dt) {
+    for (let i = eBullets.length - 1; i >= 0; i--) {
+      const b = eBullets[i];
+      b.x += b.vx * dt;
+      b.y += b.vy * dt;
+      b.life -= dt;
+      let gone = b.life <= 0 || b.x < camera - 80 || b.x > camera + W + 80;
+      if (!gone && state === 'cavern' && cave) {
+        const t = terrainAt(b.x);
+        if (b.y < t.ceil || b.y > t.floor) gone = true;
+      }
+      if (!gone && player.alive && player.invuln <= 0 && !player.shieldOn &&
+        playerHit(b.x, b.y, 5)) {
+        killPlayer();
+        return;
+      }
+      if (gone) eBullets.splice(i, 1);
+    }
+  }
+
+  function updateMines(dt) {
+    for (let i = mines.length - 1; i >= 0; i--) {
+      const m = mines[i];
+      m.t += dt;
+      m.life -= dt;
+      m.x += Math.sin(m.t * 2.3) * 22 * dt + m.vx * dt;
+      m.y += m.vy * dt;
+      if (m.life <= 0 || m.y > GROUND_Y - 8) {
+        explode(m.x, m.y, C.pink, 8);
+        mines.splice(i, 1);
+        continue;
+      }
+      if (player.alive && player.invuln <= 0 && !player.shieldOn &&
+        playerHit(m.x, m.y, m.r * 0.7)) {
+        explode(m.x, m.y, C.pink, 14);
+        mines.splice(i, 1);
+        killPlayer();
+        return;
+      }
+    }
+  }
+
+  function updateStations(dt) {
+    for (const s of stations) {
+      s.cool = Math.max(0, s.cool - dt);
+      s.pulse += dt * 2.4;
+      const near = Math.abs(player.x - s.x) < 30 && player.y > GROUND_Y - 66;
+      if (near && s.cool <= 0 && player.alive) {
+        if (energy > 0) {
+          energy = 0;
+          addScore(500);
+          addBaseProgress(-4, 'return');
+          say('ENERGY RETURNED', '+500  BASE DELAYED', C.green, 2.4);
+          floatText(player.x, player.y - 24, '+500', C.green);
+          sfx.deliver();
+          spark(s.x, GROUND_Y - 12, C.green, 20, 160, -80, 3);
+          s.cool = 1.2;
+        } else if (shieldEnergy < 99) {
+          shieldEnergy = 100;
+          shieldLock = false;
+          say('SHIELD RECHARGED', 'STATION ONLINE', C.cyan, 1.6);
+          sfx.pickup();
+          spark(s.x, GROUND_Y - 12, C.cyan, 14, 120, -60, 2);
+          s.cool = 3.5;
+        }
+      }
+    }
+  }
+
+  function updateSurface(dt) {
+    updatePlayer(dt);
+    if (state !== 'surface') return;
+    updateSurfaceWorld(dt);
+  }
+
+  function updateSurfaceWorld(dt) {
+    const active = () => state === 'surface' || state === 'dying';
+
+    updateBullets(dt);
+    if (!active()) return;
+
+    updateEnemiesSurface(dt);
+    if (!active()) return;
+
+    updateEBullets(dt);
+    if (!active()) return;
+
+    updateMines(dt);
+    if (!active()) return;
+
+    updateStations(dt);
+    surfaceSpawnTick(dt);
+
+    if (energy > 0) {
+      energy -= dt;
+      if (energy <= 0) {
+        energy = 0;
+        addBaseProgress(7, 'siphon');
+        say('ENERGY DISSIPATED', 'THE BASE GROWS STRONGER', C.red, 2.3);
+        sfx.deny();
+      }
+    }
+
+    basePulse = Math.max(0, basePulse - dt * 2.4);
+  }
+
+  /* ============================================================
+     Caverns
+     ============================================================ */
+  function terrainAt(x) {
+    if (!cave) return { ceil: 0, floor: H };
+    const raw = clamp(x / cave.step, 0, cave.count - 1);
+    const i = Math.floor(raw);
+    const f = raw - i;
+    const j = Math.min(i + 1, cave.count - 1);
+    return {
+      ceil: lerp(cave.ceil[i], cave.ceil[j], f),
+      floor: lerp(cave.floor[i], cave.floor[j], f)
+    };
+  }
+
+  function makeCavern() {
+    worldW = 2200 + level * 170;
+    const step = 18;
+    const count = Math.ceil(worldW / step) + 1;
+    const ceilArr = [];
+    const floorArr = [];
+    const seed = rand(0, 20);
+    const chamberStart = worldW - 560;
+
+    for (let i = 0; i < count; i++) {
+      const x = i * step;
+      let c = 88 + Math.sin(x * 0.0061 + seed) * 30 + Math.sin(x * 0.017 + seed * 1.7) * 13;
+      let f = 478 + Math.sin(x * 0.005 + seed * 2.1) * 25 + Math.sin(x * 0.0131 + seed * 0.7) * 12;
+      if (x < 300) {
+        const t = x / 300;
+        c = lerp(70, c, t * t);
+        f = lerp(520, f, t * t);
+      }
+      if (x > chamberStart - 200) {
+        const t = clamp((x - (chamberStart - 200)) / 200, 0, 1);
+        c = lerp(c, 62, t);
+        f = lerp(f, 522, t);
+      }
+      ceilArr.push(c);
+      floorArr.push(f);
+    }
+
+    cave = { step, count, ceil: ceilArr, floor: floorArr, crystals: [], worldW, chamberStart };
+
+    for (let i = 0; i < 110; i++) {
+      const x = rand(50, worldW - 50);
+      const t = terrainAt(x);
+      const top = Math.random() < 0.5;
+      cave.crystals.push({
+        x,
+        y: top ? t.ceil + rand(8, 30) : t.floor - rand(8, 30),
+        c: pick([C.green, C.pink, C.cyan, C.purple, C.yellow]),
+        s: rand(2, 5),
+        ph: rand(0, TAU)
+      });
+    }
+
+    const tc = terrainAt(worldW - 210);
+    core = {
+      x: worldW - 210,
+      y: (tc.ceil + tc.floor) / 2,
+      r: 46,
+      hp: 28 + level * 7,
+      max: 28 + level * 7,
+      hurt: 0,
+      angle: 0,
+      burst: 3.2
+    };
+
+    enemies = [];
+    for (const gx of [chamberStart + 40, chamberStart + 190, chamberStart + 330]) {
+      const t = terrainAt(gx);
+      enemies.push({
+        type: 'guardian',
+        x: gx,
+        y: t.ceil + 22,
+        vx: 0, vy: 0, t: rand(0, TAU),
+        hp: 3, r: 16, score: 200,
+        fireT: rand(1.2, 2.6),
+        color: C.pink,
+        host: 'ceiling'
+      });
+      enemies.push({
+        type: 'guardian',
+        x: gx,
+        y: t.floor - 22,
+        vx: 0, vy: 0, t: rand(0, TAU),
+        hp: 3, r: 16, score: 200,
+        fireT: rand(1.2, 2.6),
+        color: C.pink,
+        host: 'floor'
+      });
+    }
+
+    for (let i = 0; i < 34; i++) {
+      const x = rand(320, worldW - 300);
+      const t = terrainAt(x);
+      if (t.floor - t.ceil > 230) {
+        particles.push({
+          x, y: rand(t.ceil + 40, t.floor - 40),
+          vx: rand(-4, 4), vy: rand(-8, -2),
+          life: rand(1, 4), max: 4, size: rand(1, 2),
+          color: pick([C.cyan, C.purple, C.green]), gravity: 0
+        });
+      }
+    }
+  }
+
+  function startCavern() {
+    phase = 'cavern';
+    state = 'cavern';
+    enemies = [];
+    bullets = [];
+    eBullets = [];
+    mines = [];
+    particles = [];
+    siphonMotes = [];
+    floats = [];
+    deathFx = null;
+    deathVx = 0;
+    deathVy = 0;
+    drayne = null;
+    energy = 0;
+    baseComplete = false;
+
+    makeCavern();
+    camera = 0;
+    player.alive = true;
+    player.x = 146;
+    const t0 = terrainAt(player.x);
+    player.y = (t0.ceil + t0.floor) / 2;
+    player.vx = 0;
+    player.vy = 0;
+    player.face = 1;
+    player.invuln = 2.6;
+    player.cooldown = 0;
+    shieldEnergy = 100;
+    shieldLock = false;
+
+    caveWaveTimer = 3.2;
+    coreBurst = 3.4;
+
+    showBanner('LEVEL ' + level, 'CAVERNS — RADAR OFFLINE', 3.2, C.pink);
+    say('DESCENT COMPLETE', 'DESTROY THE POWER CORE', C.cyan, 2.7);
+  }
+
+  function caveSpawnPoint() {
+    const ahead = Math.random() < 0.55;
+    const x = clamp(
+      ahead ? camera + W + rand(30, 120) : camera - rand(30, 120),
+      80, worldW - 260
+    );
+    const t = terrainAt(x);
+    return { x, y: clamp((t.ceil + t.floor) / 2 + rand(-40, 40), t.ceil + 30, t.floor - 30) };
+  }
+
+  function spawnCaveEnemy(type, x, y) {
+    const p = x === undefined ? caveSpawnPoint() : { x, y };
+    if (type === 'dart') {
+      enemies.push({
+        type, x: p.x, y: p.y, vx: 0, vy: 0, t: 0,
+        hp: 1, r: 12, score: 120, color: C.cyan
+      });
+    } else if (type === 'guardian') {
+      const t = terrainAt(p.x);
+      enemies.push({
+        type, x: p.x, y: t.floor - 22, vx: 0, vy: 0, t: 0,
+        hp: 3, r: 16, score: 200, fireT: rand(1.2, 2.4), color: C.pink, host: 'floor'
+      });
+    } else {
+      enemies.push({
+        type: 'caveship', x: p.x, y: p.y,
+        vx: (Math.random() < 0.5 ? -1 : 1) * rand(70, 100 + level * 5),
+        vy: 0, baseY: p.y, t: 0, hp: 2, r: 15,
+        score: 100, fireT: rand(1.0, 2.2), color: C.purple
+      });
+    }
+  }
+
+  function caveWave() {
+    const n = clamp(2 + Math.floor(level / 2), 2, 5);
+    for (let i = 0; i < n; i++) {
+      const roll = Math.random();
+      if (roll < 0.55) spawnCaveEnemy('dart');
+      else if (roll < 0.85) spawnCaveEnemy('caveship');
+      else spawnCaveEnemy('guardian');
+    }
+    caveWaveTimer = Math.max(3.6, 6.4 - level * 0.22);
+  }
+
+  function updateCavernEnemies(dt) {
+    for (let i = enemies.length - 1; i >= 0; i--) {
+      const e = enemies[i];
+      if (!e) continue;
+      e.t += dt;
+      if (e.hurt) e.hurt = Math.max(0, e.hurt - dt);
+      const onScreen = e.x > camera - 80 && e.x < camera + W + 80;
+
+      if (e.type === 'dart') {
+        const dx = player.x - e.x;
+        const dy = player.y - e.y;
+        const d = Math.max(1, Math.hypot(dx, dy));
+        const sp = 185 + level * 9;
+        e.vx = lerp(e.vx, (dx / d) * sp, Math.min(1, dt * 2.2));
+        e.vy = lerp(e.vy, (dy / d) * sp, Math.min(1, dt * 2.2));
+        e.x += e.vx * dt;
+        e.y += e.vy * dt;
+      } else if (e.type === 'caveship') {
+        e.x += e.vx * dt;
+        e.y = e.baseY + Math.sin(e.t * 1.9) * 34;
+        const t = terrainAt(e.x);
+        e.y = clamp(e.y, t.ceil + 28, t.floor - 28);
+        if (e.x < camera - 150) e.vx = Math.abs(e.vx);
+        if (e.x > camera + W + 150) e.vx = -Math.abs(e.vx);
+        e.fireT -= dt;
+        if (onScreen && e.fireT <= 0) {
+          enemyShot(e, 235 + level * 8, 0.08);
+          e.fireT = rand(1.4, 2.5);
+        }
+      } else if (e.type === 'guardian') {
+        e.y += Math.sin(e.t * 2.2) * 8 * dt;
+        e.fireT -= dt;
+        if (onScreen && e.fireT <= 0) {
+          enemyShot(e, 260 + level * 8, 0.04);
+          e.fireT = rand(1.5, 2.6);
+        }
+      }
+
+      if (player.alive && player.invuln <= 0 && !player.shieldOn &&
+        playerHit(e.x, e.y, e.r || 14)) {
+        ramEnemy(e, i);
+        return;
+      }
+
+      if (e.x < -400 || e.x > worldW + 400) {
+        enemies.splice(i, 1);
+      }
+    }
+  }
+
+  function updateCore(dt) {
+    if (!core) return;
+    core.angle += dt * 1.4;
+    core.hurt = Math.max(0, core.hurt - dt);
+    core.burst -= dt;
+    if (core.burst <= 0 && core.hp > 0) {
+      core.burst = Math.max(2.3, 4.2 - level * 0.16);
+      const n = 8;
+      const off = rand(0, TAU);
+      for (let i = 0; i < n; i++) {
+        const a = off + (i / n) * TAU;
+        eBullets.push({
+          x: core.x + Math.cos(a) * core.r,
+          y: core.y + Math.sin(a) * core.r,
+          vx: Math.cos(a) * 155,
+          vy: Math.sin(a) * 155,
+          r: 4, life: 4.5, color: C.yellow
+        });
+      }
+      tone(120, 60, 0.3, 'sawtooth', 0.08);
+    }
+    if (core.hp <= 0 && state === 'cavern') destroyCore();
+  }
+
+  function destroyCore() {
+    if (state !== 'cavern' || !core) return;
+    state = 'coreboom';
+    coreTimer = 0;
+    core.hp = 0;
+    shake = 26;
+    flash = 1;
+    sfx.core();
+    player.invuln = 999;
+    for (const e of enemies) explode(e.x, e.y, e.color, 16);
+    enemies = [];
+    eBullets = [];
+    mines = [];
+    say('CORE BREACH', 'CHAIN REACTION DETECTED', C.yellow, 2.8);
+  }
+
+  function updateCavern(dt) {
+    updatePlayer(dt);
+    if (state !== 'cavern') return;
+    updateCavernWorld(dt);
+  }
+
+  function updateCavernWorld(dt) {
+    const active = () => state === 'cavern' || state === 'dying';
+
+    updateBullets(dt);
+    if (!active()) return;
+
+    updateCavernEnemies(dt);
+    if (!active()) return;
+
+    updateEBullets(dt);
+    if (!active()) return;
+
+    updateCore(dt);
+    if (!active()) return;
+
+    caveWaveTimer -= dt;
+    if (caveWaveTimer <= 0 && enemies.length < 9) caveWave();
+
+    // Terrain shear.
+    if (player.alive && player.invuln <= 0 && !player.shieldOn && cave) {
+      const t = terrainAt(player.x);
+      if (player.y <= t.ceil + 10 || player.y >= t.floor - 10) killPlayer();
+    }
+  }
+
+  /* ============================================================
+     Global state transitions
+     ============================================================ */
+  function startGame() {
+    initAudio();
+    level = 1;
+    score = 0;
+    lives = 3;
+    nukes = 3;
+    nextExtra = 10000;
+    hiScore = loadHi();
+    paused = false;
+    startSurface();
+  }
+
+  function updateBomb(dt) {
+    bombTimer += dt;
+    shake = Math.max(shake, 3 + Math.sin(bombTimer * 20) * 2);
+    if (bombTimer > 0.7 && Math.random() < 0.3) {
+      const x = camera + rand(0, W);
+      explode(x, rand(120, GROUND_Y - 20), pick([C.pink, C.yellow, C.white]), 14);
+    }
+    if (bombTimer > 3.5) startCavern();
+  }
+
+  function updateCoreBoom(dt) {
+    coreTimer += dt;
+    shake = Math.max(shake, 5);
+    if (core && Math.random() < 0.5) {
+      const a = rand(0, TAU);
+      const r = rand(0, 80);
+      explode(core.x + Math.cos(a) * r, core.y + Math.sin(a) * r,
+        pick([C.yellow, C.white, C.orange]), 12);
+    }
+    if (coreTimer > 2.7) {
+      state = 'levelclear';
+      clearTimer = 3.8;
+      clearBonus = 1000 + level * 300;
+      addScore(clearBonus);
+      nukes = Math.min(5, nukes + 1);
+      sfx.clear();
+    }
+  }
+
+  /* ============================================================
+     Main update
+     ============================================================ */
+  function updateAmbient(dt) {
+    for (const s of stars) {
+      s.tw += s.sp * dt;
+      s.y += 5 * dt;
+      if (s.y > GROUND_Y) { s.y = -2; s.x = rand(0, W); }
+    }
+    updateParticles(dt);
+    if (msgTimer > 0) msgTimer -= dt;
+    if (bannerTimer > 0) bannerTimer -= dt;
+    shake = Math.max(0, shake - dt * 30);
+    flash = Math.max(0, flash - dt * 2.2);
+  }
+
+  function update(dt) {
+    updateAmbient(dt);
+
+    if (state === 'surface') {
+      updateSurface(dt);
+      if (state === 'surface' && basePulse > 0) basePulse = Math.max(0, basePulse - dt);
+    } else if (state === 'cavern') {
+      updateCavern(dt);
+    } else if (state === 'dying') {
+      deathTimer -= dt;
+      updateDeathDrift(dt);
+      updateCamera();
+      updateDeathFx(dt);
+      if (phase === 'surface') updateSurfaceWorld(dt);
+      else if (cave) updateCavernWorld(dt);
+      if (state !== 'dying') return;
+      if (deathTimer <= 0) respawn();
+    } else if (state === 'bomb') {
+      updateBomb(dt);
+    } else if (state === 'coreboom') {
+      updateCoreBoom(dt);
+    } else if (state === 'levelclear') {
+      clearTimer -= dt;
+      if (clearTimer <= 0) {
+        level++;
+        startSurface();
+      }
+    }
+  }
+
+  /* ============================================================
+     Rendering: shared
+     ============================================================ */
+  function drawStars() {
+    ctx.fillStyle = '#020106';
+    ctx.fillRect(0, 0, W, H);
+    for (const s of stars) {
+      const tw = 0.55 + 0.45 * Math.sin(s.tw + time * 3);
+      ctx.globalAlpha = s.a * tw;
+      ctx.fillStyle = s.s > 1 ? C.cyan : '#cfe8ff';
+      ctx.fillRect(Math.floor(s.x), Math.floor(s.y), s.s, s.s);
+    }
+    ctx.globalAlpha = 1;
+    const g = ctx.createLinearGradient(0, GROUND_Y - 180, 0, GROUND_Y);
+    g.addColorStop(0, 'rgba(80,20,120,0)');
+    g.addColorStop(1, 'rgba(120,30,160,0.16)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, GROUND_Y - 180, W, 180);
+  }
+
+  function drawPanel(x, y, w, h, accent) {
+    ctx.fillStyle = '#030107';
+    ctx.fillRect(x, y, w, h);
+    ctx.strokeStyle = accent;
+    ctx.globalAlpha = 0.75;
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(x + 0.75, y + 0.75, w - 1.5, h - 1.5);
+    ctx.globalAlpha = 1;
+    ctx.strokeStyle = accent;
+    ctx.globalAlpha = 0.5;
+    ctx.beginPath();
+    ctx.moveTo(x + 1, y + 7); ctx.lineTo(x + 1, y + 1); ctx.lineTo(x + 7, y + 1);
+    ctx.moveTo(x + w - 7, y + 1); ctx.lineTo(x + w - 1, y + 1); ctx.lineTo(x + w - 1, y + 7);
+    ctx.moveTo(x + 1, y + h - 7); ctx.lineTo(x + 1, y + h - 1); ctx.lineTo(x + 7, y + h - 1);
+    ctx.moveTo(x + w - 7, y + h - 1); ctx.lineTo(x + w - 1, y + h - 1); ctx.lineTo(x + w - 1, y + h - 7);
+    ctx.stroke();
+    ctx.globalAlpha = 1;
+  }
+
+  function drawParticles() {
+    ctx.save();
+
+    // Trailing smoke sits behind the solid wreckage.
+    for (const p of particles) {
+      if (p.kind !== 'smoke') continue;
+      const a = clamp(p.life / p.max, 0, 1);
+      const x = p.x - camera;
+      const y = p.y;
+      const s = Math.max(1, p.size);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = a * 0.22;
+      ctx.beginPath();
+      ctx.arc(x, y, s * 1.6, 0, TAU);
+      ctx.fill();
+      ctx.globalAlpha = a * 0.46;
+      ctx.beginPath();
+      ctx.arc(x, y, s, 0, TAU);
+      ctx.fill();
+    }
+
+    for (const p of particles) {
+      if (p.kind !== 'fire') continue;
+      const a = clamp(p.life / p.max, 0, 1);
+      const x = p.x - camera;
+      const y = p.y;
+      const s = Math.max(1, p.size);
+      const g = ctx.createRadialGradient(x, y, 0, x, y, s);
+      g.addColorStop(0, p.color);
+      g.addColorStop(0.55, p.color);
+      g.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.globalAlpha = a * 0.7;
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(x, y, s, 0, TAU);
+      ctx.fill();
+    }
+
+    for (const p of particles) {
+      if (p.kind !== 'ring') continue;
+      const a = clamp(p.life / p.max, 0, 1);
+      ctx.globalAlpha = a * 0.8;
+      ctx.strokeStyle = p.color;
+      ctx.lineWidth = Math.max(1, 3 * a);
+      ctx.beginPath();
+      ctx.arc(p.x - camera, p.y, Math.max(1, p.size), 0, TAU);
+      ctx.stroke();
+    }
+
+    for (const p of particles) {
+      if (p.kind !== 'debris') continue;
+      const a = clamp(p.life / p.max, 0, 1);
+      const s = Math.max(1, p.size);
+      ctx.globalAlpha = a;
+      ctx.save();
+      ctx.translate(p.x - camera, p.y);
+      ctx.rotate(p.rot || 0);
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-s / 2, -s * 0.35, s, s * 0.7);
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.fillRect(-s / 2, -s * 0.35, s * 0.4, 1);
+      ctx.restore();
+    }
+
+    for (const p of particles) {
+      if (p.kind === 'smoke' || p.kind === 'fire' || p.kind === 'ring' || p.kind === 'debris') continue;
+      const a = clamp(p.life / p.max, 0, 1);
+      ctx.globalAlpha = a;
+      ctx.fillStyle = p.color;
+      const s = Math.max(1, p.size * (0.5 + a * 0.5));
+      ctx.fillRect(Math.floor(p.x - camera), Math.floor(p.y), s, s);
+    }
+
+    ctx.restore();
+    ctx.globalAlpha = 1;
+  }
+
+  function drawFloats() {
+    ctx.save();
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.font = 'bold 10px "Courier New", monospace';
+    for (const f of floats) {
+      ctx.globalAlpha = clamp(f.life / f.max, 0, 1);
+      ctx.fillStyle = f.color;
+      ctx.fillText(f.str, f.x - camera, f.y);
+    }
+    ctx.restore();
+  }
+
+  /* ============================================================
+     Rendering: surface
+     ============================================================ */
+  function drawGround() {
+    const g = ctx.createLinearGradient(0, GROUND_Y - 30, 0, GROUND_Y + 40);
+    g.addColorStop(0, 'rgba(30,8,40,0)');
+    g.addColorStop(0.5, 'rgba(70,20,60,0.38)');
+    g.addColorStop(1, 'rgba(10,4,16,0.9)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, GROUND_Y - 30, W, 82);
+
+    ctx.fillStyle = C.yellow;
+    ctx.fillRect(0, GROUND_Y, W, 3);
+    ctx.fillStyle = 'rgba(255,225,77,0.25)';
+    ctx.fillRect(0, GROUND_Y - 2, W, 1);
+
+    ctx.fillStyle = '#1d0722';
+    ctx.fillRect(0, GROUND_Y + 3, W, 9);
+    ctx.fillStyle = C.pink;
+    ctx.fillRect(0, GROUND_Y + 12, W, 2);
+    ctx.fillStyle = 'rgba(99,231,255,0.65)';
+    ctx.fillRect(0, GROUND_Y + 18, W, 1);
+
+    ctx.fillStyle = '#04020a';
+    ctx.fillRect(0, GROUND_Y + 20, W, HUD_TOP - GROUND_Y - 20);
+
+    const off = camera % 54;
+    ctx.strokeStyle = 'rgba(125,255,77,0.22)';
+    ctx.lineWidth = 1;
+    for (let x = -off; x < W; x += 54) {
+      ctx.beginPath();
+      ctx.moveTo(x, GROUND_Y + 24);
+      ctx.lineTo(x - 12, HUD_TOP - 4);
+      ctx.stroke();
+    }
+    ctx.strokeStyle = 'rgba(255,77,210,0.16)';
+    for (let x = 20 - off; x < W; x += 108) {
+      ctx.beginPath();
+      ctx.moveTo(x, GROUND_Y + 36);
+      ctx.lineTo(x + 30, HUD_TOP - 4);
+      ctx.stroke();
+    }
+  }
+
+  function drawCity() {
+    const left = camera - 40;
+    const right = camera + W + 40;
+    for (const b of cityBlocks) {
+      if (!b.alive || b.x < left || b.x > right) continue;
+      const x = b.x - camera;
+      const y = b.y;
+      ctx.fillStyle = 'rgba(7,20,9,0.9)';
+      ctx.fillRect(x + 1, y + 1, 16, 12);
+      const accent = b.style === 0 ? C.green : b.style === 1 ? C.pink : C.cyan;
+      ctx.strokeStyle = accent;
+      ctx.globalAlpha = 0.9;
+      ctx.lineWidth = 1;
+      ctx.strokeRect(x + 1.5, y + 1.5, 15, 11);
+      ctx.globalAlpha = 1;
+
+      if (b.style === 0) {
+        ctx.fillStyle = C.pink;
+        for (let dx = 4; dx <= 12; dx += 6) {
+          for (let dy = 4; dy <= 8; dy += 5) {
+            ctx.fillRect(x + dx, y + dy, 2, 2);
+          }
+        }
+        ctx.fillStyle = 'rgba(125,255,77,0.8)';
+        ctx.fillRect(x + 3, y + 10, 12, 1);
+      } else if (b.style === 1) {
+        ctx.fillStyle = C.green;
+        ctx.fillRect(x + 4, y + 4, 2, 7);
+        ctx.fillRect(x + 8, y + 4, 2, 7);
+        ctx.fillRect(x + 12, y + 4, 2, 7);
+      } else {
+        ctx.fillStyle = 'rgba(255,225,77,0.75)';
+        ctx.fillRect(x + 4, y + 4, 10, 2);
+        ctx.fillRect(x + 4, y + 9, 10, 2);
+      }
+    }
+  }
+
+  function drawBase() {
+    const filled = baseFilledCount();
+    const visBase = BASE_X - camera;
+    if (visBase > W + 30) return;
+
+    for (let i = 0; i < baseSlots.length; i++) {
+      const s = baseSlots[i];
+      const x = s.x - camera;
+      if (x < -30 || x > W + 30) continue;
+      if (i < filled) {
+        const pulse = 0.75 + 0.25 * Math.sin(time * 5 + s.col * 0.5);
+        ctx.save();
+        if (basePulse > 0.05) {
+          ctx.shadowColor = C.pink;
+          ctx.shadowBlur = 10 * basePulse;
+        }
+        ctx.fillStyle = 'rgba(65,10,55,0.95)';
+        ctx.fillRect(x + 1, s.y + 1, 16, 12);
+        ctx.strokeStyle = C.pink;
+        ctx.globalAlpha = pulse;
+        ctx.lineWidth = 1.4;
+        ctx.strokeRect(x + 1.5, s.y + 1.5, 15, 11);
+        ctx.globalAlpha = 1;
+        ctx.fillStyle = C.yellow;
+        ctx.fillRect(x + 4, s.y + 4, 10, 2);
+        ctx.fillStyle = C.green;
+        ctx.fillRect(x + 7, s.y + 8, 4, 2);
+        ctx.restore();
+      } else {
+        ctx.strokeStyle = 'rgba(255,77,210,0.16)';
+        ctx.lineWidth = 1;
+        ctx.strokeRect(x + 1.5, s.y + 1.5, 15, 11);
+      }
+    }
+
+    const tx = BASE_X + 180 - camera;
+    if (tx > -80 && tx < W + 80) {
+      text('QUARRIOR BASE', tx, GROUND_Y - 132, 10, 'rgba(255,77,210,0.75)');
+      text(Math.floor(baseProgress) + '%', tx, GROUND_Y - 118, 15, C.pink);
+    }
+  }
+
+  function drawStations() {
+    for (const s of stations) {
+      const x = s.x - camera;
+      if (x < -70 || x > W + 70) continue;
+      const pulse = 0.6 + 0.4 * Math.sin(s.pulse);
+      ctx.save();
+      ctx.strokeStyle = energy > 0 ? C.yellow : C.cyan;
+      ctx.shadowColor = energy > 0 ? C.yellow : C.cyan;
+      ctx.shadowBlur = 12;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(x, GROUND_Y - 4, 15 + pulse * 3, Math.PI, TAU);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.moveTo(x - 20, GROUND_Y);
+      ctx.lineTo(x - 20, GROUND_Y - 9);
+      ctx.moveTo(x + 20, GROUND_Y);
+      ctx.lineTo(x + 20, GROUND_Y - 9);
+      ctx.stroke();
+      ctx.restore();
+      ctx.fillStyle = energy > 0 ? C.yellow : C.cyan;
+      ctx.globalAlpha = 0.55 + pulse * 0.3;
+      ctx.fillRect(x - 12, GROUND_Y - 6, 24, 2);
+      ctx.globalAlpha = 1;
+      text('CHARGE', x, GROUND_Y - 26, 7, energy > 0 ? C.yellow : 'rgba(99,231,255,0.7)');
+    }
+  }
+
+  function drawDyneBeam(e) {
+    if (e.state !== 'beam' && e.state !== 'charge') return;
+    const sy = e.y;
+    if (e.state === 'charge') {
+      if (Math.floor(time * 18) % 2 === 0) {
+        ctx.save();
+        ctx.globalAlpha = 0.5;
+        ctx.strokeStyle = C.purple;
+        ctx.setLineDash([10, 8]);
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.moveTo(0, sy);
+        ctx.lineTo(W, sy);
+        ctx.stroke();
+        ctx.restore();
+      }
+      return;
+    }
+    const a = clamp(e.beamT / 0.82, 0, 1);
+    ctx.save();
+    ctx.globalAlpha = 0.28 * a;
+    ctx.fillStyle = C.purple;
+    ctx.fillRect(0, sy - 12, W, 24);
+    ctx.globalAlpha = 0.7 * a;
+    ctx.fillStyle = C.pink;
+    ctx.fillRect(0, sy - 4, W, 8);
+    ctx.globalAlpha = a;
+    ctx.fillStyle = C.white;
+    ctx.fillRect(0, sy - 1.5, W, 3);
+    ctx.strokeStyle = C.cyan;
+    ctx.globalAlpha = 0.5 * a;
+    for (let i = 0; i < 8; i++) {
+      const x = rand(0, W);
+      ctx.beginPath();
+      ctx.moveTo(x, sy + rand(-7, 7));
+      ctx.lineTo(x + rand(-28, 28), sy + rand(-7, 7));
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawDrayneBeam() {
+    if (!drayne || drayne.state !== 'beam') return;
+    const x = drayne.x - camera;
+    const y0 = drayne.y + 10;
+    const y1 = GROUND_Y;
+    const a = clamp(drayne.beamT / drayne.beamMax, 0, 1);
+    const urgency = 1 - a;
+    const flick = 0.8 + Math.random() * 0.2;
+    ctx.save();
+    ctx.globalAlpha = 0.2 * a;
+    ctx.fillStyle = C.pink;
+    ctx.fillRect(x - 16, y0, 32, y1 - y0);
+    ctx.globalAlpha = 0.5 * a * flick;
+    ctx.fillRect(x - 5, y0, 10, y1 - y0);
+    ctx.globalAlpha = 0.9 * a;
+    ctx.fillStyle = C.white;
+    ctx.fillRect(x - 1.5, y0, 3, y1 - y0);
+    ctx.strokeStyle = C.cyan;
+    ctx.lineWidth = 1;
+    for (let i = 0; i < 7; i++) {
+      const off = Math.sin(time * 9 + i * 1.7) * (6 + i);
+      ctx.beginPath();
+      ctx.moveTo(x + off, y0 + i * 38 + ((time * 80 + i * 47) % 40));
+      ctx.lineTo(x - off * 0.5, y0 + i * 38 + 26 + ((time * 80 + i * 47) % 40));
+      ctx.stroke();
+    }
+
+    // Upward gulp waves: bright rings climb the beam as the siphon feeds.
+    for (let k = 0; k < 2; k++) {
+      const ph = (time * (0.55 + urgency * 0.4) + k * 0.5) % 1;
+      const wy = lerp(y1, y0 + 6, ph);
+      const bulge = Math.sin(ph * Math.PI);
+      const rx = 16 + 9 * bulge;
+      const ry = 4 + 3.5 * bulge;
+      ctx.save();
+      ctx.globalAlpha = (0.14 + 0.34 * bulge) * (0.65 + 0.35 * a);
+      ctx.strokeStyle = k === 0 ? C.pink : C.cyan;
+      ctx.shadowColor = k === 0 ? C.pink : C.cyan;
+      ctx.shadowBlur = 10;
+      ctx.lineWidth = 1.6;
+      ctx.beginPath();
+      ctx.ellipse(x, wy, rx, ry, 0, 0, TAU);
+      ctx.stroke();
+      ctx.globalAlpha *= 0.7;
+      ctx.strokeStyle = C.white;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.ellipse(x, wy, rx * 0.55, ry * 0.55, 0, 0, TAU);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // Swirling motes corkscrew up the beam and vanish into the siphon.
+    ctx.save();
+    ctx.shadowBlur = 6;
+    for (const m of siphonMotes) {
+      const s = Math.max(1, m.size * (0.55 + 0.45 * (m.life / m.max)));
+      const alpha = clamp(m.life / m.max, 0, 1) * 0.85;
+      const mx = x + Math.cos(m.a) * m.r;
+      const my = m.y;
+      ctx.shadowColor = m.color;
+
+      // Short corkscrew trail behind each mote.
+      for (let j = 3; j >= 1; j--) {
+        const aa = m.a - m.spin * 0.035 * j;
+        const rr = m.r + j * 2.2;
+        const yy = my + m.rise * 0.03 * j;
+        const ss = Math.max(1, s * (1 - j * 0.17));
+        ctx.globalAlpha = alpha * (0.42 - j * 0.09);
+        ctx.fillStyle = m.color;
+        ctx.fillRect(x + Math.cos(aa) * rr - ss / 2, yy - ss / 2, ss, ss);
+      }
+
+      ctx.globalAlpha = alpha;
+      ctx.fillStyle = m.color;
+      ctx.fillRect(mx - s / 2, my - s / 2, s, s);
+    }
+    ctx.restore();
+
+    // A swallowed mote pulses the mouth of the invader.
+    if (drayne.gulp > 0) {
+      const g = clamp(drayne.gulp / 0.18, 0, 1);
+      ctx.globalAlpha = g * 0.6;
+      ctx.strokeStyle = C.white;
+      ctx.lineWidth = 1.4;
+      ctx.beginPath();
+      ctx.arc(x, drayne.y + 8, 9 + (1 - g) * 20, 0, TAU);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawSaucer(e) {
+    const x = e.x - camera;
+    ctx.save();
+    ctx.translate(x, e.y);
+    ctx.shadowColor = e.dogged ? C.red : e.color;
+    ctx.shadowBlur = e.dogged ? 13 : 8;
+    ctx.fillStyle = '#160a1b';
+    ctx.strokeStyle = e.dogged ? C.red : e.color;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 16, 7, 0, 0, TAU);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = e.dogged ? C.red : e.color;
+    ctx.globalAlpha = 0.75;
+    ctx.beginPath();
+    ctx.arc(0, -3, 5, Math.PI, TAU);
+    ctx.fill();
+    ctx.globalAlpha = 0.8 + Math.sin(e.t * 7) * 0.2;
+    for (let i = -10; i <= 10; i += 5) {
+      ctx.fillStyle = i === 0 ? C.white : (e.dogged ? C.orange : C.cyan);
+      ctx.fillRect(i, 2, 2, 2);
+    }
+    ctx.restore();
+  }
+
+  function drawNova(e) {
+    const x = e.x - camera;
+    ctx.save();
+    ctx.translate(x, e.y);
+    const flip = e.vx < 0 ? -1 : 1;
+    ctx.scale(flip, 1);
+    ctx.shadowColor = C.pink;
+    ctx.shadowBlur = 10;
+    ctx.fillStyle = '#240817';
+    ctx.strokeStyle = C.pink;
+    ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    ctx.moveTo(-20, 0);
+    ctx.lineTo(-8, -8);
+    ctx.lineTo(14, -6);
+    ctx.lineTo(22, 0);
+    ctx.lineTo(12, 7);
+    ctx.lineTo(-7, 8);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = C.orange;
+    ctx.beginPath();
+    ctx.moveTo(-14, -3);
+    ctx.lineTo(-24, -9);
+    ctx.lineTo(-17, 0);
+    ctx.lineTo(-24, 9);
+    ctx.lineTo(-14, 3);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = C.yellow;
+    ctx.fillRect(4, -2, 8, 4);
+    ctx.fillStyle = C.cyan;
+    ctx.fillRect(12, -1, 4, 2);
+    ctx.restore();
+  }
+
+  function drawDyne(e) {
+    const x = e.x - camera;
+    ctx.save();
+    ctx.translate(x, e.y);
+    ctx.shadowColor = C.purple;
+    ctx.shadowBlur = e.state === 'charge' ? 16 : 8;
+    ctx.fillStyle = '#160622';
+    ctx.strokeStyle = C.purple;
+    ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 15, 11, 0, 0, TAU);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = C.pink;
+    ctx.beginPath();
+    ctx.arc(0, 0, 5, 0, TAU);
+    ctx.fill();
+    ctx.fillStyle = C.purple;
+    for (const s of [-1, 1]) {
+      ctx.beginPath();
+      ctx.moveTo(s * 13, -5);
+      ctx.lineTo(s * 23, -10);
+      ctx.lineTo(s * 20, 2);
+      ctx.lineTo(s * 13, 4);
+      ctx.closePath();
+      ctx.fill();
+    }
+    ctx.fillStyle = C.white;
+    ctx.globalAlpha = 0.7 + 0.3 * Math.sin(time * 16);
+    ctx.fillRect(-1, -1, 2, 2);
+    ctx.restore();
+  }
+
+  function drawMinelayer(e) {
+    const x = e.x - camera;
+    ctx.save();
+    ctx.translate(x, e.y);
+    ctx.shadowColor = C.orange;
+    ctx.shadowBlur = 8;
+    ctx.fillStyle = '#241004';
+    ctx.strokeStyle = C.orange;
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(-16, -8, 32, 16);
+    ctx.fillStyle = C.orange;
+    ctx.fillRect(-10, -4, 20, 3);
+    ctx.fillStyle = C.pink;
+    ctx.fillRect(-4, -16, 8, 7);
+    ctx.fillStyle = Math.sin(time * 9) > 0 ? C.red : C.yellow;
+    ctx.fillRect(-2, -15, 4, 4);
+    ctx.fillStyle = C.orange;
+    ctx.fillRect(-22, -2, 6, 8);
+    ctx.fillRect(16, -2, 6, 8);
+    ctx.restore();
+  }
+
+  function drawQuarrior(e) {
+    const x = e.x - camera;
+    ctx.save();
+    ctx.translate(x, e.y);
+    ctx.shadowColor = C.green;
+    ctx.shadowBlur = 8;
+    ctx.fillStyle = '#071c09';
+    ctx.strokeStyle = C.green;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.moveTo(-20, -2);
+    ctx.lineTo(-6, -11);
+    ctx.lineTo(16, -7);
+    ctx.lineTo(20, 0);
+    ctx.lineTo(10, 9);
+    ctx.lineTo(-8, 9);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = C.pink;
+    for (const s of [-1, 1]) {
+      ctx.beginPath();
+      ctx.moveTo(s * 8, 7);
+      ctx.lineTo(s * 17, 15);
+      ctx.lineTo(s * 12, 3);
+      ctx.closePath();
+      ctx.fill();
+    }
+    ctx.fillStyle = C.yellow;
+    ctx.fillRect(-2, -3, 6, 4);
+    if (e.state === 'carry') {
+      ctx.fillStyle = 'rgba(20,50,16,0.9)';
+      ctx.strokeStyle = C.pink;
+      ctx.lineWidth = 1;
+      ctx.fillRect(-8, 14, 16, 12);
+      ctx.strokeRect(-7.5, 14.5, 15, 11);
+      ctx.fillStyle = C.yellow;
+      ctx.fillRect(-4, 18, 8, 2);
+      ctx.strokeStyle = 'rgba(125,255,77,0.45)';
+      ctx.setLineDash([4, 6]);
+      ctx.beginPath();
+      ctx.moveTo(0, 10);
+      ctx.lineTo(0, e.slot ? e.slot.y - e.y - 4 : 30);
+      ctx.stroke();
+      ctx.setLineDash([]);
+    }
+    ctx.restore();
+  }
+
+  function drawDrayne(e) {
+    const x = e.x - camera;
+    ctx.save();
+    ctx.translate(x, e.y);
+
+    // Late in the siphon cycle, a subtle hungry cloud pulses around the invader.
+    const cloud = e.state === 'beam' ? clamp(1 - e.beamT / 3.2, 0, 1) : 0;
+    if (cloud > 0.01) {
+      const pulse = 0.5 + 0.5 * Math.sin(time * (5 + cloud * 6));
+      ctx.save();
+      const halo = ctx.createRadialGradient(0, 0, 4, 0, 0, 46);
+      halo.addColorStop(0, 'rgba(255,77,210,' + (0.05 + 0.12 * cloud * pulse) + ')');
+      halo.addColorStop(0.62, 'rgba(180,92,255,' + (0.03 + 0.07 * cloud * pulse) + ')');
+      halo.addColorStop(1, 'rgba(0,0,0,0)');
+      ctx.fillStyle = halo;
+      ctx.beginPath();
+      ctx.arc(0, 0, 46, 0, TAU);
+      ctx.fill();
+
+      for (let i = 0; i < 5; i++) {
+        const ang = time * (0.7 + cloud * 0.6) + i * TAU / 5;
+        const rr = 18 + 8 * cloud + Math.sin(time * 3 + i) * 3;
+        const px = Math.cos(ang) * rr;
+        const py = Math.sin(ang * 1.25) * rr * 0.65;
+        const pr = 10 + 6 * cloud;
+        const puff = ctx.createRadialGradient(px, py, 0, px, py, pr);
+        puff.addColorStop(0, 'rgba(255,110,220,' + (0.05 + 0.11 * cloud * pulse) + ')');
+        puff.addColorStop(1, 'rgba(255,77,210,0)');
+        ctx.fillStyle = puff;
+        ctx.beginPath();
+        ctx.arc(px, py, pr, 0, TAU);
+        ctx.fill();
+      }
+
+      ctx.globalAlpha = 0.08 + 0.2 * cloud * pulse;
+      ctx.strokeStyle = C.pink;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(0, 0, 26 + 4 * pulse, 0, TAU);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    ctx.shadowColor = C.cyan;
+    ctx.shadowBlur = 12;
+    ctx.fillStyle = '#04202a';
+    ctx.strokeStyle = C.cyan;
+    ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    ctx.ellipse(0, 0, 17, 12, 0, 0, TAU);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = C.pink;
+    ctx.beginPath();
+    ctx.arc(0, -1, 6, 0, TAU);
+    ctx.fill();
+    ctx.strokeStyle = C.cyan;
+    ctx.lineWidth = 2;
+    for (const s of [-1, 1]) {
+      for (let i = 0; i < 3; i++) {
+        ctx.beginPath();
+        ctx.moveTo(s * (10 + i * 3), 7);
+        ctx.lineTo(s * (15 + i * 4) + Math.sin(time * 4 + i) * 4, 20 + i * 5);
+        ctx.stroke();
+      }
+    }
+    ctx.fillStyle = C.white;
+    ctx.fillRect(-1, -3, 2, 2);
+    ctx.restore();
+  }
+
+  function drawMine(m) {
+    const x = m.x - camera;
+    ctx.save();
+    ctx.translate(x, m.y);
+    ctx.rotate(m.t * 1.9);
+    ctx.strokeStyle = C.pink;
+    ctx.fillStyle = '#28061f';
+    ctx.lineWidth = 1.4;
+    for (let i = 0; i < 8; i++) {
+      ctx.rotate(TAU / 8);
+      ctx.beginPath();
+      ctx.moveTo(0, -5);
+      ctx.lineTo(0, -11);
+      ctx.stroke();
+    }
+    ctx.beginPath();
+    ctx.arc(0, 0, 5, 0, TAU);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = Math.sin(m.t * 8) > 0 ? C.yellow : C.red;
+    ctx.fillRect(-1.5, -1.5, 3, 3);
+    ctx.restore();
+  }
+
+  function drawEnemy(e) {
+    const x = e.x - camera;
+    if (x < -60 || x > W + 60) return;
+    if (e.hurt && Math.floor(time * 30) % 2 === 0) return;
+    switch (e.type) {
+      case 'saucer': drawSaucer(e); break;
+      case 'nova': drawNova(e); break;
+      case 'dyne': drawDyne(e); break;
+      case 'minelayer': drawMinelayer(e); break;
+      case 'quarrior': drawQuarrior(e); break;
+      case 'drayne': drawDrayne(e); break;
+      case 'guardian': drawGuardian(e); break;
+      case 'dart': drawDart(e); break;
+      case 'caveship': drawSaucer(e); break;
+    }
+  }
+
+  function drawGuardian(e) {
+    const x = e.x - camera;
+    const ang = Math.atan2(player.y - e.y, player.x - e.x);
+    ctx.save();
+    ctx.translate(x, e.y);
+    ctx.shadowColor = C.pink;
+    ctx.shadowBlur = 8;
+    ctx.fillStyle = '#21081a';
+    ctx.strokeStyle = C.pink;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(0, 0, 14, 0, TAU);
+    ctx.fill();
+    ctx.stroke();
+    ctx.save();
+    ctx.rotate(ang);
+    ctx.fillStyle = C.pink;
+    ctx.fillRect(0, -3, 22, 6);
+    ctx.fillStyle = C.yellow;
+    ctx.fillRect(16, -2, 5, 4);
+    ctx.restore();
+    ctx.fillStyle = C.white;
+    ctx.fillRect(-2, -2, 4, 4);
+    ctx.restore();
+  }
+
+  function drawDart(e) {
+    const x = e.x - camera;
+    ctx.save();
+    ctx.translate(x, e.y);
+    ctx.rotate(Math.atan2(e.vy || 0, e.vx || 1));
+    ctx.shadowColor = C.cyan;
+    ctx.shadowBlur = 12;
+    ctx.fillStyle = C.cyan;
+    ctx.beginPath();
+    ctx.moveTo(13, 0);
+    ctx.lineTo(-8, -6);
+    ctx.lineTo(-3, 0);
+    ctx.lineTo(-8, 6);
+    ctx.closePath();
+    ctx.fill();
+    ctx.fillStyle = C.white;
+    ctx.fillRect(0, -1, 5, 2);
+    ctx.restore();
+  }
+
+  function drawFighter(s) {
+    ctx.save();
+    ctx.scale(s, s);
+    ctx.lineWidth = 2 / s;
+
+    // Swept wings.
+    ctx.fillStyle = '#2a0d27';
+    ctx.strokeStyle = C.pink;
+    ctx.beginPath();
+    ctx.moveTo(-4, -5);
+    ctx.lineTo(-17, -16);
+    ctx.lineTo(-25, -15);
+    ctx.lineTo(-11, -4);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(-4, 5);
+    ctx.lineTo(-17, 16);
+    ctx.lineTo(-25, 15);
+    ctx.lineTo(-11, 4);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Tail fins.
+    ctx.fillStyle = '#18091f';
+    ctx.beginPath();
+    ctx.moveTo(-22, -4);
+    ctx.lineTo(-28, -13);
+    ctx.lineTo(-34, -13);
+    ctx.lineTo(-31, -1);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(-22, 4);
+    ctx.lineTo(-28, 13);
+    ctx.lineTo(-34, 13);
+    ctx.lineTo(-31, 1);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Fuselage.
+    ctx.fillStyle = '#081827';
+    ctx.strokeStyle = C.white;
+    ctx.lineWidth = 2.2 / s;
+    ctx.beginPath();
+    ctx.moveTo(32, 0);
+    ctx.lineTo(14, -5);
+    ctx.lineTo(-10, -6);
+    ctx.lineTo(-26, -4);
+    ctx.lineTo(-31, 0);
+    ctx.lineTo(-26, 4);
+    ctx.lineTo(-10, 6);
+    ctx.lineTo(14, 5);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    // Dorsal stripe.
+    ctx.fillStyle = C.pink;
+    ctx.fillRect(-20, -2, 34, 3);
+    // Cockpit and nose light.
+    ctx.fillStyle = C.cyan;
+    ctx.fillRect(6, -4, 12, 3);
+    ctx.fillStyle = C.yellow;
+    ctx.fillRect(24, -1.5, 6, 3);
+    ctx.fillStyle = C.white;
+    ctx.fillRect(-25, -1, 4, 2);
+    ctx.restore();
+  }
+
+  function drawShip() {
+    if (!player.alive) return;
+    const x = player.x - camera;
+    const y = player.y;
+    const blink = player.invuln > 0 && Math.floor(time * 14) % 2 === 0;
+
+    ctx.save();
+    ctx.translate(x, y);
+
+    if (energy > 0) {
+      const g = ctx.createRadialGradient(0, 0, 4, 0, 0, 34);
+      g.addColorStop(0, 'rgba(255,225,77,0.22)');
+      g.addColorStop(1, 'rgba(255,225,77,0)');
+      ctx.fillStyle = g;
+      ctx.beginPath();
+      ctx.arc(0, 0, 34, 0, TAU);
+      ctx.fill();
+    }
+
+    if (player.shieldOn) {
+      const pulse = 0.55 + 0.25 * Math.sin(time * 12);
+      ctx.save();
+      ctx.shadowColor = C.cyan;
+      ctx.shadowBlur = 18;
+      ctx.strokeStyle = 'rgba(99,231,255,0.85)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(0, 0, 30, 0, TAU);
+      ctx.stroke();
+      ctx.globalAlpha = pulse * 0.35;
+      ctx.fillStyle = C.cyan;
+      ctx.fill();
+      ctx.globalAlpha = 1;
+      ctx.strokeStyle = 'rgba(242,246,255,0.45)';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(0, 0, 36, time * 2, time * 2 + 2.2);
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    ctx.globalAlpha = blink ? 0.38 : 1;
+    ctx.scale(player.face, 1);
+
+    if (player.thrust && !player.shieldOn) {
+      const f = 12 + Math.sin(time * 40) * 5;
+      ctx.fillStyle = 'rgba(99,231,255,0.8)';
+      ctx.beginPath();
+      ctx.moveTo(-24, -5);
+      ctx.lineTo(-24 - f, 0);
+      ctx.lineTo(-24, 5);
+      ctx.closePath();
+      ctx.fill();
+      ctx.fillStyle = C.white;
+      ctx.beginPath();
+      ctx.moveTo(-24, -2.5);
+      ctx.lineTo(-24 - f * 0.55, 0);
+      ctx.lineTo(-24, 2.5);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    ctx.shadowColor = C.cyan;
+    ctx.shadowBlur = 12;
+    drawFighter(1);
+
+    ctx.restore();
+  }
+
+  function drawBullets() {
+    for (const b of bullets) {
+      const x = b.x - camera;
+      if (x < -30 || x > W + 30) continue;
+      ctx.save();
+      ctx.shadowColor = b.color;
+      ctx.shadowBlur = 10;
+      ctx.strokeStyle = b.color;
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      ctx.moveTo(x, b.y);
+      ctx.lineTo(x - Math.sign(b.vx) * 18, b.y);
+      ctx.stroke();
+      ctx.strokeStyle = C.white;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(x, b.y);
+      ctx.lineTo(x - Math.sign(b.vx) * 10, b.y);
+      ctx.stroke();
+      ctx.restore();
+    }
+    for (const b of eBullets) {
+      const x = b.x - camera;
+      if (x < -20 || x > W + 20) continue;
+      ctx.save();
+      ctx.translate(x, b.y);
+      ctx.shadowColor = b.color;
+      ctx.shadowBlur = 9;
+      ctx.fillStyle = b.color;
+      ctx.beginPath();
+      ctx.arc(0, 0, 3.2, 0, TAU);
+      ctx.fill();
+      ctx.strokeStyle = C.white;
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(-6, 0);
+      ctx.lineTo(6, 0);
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  function drawOffscreen() {
+    if (phase === 'surface' && drayne && drayne.state === 'beam') {
+      const sx = drayne.x - camera;
+      if (sx < 20 || sx > W - 20) {
+        const side = sx < 20 ? 1 : -1;
+        const x = sx < 20 ? 18 : W - 18;
+        const y = clamp(drayne.y, 90, 460);
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.scale(side, 1);
+        ctx.fillStyle = Math.sin(time * 10) > 0 ? C.pink : C.yellow;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(14, -8);
+        ctx.lineTo(14, 8);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+        text('SIPHON', x - side * 27, y, 8, C.pink, side > 0 ? 'right' : 'left');
+      }
+    }
+
+    if (phase === 'surface' && BASE_X - camera > W - 30) {
+      const y = 216;
+      ctx.save();
+      ctx.globalAlpha = 0.6 + 0.4 * Math.sin(time * 5);
+      ctx.fillStyle = C.pink;
+      ctx.beginPath();
+      ctx.moveTo(W - 18, y);
+      ctx.lineTo(W - 32, y - 8);
+      ctx.lineTo(W - 32, y + 8);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+      text('BASE ' + Math.floor(baseProgress) + '%', W - 38, y, 8, C.pink, 'right');
+    }
+
+    if (phase === 'surface' && energy > 0) {
+      let best = null;
+      let bd = Infinity;
+      for (const s of stations) {
+        const d = Math.abs(s.x - player.x);
+        if (d < bd) { bd = d; best = s; }
+      }
+      if (best && Math.abs(best.x - camera - W / 2) > W / 2 - 60) {
+        const sx = best.x - camera;
+        const edge = sx < 0 ? 14 : W - 14;
+        const side = sx < 0 ? 1 : -1;
+        ctx.save();
+        ctx.translate(edge, clamp(player.y, 100, 480));
+        ctx.scale(side, 1);
+        ctx.fillStyle = C.yellow;
+        ctx.beginPath();
+        ctx.moveTo(0, 0);
+        ctx.lineTo(12, -7);
+        ctx.lineTo(12, 7);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+        text('CHARGE', edge - side * 26, clamp(player.y, 100, 480), 8, C.yellow, side > 0 ? 'right' : 'left');
+      }
+    }
+  }
+
+  function drawSurfaceScene() {
+    drawStars();
+    drawGround();
+    drawCity();
+    drawBase();
+    drawStations();
+
+    if (drayne) drawDrayneBeam();
+    for (const e of enemies) if (e.type === 'dyne') drawDyneBeam(e);
+
+    for (const e of enemies) drawEnemy(e);
+    for (const m of mines) drawMine(m);
+    drawShip();
+    drawBullets();
+    drawParticles();
+    drawFloats();
+    drawOffscreen();
+  }
+
+  /* ============================================================
+     Rendering: caverns
+     ============================================================ */
+  function drawCavernScene() {
+    ctx.fillStyle = '#030107';
+    ctx.fillRect(0, 0, W, H);
+
+    const g = ctx.createRadialGradient(W * 0.5, H * 0.5, 40, W * 0.5, H * 0.5, W * 0.75);
+    g.addColorStop(0, 'rgba(40,18,70,0.25)');
+    g.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+
+    const pts = [];
+    const first = Math.floor((camera - 40) / cave.step) * cave.step;
+    for (let wx = first; wx <= camera + W + 40; wx += cave.step) {
+      const t = terrainAt(clamp(wx, 0, worldW));
+      pts.push({ x: wx - camera, c: t.ceil, f: t.floor });
+    }
+    if (!pts.length) return;
+
+    // Ceiling mass.
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, 0);
+    for (const p of pts) ctx.lineTo(p.x, p.c);
+    ctx.lineTo(pts[pts.length - 1].x, 0);
+    ctx.closePath();
+    ctx.fillStyle = '#080411';
+    ctx.fill();
+    // Floor mass.
+    ctx.beginPath();
+    ctx.moveTo(pts[0].x, H);
+    for (const p of pts) ctx.lineTo(p.x, p.f);
+    ctx.lineTo(pts[pts.length - 1].x, H);
+    ctx.closePath();
+    ctx.fillStyle = '#080411';
+    ctx.fill();
+
+    // Luminous cave edges.
+    ctx.save();
+    ctx.shadowColor = C.green;
+    ctx.shadowBlur = 9;
+    ctx.strokeStyle = C.green;
+    ctx.lineWidth = 1.6;
+    ctx.beginPath();
+    for (let i = 0; i < pts.length; i++) {
+      if (i === 0) ctx.moveTo(pts[i].x, pts[i].c);
+      else ctx.lineTo(pts[i].x, pts[i].c);
+    }
+    ctx.stroke();
+    ctx.shadowColor = C.pink;
+    ctx.strokeStyle = C.pink;
+    ctx.beginPath();
+    for (let i = 0; i < pts.length; i++) {
+      if (i === 0) ctx.moveTo(pts[i].x, pts[i].f);
+      else ctx.lineTo(pts[i].x, pts[i].f);
+    }
+    ctx.stroke();
+    ctx.restore();
+
+    // Rocky striations.
+    ctx.save();
+    ctx.globalAlpha = 0.22;
+    ctx.strokeStyle = C.purple;
+    ctx.lineWidth = 1;
+    for (const p of pts) {
+      if (Math.abs((p.x + camera) % 90) < cave.step) {
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.c);
+        ctx.lineTo(p.x + 9, p.c + 26);
+        ctx.lineTo(p.x + 2, p.c + 46);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(p.x, p.f);
+        ctx.lineTo(p.x - 8, p.f - 24);
+        ctx.stroke();
+      }
+    }
+    ctx.restore();
+
+    for (const cr of cave.crystals) {
+      const x = cr.x - camera;
+      if (x < -10 || x > W + 10) continue;
+      const tw = 0.55 + 0.45 * Math.sin(time * 3 + cr.ph);
+      ctx.save();
+      ctx.globalAlpha = tw;
+      ctx.fillStyle = cr.c;
+      ctx.shadowColor = cr.c;
+      ctx.shadowBlur = 7;
+      ctx.beginPath();
+      ctx.moveTo(x, cr.y - cr.s);
+      ctx.lineTo(x + cr.s, cr.y);
+      ctx.lineTo(x, cr.y + cr.s);
+      ctx.lineTo(x - cr.s, cr.y);
+      ctx.closePath();
+      ctx.fill();
+      ctx.restore();
+    }
+
+    drawParticles();
+    for (const e of enemies) drawEnemy(e);
+    drawCore();
+    drawShip();
+    drawBullets();
+    drawFloats();
+
+    if (core && core.hp > 0) {
+      const cx = core.x - camera;
+      if (cx > W + 20) {
+        ctx.save();
+        ctx.globalAlpha = 0.6 + 0.4 * Math.sin(time * 6);
+        ctx.fillStyle = C.yellow;
+        ctx.beginPath();
+        ctx.moveTo(W - 18, 280);
+        ctx.lineTo(W - 32, 272);
+        ctx.lineTo(W - 32, 288);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+        text('POWER CORE', W - 38, 280, 8, C.yellow, 'right');
+      }
+    }
+  }
+
+  function drawCore() {
+    if (!core) return;
+    const x = core.x - camera;
+    if (x < -90 || x > W + 90) return;
+    const pulse = 0.6 + 0.4 * Math.sin(time * 4);
+    const hurt = core.hurt > 0;
+
+    ctx.save();
+    ctx.translate(x, core.y);
+    ctx.shadowColor = hurt ? C.white : C.yellow;
+    ctx.shadowBlur = 22;
+
+    ctx.strokeStyle = hurt ? C.white : C.orange;
+    ctx.lineWidth = 2;
+    for (let i = 0; i < 3; i++) {
+      ctx.beginPath();
+      ctx.ellipse(0, 0, 58 + i * 9, 30 + i * 7, core.angle + i * 0.6, 0, TAU);
+      ctx.stroke();
+    }
+    ctx.strokeStyle = C.pink;
+    ctx.lineWidth = 1.4;
+    for (let i = 0; i < 8; i++) {
+      const a = core.angle * 0.7 + i * TAU / 8;
+      ctx.beginPath();
+      ctx.moveTo(Math.cos(a) * 26, Math.sin(a) * 20);
+      ctx.lineTo(Math.cos(a) * 44, Math.sin(a) * 30);
+      ctx.stroke();
+    }
+    const rg = ctx.createRadialGradient(0, 0, 3, 0, 0, core.r);
+    rg.addColorStop(0, hurt ? C.white : C.yellow);
+    rg.addColorStop(0.45, hurt ? C.white : C.orange);
+    rg.addColorStop(1, 'rgba(255,77,94,0.12)');
+    ctx.fillStyle = rg;
+    ctx.beginPath();
+    ctx.arc(0, 0, core.r * (0.8 + pulse * 0.12), 0, TAU);
+    ctx.fill();
+    ctx.strokeStyle = C.white;
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    ctx.arc(0, 0, 22, 0, TAU);
+    ctx.stroke();
+    ctx.restore();
+
+    // Health rail.
+    const pct = clamp(core.hp / core.max, 0, 1);
+    const bx = x - 60;
+    const by = core.y - 72;
+    ctx.fillStyle = 'rgba(0,0,0,0.7)';
+    ctx.fillRect(bx, by, 120, 8);
+    ctx.strokeStyle = 'rgba(255,225,77,0.6)';
+    ctx.strokeRect(bx + 0.5, by + 0.5, 119, 7);
+    ctx.fillStyle = pct > 0.35 ? C.yellow : C.red;
+    ctx.fillRect(bx + 2, by + 2, 116 * pct, 4);
+    text('POWER CORE', x, by - 10, 9, C.yellow);
+  }
+
+  /* ============================================================
+     Rendering: HUD
+     ============================================================ */
+  function drawScanner(x, y, w, h) {
+    drawPanel(x, y, w, h, C.green);
+    text('LONG RANGE SCANNER', x + w / 2, y + 10, 8, 'rgba(125,255,77,0.7)');
+
+    const rx = x + 14;
+    const ry = y + 19;
+    const rw = w - 28;
+    const rh = 34;
+    ctx.strokeStyle = 'rgba(125,255,77,0.35)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(rx + 0.5, ry + 0.5, rw - 1, rh - 1);
+    for (let i = 1; i < 6; i++) {
+      const gx = rx + (rw / 6) * i;
+      ctx.strokeStyle = 'rgba(125,255,77,0.12)';
+      ctx.beginPath();
+      ctx.moveTo(gx, ry + 1);
+      ctx.lineTo(gx, ry + rh - 1);
+      ctx.stroke();
+    }
+    ctx.strokeStyle = 'rgba(125,255,77,0.18)';
+    ctx.beginPath();
+    ctx.moveTo(rx + 1, ry + rh / 2);
+    ctx.lineTo(rx + rw - 1, ry + rh / 2);
+    ctx.stroke();
+
+    if (phase !== 'surface') {
+      ctx.save();
+      ctx.globalAlpha = 0.55;
+      for (let i = 0; i < 16; i++) {
+        const yy = ry + rand(1, rh - 2);
+        ctx.strokeStyle = Math.random() < 0.5 ? 'rgba(99,231,255,0.35)' : 'rgba(255,77,210,0.25)';
+        ctx.beginPath();
+        ctx.moveTo(rx + rand(0, rw * 0.5), yy);
+        ctx.lineTo(rx + rand(rw * 0.5, rw), yy + rand(-2, 2));
+        ctx.stroke();
+      }
+      ctx.restore();
+      text('RADAR OFFLINE', x + w / 2, ry + rh / 2, 9, C.red);
+    } else {
+      const mapX = (wx) => rx + clamp(wx / worldW, 0, 1) * rw;
+      const mapY = (wy) => ry + clamp(wy / GROUND_Y, 0, 1) * rh;
+
+      // Base.
+      const bx = mapX(BASE_X);
+      ctx.fillStyle = C.pink;
+      ctx.globalAlpha = 0.8;
+      ctx.fillRect(bx, ry + 2, 3, rh - 4);
+      ctx.globalAlpha = 1;
+      // Stations.
+      for (const s of stations) {
+        ctx.fillStyle = C.green;
+        ctx.fillRect(mapX(s.x) - 1, ry + rh - 4, 3, 3);
+      }
+      // Enemies.
+      for (const e of enemies) {
+        ctx.fillStyle = e.color;
+        ctx.fillRect(mapX(e.x) - 1.5, mapY(e.y) - 1.5, 3, 3);
+      }
+      // Player.
+      const px = mapX(player.x);
+      const py = mapY(player.y);
+      ctx.fillStyle = C.white;
+      ctx.beginPath();
+      ctx.moveTo(px + 4, py);
+      ctx.lineTo(px - 3, py - 3);
+      ctx.lineTo(px - 3, py + 3);
+      ctx.closePath();
+      ctx.fill();
+    }
+  }
+
+  function drawLocalRadar(x, y, w, h) {
+    drawPanel(x, y, w, h, C.cyan);
+    text('LOCAL', x + w / 2, y + 10, 8, 'rgba(99,231,255,0.7)');
+
+    const rx = x + 8;
+    const ry = y + 18;
+    const rw = w - 16;
+    const rh = h - 26;
+    ctx.strokeStyle = 'rgba(99,231,255,0.35)';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(rx + 0.5, ry + 0.5, rw - 1, rh - 1);
+    ctx.beginPath();
+    ctx.moveTo(rx + rw / 2, ry + 1);
+    ctx.lineTo(rx + rw / 2, ry + rh - 1);
+    ctx.moveTo(rx + 1, ry + rh / 2);
+    ctx.lineTo(rx + rw - 1, ry + rh / 2);
+    ctx.stroke();
+
+    const cx = rx + rw / 2;
+    const cy = ry + rh / 2;
+
+    if (phase === 'surface') {
+      ctx.save();
+      ctx.strokeStyle = 'rgba(99,231,255,0.35)';
+      ctx.beginPath();
+      ctx.arc(cx, cy, Math.min(rw, rh) * 0.38, 0, TAU);
+      ctx.stroke();
+      const sweep = time * 2.4;
+      ctx.strokeStyle = 'rgba(99,231,255,0.25)';
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + Math.cos(sweep) * rw * 0.48, cy + Math.sin(sweep) * rh * 0.48);
+      ctx.stroke();
+      for (const e of enemies) {
+        const dx = (e.x - player.x) / 560;
+        const dy = (e.y - player.y) / 400;
+        if (Math.abs(dx) > 0.9 || Math.abs(dy) > 0.9) continue;
+        ctx.fillStyle = e.color;
+        ctx.fillRect(cx + dx * rw * 0.46 - 1.5, cy + dy * rh * 0.46 - 1.5, 3, 3);
+      }
+      ctx.fillStyle = C.white;
+      ctx.fillRect(cx - 1, cy - 1, 2, 2);
+      ctx.restore();
+    } else {
+      ctx.save();
+      ctx.globalAlpha = 0.5;
+      for (let i = 0; i < 9; i++) {
+        ctx.strokeStyle = Math.random() < 0.5 ? 'rgba(99,231,255,0.3)' : 'rgba(255,77,210,0.25)';
+        ctx.beginPath();
+        ctx.moveTo(rx + rand(2, rw - 2), ry + rand(2, rh - 2));
+        ctx.lineTo(rx + rand(2, rw - 2), ry + rand(2, rh - 2));
+        ctx.stroke();
+      }
+      ctx.restore();
+      text('NO SIGNAL', cx, cy, 8, C.red);
+    }
+  }
+
+  function drawMecoMeter(x, y, w, h) {
+    // Vertical MECO / base-construction rail.
+    const label = phase === 'surface' ? 'MECO' : 'CORE';
+    for (let i = 0; i < label.length; i++) {
+      text(label[i], x - 12, y + 12 + i * 14, 9, 'rgba(99,231,255,0.65)');
+    }
+    const segs = 8;
+    const segH = (h - 8) / segs;
+    let pct;
+    if (phase === 'surface') pct = baseProgress / 100;
+    else pct = core ? clamp(core.hp / core.max, 0, 1) : 0;
+    const lit = Math.ceil(pct * segs);
+
+    for (let i = 0; i < segs; i++) {
+      const sy = y + h - 4 - (i + 1) * segH;
+      const on = i < lit;
+      ctx.fillStyle = on
+        ? (phase === 'surface' ? (i > 5 ? C.red : C.pink) : (pct < 0.35 ? C.red : C.yellow))
+        : 'rgba(80,50,110,0.28)';
+      ctx.fillRect(x, sy + 1, 24, segH - 3);
+      if (on) {
+        ctx.fillStyle = 'rgba(255,255,255,0.55)';
+        ctx.fillRect(x + 2, sy + 2, 20, 1);
+      }
+    }
+    text(phase === 'surface' ? 'BASE' : 'CORE', x + 12, y + h + 9, 7, 'rgba(190,220,255,0.4)');
+  }
+
+  function drawHUD() {
+    ctx.fillStyle = 'rgba(0,0,0,0.9)';
+    ctx.fillRect(0, HUD_TOP - 6, W, H - HUD_TOP + 6);
+    line(10, HUD_TOP - 5, W - 10, HUD_TOP - 5, C.green, 1, 0.45);
+    line(10, HUD_TOP - 2, W - 10, HUD_TOP - 2, C.pink, 1, 0.22);
+
+    // Score / ships / nukes.
+    drawPanel(24, 600, 286, 92, C.cyan);
+    text('SCORE', 34, 611, 8, 'rgba(99,231,255,0.6)', 'left');
+    glowText(pad(score, 6), 167, 636, 27, C.white, 'center', 8);
+    line(38, 652, 296, 652, C.cyan, 1, 0.28);
+
+    text('SHIPS', 34, 666, 8, 'rgba(190,220,255,0.55)', 'left');
+    for (let i = 0; i < Math.min(lives, 8); i++) {
+      const sx = 78 + i * 19;
+      ctx.fillStyle = i < lives ? C.white : 'rgba(255,255,255,0.15)';
+      ctx.beginPath();
+      ctx.moveTo(sx + 6, 666);
+      ctx.lineTo(sx - 5, 661);
+      ctx.lineTo(sx - 2, 666);
+      ctx.lineTo(sx - 5, 671);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    text('NUKES', 184, 666, 8, 'rgba(190,220,255,0.55)', 'left');
+    for (let i = 0; i < 5; i++) {
+      const sx = 231 + i * 14;
+      ctx.strokeStyle = i < nukes ? C.yellow : 'rgba(255,225,77,0.18)';
+      ctx.fillStyle = i < nukes ? 'rgba(255,225,77,0.22)' : 'transparent';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(sx, 665, 4.5, 0, TAU);
+      ctx.fill();
+      ctx.stroke();
+      if (i < nukes) {
+        ctx.fillStyle = C.yellow;
+        ctx.fillRect(sx - 1, 663, 2, 2);
+      }
+    }
+
+    // Scanner + shield.
+    drawScanner(322, 600, 376, 92);
+    text('SHIELD', 334, 668, 8, 'rgba(190,220,255,0.5)', 'left');
+    const shx = 384;
+    const shy = 664;
+    const shw = 218;
+    ctx.strokeStyle = 'rgba(99,231,255,0.35)';
+    ctx.strokeRect(shx + 0.5, shy + 0.5, shw, 7);
+    ctx.fillStyle = player.shieldOn ? C.purple : (shieldLock ? C.red : C.cyan);
+    ctx.fillRect(shx + 2, shy + 2, (shw - 4) * clamp(shieldEnergy / 100, 0, 1), 4);
+    if (shieldLock) text('RECHARGE', shx + shw + 32, 668, 7, C.red);
+
+    let status = '';
+    let statusColor = 'rgba(190,220,255,0.55)';
+    if (energy > 0) {
+      status = 'ENERGY ' + energy.toFixed(1) + 's — REACH A CHARGE STATION';
+      statusColor = C.yellow;
+    } else if (phase === 'surface' && drayne && drayne.state === 'beam') {
+      status = 'SIPHON ACTIVE — CROSS THE BEAM';
+      statusColor = C.pink;
+    } else if (phase === 'surface') {
+      status = 'BASE CONSTRUCTION ' + Math.floor(baseProgress) + '%';
+      statusColor = baseProgress > 70 ? C.red : 'rgba(255,77,210,0.75)';
+    } else {
+      status = core ? 'CORE INTEGRITY ' + Math.max(0, Math.ceil(core.hp / core.max * 100)) + '%' : 'POWER CORE';
+      statusColor = C.yellow;
+    }
+    text(status, 334, 683, 8, statusColor, 'left');
+
+    // Right radar + MECO.
+    drawLocalRadar(710, 600, 120, 92);
+    drawMecoMeter(856, 612, 24, 68);
+
+    // Level marker.
+    text('LEVEL ' + pad(level, 2), 930, 606, 8, 'rgba(255,77,210,0.65)', 'right');
+    text(muted ? 'MUTED' : 'AUDIO', 930, 628, 7, 'rgba(190,220,255,0.35)', 'right');
+  }
+
+  /* ============================================================
+     Rendering: title + overlays
+     ============================================================ */
+  const TITLE_FONT = {
+    R: ['11110', '10001', '10001', '11110', '10100', '10010', '10001'],
+    E: ['11111', '10000', '10000', '11110', '10000', '10000', '11111'],
+    P: ['11110', '10001', '10001', '11110', '10000', '10000', '10000'],
+    T: ['11111', '00100', '00100', '00100', '00100', '00100', '00100'],
+    O: ['01110', '10001', '10001', '10001', '10001', '10001', '01110'],
+    N: ['10001', '11001', '11001', '10101', '10011', '10011', '10001']
+  };
+
+  function drawTitleLogo(cx, y) {
+    const word = 'REPTON';
+    const scale = 11;
+    const gap = 11;
+    const cell = 8;
+    const totalW = word.length * 5 * cell + (word.length - 1) * gap;
+    let x0 = cx - totalW / 2;
+    for (let li = 0; li < word.length; li++) {
+      const pat = TITLE_FONT[word[li]];
+      for (let row = 0; row < pat.length; row++) {
+        for (let col = 0; col < 5; col++) {
+          if (pat[row][col] !== '1') continue;
+          const px = x0 + col * cell;
+          const py = y + row * cell;
+          const t = (row / 7) * 0.65 + (col / 5) * 0.35;
+          let color = t < 0.34 ? C.pink : t < 0.62 ? C.purple : C.green;
+          if ((col + row * 2 + li) % 9 === 0) color = C.yellow;
+          ctx.save();
+          ctx.shadowColor = color;
+          ctx.shadowBlur = 9;
+          ctx.fillStyle = color;
+          ctx.fillRect(px, py, cell - 1.5, cell - 1.5);
+          ctx.restore();
+        }
+      }
+      x0 += 5 * cell + gap;
+    }
+    // Underline rail.
+    line(cx - totalW / 2, y + 65, cx + totalW / 2, y + 65, C.pink, 2, 0.5);
+  }
+
+  function drawTitleCity() {
+    // Decorative skyline across the title screen.
+    for (let x = 0; x < W; x += 18) {
+      const h = 10 + Math.abs(Math.sin(x * 0.031) * 40) + (x % 54 === 0 ? 12 : 0);
+      const top = GROUND_Y - h;
+      ctx.fillStyle = 'rgba(7,24,10,0.95)';
+      ctx.fillRect(x + 1, top, 16, h);
+      ctx.strokeStyle = x % 36 === 0 ? C.pink : C.green;
+      ctx.globalAlpha = 0.72;
+      ctx.lineWidth = 1;
+      ctx.strokeRect(x + 1.5, top + 1, 15, h - 2);
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = x % 36 === 0 ? C.yellow : C.pink;
+      for (let yy = top + 7; yy < GROUND_Y - 4; yy += 12) {
+        ctx.fillRect(x + 5, yy, 2, 2);
+        ctx.fillRect(x + 10, yy, 2, 2);
+      }
+    }
+    ctx.fillStyle = C.yellow;
+    ctx.fillRect(0, GROUND_Y, W, 3);
+    ctx.fillStyle = '#1d0722';
+    ctx.fillRect(0, GROUND_Y + 3, W, 8);
+    ctx.fillStyle = C.pink;
+    ctx.fillRect(0, GROUND_Y + 11, W, 2);
+  }
+
+  function drawTitle() {
+    drawStars();
+
+    // Distant dish silhouette on the right.
+    ctx.save();
+    ctx.globalAlpha = 0.35;
+    const bx = 760;
+    for (let col = 0; col < BASE_HEIGHTS.length; col++) {
+      const h = BASE_HEIGHTS[col];
+      for (let row = 0; row < h; row++) {
+        const x = bx + col * 8;
+        const y = GROUND_Y - (row + 1) * 7;
+        ctx.strokeStyle = C.pink;
+        ctx.strokeRect(x + 0.5, y + 0.5, 7, 6);
+      }
+    }
+    ctx.restore();
+
+    drawTitleCity();
+
+    glowText('SIRIUS PRESENTS', W / 2, 76, 17, C.pink, 'center', 12);
+    drawTitleLogo(W / 2, 112);
+
+    text('BY DAN THOMPSON', W / 2, 300, 12, C.green);
+    text('AND ANDY KALUZNIACKI', W / 2, 320, 12, C.green);
+    text('COPYRIGHT 1983 SIRIUS SOFTWARE INC.', W / 2, 346, 11, C.yellow);
+
+    text('DEFEND THE COLONY  ·  STOP THE BASE  ·  DESTROY THE CORE', W / 2, 385, 10, 'rgba(190,220,255,0.55)');
+
+    // Hero ship hovering over the city.
+    ctx.save();
+    const bob = Math.sin(time * 1.7) * 4;
+    ctx.translate(W / 2, 420 + bob);
+    ctx.shadowColor = C.cyan;
+    ctx.shadowBlur = 16;
+    drawFighter(1.35);
+    ctx.restore();
+
+    ctx.save();
+    ctx.globalAlpha = 0.55 + 0.45 * Math.sin(time * 3.2);
+    glowText('PRESS SPACE BAR TO PLAY', W / 2, 620, 20, C.cyan, 'center', 14);
+    ctx.restore();
+    text('ARROWS / A D  THRUST & STEER     SPACE  FIRE', W / 2, 650, 10, 'rgba(190,220,255,0.55)');
+    text('SHIFT  SHIELD (NO STEERING)     N  NUKE     P  PAUSE', W / 2, 668, 10, 'rgba(190,220,255,0.55)');
+    text('HI SCORE  ' + pad(hiScore, 6), W / 2, 694, 11, 'rgba(255,225,77,0.8)');
+    text(muted ? 'MUTED' : 'M — AUDIO', W - 26, 694, 8, 'rgba(190,220,255,0.35)', 'right');
+  }
+
+  function drawMessage() {
+    if (msgTimer <= 0 || state === 'title') return;
+    const a = Math.min(1, msgTimer / 0.35) * Math.min(1, (msgMax - msgTimer) / 0.12);
+    const pulse = 0.72 + 0.28 * Math.sin(time * 14);
+    ctx.save();
+    ctx.globalAlpha = clamp(a, 0, 1);
+    const off = (msgMain === 'ALERT' || msgMain === 'WARNING') ? Math.sin(time * 50) * 1.6 : 0;
+    glowText(msgMain, W / 2 + off, 170, 33, msgColor, 'center', 18);
+    if (msgSub) text(msgSub, W / 2, 201, 12, 'rgba(225,238,255,0.78)');
+    if (msgMain === 'ALERT' || msgMain === 'WARNING') {
+      ctx.strokeStyle = msgColor;
+      ctx.globalAlpha = 0.45 * pulse * clamp(a, 0, 1);
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.moveTo(W / 2 - 210, 152);
+      ctx.lineTo(W / 2 + 210, 152);
+      ctx.moveTo(W / 2 - 180, 220);
+      ctx.lineTo(W / 2 + 180, 220);
+      ctx.stroke();
+    }
+    ctx.restore();
+  }
+
+  function drawBanner() {
+    if (bannerTimer <= 0 || state === 'title') return;
+    const total = 2.9;
+    const fade = Math.min(1, bannerTimer / 0.45) * Math.min(1, (total - bannerTimer) / 0.25 + 0.15);
+    ctx.save();
+    ctx.globalAlpha = clamp(fade, 0, 1);
+    glowText(bannerMain, W / 2, 278, 27, bannerColor, 'center', 14);
+    text(bannerSub, W / 2, 307, 11, 'rgba(225,238,255,0.7)');
+    ctx.restore();
+  }
+
+  function drawPause() {
+    ctx.fillStyle = 'rgba(2,1,6,0.72)';
+    ctx.fillRect(0, 0, W, H);
+    glowText('PAUSED', W / 2, 300, 46, C.cyan, 'center', 20);
+    text('PRESS P TO RESUME', W / 2, 350, 13, 'rgba(190,220,255,0.7)');
+    text('ARROWS THRUST   SPACE FIRE   SHIFT SHIELD   N NUKE   M MUTE', W / 2, 382, 9, 'rgba(190,220,255,0.38)');
+  }
+
+  function drawGameOver() {
+    ctx.fillStyle = 'rgba(2,1,6,0.78)';
+    ctx.fillRect(0, 0, W, H);
+    glowText('GAME OVER', W / 2, 268, 50, C.pink, 'center', 22);
+    text('FINAL SCORE  ' + pad(score, 6), W / 2, 330, 15, C.white);
+    text('HI SCORE  ' + pad(hiScore, 6), W / 2, 356, 11, 'rgba(255,225,77,0.8)');
+    if (Math.sin(time * 3.2) > -0.3) {
+      text('PRESS SPACE TO DEFEND AGAIN', W / 2, 414, 13, C.cyan);
+    }
+  }
+
+  function drawBombOverlay() {
+    if (state !== 'bomb') return;
+    const t = bombTimer;
+    let main = '';
+    let sub = '';
+    let color = C.red;
+    if (t < 1.15) {
+      main = 'PLANET DEFENSES TRIGGERED';
+      sub = 'QUARRIOR BASE COMPLETE — SURFACE PURGE ARMED';
+    } else if (t < 2.45) {
+      main = 'SURFACE PURGED';
+      sub = 'ALL SURFACE FORCES LOST';
+      color = C.yellow;
+      const a = clamp((t - 1.15) / 0.8, 0, 1) * (1 - clamp((t - 2.1) / 0.35, 0, 1));
+      ctx.fillStyle = 'rgba(255,255,255,' + (a * 0.7) + ')';
+      ctx.fillRect(0, 0, W, H);
+    } else {
+      main = 'DESCENDING TO CAVERNS';
+      sub = 'RADAR SYSTEMS OFFLINE';
+      color = C.cyan;
+    }
+    ctx.save();
+    ctx.globalAlpha = 0.55 + 0.45 * Math.sin(time * 12);
+    text(main, W / 2, 250, 22, color);
+    ctx.restore();
+    text(sub, W / 2, 280, 10, 'rgba(225,238,255,0.7)');
+    if (t < 1.2 && Math.floor(t * 8) % 2 === 0) {
+      ctx.strokeStyle = C.red;
+      ctx.lineWidth = 2;
+      ctx.strokeRect(22, 22, W - 44, H - 44);
+    }
+  }
+
+  function drawCoreBoomOverlay() {
+    if (state !== 'coreboom') return;
+    ctx.fillStyle = 'rgba(255,80,30,' + (0.08 + Math.abs(Math.sin(time * 14)) * 0.1) + ')';
+    ctx.fillRect(0, 0, W, H);
+    glowText('CORE BREACH', W / 2, 236, 30, C.yellow, 'center', 18);
+    text('CHAIN REACTION IN PROGRESS', W / 2, 270, 11, C.orange);
+  }
+
+  function drawLevelClear() {
+    if (state !== 'levelclear') return;
+    ctx.fillStyle = 'rgba(2,1,6,0.68)';
+    ctx.fillRect(0, 0, W, H);
+    glowText('POWER CORE DESTROYED', W / 2, 250, 29, C.yellow, 'center', 18);
+    text('LEVEL ' + pad(level, 2) + ' CLEARED', W / 2, 292, 15, C.cyan);
+    text('BONUS  +' + clearBonus, W / 2, 322, 13, C.green);
+    text('NEXT SURFACE DEPLOYMENT IN ' + Math.max(0, clearTimer).toFixed(1), W / 2, 356, 10, 'rgba(190,220,255,0.55)');
+  }
+
+  function render() {
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+
+    if (state === 'title') {
+      drawTitle();
+      return;
+    }
+
+    ctx.save();
+    if (shake > 0.5) {
+      ctx.translate(rand(-shake, shake) * 0.35, rand(-shake, shake) * 0.35);
+    }
+
+    if (phase === 'surface') drawSurfaceScene();
+    else drawCavernScene();
+
+    ctx.restore();
+
+    drawHUD();
+    drawMessage();
+    drawBanner();
+    drawBombOverlay();
+    drawCoreBoomOverlay();
+    drawLevelClear();
+
+    if (flash > 0.01) {
+      ctx.fillStyle = 'rgba(255,255,255,' + (flash * 0.35) + ')';
+      ctx.fillRect(0, 0, W, H);
+    }
+
+    if (paused) drawPause();
+    if (state === 'gameover') drawGameOver();
+  }
+
+  /* ============================================================
+     Main loop
+     ============================================================ */
+  let last = 0;
+  function frame(ts) {
+    if (!last) last = ts;
+    let dt = (ts - last) / 1000;
+    last = ts;
+    dt = clamp(dt, 0, 0.05);
+    time += dt;
+
+    if (!paused) update(dt);
+    render();
+    requestAnimationFrame(frame);
+  }
+
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
