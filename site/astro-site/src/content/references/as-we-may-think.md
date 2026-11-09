@@ -211,7 +211,7 @@ A new symbolism, probably positional, must apparently precede the reduction of m
 
 ## HOW TO CONSULT THE RECORD-MACHINES: EXAMINE THE FILES AND SELECT RELATED ITEMS
 
-> *Identifiying the core problem—we can create vast records but cannot effectively access them; contrasting sequential selection with more sophisticated hierarchical appraoches.
+> *Identifiying the core problem—we can create vast records but cannot effectively access them; contrasting sequential selection with more sophisticated hierarchical approaches.*
 
 So much for the manipulation of ideas and their insertion into the record. Thus far we seem to be worse off than before—for we can enormously extend the record; yet even in its present bulk we can hardly consult it. This is a much larger matter than merely the extraction of data for the purposes of scientific research; it involves the entire process by which man profits by his inheritance of acquired knowledge. The prime action of use is selection, and here we are halting indeed. There may be millions of fine thoughts, and the account of the experience on which they are based, all encased within stone walls of acceptable architectural form; but if the scholar can get at only one a week by diligent search, his syntheses are not likely to keep up with the current scene.
 
