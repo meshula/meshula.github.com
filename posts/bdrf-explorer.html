@@ -1,0 +1,1594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Disney Principled BRDF Explorer</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Three.js and OrbitControls -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+  <!-- FontAwesome for technical UI icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+    
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0b0d11;
+      color: #c9d1d9;
+      overflow: hidden;
+    }
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    /* Custom dark scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #11141a;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2a303c;
+      border-radius: 3px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3e4756;
+    }
+    
+    /* Range input styling for CAD / Technical vibe */
+    input[type=range] {
+      -webkit-appearance: none;
+      background: #1e2430;
+      height: 4px;
+      border-radius: 2px;
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #38bdf8;
+      cursor: pointer;
+      border: 2px solid #0f172a;
+      box-shadow: 0 0 6px rgba(56, 189, 248, 0.5);
+      transition: transform 0.1s, background-color 0.1s;
+    }
+    input[type=range]::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+      background: #7dd3fc;
+    }
+    .panel-glass {
+      background: rgba(15, 18, 25, 0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .tab-btn.active {
+      background: #1e293b;
+      color: #38bdf8;
+      border-bottom: 2px solid #38bdf8;
+    }
+    .canvas-grid {
+      background-image: 
+        radial-gradient(circle at 50% 50%, rgba(30, 41, 59, 0.4) 0%, transparent 80%),
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+      background-size: 100% 100%, 24px 24px, 24px 24px;
+    }
+  </style>
+</head>
+<body class="w-screen h-screen flex flex-col antialiased">
+
+  <!-- Top Navigation & Global Header -->
+  <header class="h-12 bg-[#0d1117] border-b border-[#21262d] flex items-center justify-between px-4 z-20 flex-shrink-0">
+    <div class="flex items-center space-x-3">
+      <div class="flex items-center justify-center w-7 h-7 rounded bg-gradient-to-br from-cyan-500 to-blue-600 text-white font-bold text-xs shadow-md shadow-cyan-500/20">
+        <i class="fa-solid fa-shapes"></i>
+      </div>
+      <div class="flex items-baseline space-x-2">
+        <h1 class="text-sm font-semibold tracking-wide text-gray-100 flex items-center gap-1.5">
+          BRDF EXPLORER <span class="text-xs px-1.5 py-0.5 rounded bg-blue-900/60 text-cyan-400 font-mono font-normal border border-cyan-800/50">WDAS 2012</span>
+        </h1>
+        <span class="text-xs text-gray-500 hidden sm:inline">Brent Burley Principled Model</span>
+      </div>
+    </div>
+
+    <!-- Center Quick Presets -->
+    <div class="hidden md:flex items-center space-x-1.5 text-xs">
+      <span class="text-gray-400 mr-1 text-[11px] font-medium tracking-wider uppercase">Presets:</span>
+      <select id="presetSelect" class="bg-[#161b22] text-cyan-300 border border-[#30363d] rounded px-2.5 py-1 text-xs focus:outline-none focus:border-cyan-500 transition-colors">
+        <option value="custom">Select Preset...</option>
+        <option value="carPaint">Car Paint (Metallic Red)</option>
+        <option value="brushedCopper">Brushed Copper (Anisotropic)</option>
+        <option value="redVelvet">Red Velvet (High Sheen)</option>
+        <option value="mattePlastic">Matte Plastic (Rough Dielectric)</option>
+        <option value="goldIngot">Gold Ingot (Smooth Metal)</option>
+        <option value="jadeMilk">Jade / Milk (High Subsurface)</option>
+        <option value="wetClay">Wet Clay</option>
+        <option value="pearlySatin">Pearlescent Satin</option>
+      </select>
+    </div>
+
+    <!-- Right Controls / Toggles -->
+    <div class="flex items-center space-x-2 text-xs">
+      <button id="toggleWireframeBtn" title="Toggle Surface Wireframe" class="p-1.5 px-2.5 rounded bg-[#161b22] hover:bg-[#21262d] border border-[#30363d] text-gray-300 hover:text-white transition">
+        <i class="fa-solid fa-border-all mr-1"></i> Wire
+      </button>
+      <button id="toggleEnvBtn" title="Toggle Studio Reflection Map" class="p-1.5 px-2.5 rounded bg-[#161b22] hover:bg-[#21262d] border border-[#30363d] text-cyan-400 hover:text-cyan-300 transition">
+        <i class="fa-solid fa-circle-half-stroke mr-1"></i> Env IBL
+      </button>
+      <button id="openGlslBtn" class="p-1.5 px-3 rounded bg-blue-600/30 hover:bg-blue-600/50 text-cyan-300 border border-blue-500/40 font-medium transition flex items-center gap-1.5">
+        <i class="fa-solid fa-code text-[11px]"></i> GLSL Shader
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Multi-pane Workspace -->
+  <main class="flex-1 flex overflow-hidden relative">
+
+    <!-- Left: 3D Viewport & Visualizer -->
+    <div id="viewportContainer" class="flex-1 relative h-full flex flex-col bg-[#080a0e] canvas-grid">
+      <!-- 3D Canvas element -->
+      <div id="canvas3dContainer" class="w-full h-full relative cursor-grab active:cursor-grabbing"></div>
+
+      <!-- Overlaid 3D Viewport Controls / Geometry Switcher -->
+      <div class="absolute top-3 left-3 flex items-center space-x-1.5 bg-[#0f141c]/90 border border-[#232936] rounded-md p-1 shadow-xl backdrop-blur-md z-10">
+        <span class="text-[11px] text-gray-400 font-mono px-2 uppercase tracking-wider">Mesh:</span>
+        <button data-geo="sphere" class="geo-btn active px-2.5 py-1 text-xs rounded font-medium text-gray-200 bg-[#1e2738] hover:text-white transition">Sphere</button>
+        <button data-geo="torusKnot" class="geo-btn px-2.5 py-1 text-xs rounded font-medium text-gray-400 hover:text-white transition">Torus Knot</button>
+        <button data-geo="shaderBall" class="geo-btn px-2.5 py-1 text-xs rounded font-medium text-gray-400 hover:text-white transition">Shader Ball</button>
+        <button data-geo="plane" class="geo-btn px-2.5 py-1 text-xs rounded font-medium text-gray-400 hover:text-white transition">Aniso Plate</button>
+        <button data-geo="cylinder" class="geo-btn px-2.5 py-1 text-xs rounded font-medium text-gray-400 hover:text-white transition">Cylinder</button>
+      </div>
+
+      <!-- Light Control floating badge -->
+      <div class="absolute bottom-3 left-3 bg-[#0f141c]/90 border border-[#232936] rounded-md px-3 py-2 text-xs text-gray-300 shadow-xl backdrop-blur-md flex items-center space-x-3 pointer-events-auto">
+        <div class="flex items-center space-x-2">
+          <i class="fa-regular fa-sun text-amber-400"></i>
+          <span class="font-mono text-[11px] text-gray-400">Light Elev:</span>
+          <input type="range" id="lightElev" min="-10" max="80" value="35" class="w-16 accent-amber-400">
+        </div>
+        <div class="flex items-center space-x-2 border-l border-[#232936] pl-3">
+          <span class="font-mono text-[11px] text-gray-400">Azimuth:</span>
+          <input type="range" id="lightAzimuth" min="0" max="360" value="45" class="w-16 accent-amber-400">
+        </div>
+        <div class="flex items-center space-x-1.5 border-l border-[#232936] pl-3">
+          <span class="font-mono text-[11px] text-gray-400">Intensity:</span>
+          <input type="range" id="lightIntensity" min="0.5" max="5.0" step="0.1" value="2.5" class="w-16 accent-amber-400">
+        </div>
+      </div>
+
+      <!-- Camera navigation helper badge -->
+      <div class="absolute top-3 right-3 text-[10px] text-gray-500 font-mono bg-black/40 px-2 py-1 rounded border border-white/5 pointer-events-none">
+        L-Click: Rotate • R-Click: Pan • Wheel: Zoom
+      </div>
+    </div>
+
+    <!-- Middle: 2D BRDF Plotter Panel (WDAS Style) -->
+    <div id="plotterPanel" class="w-[360px] lg:w-[420px] bg-[#0d1017] border-l border-[#1f242e] flex flex-col z-10 transition-all duration-200">
+      <!-- Plotter Header -->
+      <div class="p-3 border-b border-[#1f242e] flex items-center justify-between bg-[#111620]">
+        <div class="flex items-center space-x-2">
+          <i class="fa-solid fa-chart-line text-cyan-400 text-xs"></i>
+          <span class="text-xs font-semibold tracking-wider text-gray-200 uppercase font-mono">BRDF Slice Analyzer</span>
+        </div>
+        <!-- Scale switch -->
+        <div class="flex items-center bg-[#090b10] p-0.5 rounded border border-[#252b38] text-[11px]">
+          <button id="plotLinearBtn" class="px-2 py-0.5 rounded text-cyan-300 font-medium bg-[#1e2533]">Linear</button>
+          <button id="plotLogBtn" class="px-2 py-0.5 rounded text-gray-400 hover:text-gray-200">Log10</button>
+        </div>
+      </div>
+
+      <!-- Plot Angle Configuration Bar -->
+      <div class="px-3 py-2 bg-[#0f131c] border-b border-[#1f242e] grid grid-cols-2 gap-2 text-[11px] font-mono">
+        <div>
+          <label class="text-gray-400 block text-[10px] mb-0.5">X-AXIS SWEEP:</label>
+          <select id="plotSliceMode" class="w-full bg-[#181d28] text-gray-200 border border-[#2b3345] rounded px-2 py-1 text-xs">
+            <option value="theta_h">&theta;_h (Half Angle Sweep, &theta;_d=0&deg;)</option>
+            <option value="theta_d">&theta;_d (Diff Angle Sweep, &theta;_h=0&deg;)</option>
+            <option value="theta_l">&theta;_l (Incident Angle, &theta;_v=0&deg;)</option>
+          </select>
+        </div>
+        <div>
+          <label class="text-gray-400 block text-[10px] mb-0.5">FIXED ANGLE (&deg;):</label>
+          <div class="flex items-center space-x-1.5">
+            <input type="range" id="fixedAngleSlider" min="0" max="89" value="0" class="w-full">
+            <span id="fixedAngleVal" class="text-cyan-400 w-7 text-right">0&deg;</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Graph Canvas Container -->
+      <div class="p-3 flex-1 flex flex-col min-h-[220px]">
+        <div class="relative w-full flex-1 bg-[#090c12] rounded border border-[#1e2535] overflow-hidden flex flex-col">
+          <canvas id="brdfCanvas" class="w-full h-full block cursor-crosshair"></canvas>
+          <div id="plotCrosshairInfo" class="absolute top-2 left-2 bg-black/85 text-[10px] font-mono p-1.5 rounded border border-gray-700 pointer-events-none text-gray-300 leading-tight">
+            Hover graph to sample
+          </div>
+        </div>
+
+        <!-- Lobes Legend with visibility toggles -->
+        <div class="mt-2.5 grid grid-cols-3 gap-1.5 text-[10px] font-mono select-none">
+          <label class="flex items-center space-x-1.5 cursor-pointer bg-[#141822] p-1 rounded border border-[#222938]">
+            <input type="checkbox" id="showTotal" checked class="accent-cyan-400">
+            <span class="w-2.5 h-1 rounded bg-cyan-400"></span>
+            <span class="text-gray-200">Total BRDF</span>
+          </label>
+          <label class="flex items-center space-x-1.5 cursor-pointer bg-[#141822] p-1 rounded border border-[#222938]">
+            <input type="checkbox" id="showDiffuse" checked class="accent-amber-400">
+            <span class="w-2.5 h-1 rounded bg-amber-400"></span>
+            <span class="text-amber-200">Diffuse</span>
+          </label>
+          <label class="flex items-center space-x-1.5 cursor-pointer bg-[#141822] p-1 rounded border border-[#222938]">
+            <input type="checkbox" id="showSpecular" checked class="accent-blue-400">
+            <span class="w-2.5 h-1 rounded bg-blue-400"></span>
+            <span class="text-blue-200">Specular</span>
+          </label>
+          <label class="flex items-center space-x-1.5 cursor-pointer bg-[#141822] p-1 rounded border border-[#222938]">
+            <input type="checkbox" id="showSheen" checked class="accent-fuchsia-400">
+            <span class="w-2.5 h-1 rounded bg-fuchsia-400"></span>
+            <span class="text-fuchsia-200">Sheen</span>
+          </label>
+          <label class="flex items-center space-x-1.5 cursor-pointer bg-[#141822] p-1 rounded border border-[#222938]">
+            <input type="checkbox" id="showClearcoat" checked class="accent-emerald-400">
+            <span class="w-2.5 h-1 rounded bg-emerald-400"></span>
+            <span class="text-emerald-200">Clearcoat</span>
+          </label>
+          <div class="text-[9px] text-gray-500 flex items-center justify-end pr-1">
+            &pi;·f_r response
+          </div>
+        </div>
+      </div>
+
+      <!-- Formula Note -->
+      <div class="px-3 pb-3">
+        <div class="bg-[#0b0f16] border border-[#1b2230] rounded p-2 text-[10px] text-gray-400 font-mono space-y-1">
+          <div class="text-cyan-400 font-semibold flex items-center justify-between">
+            <span>BRENT BURLEY (2012) BRDF</span>
+            <span class="text-[9px] text-gray-500">Walt Disney Animation</span>
+          </div>
+          <p class="leading-relaxed text-gray-400">
+            Evaluates: <span class="text-amber-300">f_d</span> (Burley Retro-Diffuse / Subsurf) + <span class="text-blue-300">f_s</span> (GTR2 Specular + Separable Smith G + Schlick) + <span class="text-fuchsia-300">f_sheen</span> + <span class="text-emerald-300">f_clearcoat</span> (GTR1 Berry).
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Parameter Control Panel -->
+    <div id="parameterPanel" class="w-80 md:w-88 bg-[#0e121a] border-l border-[#1f242e] flex flex-col h-full z-10 overflow-y-auto">
+      <div class="p-3 border-b border-[#1f242e] bg-[#121622] sticky top-0 z-20 flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+          <i class="fa-solid fa-sliders text-cyan-400 text-xs"></i>
+          <span class="text-xs font-semibold tracking-wider text-gray-200 uppercase font-mono">Parameters</span>
+        </div>
+        <button id="resetDefaultsBtn" class="text-[11px] text-gray-400 hover:text-cyan-300 font-mono transition">
+          <i class="fa-solid fa-rotate-left mr-1"></i>Reset
+        </button>
+      </div>
+
+      <div class="p-3.5 space-y-3.5 text-xs">
+        
+        <!-- Base Color -->
+        <div class="space-y-1.5 pb-2 border-b border-[#1b212e]">
+          <div class="flex justify-between items-center">
+            <span class="font-medium text-gray-200 flex items-center gap-1.5">
+              <span class="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-red-500 via-green-500 to-blue-500 inline-block"></span>
+              Base Color
+            </span>
+            <div class="flex items-center space-x-1.5">
+              <input type="color" id="baseColorPicker" value="#d8523c" class="w-6 h-6 rounded border border-gray-700 cursor-pointer bg-transparent">
+              <span id="baseColorHex" class="font-mono text-[11px] text-cyan-400">#D8523C</span>
+            </div>
+          </div>
+          <p class="text-[10px] text-gray-500 leading-tight">Surface albedo / reflectance at normal incidence for dielectrics and tint for conductors.</p>
+        </div>
+
+        <!-- Subsurface -->
+        <div class="param-group">
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-gray-300 font-mono text-[11px] flex items-center gap-1" title="Subsurface scattering approximation">
+              Subsurface <i class="fa-regular fa-circle-question text-gray-600 text-[10px]"></i>
+            </label>
+            <span id="val_subsurface" class="font-mono text-cyan-400 text-[11px]">0.00</span>
+          </div>
+          <input type="range" id="param_subsurface" min="0" max="1" step="0.01" value="0.0" class="w-full">
+          <div class="flex justify-between text-[9px] text-gray-600 font-mono mt-0.5">
+            <span>Lambert/Burley</span>
+            <span>Hanrahan-Krueger</span>
+          </div>
+        </div>
+
+        <!-- Metallic -->
+        <div class="param-group">
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-gray-300 font-mono text-[11px]" title="Dielectric vs Conductor blend">
+              Metallic
+            </label>
+            <span id="val_metallic" class="font-mono text-cyan-400 text-[11px]">0.00</span>
+          </div>
+          <input type="range" id="param_metallic" min="0" max="1" step="0.01" value="0.0" class="w-full">
+          <div class="flex justify-between text-[9px] text-gray-600 font-mono mt-0.5">
+            <span>Dielectric (0.0)</span>
+            <span>Conductor (1.0)</span>
+          </div>
+        </div>
+
+        <!-- Specular -->
+        <div class="param-group">
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-gray-300 font-mono text-[11px]" title="Incident specular amount (F0 scaling for dielectrics)">
+              Specular (F0)
+            </label>
+            <span id="val_specular" class="font-mono text-cyan-400 text-[11px]">0.50</span>
+          </div>
+          <input type="range" id="param_specular" min="0" max="1" step="0.01" value="0.5" class="w-full">
+          <div class="flex justify-between text-[9px] text-gray-600 font-mono mt-0.5">
+            <span>0% (IOR 1.0)</span>
+            <span>8% (Glass/Plastic ~1.5)</span>
+          </div>
+        </div>
+
+        <!-- Specular Tint -->
+        <div class="param-group">
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-gray-300 font-mono text-[11px]" title="Tints specular towards base color luminance">
+              Specular Tint
+            </label>
+            <span id="val_specularTint" class="font-mono text-cyan-400 text-[11px]">0.00</span>
+          </div>
+          <input type="range" id="param_specularTint" min="0" max="1" step="0.01" value="0.0" class="w-full">
+        </div>
+
+        <!-- Roughness -->
+        <div class="param-group bg-[#131722] p-2 rounded border border-[#212738]">
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-cyan-300 font-mono text-[11px] font-semibold" title="Linear roughness = sqrt(alpha)">
+              Roughness (&alpha;)
+            </label>
+            <span id="val_roughness" class="font-mono text-cyan-400 text-[11px]">0.35</span>
+          </div>
+          <input type="range" id="param_roughness" min="0.001" max="1" step="0.005" value="0.35" class="w-full accent-cyan-400">
+          <div class="flex justify-between text-[9px] text-gray-500 font-mono mt-0.5">
+            <span>Glossy mirror</span>
+            <span>Microfacet diffuse</span>
+          </div>
+        </div>
+
+        <!-- Anisotropic -->
+        <div class="param-group">
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-gray-300 font-mono text-[11px]" title="Degree of microfacet elongation">
+              Anisotropic
+            </label>
+            <span id="val_anisotropic" class="font-mono text-cyan-400 text-[11px]">0.00</span>
+          </div>
+          <input type="range" id="param_anisotropic" min="0" max="1" step="0.01" value="0.0" class="w-full">
+          <div class="flex justify-between text-[9px] text-gray-600 font-mono mt-0.5">
+            <span>Isotropic</span>
+            <span>Aspect Ratio &infin;</span>
+          </div>
+        </div>
+
+        <!-- Sheen -->
+        <div class="param-group">
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-gray-300 font-mono text-[11px]" title="Grazing angle sheen for cloth and fabric">
+              Sheen (Cloth Lobe)
+            </label>
+            <span id="val_sheen" class="font-mono text-cyan-400 text-[11px]">0.00</span>
+          </div>
+          <input type="range" id="param_sheen" min="0" max="1" step="0.01" value="0.0" class="w-full">
+        </div>
+
+        <!-- Sheen Tint -->
+        <div class="param-group">
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-gray-300 font-mono text-[11px]" title="Tints sheen towards base color">
+              Sheen Tint
+            </label>
+            <span id="val_sheenTint" class="font-mono text-cyan-400 text-[11px]">0.50</span>
+          </div>
+          <input type="range" id="param_sheenTint" min="0" max="1" step="0.01" value="0.5" class="w-full">
+        </div>
+
+        <!-- Clearcoat -->
+        <div class="param-group bg-[#131722] p-2 rounded border border-[#212738]">
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-emerald-300 font-mono text-[11px] font-semibold" title="Secondary glossy specular layer">
+              Clearcoat
+            </label>
+            <span id="val_clearcoat" class="font-mono text-cyan-400 text-[11px]">0.00</span>
+          </div>
+          <input type="range" id="param_clearcoat" min="0" max="1" step="0.01" value="0.0" class="w-full accent-emerald-400">
+        </div>
+
+        <!-- Clearcoat Gloss -->
+        <div class="param-group">
+          <div class="flex justify-between items-center mb-1">
+            <label class="text-gray-300 font-mono text-[11px]" title="Glossiness of clearcoat (maps to Berry GTR1 alpha)">
+              Clearcoat Gloss
+            </label>
+            <span id="val_clearcoatGloss" class="font-mono text-cyan-400 text-[11px]">1.00</span>
+          </div>
+          <input type="range" id="param_clearcoatGloss" min="0" max="1" step="0.01" value="1.0" class="w-full">
+          <div class="flex justify-between text-[9px] text-gray-600 font-mono mt-0.5">
+            <span>Satin / Hazy</span>
+            <span>High Gloss mirror</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- GLSL Code Inspection Modal -->
+  <div id="glslModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-[#0f131c] border border-[#262f40] rounded-lg max-w-4xl w-full h-[85vh] flex flex-col shadow-2xl overflow-hidden">
+      <div class="px-4 py-3 border-b border-[#262f40] flex items-center justify-between bg-[#141a26]">
+        <div class="flex items-center space-x-2">
+          <i class="fa-solid fa-laptop-code text-cyan-400"></i>
+          <h3 class="font-mono text-xs font-semibold text-gray-200">GLSL BURLEY PRINCIPLED BRDF IMPLEMENTATION</h3>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button id="copyGlslBtn" class="px-2.5 py-1 text-xs font-mono bg-[#1d2433] hover:bg-[#283247] border border-[#354159] text-cyan-300 rounded transition flex items-center gap-1.5">
+            <i class="fa-regular fa-copy"></i> <span id="copyBtnText">Copy Code</span>
+          </button>
+          <button id="closeGlslBtn" class="text-gray-400 hover:text-white px-2 py-1 text-base">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      </div>
+      <div class="flex-1 p-3 overflow-hidden bg-[#0a0d14]">
+        <pre class="w-full h-full p-4 bg-[#07090e] rounded border border-[#1b2230] text-gray-300 font-mono text-[11px] leading-relaxed overflow-auto select-text" id="glslCodeContainer"></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="toast" class="fixed bottom-5 right-5 bg-cyan-600 text-white font-mono text-xs px-4 py-2 rounded shadow-lg pointer-events-none transition-opacity duration-300 opacity-0 z-50">
+    Copied to clipboard!
+  </div>
+
+  <!-- ================= LOGIC & SHADER CODE ================= -->
+  <script>
+    // --- GLSL SHADER CODE ---
+    const burleyBRDF_GLSL = `
+// Disney Principled BRDF (Brent Burley, Walt Disney Animation Studios 2012)
+#define PI 3.1415926535897932384626433832795
+
+// Square helper
+float sqr(float x) { return x * x; }
+
+// Schlick Fresnel approximation
+float fresnelSchlick(float cosTheta) {
+    float m = clamp(1.0 - cosTheta, 0.0, 1.0);
+    return pow(m, 5.0);
+}
+
+vec3 fresnelSchlickVec(vec3 F0, float cosTheta) {
+    return F0 + (1.0 - F0) * pow(clamp(1.0 - cosTheta, 0.0, 1.0), 5.0);
+}
+
+// GTR1 (Berry distribution) for Clearcoat
+float GTR1(float NdotH, float a) {
+    if (a >= 1.0) return 1.0 / PI;
+    float a2 = a * a;
+    float t = 1.0 + (a2 - 1.0) * NdotH * NdotH;
+    return (a2 - 1.0) / (PI * log(a2) * t);
+}
+
+// GTR2 (GGX) distribution for specular lobe
+float GTR2(float NdotH, float a) {
+    float a2 = a * a;
+    float t = 1.0 + (a2 - 1.0) * NdotH * NdotH;
+    return a2 / (PI * t * t);
+}
+
+// Anisotropic GTR2
+float GTR2_aniso(float NdotH, float HdotX, float HdotY, float ax, float ay) {
+    float d = sqr(HdotX / ax) + sqr(HdotY / ay) + NdotH * NdotH;
+    return 1.0 / (PI * ax * ay * sqr(d));
+}
+
+// Smith GGX Masking-Shadowing for isotropic specular
+float smithG_GGX(float NdotV, float alphaG) {
+    float a = alphaG * alphaG;
+    float b = NdotV * NdotV;
+    return 1.0 / (NdotV + sqrt(a + b - a * b));
+}
+
+// Anisotropic Smith GGX Masking-Shadowing
+float smithG_GGX_aniso(float NdotV, float VdotX, float VdotY, float ax, float ay) {
+    float d = sqr(VdotX * ax) + sqr(VdotY * ay) + sqr(NdotV);
+    return 1.0 / (NdotV + sqrt(d));
+}
+
+// Evaluates the complete Burley Principled BRDF for an incident light (L) and view direction (V)
+vec3 evaluateDisneyBRDF(
+    vec3 N, vec3 V, vec3 L, vec3 X, vec3 Y,
+    vec3 baseColor,
+    float subsurface,
+    float metallic,
+    float specular,
+    float specularTint,
+    float roughness,
+    float anisotropic,
+    float sheen,
+    float sheenTint,
+    float clearcoat,
+    float clearcoatGloss
+) {
+    float NdotL = dot(N, L);
+    float NdotV = dot(N, V);
+    if (NdotL <= 0.0 || NdotV <= 0.0) return vec3(0.0);
+
+    vec3 H = normalize(L + V);
+    float NdotH = clamp(dot(N, H), 0.0, 1.0);
+    float LdotH = clamp(dot(L, H), 0.0, 1.0);
+    NdotL = clamp(NdotL, 0.001, 1.0);
+    NdotV = clamp(NdotV, 0.001, 1.0);
+
+    // Luminance for tint calculations
+    float lum = dot(baseColor, vec3(0.3, 0.59, 0.11));
+    vec3 cTint = lum > 0.0 ? baseColor / lum : vec3(1.0);
+    vec3 cSpec0 = mix(specular * 0.08 * mix(vec3(1.0), cTint, specularTint), baseColor, metallic);
+    vec3 cSheen = mix(vec3(1.0), cTint, sheenTint);
+
+    // ----------------- DIFFUSE LOBE (Burley Retro-reflection) -----------------
+    float FL = fresnelSchlick(NdotL);
+    float FV = fresnelSchlick(NdotV);
+    float Fd90 = 0.5 + 2.0 * roughness * sqr(LdotH);
+    float Fd = mix(1.0, Fd90, FL) * mix(1.0, Fd90, FV);
+
+    // Hanrahan-Krueger style subsurface approximation
+    float Fss90 = roughness * sqr(LdotH);
+    float Fss = mix(1.0, Fss90, FL) * mix(1.0, Fss90, FV);
+    float ss = 1.25 * (Fss * (1.0 / (NdotL + NdotV) - 0.5) + 0.5);
+
+    // Mix standard retro-diffuse and subsurface
+    vec3 f_diffuse = (1.0 - metallic) * (baseColor / PI) * mix(Fd, ss, subsurface);
+
+    // ----------------- PRIMARY SPECULAR LOBE (GTR2 / GGX) -------------------
+    float aspect = sqrt(1.0 - anisotropic * 0.9);
+    float ax = max(0.001, sqr(roughness) / aspect);
+    float ay = max(0.001, sqr(roughness) * aspect);
+    
+    float Ds = GTR2_aniso(NdotH, dot(H, X), dot(H, Y), ax, ay);
+    float Gs = smithG_GGX_aniso(NdotL, dot(L, X), dot(L, Y), ax, ay) *
+               smithG_GGX_aniso(NdotV, dot(V, X), dot(V, Y), ax, ay);
+    vec3 Fs = fresnelSchlickVec(cSpec0, LdotH);
+    vec3 f_specular = Gs * Fs * Ds;
+
+    // ----------------- SHEEN LOBE -----------------
+    float Fh = fresnelSchlick(LdotH);
+    vec3 f_sheen = (1.0 - metallic) * sheen * cSheen * Fh;
+
+    // ----------------- CLEARCOAT LOBE (GTR1 Berry) -----------------
+    // Roughness for clearcoat: interpolate alpha from 0.1 to 0.001
+    float clearcoatAlpha = mix(0.1, 0.001, clearcoatGloss);
+    float Dr = GTR1(NdotH, clearcoatAlpha);
+    float Fr = mix(0.04, 1.0, Fh);
+    // Smith G with alpha=0.25 as prescribed in Disney paper
+    float Gr = smithG_GGX(NdotL, 0.25) * smithG_GGX(NdotV, 0.25);
+    vec3 f_clearcoat = vec3(0.25 * clearcoat * Gr * Fr * Dr);
+
+    return (f_diffuse + f_specular + f_sheen) + f_clearcoat;
+}
+`;
+
+    const vertexShader = `
+varying vec3 vNormal;
+varying vec3 vWorldPosition;
+varying vec3 vTangent;
+varying vec3 vBitangent;
+varying vec2 vUv;
+
+void main() {
+    vUv = uv;
+    vec4 worldPos = modelMatrix * vec4(position, 1.0);
+    vWorldPosition = worldPos.xyz;
+    
+    // Normal & tangent in world space
+    vNormal = normalize(mat3(modelMatrix) * normal);
+    
+    // Approximate tangent frame for geometry lacking explicit tangents
+    vec3 c1 = cross(vNormal, vec3(0.0, 0.0, 1.0));
+    vec3 c2 = cross(vNormal, vec3(0.0, 1.0, 0.0));
+    vec3 tangent = length(c1) > length(c2) ? c1 : c2;
+    vTangent = normalize(tangent);
+    vBitangent = normalize(cross(vNormal, vTangent));
+
+    gl_Position = projectionMatrix * viewMatrix * worldPos;
+}
+`;
+
+    const fragmentShader = `
+uniform vec3 u_lightPos;
+uniform vec3 u_lightColor;
+uniform float u_lightIntensity;
+uniform vec3 u_cameraPos;
+
+// Burley Parameters
+uniform vec3 u_baseColor;
+uniform float u_subsurface;
+uniform float u_metallic;
+uniform float u_specular;
+uniform float u_specularTint;
+uniform float u_roughness;
+uniform float u_anisotropic;
+uniform float u_sheen;
+uniform float u_sheenTint;
+uniform float u_clearcoat;
+uniform float u_clearcoatGloss;
+uniform int u_useEnv;
+
+varying vec3 vNormal;
+varying vec3 vWorldPosition;
+varying vec3 vTangent;
+varying vec3 vBitangent;
+varying vec2 vUv;
+
+${burleyBRDF_GLSL}
+
+// Synthetic Studio Environment map (Procedural HDR Sky / Softboxes)
+vec3 getEnvironmentRadiance(vec3 R, float roughness) {
+    // Ground bounce
+    vec3 col = mix(vec3(0.03, 0.04, 0.06), vec3(0.08, 0.12, 0.18), clamp(R.y * 0.5 + 0.5, 0.0, 1.0));
+    
+    // Key light softbox
+    vec3 keyDir = normalize(vec3(1.0, 1.5, 1.0));
+    float keyDot = max(0.0, dot(R, keyDir));
+    col += vec3(1.8, 1.7, 1.5) * pow(keyDot, mix(200.0, 4.0, roughness)) * 0.8;
+
+    // Rim fill light
+    vec3 fillDir = normalize(vec3(-1.5, 0.5, -1.0));
+    float fillDot = max(0.0, dot(R, fillDir));
+    col += vec3(0.8, 1.1, 1.5) * pow(fillDot, mix(80.0, 3.0, roughness)) * 0.5;
+
+    // Ambient overhead soft skylight
+    col += vec3(0.25, 0.32, 0.42) * max(0.0, R.y) * 0.6;
+    return col;
+}
+
+void main() {
+    vec3 N = normalize(vNormal);
+    vec3 V = normalize(u_cameraPos - vWorldPosition);
+    vec3 L = normalize(u_lightPos - vWorldPosition);
+    vec3 X = normalize(vTangent);
+    vec3 Y = normalize(vBitangent);
+
+    // Front-facing check
+    if (!gl_FrontFacing) N = -N;
+
+    // Direct Evaluation using Disney Principled BRDF
+    vec3 brdf = evaluateDisneyBRDF(
+        N, V, L, X, Y,
+        u_baseColor,
+        u_subsurface,
+        u_metallic,
+        u_specular,
+        u_specularTint,
+        u_roughness,
+        u_anisotropic,
+        u_sheen,
+        u_sheenTint,
+        u_clearcoat,
+        u_clearcoatGloss
+    );
+
+    float NdotL = max(0.0, dot(N, L));
+    vec3 directLight = brdf * u_lightColor * u_lightIntensity * NdotL;
+
+    // Subtle Environment IBL reflection if enabled
+    vec3 ibl = vec3(0.0);
+    if (u_useEnv == 1) {
+        vec3 R = reflect(-V, N);
+        vec3 envRadiance = getEnvironmentRadiance(R, u_roughness);
+        
+        // Split-sum approximate response for ambient
+        float NdotV = max(0.0, dot(N, V));
+        vec3 F0 = mix(u_specular * 0.08 * vec3(1.0), u_baseColor, u_metallic);
+        vec3 kS = fresnelSchlickVec(F0, NdotV);
+        vec3 kD = (1.0 - kS) * (1.0 - u_metallic);
+        
+        ibl = kD * u_baseColor * (getEnvironmentRadiance(N, 1.0) * 0.25) + kS * envRadiance * 0.35;
+        
+        // Add clearcoat reflection
+        if (u_clearcoat > 0.0) {
+            vec3 ccR = reflect(-V, N);
+            vec3 ccEnv = getEnvironmentRadiance(ccR, mix(0.1, 0.001, u_clearcoatGloss));
+            ibl += ccEnv * (0.04 * u_clearcoat * 0.5);
+        }
+    }
+
+    vec3 finalColor = directLight + ibl;
+
+    // Tone mapping (ACES approx) & Gamma Correction
+    finalColor = (finalColor * (2.51 * finalColor + 0.03)) / (finalColor * (2.43 * finalColor + 0.59) + 0.14);
+    finalColor = pow(clamp(finalColor, 0.0, 1.0), vec3(1.0 / 2.2));
+
+    gl_FragColor = vec4(finalColor, 1.0);
+}
+`;
+
+    // --- APPLICATION STATE ---
+    const params = {
+      baseColor: '#d8523c',
+      subsurface: 0.0,
+      metallic: 0.0,
+      specular: 0.5,
+      specularTint: 0.0,
+      roughness: 0.35,
+      anisotropic: 0.0,
+      sheen: 0.0,
+      sheenTint: 0.5,
+      clearcoat: 0.0,
+      clearcoatGloss: 1.0,
+      useEnv: 1,
+      wireframe: false,
+      lightElev: 35,
+      lightAzimuth: 45,
+      lightIntensity: 2.5
+    };
+
+    const presets = {
+      carPaint: {
+        baseColor: '#b81414',
+        subsurface: 0.0,
+        metallic: 0.85,
+        specular: 0.7,
+        specularTint: 0.2,
+        roughness: 0.28,
+        anisotropic: 0.0,
+        sheen: 0.0,
+        sheenTint: 0.0,
+        clearcoat: 1.0,
+        clearcoatGloss: 1.0
+      },
+      brushedCopper: {
+        baseColor: '#d47b59',
+        subsurface: 0.0,
+        metallic: 0.95,
+        specular: 0.9,
+        specularTint: 0.0,
+        roughness: 0.32,
+        anisotropic: 0.82,
+        sheen: 0.0,
+        sheenTint: 0.0,
+        clearcoat: 0.0,
+        clearcoatGloss: 0.5
+      },
+      redVelvet: {
+        baseColor: '#5e0717',
+        subsurface: 0.45,
+        metallic: 0.0,
+        specular: 0.25,
+        specularTint: 0.6,
+        roughness: 0.75,
+        anisotropic: 0.0,
+        sheen: 1.0,
+        sheenTint: 1.0,
+        clearcoat: 0.0,
+        clearcoatGloss: 0.5
+      },
+      mattePlastic: {
+        baseColor: '#2b78d6',
+        subsurface: 0.05,
+        metallic: 0.0,
+        specular: 0.5,
+        specularTint: 0.0,
+        roughness: 0.55,
+        anisotropic: 0.0,
+        sheen: 0.0,
+        sheenTint: 0.5,
+        clearcoat: 0.0,
+        clearcoatGloss: 1.0
+      },
+      goldIngot: {
+        baseColor: '#ffcf48',
+        subsurface: 0.0,
+        metallic: 1.0,
+        specular: 0.9,
+        specularTint: 0.0,
+        roughness: 0.12,
+        anisotropic: 0.15,
+        sheen: 0.0,
+        sheenTint: 0.0,
+        clearcoat: 0.1,
+        clearcoatGloss: 0.9
+      },
+      jadeMilk: {
+        baseColor: '#6ee7b7',
+        subsurface: 0.92,
+        metallic: 0.0,
+        specular: 0.5,
+        specularTint: 0.1,
+        roughness: 0.22,
+        anisotropic: 0.0,
+        sheen: 0.1,
+        sheenTint: 0.0,
+        clearcoat: 0.4,
+        clearcoatGloss: 0.85
+      },
+      wetClay: {
+        baseColor: '#6b4f3b',
+        subsurface: 0.3,
+        metallic: 0.0,
+        specular: 0.8,
+        specularTint: 0.0,
+        roughness: 0.18,
+        anisotropic: 0.0,
+        sheen: 0.0,
+        sheenTint: 0.5,
+        clearcoat: 0.6,
+        clearcoatGloss: 0.95
+      },
+      pearlySatin: {
+        baseColor: '#e2e8f0',
+        subsurface: 0.2,
+        metallic: 0.1,
+        specular: 0.6,
+        specularTint: 0.85,
+        roughness: 0.4,
+        anisotropic: 0.6,
+        sheen: 0.8,
+        sheenTint: 0.8,
+        clearcoat: 0.2,
+        clearcoatGloss: 0.7
+      }
+    };
+
+    // --- THREE.JS INITIALIZATION ---
+    let scene, camera, renderer, controls;
+    let brdfMaterial, currentMesh;
+    let lightGizmo, lightSphere;
+    const geometries = {};
+
+    function init3D() {
+      const container = document.getElementById('canvas3dContainer');
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      scene = new THREE.Scene();
+      scene.background = new THREE.Color(0x080a0e);
+
+      camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
+      camera.position.set(0, 1.2, 4.2);
+
+      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false, powerPreference: 'high-performance' });
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      container.appendChild(renderer.domElement);
+
+      controls = new THREE.OrbitControls(camera, renderer.domElement);
+      controls.enableDamping = true;
+      controls.dampingFactor = 0.05;
+      controls.maxDistance = 12;
+      controls.minDistance = 1.2;
+
+      // Convert hex to Three.Color
+      const baseCol = new THREE.Color(params.baseColor);
+
+      // Create Custom ShaderMaterial
+      brdfMaterial = new THREE.ShaderMaterial({
+        vertexShader: vertexShader,
+        fragmentShader: fragmentShader,
+        uniforms: {
+          u_lightPos: { value: new THREE.Vector3() },
+          u_lightColor: { value: new THREE.Color(1.0, 0.98, 0.92) },
+          u_lightIntensity: { value: params.lightIntensity },
+          u_cameraPos: { value: camera.position },
+          u_baseColor: { value: baseCol },
+          u_subsurface: { value: params.subsurface },
+          u_metallic: { value: params.metallic },
+          u_specular: { value: params.specular },
+          u_specularTint: { value: params.specularTint },
+          u_roughness: { value: params.roughness },
+          u_anisotropic: { value: params.anisotropic },
+          u_sheen: { value: params.sheen },
+          u_sheenTint: { value: params.sheenTint },
+          u_clearcoat: { value: params.clearcoat },
+          u_clearcoatGloss: { value: params.clearcoatGloss },
+          u_useEnv: { value: params.useEnv }
+        },
+        wireframe: params.wireframe
+      });
+
+      // Prepare Geometries
+      geometries.sphere = new THREE.SphereGeometry(1.0, 96, 64);
+      geometries.torusKnot = new THREE.TorusKnotGeometry(0.7, 0.26, 160, 32);
+      geometries.shaderBall = createShaderBallGeometry();
+      geometries.plane = new THREE.PlaneGeometry(2.0, 2.0, 64, 64);
+      geometries.cylinder = new THREE.CylinderGeometry(0.75, 0.75, 1.5, 64, 32);
+
+      // Default mesh
+      currentMesh = new THREE.Mesh(geometries.sphere, brdfMaterial);
+      scene.add(currentMesh);
+
+      // Light visualization marker (small glowing orb)
+      const lightMeshGeo = new THREE.SphereGeometry(0.08, 16, 16);
+      const lightMeshMat = new THREE.MeshBasicMaterial({ color: 0xffe6aa });
+      lightSphere = new THREE.Mesh(lightMeshGeo, lightMeshMat);
+      scene.add(lightSphere);
+
+      // Subtle coordinate ground pedestal
+      const gridHelper = new THREE.GridHelper(6, 24, 0x1f2937, 0x111827);
+      gridHelper.position.y = -1.05;
+      scene.add(gridHelper);
+
+      updateLightPosition();
+
+      // Window resize listener
+      window.addEventListener('resize', onWindowResize);
+    }
+
+    // Build a classic shader ball composite geometry (core + inner core + base ring)
+    function createShaderBallGeometry() {
+      const group = new THREE.Group();
+      
+      // Outer carved sphere
+      const outerSphere = new THREE.SphereGeometry(0.9, 64, 32);
+      const outerMesh = new THREE.Mesh(outerSphere, brdfMaterial);
+      group.add(outerMesh);
+
+      // Center glossy core sphere
+      const innerSphere = new THREE.SphereGeometry(0.5, 32, 32);
+      innerSphere.scale(1, 1, 1);
+      const innerMesh = new THREE.Mesh(innerSphere, brdfMaterial);
+      group.add(innerMesh);
+
+      // Stand pedestal ring
+      const ring = new THREE.CylinderGeometry(0.95, 1.05, 0.25, 48);
+      ring.translate(0, -0.85, 0);
+      const ringMesh = new THREE.Mesh(ring, brdfMaterial);
+      group.add(ringMesh);
+
+      return group;
+    }
+
+    function switchGeometry(type) {
+      if (!geometries[type]) return;
+
+      scene.remove(currentMesh);
+      if (type === 'shaderBall') {
+        currentMesh = geometries.shaderBall;
+      } else {
+        currentMesh = new THREE.Mesh(geometries[type], brdfMaterial);
+        if (type === 'plane') {
+          currentMesh.rotation.x = -Math.PI * 0.2;
+        }
+      }
+      scene.add(currentMesh);
+    }
+
+    function updateLightPosition() {
+      const phi = THREE.MathUtils.degToRad(90 - params.lightElev);
+      const theta = THREE.MathUtils.degToRad(params.lightAzimuth);
+      const radius = 3.2;
+
+      const x = radius * Math.sin(phi) * Math.sin(theta);
+      const y = radius * Math.cos(phi);
+      const z = radius * Math.sin(phi) * Math.cos(theta);
+
+      brdfMaterial.uniforms.u_lightPos.value.set(x, y, z);
+      lightSphere.position.set(x, y, z);
+    }
+
+    function onWindowResize() {
+      const container = document.getElementById('canvas3dContainer');
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height);
+      drawBRDFPlot();
+    }
+
+    // --- 2D BRDF SLICE ANALYZER (WDAS EXPLORER STYLE) ---
+    const plotCanvas = document.getElementById('brdfCanvas');
+    const plotCtx = plotCanvas.getContext('2d');
+    let isLogScale = false;
+    let mousePlotX = null;
+
+    // Evaluate CPU side of the Burley Model for arbitrary theta and phi
+    function evaluateBurleyLobeCPU(theta_h_rad, theta_d_rad, comp) {
+      const NdotH = Math.cos(theta_h_rad);
+      const LdotH = Math.cos(theta_d_rad);
+
+      // In the specular half-angle plane (theta_l = theta_h + theta_d, theta_v = theta_h - theta_d)
+      const theta_l = Math.abs(theta_h_rad + theta_d_rad);
+      const theta_v = Math.abs(theta_h_rad - theta_d_rad);
+
+      if (theta_l >= Math.PI * 0.5 || theta_v >= Math.PI * 0.5) return 0.0;
+
+      const NdotL = Math.max(0.0001, Math.cos(theta_l));
+      const NdotV = Math.max(0.0001, Math.cos(theta_v));
+
+      const rough = Math.max(0.001, params.roughness);
+      const alpha = rough * rough;
+
+      // Diffuse Fresnel
+      const FL = Math.pow(1.0 - NdotL, 5);
+      const FV = Math.pow(1.0 - NdotV, 5);
+      const Fd90 = 0.5 + 2.0 * rough * (LdotH * LdotH);
+      const Fd = (1.0 + (Fd90 - 1.0) * FL) * (1.0 + (Fd90 - 1.0) * FV);
+
+      // Subsurface HK
+      const Fss90 = rough * (LdotH * LdotH);
+      const Fss = (1.0 + (Fss90 - 1.0) * FL) * (1.0 + (Fss90 - 1.0) * FV);
+      const ss = 1.25 * (Fss * (1.0 / (NdotL + NdotV) - 0.5) + 0.5);
+
+      const f_diffuse = (1.0 - params.metallic) * (1.0 / Math.PI) * ((1.0 - params.subsurface) * Fd + params.subsurface * ss);
+
+      // Specular GTR2
+      const a2 = alpha * alpha;
+      const cos2Th = NdotH * NdotH;
+      const t = 1.0 + (a2 - 1.0) * cos2Th;
+      const Ds = a2 / (Math.PI * t * t);
+
+      // Smith G GGX
+      const gL = 1.0 / (NdotL + Math.sqrt(a2 + (1.0 - a2) * NdotL * NdotL));
+      const gV = 1.0 / (NdotV + Math.sqrt(a2 + (1.0 - a2) * NdotV * NdotV));
+      const Gs = gL * gV;
+
+      // Specular Schlick
+      const F0 = (1.0 - params.metallic) * (params.specular * 0.08) + params.metallic * 0.95;
+      const Fs = F0 + (1.0 - F0) * Math.pow(1.0 - LdotH, 5);
+      const f_specular = Ds * Gs * Fs;
+
+      // Sheen
+      const Fh = Math.pow(1.0 - LdotH, 5);
+      const f_sheen = (1.0 - params.metallic) * params.sheen * Fh;
+
+      // Clearcoat GTR1
+      const ccAlpha = 0.1 * (1.0 - params.clearcoatGloss) + 0.001 * params.clearcoatGloss;
+      const ccAlpha2 = ccAlpha * ccAlpha;
+      let Dr = 1.0 / Math.PI;
+      if (ccAlpha < 0.999) {
+        Dr = (ccAlpha2 - 1.0) / (Math.PI * Math.log(ccAlpha2) * (1.0 + (ccAlpha2 - 1.0) * cos2Th));
+      }
+      const Fr = 0.04 + (1.0 - 0.04) * Fh;
+      const Gr = (1.0 / (NdotL + Math.sqrt(0.0625 + 0.9375 * NdotL * NdotL))) *
+                 (1.0 / (NdotV + Math.sqrt(0.0625 + 0.9375 * NdotV * NdotV)));
+      const f_clearcoat = 0.25 * params.clearcoat * Gr * Fr * Dr;
+
+      if (comp === 'diffuse') return f_diffuse;
+      if (comp === 'specular') return f_specular;
+      if (comp === 'sheen') return f_sheen;
+      if (comp === 'clearcoat') return f_clearcoat;
+
+      return f_diffuse + f_specular + f_sheen + f_clearcoat;
+    }
+
+    function drawBRDFPlot() {
+      const rect = plotCanvas.getBoundingClientRect();
+      const width = rect.width * (window.devicePixelRatio || 1);
+      const height = rect.height * (window.devicePixelRatio || 1);
+
+      plotCanvas.width = width;
+      plotCanvas.height = height;
+
+      plotCtx.clearRect(0, 0, width, height);
+
+      const padLeft = 46 * (window.devicePixelRatio || 1);
+      const padRight = 16 * (window.devicePixelRatio || 1);
+      const padTop = 20 * (window.devicePixelRatio || 1);
+      const padBottom = 28 * (window.devicePixelRatio || 1);
+
+      const graphW = width - padLeft - padRight;
+      const graphH = height - padTop - padBottom;
+
+      const sweepMode = document.getElementById('plotSliceMode').value;
+      const fixedDeg = parseFloat(document.getElementById('fixedAngleSlider').value);
+      const fixedRad = THREE.MathUtils.degToRad(fixedDeg);
+
+      // Determine Y-scale range
+      const yMax = isLogScale ? 2.5 : 3.0;
+      const yMin = isLogScale ? -3.0 : 0.0;
+
+      // Coordinate transformers
+      function mapX(deg) {
+        return padLeft + (deg / 90.0) * graphW;
+      }
+      function mapY(val) {
+        if (isLogScale) {
+          const clamped = Math.max(1e-3, val);
+          const logVal = Math.log10(clamped);
+          const norm = (logVal - yMin) / (yMax - yMin);
+          return padTop + (1.0 - Math.min(Math.max(norm, 0), 1)) * graphH;
+        } else {
+          const norm = Math.min(Math.max(val / yMax, 0), 1);
+          return padTop + (1.0 - norm) * graphH;
+        }
+      }
+
+      // Draw Grid & Axes
+      plotCtx.strokeStyle = 'rgba(255, 255, 255, 0.07)';
+      plotCtx.lineWidth = 1;
+      plotCtx.fillStyle = '#6b7280';
+      plotCtx.font = `${10 * (window.devicePixelRatio || 1)}px monospace`;
+
+      // Vertical grid lines (Angles: 0, 15, 30, 45, 60, 75, 90)
+      for (let deg = 0; deg <= 90; deg += 15) {
+        const x = mapX(deg);
+        plotCtx.beginPath();
+        plotCtx.moveTo(x, padTop);
+        plotCtx.lineTo(x, padTop + graphH);
+        plotCtx.stroke();
+        plotCtx.fillText(`${deg}°`, x - (deg === 90 ? 16 : 8), padTop + graphH + 16 * (window.devicePixelRatio || 1));
+      }
+
+      // Horizontal grid lines
+      const ySteps = isLogScale ? [-3, -2, -1, 0, 1, 2] : [0, 0.5, 1.0, 1.5, 2.0, 2.5, 3.0];
+      for (const yVal of ySteps) {
+        const y = mapY(isLogScale ? Math.pow(10, yVal) : yVal);
+        plotCtx.beginPath();
+        plotCtx.moveTo(padLeft, y);
+        plotCtx.lineTo(padLeft + graphW, y);
+        plotCtx.stroke();
+        const label = isLogScale ? `1e${yVal}` : yVal.toFixed(1);
+        plotCtx.fillText(label, 6 * (window.devicePixelRatio || 1), y + 3 * (window.devicePixelRatio || 1));
+      }
+
+      // Plot curves
+      const curves = [
+        { id: 'showTotal', comp: 'total', color: '#22d3ee', width: 2.4 },
+        { id: 'showDiffuse', comp: 'diffuse', color: '#fbbf24', width: 1.6 },
+        { id: 'showSpecular', comp: 'specular', color: '#60a5fa', width: 1.8 },
+        { id: 'showSheen', comp: 'sheen', color: '#e879f9', width: 1.5 },
+        { id: 'showClearcoat', comp: 'clearcoat', color: '#34d399', width: 1.5 }
+      ];
+
+      const samples = 140;
+      curves.forEach(c => {
+        if (!document.getElementById(c.id).checked) return;
+
+        plotCtx.beginPath();
+        plotCtx.strokeStyle = c.color;
+        plotCtx.lineWidth = c.width * (window.devicePixelRatio || 1);
+
+        for (let i = 0; i <= samples; i++) {
+          const deg = (i / samples) * 89.9;
+          const rad = THREE.MathUtils.degToRad(deg);
+
+          let th_h, th_d;
+          if (sweepMode === 'theta_h') {
+            th_h = rad;
+            th_d = fixedRad;
+          } else if (sweepMode === 'theta_d') {
+            th_h = fixedRad;
+            th_d = rad;
+          } else {
+            // incident angle theta_l sweep with fixed view theta_v=0 -> th_h = deg/2, th_d = deg/2
+            th_h = rad * 0.5;
+            th_d = rad * 0.5;
+          }
+
+          const val = evaluateBurleyLobeCPU(th_h, th_d, c.comp);
+          const px = mapX(deg);
+          const py = mapY(val);
+
+          if (i === 0) plotCtx.moveTo(px, py);
+          else plotCtx.lineTo(px, py);
+        }
+        plotCtx.stroke();
+      });
+
+      // Hover Crosshair and Inspection Tooltip
+      if (mousePlotX !== null && mousePlotX >= padLeft && mousePlotX <= padLeft + graphW) {
+        const hoverDeg = ((mousePlotX - padLeft) / graphW) * 90.0;
+        const rad = THREE.MathUtils.degToRad(hoverDeg);
+
+        let th_h = (sweepMode === 'theta_h') ? rad : fixedRad;
+        let th_d = (sweepMode === 'theta_d') ? rad : fixedRad;
+        if (sweepMode === 'theta_l') {
+          th_h = rad * 0.5;
+          th_d = rad * 0.5;
+        }
+
+        const totalVal = evaluateBurleyLobeCPU(th_h, th_d, 'total');
+        const diffVal = evaluateBurleyLobeCPU(th_h, th_d, 'diffuse');
+        const specVal = evaluateBurleyLobeCPU(th_h, th_d, 'specular');
+
+        // Draw crosshair vertical line
+        plotCtx.strokeStyle = 'rgba(255, 255, 255, 0.4)';
+        plotCtx.setLineDash([4, 4]);
+        plotCtx.beginPath();
+        plotCtx.moveTo(mousePlotX, padTop);
+        plotCtx.lineTo(mousePlotX, padTop + graphH);
+        plotCtx.stroke();
+        plotCtx.setLineDash([]);
+
+        // Update Tooltip HTML
+        const tip = document.getElementById('plotCrosshairInfo');
+        tip.innerHTML = `
+          <div class="text-cyan-300 font-bold">&theta; = ${hoverDeg.toFixed(1)}&deg;</div>
+          <div>Total: <span class="text-white">${totalVal.toFixed(3)}</span></div>
+          <div>Diff: <span class="text-amber-300">${diffVal.toFixed(3)}</span></div>
+          <div>Spec: <span class="text-blue-300">${specVal.toFixed(3)}</span></div>
+        `;
+      }
+    }
+
+    // --- UI EVENT LISTENERS & SYNCHRONIZATION ---
+    function updateUniforms() {
+      brdfMaterial.uniforms.u_baseColor.value.set(params.baseColor);
+      brdfMaterial.uniforms.u_subsurface.value = params.subsurface;
+      brdfMaterial.uniforms.u_metallic.value = params.metallic;
+      brdfMaterial.uniforms.u_specular.value = params.specular;
+      brdfMaterial.uniforms.u_specularTint.value = params.specularTint;
+      brdfMaterial.uniforms.u_roughness.value = params.roughness;
+      brdfMaterial.uniforms.u_anisotropic.value = params.anisotropic;
+      brdfMaterial.uniforms.u_sheen.value = params.sheen;
+      brdfMaterial.uniforms.u_sheenTint.value = params.sheenTint;
+      brdfMaterial.uniforms.u_clearcoat.value = params.clearcoat;
+      brdfMaterial.uniforms.u_clearcoatGloss.value = params.clearcoatGloss;
+      brdfMaterial.uniforms.u_useEnv.value = params.useEnv;
+      brdfMaterial.uniforms.u_lightIntensity.value = params.lightIntensity;
+      brdfMaterial.wireframe = params.wireframe;
+
+      drawBRDFPlot();
+    }
+
+    function syncUIFromParams() {
+      document.getElementById('baseColorPicker').value = params.baseColor;
+      document.getElementById('baseColorHex').innerText = params.baseColor.toUpperCase();
+
+      const sliderKeys = [
+        'subsurface', 'metallic', 'specular', 'specularTint',
+        'roughness', 'anisotropic', 'sheen', 'sheenTint',
+        'clearcoat', 'clearcoatGloss'
+      ];
+
+      sliderKeys.forEach(key => {
+        const slider = document.getElementById(`param_${key}`);
+        const label = document.getElementById(`val_${key}`);
+        if (slider && label) {
+          slider.value = params[key];
+          label.innerText = parseFloat(params[key]).toFixed(2);
+        }
+      });
+
+      updateUniforms();
+    }
+
+    function setupEventListeners() {
+      // Parameter sliders
+      const sliderKeys = [
+        'subsurface', 'metallic', 'specular', 'specularTint',
+        'roughness', 'anisotropic', 'sheen', 'sheenTint',
+        'clearcoat', 'clearcoatGloss'
+      ];
+
+      sliderKeys.forEach(key => {
+        const slider = document.getElementById(`param_${key}`);
+        const label = document.getElementById(`val_${key}`);
+        slider.addEventListener('input', (e) => {
+          params[key] = parseFloat(e.target.value);
+          label.innerText = params[key].toFixed(2);
+          document.getElementById('presetSelect').value = 'custom';
+          updateUniforms();
+        });
+      });
+
+      // Color picker
+      const colorPicker = document.getElementById('baseColorPicker');
+      colorPicker.addEventListener('input', (e) => {
+        params.baseColor = e.target.value;
+        document.getElementById('baseColorHex').innerText = params.baseColor.toUpperCase();
+        document.getElementById('presetSelect').value = 'custom';
+        updateUniforms();
+      });
+
+      // Presets Selector
+      document.getElementById('presetSelect').addEventListener('change', (e) => {
+        const presetKey = e.target.value;
+        if (presets[presetKey]) {
+          Object.assign(params, presets[presetKey]);
+          syncUIFromParams();
+        }
+      });
+
+      // Reset Defaults
+      document.getElementById('resetDefaultsBtn').addEventListener('click', () => {
+        Object.assign(params, {
+          baseColor: '#d8523c',
+          subsurface: 0.0,
+          metallic: 0.0,
+          specular: 0.5,
+          specularTint: 0.0,
+          roughness: 0.35,
+          anisotropic: 0.0,
+          sheen: 0.0,
+          sheenTint: 0.5,
+          clearcoat: 0.0,
+          clearcoatGloss: 1.0
+        });
+        document.getElementById('presetSelect').value = 'custom';
+        syncUIFromParams();
+      });
+
+      // Geometry buttons
+      document.querySelectorAll('.geo-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.geo-btn').forEach(b => {
+            b.classList.remove('active', 'bg-[#1e2738]', 'text-white');
+            b.classList.add('text-gray-400');
+          });
+          btn.classList.add('active', 'bg-[#1e2738]', 'text-white');
+          btn.classList.remove('text-gray-400');
+          switchGeometry(btn.getAttribute('data-geo'));
+        });
+      });
+
+      // Wireframe & Environment toggles
+      document.getElementById('toggleWireframeBtn').addEventListener('click', function() {
+        params.wireframe = !params.wireframe;
+        this.classList.toggle('text-cyan-400', params.wireframe);
+        this.classList.toggle('border-cyan-500/50', params.wireframe);
+        updateUniforms();
+      });
+
+      document.getElementById('toggleEnvBtn').addEventListener('click', function() {
+        params.useEnv = params.useEnv === 1 ? 0 : 1;
+        this.classList.toggle('text-cyan-400', params.useEnv === 1);
+        this.classList.toggle('text-gray-500', params.useEnv === 0);
+        updateUniforms();
+      });
+
+      // Lighting sliders
+      document.getElementById('lightElev').addEventListener('input', (e) => {
+        params.lightElev = parseFloat(e.target.value);
+        updateLightPosition();
+      });
+      document.getElementById('lightAzimuth').addEventListener('input', (e) => {
+        params.lightAzimuth = parseFloat(e.target.value);
+        updateLightPosition();
+      });
+      document.getElementById('lightIntensity').addEventListener('input', (e) => {
+        params.lightIntensity = parseFloat(e.target.value);
+        updateUniforms();
+      });
+
+      // Plotter UI
+      document.getElementById('plotLinearBtn').addEventListener('click', function() {
+        isLogScale = false;
+        this.classList.add('text-cyan-300', 'bg-[#1e2533]');
+        this.classList.remove('text-gray-400');
+        document.getElementById('plotLogBtn').classList.remove('text-cyan-300', 'bg-[#1e2533]');
+        document.getElementById('plotLogBtn').classList.add('text-gray-400');
+        drawBRDFPlot();
+      });
+
+      document.getElementById('plotLogBtn').addEventListener('click', function() {
+        isLogScale = true;
+        this.classList.add('text-cyan-300', 'bg-[#1e2533]');
+        this.classList.remove('text-gray-400');
+        document.getElementById('plotLinearBtn').classList.remove('text-cyan-300', 'bg-[#1e2533]');
+        document.getElementById('plotLinearBtn').classList.add('text-gray-400');
+        drawBRDFPlot();
+      });
+
+      document.getElementById('plotSliceMode').addEventListener('change', drawBRDFPlot);
+      document.getElementById('fixedAngleSlider').addEventListener('input', (e) => {
+        document.getElementById('fixedAngleVal').innerText = `${e.target.value}°`;
+        drawBRDFPlot();
+      });
+
+      ['showTotal', 'showDiffuse', 'showSpecular', 'showSheen', 'showClearcoat'].forEach(id => {
+        document.getElementById(id).addEventListener('change', drawBRDFPlot);
+      });
+
+      plotCanvas.addEventListener('mousemove', (e) => {
+        const rect = plotCanvas.getBoundingClientRect();
+        mousePlotX = (e.clientX - rect.left) * (window.devicePixelRatio || 1);
+        drawBRDFPlot();
+      });
+
+      plotCanvas.addEventListener('mouseleave', () => {
+        mousePlotX = null;
+        document.getElementById('plotCrosshairInfo').innerText = 'Hover graph to sample';
+        drawBRDFPlot();
+      });
+
+      // GLSL Modal & Clipboard copy
+      const glslModal = document.getElementById('glslModal');
+      const glslContainer = document.getElementById('glslCodeContainer');
+
+      const fullGlslShaderDisplay = `// ==============================================================
+// Disney Principled BRDF
+// Author: Brent Burley (Walt Disney Animation Studios, SIGGRAPH 2012)
+// Complete WebGL GLSL Implementation
+// ==============================================================
+
+#define PI 3.14159265358979323846
+
+float sqr(float x) { return x * x; }
+
+float fresnelSchlick(float cosTheta) {
+    float m = clamp(1.0 - cosTheta, 0.0, 1.0);
+    return pow(m, 5.0);
+}
+
+vec3 fresnelSchlickVec(vec3 F0, float cosTheta) {
+    return F0 + (1.0 - F0) * pow(clamp(1.0 - cosTheta, 0.0, 1.0), 5.0);
+}
+
+// GTR1 (Berry distribution) for Clearcoat
+float GTR1(float NdotH, float a) {
+    if (a >= 1.0) return 1.0 / PI;
+    float a2 = a * a;
+    float t = 1.0 + (a2 - 1.0) * NdotH * NdotH;
+    return (a2 - 1.0) / (PI * log(a2) * t);
+}
+
+// GTR2 (GGX) distribution for specular lobe
+float GTR2(float NdotH, float a) {
+    float a2 = a * a;
+    float t = 1.0 + (a2 - 1.0) * NdotH * NdotH;
+    return a2 / (PI * t * t);
+}
+
+// Anisotropic GTR2
+float GTR2_aniso(float NdotH, float HdotX, float HdotY, float ax, float ay) {
+    float d = sqr(HdotX / ax) + sqr(HdotY / ay) + NdotH * NdotH;
+    return 1.0 / (PI * ax * ay * sqr(d));
+}
+
+// Smith GGX Masking-Shadowing
+float smithG_GGX(float NdotV, float alphaG) {
+    float a = alphaG * alphaG;
+    float b = NdotV * NdotV;
+    return 1.0 / (NdotV + sqrt(a + b - a * b));
+}
+
+// Anisotropic Smith GGX Masking-Shadowing
+float smithG_GGX_aniso(float NdotV, float VdotX, float VdotY, float ax, float ay) {
+    float d = sqr(VdotX * ax) + sqr(VdotY * ay) + sqr(NdotV);
+    return 1.0 / (NdotV + sqrt(d));
+}
+
+vec3 evaluateDisneyBRDF(
+    vec3 N, vec3 V, vec3 L, vec3 X, vec3 Y,
+    vec3 baseColor,
+    float subsurface,
+    float metallic,
+    float specular,
+    float specularTint,
+    float roughness,
+    float anisotropic,
+    float sheen,
+    float sheenTint,
+    float clearcoat,
+    float clearcoatGloss
+) {
+    float NdotL = dot(N, L);
+    float NdotV = dot(N, V);
+    if (NdotL <= 0.0 || NdotV <= 0.0) return vec3(0.0);
+
+    vec3 H = normalize(L + V);
+    float NdotH = clamp(dot(N, H), 0.0, 1.0);
+    float LdotH = clamp(dot(L, H), 0.0, 1.0);
+    NdotL = clamp(NdotL, 0.001, 1.0);
+    NdotV = clamp(NdotV, 0.001, 1.0);
+
+    // Luminance tint factors
+    float lum = dot(baseColor, vec3(0.3, 0.59, 0.11));
+    vec3 cTint = lum > 0.0 ? baseColor / lum : vec3(1.0);
+    vec3 cSpec0 = mix(specular * 0.08 * mix(vec3(1.0), cTint, specularTint), baseColor, metallic);
+    vec3 cSheen = mix(vec3(1.0), cTint, sheenTint);
+
+    // 1. DIFFUSE LOBE (Retro-reflection & Subsurface approx)
+    float FL = fresnelSchlick(NdotL);
+    float FV = fresnelSchlick(NdotV);
+    float Fd90 = 0.5 + 2.0 * roughness * sqr(LdotH);
+    float Fd = mix(1.0, Fd90, FL) * mix(1.0, Fd90, FV);
+
+    // Hanrahan-Krueger style subsurface approximation
+    float Fss90 = roughness * sqr(LdotH);
+    float Fss = mix(1.0, Fss90, FL) * mix(1.0, Fss90, FV);
+    float ss = 1.25 * (Fss * (1.0 / (NdotL + NdotV) - 0.5) + 0.5);
+    vec3 f_diffuse = (1.0 - metallic) * (baseColor / PI) * mix(Fd, ss, subsurface);
+
+    // 2. SPECULAR LOBE (Anisotropic GGX / GTR2)
+    float aspect = sqrt(1.0 - anisotropic * 0.9);
+    float ax = max(0.001, sqr(roughness) / aspect);
+    float ay = max(0.001, sqr(roughness) * aspect);
+    
+    float Ds = GTR2_aniso(NdotH, dot(H, X), dot(H, Y), ax, ay);
+    float Gs = smithG_GGX_aniso(NdotL, dot(L, X), dot(L, Y), ax, ay) *
+               smithG_GGX_aniso(NdotV, dot(V, X), dot(V, Y), ax, ay);
+    vec3 Fs = fresnelSchlickVec(cSpec0, LdotH);
+    vec3 f_specular = Gs * Fs * Ds;
+
+    // 3. SHEEN LOBE
+    float Fh = fresnelSchlick(LdotH);
+    vec3 f_sheen = (1.0 - metallic) * sheen * cSheen * Fh;
+
+    // 4. CLEARCOAT LOBE (GTR1 Berry)
+    float clearcoatAlpha = mix(0.1, 0.001, clearcoatGloss);
+    float Dr = GTR1(NdotH, clearcoatAlpha);
+    float Fr = mix(0.04, 1.0, Fh);
+    float Gr = smithG_GGX(NdotL, 0.25) * smithG_GGX(NdotV, 0.25);
+    vec3 f_clearcoat = vec3(0.25 * clearcoat * Gr * Fr * Dr);
+
+    return (f_diffuse + f_specular + f_sheen) + f_clearcoat;
+}`;
+
+      glslContainer.textContent = fullGlslShaderDisplay;
+
+      document.getElementById('openGlslBtn').addEventListener('click', () => {
+        glslModal.classList.remove('hidden');
+      });
+
+      document.getElementById('closeGlslBtn').addEventListener('click', () => {
+        glslModal.classList.add('hidden');
+      });
+
+      glslModal.addEventListener('click', (e) => {
+        if (e.target === glslModal) glslModal.classList.add('hidden');
+      });
+
+      document.getElementById('copyGlslBtn').addEventListener('click', () => {
+        const dummy = document.createElement('textarea');
+        dummy.value = fullGlslShaderDisplay;
+        document.body.appendChild(dummy);
+        dummy.select();
+        try {
+          document.execCommand('copy');
+          showToast('GLSL copied to clipboard!');
+          const btnText = document.getElementById('copyBtnText');
+          btnText.innerText = 'Copied!';
+          setTimeout(() => btnText.innerText = 'Copy Code', 2000);
+        } catch (err) {
+          console.error('Copy failed', err);
+        }
+        document.body.removeChild(dummy);
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      toast.innerText = msg;
+      toast.classList.remove('opacity-0');
+      toast.classList.add('opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('opacity-100');
+        toast.classList.add('opacity-0');
+      }, 2000);
+    }
+
+    // --- ANIMATION & RENDER LOOP ---
+    function animate() {
+      requestAnimationFrame(animate);
+
+      // Smooth slow auto-rotation for torus knot & shader ball if idle
+      if (currentMesh && currentMesh.geometry === geometries.torusKnot) {
+        currentMesh.rotation.y += 0.002;
+      }
+
+      controls.update();
+      renderer.render(scene, camera);
+    }
+
+    // --- ENTRY POINT ---
+    window.onload = function() {
+      init3D();
+      setupEventListeners();
+      syncUIFromParams();
+      drawBRDFPlot();
+      animate();
+    };
+  </script>
+</body>
+</html>
