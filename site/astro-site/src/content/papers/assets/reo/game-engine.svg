@@ -82,7 +82,7 @@
     <text x="0" y="-96" text-anchor="middle" class="label">AUTHORED INTENT</text>
     <text x="90" y="-3" text-anchor="start" class="label">COMPOSED</text>
     <text x="0" y="98" text-anchor="middle" class="label">RUNTIME STATE</text>
-    <text x="0" y="107" text-anchor="middle" class="sublabel">Simulation & physics</text>
+    <text x="0" y="107" text-anchor="middle" class="sublabel">Simulation &amp; physics</text>
     <text x="-90" y="-3" text-anchor="end" class="label">PRESENTATION</text>
   </g>
 

@@ -24,7 +24,7 @@
   <rect class="bg" width="1080" height="360" rx="4" />
 
   <text x="24" y="30" class="header-title">CASE 6.4: CULTURAL HERITAGE</text>
-  <text x="24" y="46" class="header-sub">Inverted reification (measurement to file) & multi-decade ISO preservation[cite: 1]</text>
+  <text x="24" y="46" class="header-sub">Inverted reification (measurement to file) &amp; multi-decade ISO preservation</text>
   <line x1="24" y1="56" x2="1056" y2="56" class="panel-divider" />
 
   <line x1="360" y1="68" x2="360" y2="342" class="panel-divider" />
@@ -54,7 +54,7 @@
 
     <text x="0" y="-96" text-anchor="middle" class="label">USD-ORACLED</text>
     <text x="86" y="-26" text-anchor="start" class="label">USD-HOSTED</text>
-    <text x="86" y="-17" text-anchor="start" class="sublabel">Master archive document[cite: 1]</text>
+    <text x="86" y="-17" text-anchor="start" class="sublabel">Master archive document</text>
     <text x="55" y="79" text-anchor="start" class="label">USD-FED</text>
     <text x="-55" y="79" text-anchor="end" class="label">ADJACENT</text>
     <text x="-86" y="-26" text-anchor="end" class="label">USD-NATIVE</text>
@@ -80,7 +80,7 @@
     <circle class="pt-state" cx="-58.8" cy="0" r="3.5" />
 
     <text x="0" y="-96" text-anchor="middle" class="label">AUTHORED INTENT</text>
-    <text x="0" y="-87" text-anchor="middle" class="sublabel">Evidence & provenance layers[cite: 1]</text>
+    <text x="0" y="-87" text-anchor="middle" class="sublabel">Evidence &amp; provenance layers</text>
     <text x="90" y="-3" text-anchor="start" class="label">COMPOSED</text>
     <text x="0" y="98" text-anchor="middle" class="label">RUNTIME STATE</text>
     <text x="-90" y="-3" text-anchor="end" class="label">PRESENTATION</text>
@@ -107,9 +107,9 @@
 
     <text x="0" y="-96" text-anchor="middle" class="label">CONTENT CLOCK</text>
     <text x="90" y="-3" text-anchor="start" class="label">SCHEMA CLOCK</text>
-    <text x="90" y="6" text-anchor="start" class="sublabel">ISO ratification[cite: 1]</text>
+    <text x="90" y="6" text-anchor="start" class="sublabel">ISO ratification</text>
     <text x="0" y="98" text-anchor="middle" class="label">CONTRACT CLOCK</text>
     <text x="-90" y="-3" text-anchor="end" class="label">ECOSYSTEM</text>
-    <text x="-90" y="6" text-anchor="end" class="sublabel">Decades[cite: 1]</text>
+    <text x="-90" y="6" text-anchor="end" class="sublabel">Decades</text>
   </g>
 </svg>
