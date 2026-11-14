@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" role="img" aria-labelledby="matrixTitle matrixDesc" font-family="ui-sans-serif, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" text-rendering="geometricPrecision">
+  <title id="matrixTitle">Reification, oracles, and evolution: who owns the change</title>
+  <desc id="matrixDesc">A two by two matrix. The vertical axis runs from eager resolution at the top to lazy resolution at the bottom. The horizontal axis runs from authored change on the left to emergent change on the right. Reification is eager and authored. Oracle is lazy and authored. Last-mile cache is eager and emergent, and is legitimate only when declared as a cache. Runtime is lazy and emergent and belongs to the application.</desc>
+
+  <!-- column headers -->
+  <g text-anchor="middle">
+    <text x="360" y="52" font-size="15" font-weight="700" letter-spacing="2" fill="#1e40af">AUTHORED</text>
+    <text x="360" y="72" font-size="11" fill="#6b7280">intent owns change</text>
+    <text x="760" y="52" font-size="15" font-weight="700" letter-spacing="2" fill="#b45309">EMERGENT</text>
+    <text x="760" y="72" font-size="11" fill="#6b7280">process owns change</text>
+  </g>
+
+  <!-- row labels -->
+  <g text-anchor="end">
+    <text x="145" y="235" font-size="15" font-weight="700" letter-spacing="2" fill="#1e40af">EAGER</text>
+    <text x="145" y="255" font-size="11" fill="#6b7280">resolve up front</text>
+    <text x="145" y="505" font-size="15" font-weight="700" letter-spacing="2" fill="#b45309">LAZY</text>
+    <text x="145" y="525" font-size="11" fill="#6b7280">resolve on demand</text>
+  </g>
+
+  <!-- axes -->
+  <g stroke="#e2e8f0" stroke-width="1">
+    <line x1="160" y1="365" x2="960" y2="365"/>
+    <line x1="560" y1="90" x2="560" y2="640"/>
+  </g>
+
+  <!-- top left: reification -->
+  <g>
+    <rect x="175" y="100" width="370" height="250" rx="14" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <text x="200" y="132" font-size="9" font-weight="700" letter-spacing="1.5" fill="#1d4ed8">USD JURISDICTION</text>
+    <text x="200" y="176" font-size="26" font-weight="700" fill="#111827">Reification</text>
+    <text x="200" y="210" font-size="13" fill="#374151">Bake the authored world</text>
+    <text x="200" y="230" font-size="13" fill="#374151">into native structures.</text>
+    <text x="200" y="315" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="12" fill="#6b7280">R(R(x)) = R(x)</text>
+  </g>
+
+  <!-- top right: last-mile cache -->
+  <g>
+    <rect x="575" y="100" width="370" height="250" rx="14" fill="#fffbeb" stroke="#fcd34d" stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="600" y="132" font-size="9" font-weight="700" letter-spacing="1.5" fill="#b45309">CACHE ONLY</text>
+    <text x="600" y="176" font-size="24" font-weight="700" fill="#111827">Last-mile cache</text>
+    <text x="600" y="210" font-size="13" fill="#374151">Bake a simulation to USD,</text>
+    <text x="600" y="230" font-size="13" fill="#374151">explicitly labelled a cache.</text>
+    <text x="600" y="315" font-size="11" font-style="italic" fill="#92400e">legitimate only when declared</text>
+  </g>
+
+  <!-- bottom left: oracle -->
+  <g>
+    <rect x="175" y="380" width="370" height="250" rx="14" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1.5"/>
+    <text x="200" y="412" font-size="9" font-weight="700" letter-spacing="1.5" fill="#1d4ed8">USD JURISDICTION</text>
+    <text x="200" y="456" font-size="26" font-weight="700" fill="#111827">Oracle</text>
+    <text x="200" y="490" font-size="13" fill="#374151">Ask the authored world</text>
+    <text x="200" y="510" font-size="13" fill="#374151">what it composes to.</text>
+    <text x="200" y="595" font-size="11" fill="#6b7280">authoritative within a context</text>
+  </g>
+
+  <!-- bottom right: runtime -->
+  <g>
+    <rect x="575" y="380" width="370" height="250" rx="14" fill="#f8fafc" stroke="#cbd5e1" stroke-width="1.5"/>
+    <text x="600" y="412" font-size="9" font-weight="700" letter-spacing="1.5" fill="#475569">APPLICATION JURISDICTION</text>
+    <text x="600" y="456" font-size="26" font-weight="700" fill="#111827">Runtime</text>
+    <text x="600" y="490" font-size="13" fill="#374151">The application answers</text>
+    <text x="600" y="510" font-size="13" fill="#374151">about what it is doing.</text>
+    <text x="600" y="595" font-size="11" fill="#475569">emergent state lives here</text>
+  </g>
+
+  <!-- footer -->
+  <text x="500" y="685" text-anchor="middle" font-size="11.5" font-style="italic" fill="#6b7280">USD answers for the left column. The application answers for the right — except for the declared cache.</text>
+</svg>

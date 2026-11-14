@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 360" width="1080" height="360">
+  <style>
+    .bg { fill: #fcfbf9; }
+    .header-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 16px; font-weight: 700; fill: #1a1a1a; letter-spacing: 0.03em; }
+    .header-sub { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; fill: #666666; }
+    .panel-title { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 11px; font-weight: 700; fill: #333333; letter-spacing: 0.04em; }
+    .panel-divider { stroke: #e6e2da; stroke-width: 1; }
+    .grid-outer { fill: none; stroke: #222222; stroke-width: 1.4; }
+    .grid-inner { fill: none; stroke: #cccccc; stroke-width: 0.8; stroke-dasharray: 2,2; }
+    .axis { stroke: #999999; stroke-width: 0.85; }
+    .label { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 10px; font-weight: 600; fill: #222222; }
+    .sublabel { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; font-size: 8.5px; fill: #666666; }
+    
+    .poly-posture { fill: rgba(142, 85, 46, 0.22); stroke: #8e552e; stroke-width: 2; stroke-linejoin: round; }
+    .pt-posture { fill: #8e552e; stroke: #fcfbf9; stroke-width: 1.5; }
+
+    .poly-state { fill: rgba(43, 76, 126, 0.22); stroke: #2b4c7e; stroke-width: 2; stroke-linejoin: round; }
+    .pt-state { fill: #2b4c7e; stroke: #fcfbf9; stroke-width: 1.5; }
+
+    .poly-clock { fill: rgba(180, 50, 50, 0.22); stroke: #b43232; stroke-width: 2; stroke-linejoin: round; }
+    .pt-clock { fill: #b43232; stroke: #fcfbf9; stroke-width: 1.5; }
+  </style>
+
+  <rect class="bg" width="1080" height="360" rx="4" />
+
+  <text x="24" y="30" class="header-title">CASE 6.3: VIRTUAL PRODUCTION</text>
+  <text x="24" y="46" class="header-sub">Frame-rate camera telemetry & per-shot mapping contract stability[cite: 1]</text>
+  <line x1="24" y1="56" x2="1056" y2="56" class="panel-divider" />
+
+  <line x1="360" y1="68" x2="360" y2="342" class="panel-divider" />
+  <line x1="720" y1="68" x2="720" y2="342" class="panel-divider" />
+
+  <!-- PANEL 1: POSTURES -->
+  <text x="180" y="78" text-anchor="middle" class="panel-title">I. ADOPTION POSTURES</text>
+  <g transform="translate(180, 212)">
+    <polygon class="grid-inner" points="0,-16.8 16.0,-5.2 9.9,13.6 -9.9,13.6 -16.0,-5.2" />
+    <polygon class="grid-inner" points="0,-33.6 32.0,-10.4 19.7,27.2 -19.7,27.2 -32.0,-10.4" />
+    <polygon class="grid-inner" points="0,-50.4 47.9,-15.6 29.6,40.8 -29.6,40.8 -47.9,-15.6" />
+    <polygon class="grid-inner" points="0,-67.2 63.9,-20.8 39.5,54.4 -39.5,54.4 -63.9,-20.8" />
+    <polygon class="grid-outer" points="0,-84 79.9,-26.0 49.4,68.0 -49.4,68.0 -79.9,-26.0" />
+
+    <line class="axis" x1="0" y1="0" x2="0" y2="-84" />
+    <line class="axis" x1="0" y1="0" x2="79.9" y2="-26.0" />
+    <line class="axis" x1="0" y1="0" x2="49.4" y2="68.0" />
+    <line class="axis" x1="0" y1="0" x2="-49.4" y2="68.0" />
+    <line class="axis" x1="0" y1="0" x2="-79.9" y2="-26.0" />
+
+    <polygon class="poly-posture" points="0,-67.2 40.0,-13.0 44.5,61.2 -4.9,6.8 -16.0,-5.2" />
+    <circle class="pt-posture" cx="0" cy="-67.2" r="3.5" />
+    <circle class="pt-posture" cx="40.0" cy="-13.0" r="3.5" />
+    <circle class="pt-posture" cx="44.5" cy="61.2" r="3.5" />
+    <circle class="pt-posture" cx="-4.9" cy="6.8" r="3.5" />
+    <circle class="pt-posture" cx="-16.0" cy="-5.2" r="3.5" />
+
+    <text x="0" y="-96" text-anchor="middle" class="label">USD-ORACLED</text>
+    <text x="86" y="-26" text-anchor="start" class="label">HOSTED</text>
+    <text x="55" y="79" text-anchor="start" class="label">USD-FED</text>
+    <text x="55" y="88" text-anchor="start" class="sublabel">Frame-rate ingest</text>
+    <text x="-55" y="79" text-anchor="end" class="label">ADJACENT</text>
+    <text x="-86" y="-26" text-anchor="end" class="label">NATIVE</text>
+  </g>
+
+  <!-- PANEL 2: STATE -->
+  <text x="540" y="78" text-anchor="middle" class="panel-title">II. KINDS OF STATE</text>
+  <g transform="translate(540, 212)">
+    <polygon class="grid-inner" points="0,-21 21,0 0,21 -21,0" />
+    <polygon class="grid-inner" points="0,-42 42,0 0,42 -42,0" />
+    <polygon class="grid-inner" points="0,-63 63,0 0,63 -63,0" />
+    <polygon class="grid-outer" points="0,-84 84,0 0,84 -84,0" />
+
+    <line class="axis" x1="0" y1="0" x2="0" y2="-84" />
+    <line class="axis" x1="0" y1="0" x2="84" y2="0" />
+    <line class="axis" x1="0" y1="0" x2="0" y2="84" />
+    <line class="axis" x1="0" y1="0" x2="-84" y2="0" />
+
+    <polygon class="poly-state" points="0,-58.8 50.4,0 0,75.6 -67.2,0" />
+    <circle class="pt-state" cx="0" cy="-58.8" r="3.5" />
+    <circle class="pt-state" cx="50.4" cy="0" r="3.5" />
+    <circle class="pt-state" cx="0" cy="75.6" r="3.5" />
+    <circle class="pt-state" cx="-67.2" cy="0" r="3.5" />
+
+    <text x="0" y="-96" text-anchor="middle" class="label">AUTHORED INTENT</text>
+    <text x="90" y="-3" text-anchor="start" class="label">COMPOSED</text>
+    <text x="0" y="98" text-anchor="middle" class="label">RUNTIME STATE</text>
+    <text x="0" y="107" text-anchor="middle" class="sublabel">Live camera telemetry</text>
+    <text x="-90" y="-3" text-anchor="end" class="label">PRESENTATION</text>
+  </g>
+
+  <!-- PANEL 3: CLOCKS -->
+  <text x="900" y="78" text-anchor="middle" class="panel-title">III. CLOCKS OF EVOLUTION</text>
+  <g transform="translate(900, 212)">
+    <polygon class="grid-inner" points="0,-21 21,0 0,21 -21,0" />
+    <polygon class="grid-inner" points="0,-42 42,0 0,42 -42,0" />
+    <polygon class="grid-inner" points="0,-63 63,0 0,63 -63,0" />
+    <polygon class="grid-outer" points="0,-84 84,0 0,84 -84,0" />
+
+    <line class="axis" x1="0" y1="0" x2="0" y2="-84" />
+    <line class="axis" x1="0" y1="0" x2="84" y2="0" />
+    <line class="axis" x1="0" y1="0" x2="0" y2="84" />
+    <line class="axis" x1="0" y1="0" x2="-84" y2="0" />
+
+    <polygon class="poly-clock" points="0,-42 56,0 0,70 -56,0" />
+    <circle class="pt-clock" cx="0" cy="-42" r="3.5" />
+    <circle class="pt-clock" cx="56" cy="0" r="3.5" />
+    <circle class="pt-clock" cx="0" cy="70" r="3.5" />
+    <circle class="pt-clock" cx="-56" cy="0" r="3.5" />
+
+    <text x="0" y="-96" text-anchor="middle" class="label">CONTENT CLOCK</text>
+    <text x="90" y="-3" text-anchor="start" class="label">SCHEMA</text>
+    <text x="0" y="98" text-anchor="middle" class="label">CONTRACT CLOCK</text>
+    <text x="0" y="107" text-anchor="middle" class="sublabel">Per-shot mapping stability[cite: 1]</text>
+    <text x="-90" y="-3" text-anchor="end" class="label">ECOSYSTEM</text>
+  </g>
+</svg>
