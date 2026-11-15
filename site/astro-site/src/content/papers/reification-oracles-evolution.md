@@ -13,23 +13,21 @@ draft: false
 # Reification, Oracles, & Evolution
 ### A practical rubric for OpenUSD adoption
 
-**Nick Porcino,** (c)2026
-
 ---
 
-**Abstract.** Discussions around OpenUSD usually revolve around the idea of it being a file format to adopt. This essay argues that it is better understood in terms of three distinct modalities: reification, oracle, and evolution - and that most adoption difficulty comes from assigning an operational mode of usd inappropriately to a domain. Reification is a lossy projection between application data and schemata; the oracle is an authority of composition as it stands, and evolution is a question of jurisdiction over change. This essay proposes a small ontology, derives three taxonomies from it, and tests them against production cases in VFX, games, virtual production, and cultural heritage.
+**Abstract.** Adoption of USD typically revolve around two distinct concepts; USD as a file format, and USD as a runtime composition engine. This essay argues that distinction oversimplifies the implications of adoption, and that USD is better understood as system, in terms of three distinct modalities: reification, oracle, and evolution. Reification is a lossy projection between application data and schemata; an oracle is an authority of composition as it stands, and evolution is a question of jurisdiction over change. Adoption difficulty arises from assigning an operational mode of USD inappropriately to a usage domain. This essay proposes an adoption rubric: an ontology, a taxonomy of modes, and tests the rubric against production cases in VFX, games, virtual production, and cultural heritage.
 
 ---
 
 ## 1. What we hear when we say "adopt USD"
 
-I've spent more than a decade working to advance OpenUSD adoption in many fields and application domains. Lately I have been trying to hear what people hear when I suggest it. I think the message that's often heard is *make everything USD*, that the goal is a USD-native application, where the composition engine is at the center of the object model, the runtime is built on the stage, and the whole program is essentially a view on a layer stack.
+I've spent more than a decade working to advance OpenUSD adoption in many fields and application domains. I have a lot of context and domain knowledge, so some things that seem intuitive and natural to me are not always so obvious to my audience. Lately I have been trying to "hear" what other people hear when I talk about adopting OpenUSD. I think the message that's often heard is a sort of naive and prescriptive *make everything USD*, that the goal is a USD-native application, where the composition engine is at the center of the object model, the runtime is built on the stage, and the whole program is essentially a view on a layer stack.
 
-Such applications are emerging, but that's not in general what adoption of USD means, or should mean, into an established, mature pipeline or tool set that is in active load-bearing use. Sophisticated modern scene pipelines in well established frameworks compose USD, query it, and translate results into native datastructures; they operate and transform their data in the specialized ways that make them unique, and commit those edits back to USD layers.
+Applications like that are emerging rapidly, but the important case to reason about is the adoption of USD into an established, mature pipeline and tool set that is in active use in real production. Modern pipelines in active production typically compose USD, query it, and translate results into native datastructures; they then operate and transform their data in unique and specialized ways, and ultimately commit those edits back to USD layers.
 
-*Last Mile and Interchange* (LMI) made a case for a new ontology for 3d file formats, arguing that we have been asking one artifact to two different jobs that are only superficially similar - carrying authorial intent between applications, and delivering finished assets to an end point. That confusion, not any particular format, was the source of much of the pain around fileformats. The taxonomy LMI laid out was useful in turning a religious argument into an engineering discussion.
+The paper [*Last Mile and Interchange* (Porcino, 2025)](https://nickporcino.com/papers/lastmile-v2/) (LMI) made a case for a new ontology for 3d file formats, arguing that we have been asking one artifact to two different jobs that are only superficially similar - carrying authorial intent between applications, and delivering finished assets to an end point. That confusion, not any particular format, was the source of much of the pain around the selection and deployment of various fileformats. The taxonomy LMI laid out was useful in turning a religious argument into an engineering discussion.
 
-*Reification, Oracles, and Evolution* is a companion to LMI. LMI classifed formats by intent, this article attempts to do the same for scene description, asking **what do we ask a scene description to do *inside* an application**. Reification, oracle, and evolution are frequently conflated, and adoption pain comes from applying scene description inappropriately. We will develop three taxonomies - adoption, state, and clocks - as a rubric for evaluating usage.
+LMI classified formats by intent; this article attempts to do the same for scene description, asking **what do we ask a scene description to do *inside* an application**. In order to help reason about that question, we will develop a rubric for USD adoption, from an ontology of operational modes and a set of characteristic taxonomies.
 
 ## 2. The Ontology
 
@@ -43,7 +41,7 @@ Reification is what happens when information moves between USD and an applicatio
 
 ![Figure 1. One reification cycle. The first pass through the application is lossy, so usd1 is not equal to usd2. The second pass is stable, so usd2 equals usd3. Reification is a projection, not an inverse.](assets/reo/cycle.svg)
 
-In this cycle, the application is lossy, so reading `usd1` and writing `usd2` loses whatever information the application cannot represent. We exect that `usd1 ≠ usd2`. In the second pass through the application there's nothing left to lose so `usd2` is in the application's canonical image, so we expect that `usd2 = usd3`.
+In this cycle, the application is lossy, so reading `usd1` and writing `usd2` loses whatever information the application cannot represent. We expect that `usd1 ≠ usd2`. In the second pass through the application there's nothing left to lose so `usd2` is in the application's canonical image, so we expect that `usd2 = usd3`.
 
 That is the defining property. **Reification is a projection onto the application's representable subspace.** It is idempotent, not invertible: `R(R(x)) = R(x)`, while `R(x) ≠ x`.
 
@@ -54,7 +52,7 @@ Four properties of USD reification logically follow:
 - **It is convergent.** One round trip loses information, subsequent round trips do not.
 - **It is deterministic.** For a fixed composition, the same pass produces the same result.
 
-If `usd2 ≠ usd3` you encountered the first test for a well structured usd adoption - the mapping fails the convergence property or the determinism property or both. The composition and the reified data are out of sync; the application will report bad state, and the consequence of non-deterministic and stateful mappings is miserable debugging situations.
+If `usd2 ≠ usd3` you encountered the first test for a well structured USD adoption - the mapping fails the convergence property or the determinism property or both. The composition and the reified data are out of sync; the application will report bad state, and the consequence of non-deterministic and stateful mappings is miserable debugging situations.
 
 Understanding the properties of reification, and designing for them is the path to success.
 
@@ -70,7 +68,7 @@ An Oracle has five properites:
 
 - **It is lazy.** It resolves a single specific question, when asked.
 - **It is partial.** It answers about a path, a property, or a relationship, but not the whole world.
-- **It is context-relative.** An oracle is authorative for a given layer stack, variant selection, and purpose. Asking in a different context maybe gave a different, equally correct answer.
+- **It is context-relative.** An oracle is authoritative for a given layer stack, variant selection, and purpose. Asking in a different context might give a different, equally correct answer.
 - **It is authorative.** Within its context, it is the answer - there is no second opinion.
 - **It has no memory.** The oracle answers only for its context; whether two compositions agree is a question to ask of the answers, not the oracle.
 
@@ -124,7 +122,7 @@ Some notes on the postures:
 
 **USD-hosted** is right when the deliverable *is* the USD file. An authoring tool whose product is a layer stack should treat the stage as its document, the way a word processor treats a document. But then undo, transactions, and performance are composition problems, and the tool had better be designed for that from the start.
 
-**USD-fed** is the classic import/export pattern. It is straight forward, and it is simultaneously very limited: the result is a last-mile relationship whether you call it that or not.
+**USD-fed** is the classic import/export pattern. It is straightforward, and it is simultaneously very limited: the result is a last-mile relationship whether you call it that or not.
 
 **USD-oracled** is the posture most mature heavily integrated production software will likely occupy at first. The application owns its runtime, its data structures, and its performance profile. It consults USD for authoritative answers about what the world is. Care must be taken that the cache and the oracle do not drift apart.
 
@@ -155,7 +153,7 @@ Second, composed state is real state, but it is *derived*. It should be recomput
 
 ## 5. Taxonomy III: clocks of evolution
 
-The third taxonomy is about what can change in the USD ecosystem, and the potentioal hazards. Four clocks run concurrently in any USD integration.
+The third taxonomy is about what can change in the USD ecosystem, and the potential hazards. Four clocks run concurrently in any USD integration.
 
 | Clock | What changes | Owner | Failure if unversioned |
 |---|---|---|---|
@@ -197,7 +195,7 @@ Attempting to store evolving gameplay or physics simulation inside USD is a cate
 
 - **Taxonomy Signature:** Balanced on USD-Fed / USD-Oracled postures, heavily dependent on Runtime and Presentation State, with an existential reliance on the Contract Clock.
 
-On a virtual production stage, the primary engineering challenge is not the scene content, but the mapping. Camera position, lens characteristic, and stage metadata arrive as live telemetry that must land in the engine with stable, predictable semantics, at frame rate, directly in front of a director.
+On a virtual production stage, the primary engineering challenge is not the scene content, but the mapping. Camera position, lens characteristics and settings, and stage metadata arrive as live telemetry that must land in the engine with stable, predictable semantics, at frame rate, directly in front of a director.
 
 ![virtual-production](assets/reo/virtual-production.svg)
 
@@ -214,6 +212,8 @@ At museums like The Met, digital duplicates of masterworks like van Gogh’s Sun
 This domain inverts the usual software paradigm through three structural shifts:
 
 1. **Inverted Reification:** Unlike a game where software projects data into an app, cultural heritage projects physical reality into USD. The physical object is ground truth; the capture pipeline is a lossy projection constrained by what instruments can measure.   
-2. **Provenance over Presentation:** Following specialized schemata like UsdGeomBackPlateAPI, the scene separates raw evidence from derived inferences (such as reconstructed meshes). Overwriting evidence with a baked, computed, or inferred data turns a scientific record into a mere assertion.   
+2. **Provenance over Presentation:** Following specialized schemata like UsdGeomBackPlateAPI, the scene separates raw evidence from derived inferences (such as reconstructed meshes). Overwriting evidence with baked, computed, or inferred data turns a scientific record into a mere assertion.   
 3. **The Multi-Decade Horizon:** While virtual production shares heritage's reality-capture DNA, its operational telos is immediate and real-time. Cultural heritage inverts this: the runtime is merely a temporary means, while the file is the permanent end. Because the file must outlive its creators and software tools, the Ecosystem and Schema Clocks span decades, making AOUSD's ISO ratification an essential structural preservation mechanism.
 
+**Nick Porcino,** (c)2026
+written in california
