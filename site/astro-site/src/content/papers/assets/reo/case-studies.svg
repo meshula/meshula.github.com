@@ -1,0 +1,161 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1140 760" width="1140" height="760">
+  <!-- Outer Paper Background &amp; Frame -->
+  <rect x="0" y="0" width="1140" height="760" rx="6" fill="#fcfbf9" />
+  <rect x="14" y="14" width="1112" height="732" rx="4" fill="none" stroke="#d6d1c7" stroke-width="1.5" />
+
+  <!-- Title Block -->
+  <text x="36" y="48" font-family="Georgia, Times New Roman, serif" font-size="21" font-weight="700" fill="#1f2428">Appendix Synthesis: Seven Architectures Across the ROE Rubric</text>
+  <text x="36" y="70" font-family="Helvetica Neue, Arial, sans-serif" font-size="12.5" fill="#5a626a">Mapping OpenUSD adoption postures (Taxonomy I) and state-evolution regimes (Eager/Lazy × Authored/Emergent)</text>
+  <line x1="36" y1="82" x2="1104" y2="82" stroke="#ded9cf" stroke-width="1" />
+
+  <!-- LEFT PANEL: Taxonomy I Adoption Postures Spectrum -->
+  <rect x="36" y="100" width="480" height="595" rx="5" fill="#f7f4ee" stroke="#d6d1c7" stroke-width="1.2" />
+  <text x="54" y="128" font-family="Georgia, Times New Roman, serif" font-size="15" font-weight="700" fill="#1f2428">A. Taxonomy I: Adoption Postures</text>
+  <text x="54" y="146" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#646c73">Where the primary object model &amp; runtime reside</text>
+  <line x1="54" y1="156" x2="498" y2="156" stroke="#ded9cf" stroke-width="1" />
+
+  <!-- Posture Bands -->
+  <rect x="50" y="168.0" width="452" height="96.2" rx="4" fill="#fcfbf9" stroke="#e2ddd3" stroke-width="1" />
+  <text x="60" y="191.0" font-family="Georgia, Times New Roman, serif" font-size="12.5" font-weight="700" fill="#2b3136">USD-Native</text>
+  <text x="60" y="207.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#687078">Object model lives directly in UsdStage</text>
+
+  <rect x="50" y="270.2" width="452" height="96.2" rx="4" fill="#f3efe6" stroke="#e2ddd3" stroke-width="1" />
+  <text x="60" y="293.2" font-family="Georgia, Times New Roman, serif" font-size="12.5" font-weight="700" fill="#2b3136">USD-Hosted</text>
+  <text x="60" y="309.2" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#687078">Stage holds document; transient app proxies</text>
+
+  <rect x="50" y="372.4" width="452" height="96.2" rx="4" fill="#fcfbf9" stroke="#e2ddd3" stroke-width="1" />
+  <text x="60" y="395.4" font-family="Georgia, Times New Roman, serif" font-size="12.5" font-weight="700" fill="#2b3136">USD-Queried</text>
+  <text x="60" y="411.4" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#687078">App queries composed stage as lazy oracle</text>
+
+  <rect x="50" y="474.6" width="452" height="96.2" rx="4" fill="#f3efe6" stroke="#e2ddd3" stroke-width="1" />
+  <text x="60" y="497.6" font-family="Georgia, Times New Roman, serif" font-size="12.5" font-weight="700" fill="#2b3136">Reified-Core</text>
+  <text x="60" y="513.6" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#687078">Eager projection into native app structures</text>
+
+  <rect x="50" y="576.8" width="452" height="96.2" rx="4" fill="#fcfbf9" stroke="#e2ddd3" stroke-width="1" />
+  <text x="60" y="599.8" font-family="Georgia, Times New Roman, serif" font-size="12.5" font-weight="700" fill="#2b3136">Last-Mile</text>
+  <text x="60" y="615.8" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#687078">Frozen, hardware-ready delivery artifact</text>
+
+  <!-- Plotted Cases on Left Panel -->
+  <line x1="264" y1="623.2" x2="284" y2="623.2" stroke="#1f6f78" stroke-width="1.2" stroke-dasharray="2,2" />
+  <circle cx="298" cy="623.2" r="11" fill="#1f6f78" />
+  <text x="298" y="627.2" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">1</text>
+  <text x="316" y="622.2" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1f2428">Moana on iPhone</text>
+  <text x="316" y="636.2" font-family="Consolas, Menlo, monospace" font-size="9.5" fill="#4a525a">[Last-Mile USDZ]</text>
+
+  <line x1="264" y1="452.7" x2="284" y2="452.7" stroke="#2c5e8a" stroke-width="1.2" stroke-dasharray="2,2" />
+  <circle cx="298" cy="452.7" r="11" fill="#2c5e8a" />
+  <text x="298" y="456.7" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">2</text>
+  <text x="316" y="451.7" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1f2428">Hydra Storm</text>
+  <text x="316" y="465.7" font-family="Consolas, Menlo, monospace" font-size="9.5" fill="#4a525a">[Tertiary Oracle + GPU]</text>
+
+  <line x1="264" y1="292.0" x2="284" y2="292.0" stroke="#4f6d4a" stroke-width="1.2" stroke-dasharray="2,2" />
+  <circle cx="298" cy="292.0" r="11" fill="#4f6d4a" />
+  <text x="298" y="296.0" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">3</text>
+  <text x="316" y="291.0" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1f2428">SideFX Solaris</text>
+  <text x="316" y="305.0" font-family="Consolas, Menlo, monospace" font-size="9.5" fill="#4a525a">[Near-Native Hybrid]</text>
+
+  <line x1="264" y1="389.4" x2="284" y2="389.4" stroke="#7c5295" stroke-width="1.2" stroke-dasharray="2,2" />
+  <circle cx="298" cy="389.4" r="11" fill="#7c5295" />
+  <text x="298" y="393.4" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">4</text>
+  <text x="316" y="388.4" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1f2428">Unreal Engine</text>
+  <text x="316" y="402.4" font-family="Consolas, Menlo, monospace" font-size="9.5" fill="#4a525a">[Dual Posture]</text>
+
+  <line x1="264" y1="545.2" x2="284" y2="545.2" stroke="#b58327" stroke-width="1.2" stroke-dasharray="2,2" />
+  <circle cx="298" cy="545.2" r="11" fill="#b58327" />
+  <text x="298" y="549.2" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">5</text>
+  <text x="316" y="544.2" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1f2428">LightUSD</text>
+  <text x="316" y="558.2" font-family="Consolas, Menlo, monospace" font-size="9.5" fill="#4a525a">[Bounded Projection]</text>
+
+  <line x1="264" y1="223.8" x2="284" y2="223.8" stroke="#c85a32" stroke-width="1.2" stroke-dasharray="2,2" />
+  <circle cx="298" cy="223.8" r="11" fill="#c85a32" />
+  <text x="298" y="227.8" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">6</text>
+  <text x="316" y="222.8" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1f2428">NVIDIA Omniverse</text>
+  <text x="316" y="236.8" font-family="Consolas, Menlo, monospace" font-size="9.5" fill="#4a525a">[USD-Native (+Fabric)]</text>
+
+  <line x1="264" y1="340.7" x2="284" y2="340.7" stroke="#a63a50" stroke-width="1.2" stroke-dasharray="2,2" />
+  <circle cx="298" cy="340.7" r="11" fill="#a63a50" />
+  <text x="298" y="344.7" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">7</text>
+  <text x="316" y="339.7" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1f2428">Live Collaborative Sync</text>
+  <text x="316" y="353.7" font-family="Consolas, Menlo, monospace" font-size="9.5" fill="#4a525a">[Replicated Stage]</text>
+
+  <!-- RIGHT PANEL: 2x2 Matrix -->
+  <rect x="538" y="100" width="566" height="595" rx="5" fill="#f7f4ee" stroke="#d6d1c7" stroke-width="1.2" />
+  <text x="556" y="128" font-family="Georgia, Times New Roman, serif" font-size="15" font-weight="700" fill="#1f2428">B. Ontology Matrix: Jurisdiction &amp; Cadence</text>
+  <text x="556" y="146" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" fill="#646c73">Authored vs. Emergent evolution across the Eager–Lazy spectrum</text>
+  <line x1="556" y1="156" x2="1086" y2="156" stroke="#ded9cf" stroke-width="1" />
+
+  <!-- Matrix Quadrants -->
+  <rect x="586" y="194" width="248.0" height="235.5" fill="#eef4f4" stroke="#d6d1c7" stroke-width="1" />
+  <rect x="834.0" y="194" width="248.0" height="235.5" fill="#f7f1e8" stroke="#d6d1c7" stroke-width="1" />
+  <rect x="586" y="429.5" width="248.0" height="235.5" fill="#f3f5f8" stroke="#d6d1c7" stroke-width="1" />
+  <rect x="834.0" y="429.5" width="248.0" height="235.5" fill="#f8eff1" stroke="#d6d1c7" stroke-width="1" />
+
+  <line x1="834.0" y1="194" x2="834.0" y2="665" stroke="#9aa2aa" stroke-width="1.5" stroke-dasharray="4,3" />
+  <line x1="586" y1="429.5" x2="1082" y2="429.5" stroke="#9aa2aa" stroke-width="1.5" stroke-dasharray="4,3" />
+
+  <!-- Axis Headers -->
+  <text x="710.0" y="182" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="10.5" font-weight="700" fill="#3b434b">AUTHORED EVOLUTION (USD)</text>
+  <text x="958.0" y="182" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="10.5" font-weight="700" fill="#3b434b">EMERGENT EVOLUTION (RUNTIME)</text>
+  <text x="571" y="311.8" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="10.5" font-weight="700" fill="#3b434b" transform="rotate(-90, 571, 311.8)">EAGER (PERSISTED)</text>
+  <text x="571" y="547.2" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="10.5" font-weight="700" fill="#3b434b" transform="rotate(-90, 571, 547.2)">LAZY (ON-DEMAND)</text>
+
+  <!-- Quadrant Corner Labels -->
+  <text x="598" y="215" font-family="Georgia, Times New Roman, serif" font-size="12.5" font-weight="700" fill="#2c353d">Reification</text>
+  <text x="598" y="229" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#646c73">Eager projection at boundary</text>
+
+  <text x="846.0" y="215" font-family="Georgia, Times New Roman, serif" font-size="12.5" font-weight="700" fill="#2c353d">Last-Mile Cache</text>
+  <text x="846.0" y="229" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#646c73">Explicitly baked runtime state</text>
+
+  <text x="598" y="450.5" font-family="Georgia, Times New Roman, serif" font-size="12.5" font-weight="700" fill="#2c353d">Oracle</text>
+  <text x="598" y="464.5" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#646c73">Stateless, context-relative query</text>
+
+  <text x="846.0" y="450.5" font-family="Georgia, Times New Roman, serif" font-size="12.5" font-weight="700" fill="#2c353d">Live Runtime</text>
+  <text x="846.0" y="464.5" font-family="Helvetica Neue, Arial, sans-serif" font-size="10" fill="#646c73">Frame-tick simulation &amp; interaction</text>
+
+  <!-- Plotted Cases on Right Panel -->
+  <circle cx="710.0" cy="302.3" r="14" fill="#1f6f78" fill-opacity="0.16" />
+  <circle cx="710.0" cy="302.3" r="10.5" fill="#1f6f78" stroke="#fcfbf9" stroke-width="1.5" />
+  <text x="710.0" y="306.3" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">1</text>
+  <text x="725.0" y="300.3" text-anchor="start" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1f2428">1. Moana (iPhone)</text>
+  <text x="725.0" y="313.3" text-anchor="start" font-family="Consolas, Menlo, monospace" font-size="9.5" fill="#4a525a">Build bake + Metal runtime</text>
+
+  <circle cx="719.9" cy="556.7" r="14" fill="#2c5e8a" fill-opacity="0.16" />
+  <circle cx="719.9" cy="556.7" r="10.5" fill="#2c5e8a" stroke="#fcfbf9" stroke-width="1.5" />
+  <text x="719.9" y="560.7" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">2</text>
+  <text x="719.9" y="578.7" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1f2428">2. Hydra Storm</text>
+  <text x="719.9" y="591.7" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="9.5" fill="#4a525a">SceneIndex -> GPU buffers</text>
+
+  <circle cx="710.0" cy="396.5" r="14" fill="#4f6d4a" fill-opacity="0.16" />
+  <circle cx="710.0" cy="396.5" r="10.5" fill="#4f6d4a" stroke="#fcfbf9" stroke-width="1.5" />
+  <text x="710.0" y="400.5" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">3</text>
+  <text x="725.0" y="394.5" text-anchor="start" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1f2428">3. SideFX Solaris</text>
+  <text x="725.0" y="407.5" text-anchor="start" font-family="Consolas, Menlo, monospace" font-size="9.5" fill="#4a525a">LOP stage + SOP membrane</text>
+
+  <circle cx="948.1" cy="344.7" r="14" fill="#7c5295" fill-opacity="0.16" />
+  <circle cx="948.1" cy="344.7" r="10.5" fill="#7c5295" stroke="#fcfbf9" stroke-width="1.5" />
+  <text x="948.1" y="348.7" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">4</text>
+  <text x="948.1" y="366.7" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1f2428">4. Unreal Engine</text>
+  <text x="948.1" y="379.7" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="9.5" fill="#4a525a">StageActor + UWorld Tick</text>
+
+  <circle cx="650.5" cy="344.7" r="14" fill="#b58327" fill-opacity="0.16" />
+  <circle cx="650.5" cy="344.7" r="10.5" fill="#b58327" stroke="#fcfbf9" stroke-width="1.5" />
+  <text x="650.5" y="348.7" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">5</text>
+  <text x="665.5" y="342.7" text-anchor="start" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1f2428">5. LightUSD</text>
+  <text x="665.5" y="355.7" text-anchor="start" font-family="Consolas, Menlo, monospace" font-size="9.5" fill="#4a525a">Clean-room subset oracle</text>
+
+  <circle cx="888.6" cy="502.5" r="14" fill="#c85a32" fill-opacity="0.16" />
+  <circle cx="888.6" cy="502.5" r="10.5" fill="#c85a32" stroke="#fcfbf9" stroke-width="1.5" />
+  <text x="888.6" y="506.5" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">6</text>
+  <text x="903.6" y="500.5" text-anchor="start" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1f2428">6. Omniverse</text>
+  <text x="903.6" y="513.5" text-anchor="start" font-family="Consolas, Menlo, monospace" font-size="9.5" fill="#4a525a">Live Stage + Fabric ECS</text>
+
+  <circle cx="963.0" cy="570.8" r="14" fill="#a63a50" fill-opacity="0.16" />
+  <circle cx="963.0" cy="570.8" r="10.5" fill="#a63a50" stroke="#fcfbf9" stroke-width="1.5" />
+  <text x="963.0" y="574.8" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11" font-weight="700" fill="#ffffff">7</text>
+  <text x="963.0" y="592.8" text-anchor="middle" font-family="Helvetica Neue, Arial, sans-serif" font-size="11.5" font-weight="700" fill="#1f2428">7. Live Sync</text>
+  <text x="963.0" y="605.8" text-anchor="middle" font-family="Consolas, Menlo, monospace" font-size="9.5" fill="#4a525a">Ephemeral .live deltas</text>
+
+  <!-- Footer Caption -->
+  <line x1="36" y1="716" x2="1104" y2="716" stroke="#ded9cf" stroke-width="1" />
+  <text x="36" y="738" font-family="Georgia, Times New Roman, serif" font-size="11.5" font-style="italic" fill="#4a5157">Figure A.1. Comparative distribution of the seven appendix case studies across Porcino’s Adoption Postures (left) and Eager/Lazy × Authored/Emergent matrix (right).</text>
+</svg>
