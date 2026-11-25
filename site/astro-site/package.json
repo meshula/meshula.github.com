@@ -11,8 +11,8 @@
   "dependencies": {
     "@astrojs/mdx": "^8.1.6",
     "@astrojs/markdown-remark": "latest",
-    "@astrojs/rss": "^4.0.12",
-    "@astrojs/sitemap": "^3.4.1",
+    "@astrojs/rss": "^4.0.19",
+    "@astrojs/sitemap": "^3.7.6",
     "astro": "^7.4.13",
     "astro-seo": "^0.8.4",
     "rehype-katex": "^7.0.1",
