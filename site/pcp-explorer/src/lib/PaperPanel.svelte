@@ -1,6 +1,6 @@
 <script lang="ts">
   import { marked, type Renderer } from 'marked';
-  import { base } from '$app/paths';
+  import { asset } from '$app/paths';
   import { focus, outline } from './store.svelte';
   import type { OutlineEntry } from './store.svelte';
 
@@ -50,7 +50,7 @@
   }
 
   async function loadPaper() {
-    const res = await fetch(`${base}/encapsulation.md`);
+    const res = await fetch(asset('encapsulation.md'));
     if (!res.ok) return;
     const md = await res.text();
 

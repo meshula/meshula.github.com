@@ -80,6 +80,8 @@ Configured in `src/app.html` via CDN (MathJax 3, `tex-chtml`). Inline math uses 
 
 ## Development
 
+Requires Node.js 22.17 or newer on the 22.x line, or Node.js 24 or newer.
+
 ```sh
 npm install
 npm run dev

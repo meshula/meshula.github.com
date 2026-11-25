@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { base } from '$app/paths';
+  import { asset } from '$app/paths';
   import { focus } from './store.svelte';
   import hljs from 'highlight.js/lib/core';
   import cpp from 'highlight.js/lib/languages/cpp';
@@ -31,7 +31,7 @@
 
   async function loadFile() {
     try {
-      const res = await fetch(`${base}/code/primIndex.cpp`);
+      const res = await fetch(asset('code/primIndex.cpp'));
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const text = await res.text();
       lines = text.split('\n');
