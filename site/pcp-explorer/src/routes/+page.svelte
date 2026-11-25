@@ -2,14 +2,14 @@
   import { SvelteFlow, Controls, Background, MiniMap, type Edge } from '@xyflow/svelte';
   import '@xyflow/svelte/dist/style.css';
 
-  import PcpNode from '$lib/PcpNode.svelte';
-  import Legend from '$lib/Legend.svelte';
-  import PaperPanel from '$lib/PaperPanel.svelte';
-  import OutlinePanel from '$lib/OutlinePanel.svelte';
-  import CodePanel from '$lib/CodePanel.svelte';
-  import { nodes as initialNodes, edges as initialEdges } from '$lib/pcp-graph';
-  import type { PcpNode as PcpNodeType, PcpEdge } from '$lib/pcp-graph';
-  import { panels } from '$lib/store.svelte';
+  import PcpNode from '#lib/PcpNode.svelte';
+  import Legend from '#lib/Legend.svelte';
+  import PaperPanel from '#lib/PaperPanel.svelte';
+  import OutlinePanel from '#lib/OutlinePanel.svelte';
+  import CodePanel from '#lib/CodePanel.svelte';
+  import { nodes as initialNodes, edges as initialEdges } from '../lib/pcp-graph';
+  import type { PcpNode as PcpNodeType, PcpEdge } from '../lib/pcp-graph';
+  import { panels } from '../lib/store.svelte';
 
   const nodeTypes = { pcpNode: PcpNode };
 
