@@ -80,3 +80,7 @@ Whether through the divine resonance of Sanskrit roots or the pure arithmetic of
 
 > *Ex radicibus rationis nascitur verbum.*
 > From the roots of reason, the word is born.
+
+## References
+
+Gray, Jonathan. 2016 [https://publicdomainreview.org/essay/let-us-calculate-leibniz-llull-and-the-computational-imagination/](Let Us Calculate), Public Domain Review, accessed 24 Nov 2026

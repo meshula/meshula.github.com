@@ -10,7 +10,7 @@ author: "Nick Porcino"
 draft: false
 ---
 
-**Abstract.** Discussions around adoption of interchangine frameworks, such as OpenUSD for 3D scenes and OpenTimelineIO for editorial timelines, typically revolve around two distinct concepts: the interchange representation as a file format, and the framework as a runtime data and composition model. This monograph argues that this dichotomy oversimplifies the realities of adoption, and that structured interchange is better understood as a system with three distinct operational modalities: reification, oracle, and evolution. Reification is a lossy, idempotent projection between an application's native object model and shared schemata; an oracle is a stateless, context-relative authority over composed state; and evolution is a question of jurisdiction and clocks over change. Adoption failures rarely stem from missing features in a specification; rather, they arise from assigning an operational mode inappropriately to a usage domain, or leaving projection boundaries and invalidation contracts. Part I develops a general  adoption rubric: an ontology of operational modes and three diagnostic taxonomies, and applies it to concrete production architectures across two major interchange domains: OpenUSD (Part II) and OpenTimelineIO (Part III).
+**Abstract.** Discussions around adoption of interchanging frameworks, such as OpenUSD for 3D scenes and OpenTimelineIO for editorial timelines, typically revolve around two distinct concepts: the interchange representation as a file format, and the framework as a runtime data and composition model. This monograph argues that this dichotomy oversimplifies the realities of adoption, and that structured interchange is better understood as a system with three distinct operational modalities: reification, oracle, and evolution. Reification is a lossy, idempotent projection between an application's native object model and shared schemata; an oracle is a stateless, context-relative authority over composed state; and evolution is a question of jurisdiction and clocks over change. Adoption failures rarely stem from missing features in a specification; rather, they arise from assigning an operational mode inappropriately to a usage domain, or leaving projection boundaries and invalidation contracts. Part I develops a general adoption rubric: an ontology of operational modes and three diagnostic taxonomies, and applies it to concrete production architectures across two major interchange domains: OpenUSD (Part II) and OpenTimelineIO (Part III).
 
 ---
 
@@ -24,9 +24,9 @@ Too often, the message received is a naive and prescriptive "make everything nat
 
 Applications built natively around an interchange model do exist, and for certain authoring tools they make complete sense. Yet the far more consequential engineering challenge, and the one where pipelines actually succeed or fail, is adopting an interchange framework into an established, mature production ecosystem with existing tools, specialized runtimes, and strict performance constraints. Modern pipelines in active production rarely discard their native data structures. Instead, they compose or resolve an interchange artifact, query it, project the results into specialized internal representations, transform that data in domain-specific ways, and ultimately commit targeted deltas back across the boundary.
 
-The paper [*Last Mile and Interchange* (Porcino, 2025)](https://nickporcino.com/papers/lastmile-v2/) (LMI) proposed a new ontology for 3d file formats, arguing that the industry had been asking one artifact to two different jobs that are only superficially similar - carrying open-ended authorial intent between applications, and delivering finished runtime-ready assets to a consuming endpoint. That category confusion, not the merits of any particular format, was the root cause of decades of friction around format selection and deployment. Separating formats by intent was useful in turning religious arguments into engineering discussions.
+The paper [*Last Mile and Interchange* (Porcino, 2025)](https://nickporcino.com/papers/lastmile-v2/) (LMI) proposed a new ontology for 3D file formats, arguing that the industry had been asking one artifact to two different jobs that are only superficially similar - carrying open-ended authorial intent between applications, and delivering finished runtime-ready assets to a consuming endpoint. That category confusion, not the merits of any particular format, was the root cause of decades of friction around format selection and deployment. Separating formats by intent was useful in turning religious arguments into engineering discussions.
 
-LMI classified formats by intent; this book asks the next question: **what do we ask a an interchange system to do *inside* and *between* applications?**.
+LMI classified formats by intent; this book asks the next question: **what do we ask an interchange system to do *inside* and *between* applications?**.
 
 Whether the domain is a multi-terabyte 3D world in OpenUSD or a multi-track editorial cut hundreds of layers deep in OpenTimelineIO, every tool that participates in an interchange pipeline faces the same structural questions:
 
@@ -45,24 +45,24 @@ To answer those questions systematically, Part I establishes a domain-agnostic r
 
 > **Reification** - the production of a concrete, resolved representation from an abstract, composed description.
 
-Reification in computer science is the process of making a thing concrete. It is what happens when information moves between an interchange representation such as USD, and an application's native structures. Reification includes baking steps, import, conforms, and instantiation. It also includes write-backs, export, and saving. Reification is **bidirectional without being invertible.** It is distinct from serialization, or transcoding between equivalent representations because reification crosses into a system's reprsentable model, consuming choice points along the way. Consider this cycle:
+Reification in computer science is the process of making a thing concrete. It is what happens when information moves between an interchange representation such as USD and an application's native structures. Reification includes baking steps, import, conforms, and instantiation. It also includes write-backs, export, and saving. Reification is **bidirectional without being invertible.** It is distinct from serialization or transcoding between equivalent representations, because reification crosses into a system's representable model, consuming choice points along the way. Consider this cycle:
 
 ![Figure 1. One reification cycle. The first pass through the application is lossy, so usd1 is not equal to usd2. The second pass is stable, so usd2 equals usd3. Reification is a projection, not an inverse.](assets/reo/cycle.svg)
 
-In this cycle, the application is lossy, so reading `usd1` and writing `usd2` loses whatever information the application cannot represent. We expect that `usd1 ≠ usd2`. In the second pass through the application there's nothing left to lose so `usd2` is in the application's canonical image, so we expect that `usd2 = usd3`.
+In this cycle, the application is lossy, so reading `usd1` and writing `usd2` loses whatever information the application cannot represent. We expect that `usd1 ≠ usd2`. In the second pass through the application, there is nothing left to lose, so `usd2` lands in the application's canonical image; we therefore expect that `usd2 = usd3`.
 
 That is the defining property: **Reification is a projection onto the application's representable subspace.** It is idempotent, not invertible: `R(R(x)) = R(x)`, while `R(x) ≠ x`. When multiple tools project onto the same interchange format with different representable subspaces, round-tripping across *different* tools (*A* → interchange → *B*) introduces a further hazard: a tool with a narrower model can overwrite or flatten structure another tool introduced.
 
 Four properties of reification logically follow:
 
 - **It is eager.** It resolves up front, at load, or at a declared change boundary — an explicit synchronization point (such as a scene or timeline load, a conform step, a user-initiated bake command, or a commit checkpoint) where data explicitly crosses the reification threshold rather than syncing continuously.
-- **It is lossy by design.** Reification consumes choice points. The write-back does not restore choices the forward pass consumed. New choices are created in application's idiom. This is a useful property, not a flaw.
+- **It is lossy by design.** Reification consumes choice points. The write-back does not restore choices the forward pass consumed. New choices are created in the application's idiom. This is a useful property, not a flaw.
 - **It is convergent.** One round trip loses information, subsequent round trips do not.
 - **It is deterministic.** For a fixed composition, the same pass produces the same result.
 
-A clear diagnostic signal against a well structured interchange adoption occurs when idempotency is violated - e.g. `usd2 ≠ usd3` in the example above - the mapping fails the *convergence* property or the *determinism* property or both. The composition and the reified data are out of sync; the application will report bad state, and the consequence of non-deterministic and stateful mappings is miserable debugging situations.
+A clear diagnostic signal against a well-structured interchange adoption occurs when idempotency is violated—e.g., `usd2 ≠ usd3` in the example above—and the mapping fails the *convergence* property, the *determinism* property, or both. The composition and the reified data are out of sync; the application will report bad state, and the consequence of non-deterministic and stateful mappings is miserable debugging situations.
 
-Understanding the properties of reification, and designing for them is the path to success.
+Understanding the properties of reification and designing for them is the path to success.
 
 ### 1.2 Oracle
 
@@ -70,14 +70,14 @@ Understanding the properties of reification, and designing for them is the path 
 
 An application can use an interchange system as an oracle. *Given this path, this time range, this context, this composition stack, what does the data actually say?*
 
-An oracle is not a file reader or an importer; these return or translate what was written. An oracle returns what a composition means, including resolved opinions, overrides or evaluated relationships from all contributing layers or tracks, to form a final result.
+An oracle is not a file reader or an importer; these return or translate what was written. An oracle returns what a composition means, including resolved opinions, overrides, or evaluated relationships from all contributing layers or tracks, to form a final result.
 
-An Oracle has five properites:
+An oracle has five properties:
 
 - **It is lazy.** It resolves a single specific question, when asked.
 - **It is partial.** It answers about a path, a property, a range, or a relationship, but not the whole world.
 - **It is context-relative.** An oracle is authoritative for a given layer stack, variant selection, timebase, or purpose. Asking in a different context might give a different, equally correct answer.
-- **It is authorative.** Within its context, it is the answer - there is no second opinion.
+- **It is authoritative.** Within its context, it is the answer - there is no second opinion.
 - **It has no memory.** The oracle answers only for its context; whether two compositions agree is a question to ask of the answers, not the oracle.
 
 The fifth property is the characteristic failure mode of the oracle: querying the oracle in one context and consuming the answer in another, or relying on external diffs to discover agreement.
@@ -89,29 +89,29 @@ The fifth property is the characteristic failure mode of the oracle: querying th
 There are two forms of evolution that impact interchange integration.
 
 - **Authored evolution** is change by *intent*. New versions, overrides, variants, layering, time-varying values. Composition and interchange systems exist to let many hands cooperatively and collaboratively change one world without destroying each other's work.
-- **Emergent evolution** is change by *process*. Simulation, deformation, playback, rendering, gameplay, interaction; these are the domain of the runtime. This change is not authored and is directly composable as authorial intent.
+- **Emergent evolution** is change by *process*. Simulation, deformation, playback, rendering, gameplay, interaction; these are the domain of the runtime. This change is not authored and is not directly composable as authorial intent.
 
-The characteristic failure mode of evolution imposes a **category error:** putting emergent state into the interchange layer, or freezing out authored state. Recording emergent state asks a composition or interchange model to be a database or execution log; baking authored state turns a live description into a dead export.
+The characteristic failure mode of evolution is a **category error:** putting emergent state into the interchange layer, or freezing out authored state. Recording emergent state asks a composition or interchange model to be a database or execution log; baking authored state turns a live description into a dead export.
 
 ### 1.4 The Duality of Reification and the Oracle
 
-An oracle is a *lazy reifier*, providing one fact, when asked. A reifier is an *eager oracle*: resolve everything, up front, all at once. Reification keeps the answers, and keeping the answers makes reification lossy. The oracle discards any provided answers, since it must answer fresh when asked, it will therefore always give a true answer for its context.
+An oracle is a *lazy reifier*, providing one fact, when asked. A reifier is an *eager oracle*: resolve everything, up front, all at once. Reification keeps the answers, and keeping the answers makes reification lossy. The oracle discards any provided answers; because it must answer fresh when asked, it always gives a true answer for its context.
 
 > Reification converges because it persists; the oracle stays true because it forgets.
 
-Reification is a projection, for example the data USD carries lands in the application's reprsentatable subspace. An oracle has no state, so every answer is true to its composition and context.
+Reification is a projection: for example, the data USD carries lands in the application's representable subspace. An oracle has no state, so every answer is true to its composition and context.
 
-The fundamental question of interchange adoption then, is not "should we use this standard or not?" It is this set of questions applicable to each piece of data:
+The fundamental question of interchange adoption, then, is not "should we use this standard or not?" It is this set of questions, applicable to each piece of data:
 
 - Where on the eager-lazy spectrum does it belong?
 - What invalidates the answer, and at what granularity?
 - Who owns the invalidation?
 
-**Evolution** makes this a moving target. Eager answers go stale when the world changes. Lazy answers drift when the cache is wrong or invalidated too coarsely. Answering these questions is the basis of the engineering design of the adoption of an interchange system. Figure 2 illustrates the choices:
+**Evolution** makes this a moving target. Eager answers go stale when the world changes. Lazy answers drift when the cache is wrong or invalidated too coarsely. Answering these questions is the basis of the engineering design for adopting an interchange system. Figure 2 illustrates the choices:
 
 ![Figure 2. A two by two matrix. The left column is authored change and belongs to USD; the right column is emergent change and belongs to the application. Reification is eager and authored; the oracle is lazy and authored; the last-mile cache is eager and emergent and valid only when it is explicitly created; runtime is lazy and emergent.](assets/reo/matrix.svg)
 
-The left column is authored change, and belongs to the interchange model (USD in the diagram). The right column is emergent change, and belongs to the application. Note the Eager-Emergent quadrant: **baking emergent state into USD is a last-mile operation.** This operation imposes an opinion and discards the process; that is legitimate — *Alembic* has made a long and respectable career of it. Beware the potential for a **category error** however. We mustn't pretend the bake is the process, or that the cache is the world.
+The left column is authored change, and belongs to the interchange model (USD in the diagram). The right column is emergent change, and belongs to the application. Note the Eager-Emergent quadrant: **baking emergent state into USD is a last-mile operation.** This operation imposes an opinion and discards the process; that is legitimate — *Alembic* has made a long and respectable career of it. Beware the potential for a **category error**, however. We mustn't pretend the bake is the process, or that the cache is the world.
 
 ## 2. Three Taxonomies
 
@@ -119,7 +119,7 @@ The ontology we have established describes the operational modes of interchange 
 
 ### 2.1 Taxonomy I: Adoption Postures
 
-The first taxonomy describes where an application chooses to put its object model. Here are five postures - **native, hosted, feed, oracled, and adjacent*, in rough order of ambition:
+The first taxonomy describes where an application chooses to put its object model. Here are five postures—**native, hosted, fed, oracled, and adjacent**—in rough order of ambition:
 
 | Posture          | Where the interchange lives | What interchange does | Characteristic failure |
 |------------------|------------------------------|---------------|------------------------|
@@ -129,7 +129,7 @@ The first taxonomy describes where an application chooses to put its object mode
 | **Oracled**  | In the application           | Authoritative answers | Cache/oracle divergence |
 | **Adjacent** | In both, kept in sync        | Sibling representation | Two sources of truth |
 
-These same five postures apply to editorial timelines like OpenTimelineIO, scene composition via OpenUSD, or any structured interchange system. Taking USD as a practical example the following notes clarify how each behaves in practice.
+These same five postures apply to editorial timelines like OpenTimelineIO, scene composition via OpenUSD, or any structured interchange system. Taking USD as a practical example, the following notes clarify how each behaves in practice.
 
 ---
 
@@ -137,15 +137,15 @@ These same five postures apply to editorial timelines like OpenTimelineIO, scene
 
 **USD-hosted** is right when the deliverable *is* the USD file. An authoring tool whose product is a USD layer stack should treat the stage as its document, the way a word processor treats a document. Taking this approach means that undo, transactions, and performance are composition problems, and the tool had better be designed for that from the start.
 
-**USD-fed** is the classic import/export pattern, an application ingests or exports layers/assets at explicit boundaries. It is straightforward, and it is simultaneously very limited: the result is a last-mile relationship whether you call it that or not.
+**USD-fed** is the classic import/export pattern: an application ingests or exports layers/assets at explicit boundaries. It is straightforward, and it is simultaneously very limited: the result is a last-mile relationship whether you call it that or not.
 
 **USD-oracled** is the posture most mature heavily integrated production software will likely occupy at first. The application owns its runtime, its data structures, and its performance profile. It consults USD for authoritative answers about what the world is. Care must be taken that the cache and the oracle do not drift apart.
 
-**USD-adjacent** is an anti-pattern. Two representations, kept in sync by translation, is not a posture so much as it is a debt schedule!
+**USD-adjacent** is an anti-pattern. Keeping two representations in sync by translation is not a posture so much as a debt schedule!
 
 ---
 
-Similar logic applies for other interchange systems, such as OpenTimelineIO.
+Similar logic applies to other interchange systems, such as OpenTimelineIO.
 
 **The rule:** choose the posture per subsystem, don't aim for one posture to suit all goals. A renderer, an editorial tool, a conform step, and a game runtime can and should occupy different rows of this table at the same time.
 
@@ -155,18 +155,18 @@ Most arguments about interchange system adoption are really arguments about juri
 
 | Kind of state          | Example | Jurisdiction | If misplaced |
 |------------------------|---------|--------------|--------------|
-| **Authored intent**    | opinions, overrides, variants, layering. cuts, trims, retimes, track stacks | The interchange model, USD or OTIO | The world and composition loses its edit history |
+| **Authored intent**    | opinions, overrides, variants, layering; cuts, trims, retimes, track stacks | The interchange model, USD or OTIO | The world and composition lose their edit history |
 | **Composed state**     | the resolved material binding for a path, resolved timeline cuts | The interchange computes it; nobody stores it | Stale copies; silent divergence |
-| **Runtime state**      | simulation, deformation, gameplay. Playback and scrub | The application | A composition engine asked to be a database |
-| **Presentation state** | selection, camera, viewport, UI. Playhead, track solo or mute, zoom. | The application, or an explicit session/ephemeral layer | Ephemeral data mistaken for truth |
+| **Runtime state**      | simulation, deformation, gameplay; playback and scrub | The application | A composition engine asked to be a database |
+| **Presentation state** | selection, camera, viewport, UI; playhead, track solo or mute, zoom | The application, or an explicit session/ephemeral layer | Ephemeral data mistaken for truth |
 
 **The rule: An interchange system like USD is the authority for what the world and composition *is*, not for what the world *is doing*.**
 
 That single sentence resolves the game-engine question, the simulation question, and most of the virtual-production question as well as parallel questions in editorial and media exchange. It also explains why a "native runtime" built on an interchange system can feel like such an uncomfortable phrase: it proposes to force phenomenology into the definition of the world.
 
-There are two importance nuances however.
+There are two important nuances, however.
 
-First, presentation state can legitimately live in a dedicated or ephemeral layer such as a USD session layer. The power of the layer mechanism is borrowed, but jurisdiction over the state is not extended to the scene's or the timeline's canonical composition. Session layers can be saved yet mustn't be regarded as content. If an authored choice is made in a session layer it should ultimately be migrated to an authoring layer.
+First, presentation state can legitimately live in a dedicated or ephemeral layer such as a USD session layer. The power of the layer mechanism is borrowed, but jurisdiction over the state is not extended to the scene's or the timeline's canonical composition. Session layers can be saved yet mustn't be regarded as content. If an authored choice is made in a session layer, it should ultimately be migrated to an authoring layer.
 
 Second, composed state is real state, but it is *derived*. It should be recomputed, not stored. Every time you persist or bake a composed answer, you have created a second oracle, and the second oracle will eventually disagree with the first.
 
@@ -183,7 +183,7 @@ The third taxonomy is about what can change in an interchange ecosystem, and the
 
 **The rule: careful versioning of each clock is critical.**
 
-An application must track the evolution clocks, otherwise an application doesn't have an integration, it relies on coincidence to function.
+An application must track the evolution clocks; otherwise, it doesn't have an integration—it relies on coincidence to function.
 
 ---
 
@@ -241,13 +241,13 @@ This domain inverts the usual software paradigm through three structural shifts:
 
 ### 4.1 The Moana Island Scene on an iPhone
 
-Viewing Walt Disney Animation Studios' [**Moana Island Scene** ⤴](https://www.disneyanimation.com/resources/moana-island-scene/) on an iPhone presents a unique challenge. The island is a multi-terabyte film production dataset packed with dense foliage, point instancers, high-order surfaces, and deep shader graphs. Pushing this asset onto amobile GPU a stress test for the rubric. How might we put the island in our pocket?
+Viewing Walt Disney Animation Studios' [**Moana Island Scene** ⤴](https://www.disneyanimation.com/resources/moana-island-scene/) on an iPhone presents a unique challenge. The island is a multi-terabyte film production dataset packed with dense foliage, point instancers, high-order surfaces, and deep shader graphs. Pushing this asset onto a mobile GPU is a stress test for the rubric. How might we put the island in our pocket?
 
 #### Reification: *The Lossy Projection*
 
 * **The Concept:** Projecting an infinitely rich film world onto the representable subspace of an iPhone (Metal, RealityKit, or AR Quick Look).
 * **In Practice:** It is impossible to load the raw production stage onto mobile RAM, so it must be **reified** across an explicit change boundary. Subdivision surfaces must either be evaluated with approximations like Gregory patches, or tessellated into fixed triangle budgets; Ptex and complex shading networks may need baking down into mobile-friendly PBR textures; millions of botanical variations must be collapsed into discrete LOD proxies.
-* **The Rubric’s Standard:** Reification is **eager** and **lossy by design**, but it must be **convergent and deterministic** ($R(R(x)) = R(x)$). Re-export or re-ingest of the mobile-projected island, must stabilize into a designed, canonical representation rather than drifting or failing deterministically.
+* **The Rubric’s Standard:** Reification is **eager** and **lossy by design**, but it must be **convergent and deterministic** ($R(R(x)) = R(x)$). Re-export or re-ingest of the mobile-projected island must stabilize into a designed, canonical representation rather than drifting or failing deterministically.
 
 #### The Oracle: *The Context-Relative Authority*
 
@@ -260,7 +260,7 @@ Viewing Walt Disney Animation Studios' [**Moana Island Scene** ⤴](https://www.
 * **The Concept:** Separating the island’s authored structure from any dynamic or interactive simulation running in the user's hand.
 * **In Practice:**
     * **Authored Evolution (USD's jurisdiction):** Daylight vs. night lighting variants, seasonal foliage overrides, or new layout revisions authored by artists.
-    * **Emergent Evolution (iPhone runtime's jurisdiction):** Examples might be ind swaying the palm fronds at 60/120 fps, ocean waves reacting to touch, or dynamic LOD switching as the user pinches and orbits.
+    * **Emergent Evolution (iPhone runtime's jurisdiction):** Examples might be wind swaying the palm fronds at 60/120 fps, ocean waves reacting to touch, or dynamic LOD switching as the user pinches and orbits.
 * **The Rubric’s Standard:** Avoid the **category error**. Do not push per-frame runtime wind or touch physics back into USD layers (asking a composition engine to act as a real-time database), and do not bake all authored variants into a single static export that freezes out artist intent.
 
 #### Advice from the Rubric
@@ -393,7 +393,7 @@ Solaris juggles three separate clocks of evolution, which is where its hybrid ar
 
 When Unreal Engine is used standalone, without an external DCC live-link, it occupies a fascinating, dual-minded position in the *Reification, Oracles, & Evolution* (ROE) rubric. Unlike Solaris, which uses USD as its native representation, Unreal Engine has a deeply opinionated, high-performance native object model (`UWorld`, `AActor`, `UActorComponent`, `UStaticMesh`, `UNiagaraSystem`) built for real-time simulation.
 
-Because Unreal cannot natively execute a `UsdStage` at 120 fps without translation, it bridges the gap through **two distinct adoption postures**: A **Reified-Core** (static import), and **USD-Hosted / Dynamic Reification** (the `USD Stage Actor`)—that expose every tension in the ROE rubric.
+Because Unreal cannot natively execute a `UsdStage` at 120 fps without translation, it bridges the gap through **two distinct adoption postures**: a **Reified-Core** (static import) and a **USD-Hosted / Dynamic Reification** (the `USD Stage Actor`)—postures that expose every tension in the ROE rubric.
 
 #### Taxonomy I: Dual Adoption Postures
 
@@ -401,7 +401,7 @@ The architecture of Unreal Engine does not pick a single posture across the whol
 
 1. **Static Asset Import (`File > Import` or Interchange Pipeline) $\rightarrow$ *Last-Mile / Reified-Core*:** The object model lives entirely in Unreal native `UObject` assets (`.uasset`). USD acts strictly as an interchange source at an explicit import boundary. Once imported into `UStaticMesh`, `USkeletalMesh`, and `UMaterialInstance` assets, the USD file can be deleted; Unreal has severed all ties to the composition engine.
 
-2. **The `USD Stage Actor` $\rightarrow$ *USD-Hosted with Eager-Lazy Reification*:** In this case the `UsdStage` remains live in memory inside a dedicated `UsdStageActor` in the Unreal Level. USD holds the authoritative document, variant selections, and layer stack, while dynamically spawning **transient** `AActor` and `UActorComponent` proxies into the `UWorld` so Lumen, Nanite, and Chaos Physics can render and simulate them.
+2. **The `USD Stage Actor` $\rightarrow$ *USD-Hosted with Eager-Lazy Reification*:** In this case, the `UsdStage` remains live in memory inside a dedicated `UsdStageActor` in the Unreal Level. USD holds the authoritative document, variant selections, and layer stack, while dynamically spawning **transient** `AActor` and `UActorComponent` proxies into the `UWorld` so Lumen, Nanite, and Chaos Physics can render and simulate them.
 
 This makes Unreal a **transient-projection host**: the stage is live in the editor/runtime, yet the engine still interacts almost exclusively with reified `UObject` proxies rather than querying USD attributes mid-frame.
 
@@ -429,7 +429,7 @@ Unreal highlights the starkest boundary in the **Evolution** taxonomy because a 
 | Clock / State Type | Jurisdiction | How Unreal Handles It |
 | ------------------ | ------------ | --------------------- |
 | **Authored Composition** | **USD (`UsdStageActor`)** | Layer muting, sublayer stacking, and `VariantSet` switches authored in the USD Stage Editor. |
-| **Level Sequence / Timeline** | **Sequencer $\leftrightarrow$ `UsdTimeCode**` | Unreal Sequencer drives the `UsdStageActor`’s `Time` property, sampling USD `timeSamples` per frame. |
+| **Level Sequence / Timeline** | **Sequencer $\leftrightarrow$ `UsdTimeCode`** | Unreal Sequencer drives the `UsdStageActor`’s `Time` property, sampling USD `timeSamples` per frame. |
 | **Emergent Gameplay & Physics** | **Unreal `UWorld` (`Tick`)** | Chaos physics, Niagara particles, AI navigation, character controllers, and dynamic blueprint logic. |
 | **GPU Rendering State** | **RHI / Lumen / Nanite** | Virtual shadow maps, Lumen surface cache, and Nanite streaming pages derived from reified meshes. |
 
@@ -453,7 +453,7 @@ Two complementary category errors plague Unreal USD pipelines:
 
 ### 4.5 Specification-Based Reimplementations of USD
 
-Independent reimplementations of USD, such as Light Transport's [**LightUSD**⤴](https://github.com/lighttransport/LightUSD) (a clean-room, dependency-light C++ implementation)—push the ROE rubric into a meta-architectural register. Unlike Solaris or Unreal, which wrap Pixar’s canonical C++ OpenUSD libraries, a clean-room implementation is not merely *consuming* a stage; it is **reimplementing the oracle itself** against a specification.
+Independent reimplementations of USD, such as Light Transport's [**LightUSD**⤴](https://github.com/lighttransport/LightUSD) (a clean-room, dependency-light C++ implementation), push the ROE rubric into a meta-architectural register. Unlike Solaris or Unreal, which wrap Pixar’s canonical C++ OpenUSD libraries, a clean-room implementation is not merely *consuming* a stage; it is **reimplementing the oracle itself** against a specification.
 
 Applying the ROE rubric to clean-room implementations reveals how **meta-oracles**, **asymmetric subspace projections**, and **divergent institutional clocks** govern interoperability and failure modes.
 
@@ -461,7 +461,7 @@ Applying the ROE rubric to clean-room implementations reveals how **meta-oracles
 
 In a standard pipeline, `pxr::UsdStage` is the **oracle**—the authoritative engine that resolves LIVERPS (Local, Inherits, VariantSets, Relocates, References, Payloads, Specializes) opinions. For an independent reimplementation like LightUSD, two distinct authorities exist:
 
-1. **The Formal Meta-Oracle:** The **AOUSD Core Specification** which exists as written prose, formal schemas, and mathematical composition rules.
+1. **The Formal Meta-Oracle:** The **AOUSD Core Specification**, which exists as written prose, formal schemas, and mathematical composition rules.
 2. **The De Facto Behavioral Oracle:** Pixar’s reference C++ OpenUSD codebase, which naturally includes undocumented edge-case resolutions, fallback behaviors, and schema quirks.
 
 #### Rubric Diagnosis: Dual-Oracle Drift
@@ -472,7 +472,7 @@ In a standard pipeline, `pxr::UsdStage` is the **oracle**—the authoritative en
 
 #### Reification: Author-Prioritized Subspace Projection
 
-This rubric defines reification as a **lossy projection onto an application’s representable subspace** ($R(R(x)) = R(x)$, while $R(x) \neq x$). In a clean-room implementation, that subspace is not defined by hardware limits (like an iPhone GPU), but by **what the implementation author deemed priority**.
+This rubric defines reification as a **lossy projection onto an application’s representable subspace** ($R(R(x)) = R(x)$, while $R(x) \neq x$). In a clean-room implementation, that subspace is not defined by hardware limits (like an iPhone GPU), but by **what the implementation author deemed a priority**.
 
 **Selective Schema & Arc Projection:** Clean-room libraries like LightUSD reasonably prioritize fast `.usdc` (Crate) binary parsing, `UsdGeom` meshes, transforms (`xformOp`), basic `UsdShade`, and core composition arcs (`subLayers`, `references`, `variants`), while they may simultaneously defer or omit heavier features (e.g., complex `relocates`, `specializes`, `UsdPhysics`, or `OpenSubdiv` boundary rules).
 
@@ -483,7 +483,7 @@ This rubric defines reification as a **lossy projection onto an application’s 
 
 #### Evolution & Clocks: *Three Desynchronized Timelines*
 
-Clean-room reimplementations introduce a three-way **Clock of Evolution** problem, not at interactive framerate, but at the **ecosystem and specification versioning level**:
+Clean-room reimplementations introduce a three-way **Clock of Evolution** problem, not at interactive frame rate, but at the **ecosystem and specification versioning level**:
 
 | Clock | Jurisdiction | Cadence & Mechanism |
 | ----- | ------------ | ------------------- |
@@ -501,7 +501,7 @@ Because these three clocks tick at different rates:
 #### Advice from the Rubric
 
 1. **Declare the Representable Subspace Explicitly:** Treat a clean-room USD library as a **bounded projection**, not a drop-in universal oracle. Publish a machine-readable capability manifest using `UsdProfiles` (supported Crate versions, LIVERPS arcs, and schemas) so pipelines know *up front* what choice points will be consumed at ingestion.
-2. **Validate Against Differential Oracle Testing:** Because an oracle has no memory, verify specification compliance by running **differential oracle suites**. Feeding identical multi-layer test stages into both OpenUSD and the clean-room engine and diffing the resolved property values across contexts.
+2. **Validate Against Differential Oracle Testing:** Because an oracle has no memory, verify specification compliance by running **differential oracle suites**: feed identical multi-layer test stages into both OpenUSD and the clean-room engine, and diff the resolved property values across contexts.
 3. **Separate File-Format Parsing (`Sdf`) from Composition (`Pcp`/`Usd`):** Decouple the `.usdc`/`.usda` parser clock from the composition engine clock. Being able to parse newer Crate versions and report unsupported composition arcs explicitly prevents silent data corruption.
 4. **Restrict Clean-Room Engines to Read-Only / Last-Mile Ingestion (Unless Idempotence is Proven):** Use lightweight reimplementations primarily as **downstream reifiers** (e.g., loading assets into web, mobile, or embedded C++ engines where OpenUSD’s dependency footprint is prohibitive). Avoid bidirectional write-back into multi-layer production pipelines unless round-trip convergence ($usd_2 = usd_3$) is carefully verified for every touched prim.
 
@@ -509,7 +509,7 @@ Because these three clocks tick at different rates:
 
 ### 4.6 NVIDIA **Omniverse**
 
-NVIDIA **Omniverse** represents most ambitious position of the **Adoption Postures** taxonomy: the **USD-native** application, where the object model lives *directly inside USD* and the application itself is essentially an interactive view and runtime built atop a live `UsdStage`.
+NVIDIA **Omniverse** represents the most ambitious position of the **Adoption Postures** taxonomy: the **USD-native** application, where the object model lives *directly inside USD* and the application itself is essentially an interactive view and runtime built atop a live `UsdStage`.
 
 Applying the ROE rubric to Omniverse highlights both the elegance of eliminating import/export boundaries and the architectural hazards that emerge when a composition engine is made to behave like a real-time runtime. This complexity is compounded by **ecosystem version-lag** and **proprietary schema/patch divergence**.
 
@@ -527,8 +527,8 @@ Even in a USD-native application, reification does not disappear—it moves **in
 
 * **Stage $\rightarrow$ Fabric/USDRT $\rightarrow$ RTX/PhysX (Internal Reification):** Omniverse uses **Fabric** (and `usdrt::UsdStage`) to eagerly or lazily project composed USD prims into contiguous memory arrays suitable for GPU simulation and RTX ray tracing. When PhysX steps a simulation, it updates Fabric transforms at 60+ fps without dirtying `SdfLayer` composition arcs—writing back to USD only at explicit checkpoints (or never, if purely transient).
 * **Schema & Patch Asymmetry (Outbound Reification):** Because Omniverse embeds custom, undistributed schemas (e.g., `OmniGraph` nodes, `PhysxSchema` extensions, proprietary MDL material bindings) and carries internal patches atop its forked OpenUSD runtime, **exporting an Omniverse stage to vanilla OpenUSD becomes a lossy projection**:
-* **Forward (Vanilla OpenUSD $\rightarrow$ Omniverse):** Lossless ($R(x) = x$), because Omniverse is a superset of an older OpenUSD baseline.
-* **Reverse (Omniverse $\rightarrow$ Vanilla OpenUSD):** Lossy ($R(x) \neq x$), because downstream `pxr` consumers lack Omniverse's undistributed schemas and patches, reducing custom behaviors to inert prims or unresolved schema tokens.
+    * **Forward (Vanilla OpenUSD $\rightarrow$ Omniverse):** Lossless ($R(x) = x$), because Omniverse is a superset of an older OpenUSD baseline.
+    * **Reverse (Omniverse $\rightarrow$ Vanilla OpenUSD):** Lossy ($R(x) \neq x$), because downstream `pxr` consumers lack Omniverse's undistributed schemas and patches, reducing custom behaviors to inert prims or unresolved schema tokens.
 
 #### Oracle: *The Live Stage as Single Source of Truth (and Bottleneck)*
 
@@ -539,7 +539,7 @@ In Omniverse, `UsdStage` serves as the **primary, authoritative oracle** for eve
 
 #### Evolution & Clocks: *Version-Lag & Institutional Shear*
 
-Omniverse introduces a distinctive **Clock of Evolution** problem, the lag between **upstream OpenUSD vs. vendor-forked runtime**:
+Omniverse introduces a distinctive **Clock of Evolution** problem: the lag between **upstream OpenUSD vs. vendor-forked runtime**:
 
 | Clock / Layer | Jurisdiction | Cadence & Failure Mode |
 | ------------- | ------------ | ---------------------- |
@@ -550,7 +550,7 @@ Omniverse introduces a distinctive **Clock of Evolution** problem, the lag betwe
 
 #### The Characteristic Clock Failure: *Bidirectional Version & Patch Shear*
 
-Because Omniverse lags upstream OpenUSD by one or move versions while adding proprietary extensions:
+Because Omniverse lags upstream OpenUSD by one or more versions while adding proprietary extensions:
 
 1. **Upstream Incompatibility:** Modern stages authored in cutting-edge DCCs (e.g., Houdini Solaris running current OpenUSD) using newer Crate versions, updated `UsdLux` attribute conventions, or new `HdSceneIndex` behaviors cannot be ingested without downgrading or stripping features.
 2. **Downstream Lock-In (The "Hotel California" Stage):** Conversely, a stage authored natively in Omniverse accumulates proprietary schema opinions and patched composition assumptions that upstream OpenUSD tools either ignore or misinterpret, turning a supposedly "open" USD-native stage into a vendor-specific dialect.
@@ -566,13 +566,13 @@ Because Omniverse lags upstream OpenUSD by one or move versions while adding pro
 
 ### 4.7 Real-Time Collaborative USD Editing
 
-Real-time collaborative USD editing—such as **NVIDIA Omniverse Live Sync**, **Pixar’s `Usdz`/`Sdf` delta-streaming prototypes**, or **multi-user session layer replication** across DCCs, test the outer limits of the ROE rubric.
+Real-time collaborative USD editing—such as **NVIDIA Omniverse Live Sync**, **Pixar’s `Usdz`/`Sdf` delta-streaming prototypes**, or **multi-user session layer replication** across DCCs—tests the outer limits of the ROE rubric.
 
 OpenUSD’s composition engine (LIVERPS) was originally designed for **asynchronous, file-granularity collaboration**: many artists authoring separate sublayers, references, and variants on disk without clobbering one another. Real-time collaborative editing compresses that asynchronous layer-stack model into a **synchronous, sub-second network stream**, turning a declarative composition system into a distributed state machine.
 
 #### Evolution & Clocks: *Network Replication vs. Composition Recomputation*
 
-In the ROE rubric, **Evolution** asks who has jurisdiction over change and at what clock rate state updates. Real-time multi-user USD introduces a sharp collision between three distinct clocks:
+In the ROE rubric, **Evolution** asks who has jurisdiction over change and at what clock rate state updates occur. Real-time multi-user USD introduces a sharp collision between three distinct clocks:
 
 | Clock / Layer | Jurisdiction | Cadence & Operational Reality |
 | ------------- | ------------ | ----------------------------- |
@@ -592,7 +592,7 @@ The rubric defines an **oracle** as *lazy, partial, context-relative, authoritat
 There are three Oracle failure modes in collaborative sessions:
 
 1. **Context Drift Across Heterogeneous Clients:** Suppose Artist *A* is editing in **Houdini Solaris** (viewing `purpose = render` with a `day` lighting variant selected) while Artist *B* is connected via **Unreal Engine** (viewing `purpose = proxy` with a `night` variant selected). If Artist *B* queries their local oracle for bounding boxes or material slots to place a prop, and streams a transform or material override back into the shared `.live` layer, Artist *B* has **queried the oracle in one context and injected an opinion into another**.
-2. **Stale Cache / Out-of-Order Invalidation:** Because an oracle has no memory, distributed clients rely on ordered delta packets to invalidate local caches (Hydra Scene Indices, Fabric, or `UObject` proxies). If network jitter reorders a `PrimRemoved` and `AttributeSet` delta, or if a client drops a `VariantSet` selection notice, two clients querying the "same" stage path receive different, mutually contradictory authoritative answers.
+2. **Stale Cache / Out-of-Order Invalidation:** Because an oracle has no memory, distributed clients rely on ordered delta packets to invalidate local caches (Hydra Scene Indices, Fabric, or `UObject` proxies). If network jitter reorders a `PrimRemoved` and an `AttributeSet` delta, or if a client drops a `VariantSet` selection notice, two clients querying the "same" stage path receive different, mutually contradictory authoritative answers.
 3. **Lack of Distributed Consensus in LIVERPS:** OpenUSD’s LIVERPS strength ordering resolves conflicts *structurally* (stronger sublayer beats weaker sublayer), not *temporally*. When two users simultaneously edit the exact same attribute in the same shared `.live` layer, USD’s composition engine has no native concept of distributed conflict resolution—requiring an external arbitration layer (locks, soft-locks, or operational transforms) outside USD.
 
 #### Reification: *Heterogeneous Subspaces on a Shared Stage*
@@ -619,7 +619,7 @@ For further background on how OpenUSD’s core composition specifications and cr
 
 ## 5. Comparative Matrix: Seven Case Studies Under the ROE Rubric
 
-We have examined seven architectural case studies examined through the *Reification, Oracles, & Evolution* rubric. Across mobile delivery, GPU rasterization, procedural DCCs, game engines, clean-room reimplementations, USD-native platforms, and real-time multi-user sync, every integration succeeds or fails based on how explicitly it defines its projection boundaries, oracle contexts, and clock jurisdictions.
+We have examined seven architectural case studies through the *Reification, Oracles, & Evolution* rubric. Across mobile delivery, GPU rasterization, procedural DCCs, game engines, clean-room reimplementations, USD-native platforms, and real-time multi-user sync, every integration succeeds or fails based on how explicitly it defines its projection boundaries, oracle contexts, and clock jurisdictions.
 
 ![Case Studies](assets/reo/case-studies.svg)
 
@@ -629,7 +629,7 @@ We have examined seven architectural case studies examined through the *Reificat
 | **2. Hydra Storm** | **Composed Cache + GPU Reifier** | Double projection: Stage $\xrightarrow{R_1}$ Scene Index (greedy) $\xrightarrow{R_2}$ GPU buffers (last-mile). | **Tertiary oracle** bridged to persistent GPU memory via `PrimsDirtied` masks. Trap: sharing buffers across render contexts. | Stage edits / `UsdTimeCode` scrub vs. per-frame GPU culling & compute skinning. | Honor narrow `HdDirtyBits` contracts; isolate render pass contexts; keep emergent state on GPU. |
 | **3. SideFX Solaris** | **Near-Native Hybrid** (USD-Hosted LOPs + Procedural SOPs) | Explicit bidirectional SOP $\leftrightarrow$ LOP membrane (`SOP Import` / `LOP Import`). | Downstream LOPs & `husk` query stage lazily by pattern/purpose. Trap: caching prim paths across downstream variants. | Procedural cook graph vs. `UsdTimeCode` samples vs. DOPs solver ticks. | Cross SOP $\rightarrow$ LOP once; freeze time-dependent cooks with `Cache` LOPs; separate fast/slow layers. |
 | **4. Unreal Engine (Standalone)** | **Dual Posture** (Reified-Core import & USD-Hosted Stage Actor) | Transient `UObject` proxies (`UStaticMesh`, `UMaterialInstance`) projected onto real-time RHI subspace. | Sync-time translators resolve `purpose` & variants. Trap: Editor (`proxy`) vs. MRQ/Packaged (`render`) context drift. | `UsdStageActor` / Sequencer timeline vs. `UWorld` Tick (Chaos, Niagara, gameplay). | Use `.uasset` for gameplay-critical assets and `UsdStageActor` for layout/lookdev; lock context in MRQ. |
-| **5. LightUSD (Clean-Room)** | **Bounded Projection Library** | Author-prioritized subset of Crate `.usdc`, meshes, and core LIVRPS arcs; asymmetric round-trip. | Reimplements the oracle against two meta-oracles: **AOUSD Spec** & **`pxr` behavior**. Trap: silent dual-oracle divergence. | Three desynchronized clocks: `pxr` commits vs. AOUSD spec ratification vs. author milestones. | Publish explicit capability manifests; validate via differential oracle tests against `pxr`; use read-only. |
+| **5. LightUSD (Clean-Room)** | **Bounded Projection Library** | Author-prioritized subset of Crate `.usdc`, meshes, and core LIVERPS arcs; asymmetric round-trip. | Reimplements the oracle against two meta-oracles: **AOUSD Spec** & **`pxr` behavior**. Trap: silent dual-oracle divergence. | Three desynchronized clocks: `pxr` commits vs. AOUSD spec ratification vs. author milestones. | Publish explicit capability manifests; validate via differential oracle tests against `pxr`; use read-only. |
 | **6. NVIDIA Omniverse** | **USD-Native** (with Fabric/USDRT sidecar ECS) | Internal Stage $\rightarrow$ Fabric $\rightarrow$ RTX/PhysX projection; outbound export lossy due to proprietary schemas. | Live `UsdStage` shared by all extensions. Trap: `TfNotice` storms & cross-extension `EditTarget` / context collisions. | Upstream `pxr` vs. **lagging vendor fork** (version/patch shear) vs. Fabric 60 Hz runtime. | Keep simulation in Fabric; isolate vendor schemas (`PhysxSchema`, `OmniGraph`) in dedicated sublayers. |
 | **7. Real-Time Collaborative Sync** | **Distributed Replicated Stage** | Heterogeneous clients ($R_A, R_B$) projecting concurrently onto one shared stage. | Local client oracles over replicated layers. Trap: out-of-order invalidation & cross-context opinion injection. | 60–120 Hz local cursor presence vs. 10–60 Hz `.live` delta stream vs. disk merge checkpoints. | Quarantine edits in ephemeral `.live` session layers; emit sparse deltas only; lock oracle contexts. |
 
@@ -648,7 +648,7 @@ We have examined seven architectural case studies examined through the *Reificat
 
 OpenTimelineIO (OTIO) serves as a media-facing, multi-track, time-based interchange format and composition engine. Its file format is meant for rich interchange that goes beyond historic formats such as **CMX 3600**, is more completely specified and accessible than formats like **AAF**, and is non-proprietary. It incorporates an editorial data model: `Timeline`, `Stack`, `Track` (video/audio), `Clip`, `Gap`, `Transition`, `Marker`, and `Effect` (including time effects such as linear rate changes, freeze frames, and speed ramps), paired with `MediaReference` types (`ExternalReference`, `MissingReference`, and `GeneratorReference`) and support for nested timelines/stacks.
 
-OpenTimelineIO and USD differ most significantly in being oriented toward temporal composition and spatial composition respectively. Although USD also involves temporal composition, it does not bear a formal editorial model. At the same time, OTIO isn't a video/audio media container or a replacement for an NLE's internal playback/editing engine, just as USD isn't a renderer or a game database.
+OpenTimelineIO and USD differ most significantly in being oriented toward temporal and spatial composition, respectively. Although USD also involves temporal composition, it does not have a formal editorial model. At the same time, OTIO isn't a video/audio media container or a replacement for an NLE's internal playback/editing engine, just as USD isn't a renderer or a game database.
 
 ## 6. Applying the ROE Ontology to Editorial Timelines
 
@@ -656,14 +656,14 @@ The *Reification, Oracles, & Evolution* rubric holds on editorial interchange. E
 
 ### 6.1 Reification in OTIO
 
-In editorial interchange, reification happens whenever a timeline crosses between the interchange representation and an application's internal timeline or conform structures. Examples of these boundaries include: importing an `.otio` file into an NLE sequence, generating a conform or VFX turnover cut, and exporting an NLE sequence back into OTIO.
+In editorial interchange, reification happens whenever a timeline crosses between the interchange representation and an application's internal timeline or conform structures. Examples of these boundaries include importing an `.otio` file into an NLE sequence, generating a conform or VFX turnover cut, and exporting an NLE sequence back into OTIO.
 
 Reification in OTIO is **bidirectional without being invertible**:
 
 * **Eager at boundaries:** Translation happens at explicit points—opening/importing a timeline, running a conform or turnover adapter, or exporting a sequence—rather than continuously on every frame scrub.
 * **Lossy by design:** An NLE, conform tool, or turnover script has its own representable timeline model. Nested `Stack`s or `Timeline`s might be flattened; complex `Transition`s or non-linear speed ramps might be approximated, split into cuts, or baked with handles; custom `metadata` or specific `Marker` semantics might be dropped or reshaped when moving into a tool's native model. Those choice points are consumed on the way in and are not magically recovered on the way out.
 * **Convergent and deterministic:** Within a given adapter and set of rules, one round trip (`otio1` → app → `otio2`) loses what the application cannot represent, while a second pass (`otio2` → app → `otio3`) should stabilize (`otio2 = otio3`). If `otio2 ≠ otio3` on a clean round trip, the adapter or mapping has hidden state or non-determinism — a classic recipe for mysterious conform drift.
-* **Multi-tool projection (`A` → interchange →`B`):** In editorial pipelines, round-tripping rarely stays inside a single tool. An NLE, a finishing/conform tool, and a VFX pipeline each project onto different subspaces. Passing a cut from Tool A through an interchange model into Tool B can lose structure that Tool A's native representation understood, or overwrite upstream intent if a narrower representation is written back carelessly.
+* **Multi-tool projection (`A` → interchange → `B`):** In editorial pipelines, round-tripping rarely stays inside a single tool. An NLE, a finishing/conform tool, and a VFX pipeline each project onto different subspaces. Passing a cut from Tool A through an interchange model into Tool B can lose structure that Tool A's native representation understood, or overwrite upstream intent if a narrower representation is written back carelessly.
 
 ### 6.2 The Oracle in OTIO
 
@@ -674,7 +674,7 @@ An application or pipeline tool uses an interchange model as an **oracle** when 
 
 Like any oracle, an OTIO query engine is **lazy** (answering a specific range/clip/track question when asked), **partial**, **context-relative** (dependent on timebase, active tracks/stacks, handles, or version/media resolution context), **authoritative within that context**, and **stateless (having no memory)**.
 
-The characteristic oracle trap in editorial is **context mismatch**: querying or resolving ranges/references in one context. As an example, resolving an exact source media frame in a 24 fps source context or an earlier cut version will give one answer. Resolving the frame in another context, such as a 23.976 conform pass, or with a different frame-rate/timebase rule might yield a different answer. Both answers are correct in context, but cannot serve as mutual oracles.
+The characteristic oracle trap in editorial is **context mismatch**: querying or resolving ranges/references in one context and then consuming the answer in another. As an example, resolving an exact source media frame in a 24 fps source context or an earlier cut version will give one answer. Resolving the frame in another context, such as a 23.976 conform pass, or with a different frame-rate/timebase rule might yield a different answer. Both answers are correct in context, but cannot serve as mutual oracles.
 
 ### 6.3 Evolution & The Duality
 
@@ -696,7 +696,7 @@ In an editorial or conform pipeline, a tool's posture describes how closely its 
 
 ### 7.1 Taxonomy I: Adoption Postures
 
-| Posture      | editorial/conform/review tool usage |
+| Posture      | Editorial/conform/review tool usage |
 |--------------|-------------------------------------|
 | **Native**   | OTIO data model and OTIO native document |
 | **Hosted**   | Own runtime/editing model over an OTIO-backed document (or timeline file/graph as the persisted document) |
@@ -704,13 +704,13 @@ In an editorial or conform pipeline, a tool's posture describes how closely its 
 | **Oracled**  | A pipeline/VFX/conform service querying OTIO to resolve shot ranges, handles, and versioned media references |
 | **Adjacent** | Maintaining parallel cut sheets/databases, or NLE timelines out of sync |
 
-Mixed postures across subsystems are normal. An NLE may be NLE-native, conform/turnover service may be OTIO-oracled, and an editorial review/assembly tool may be OTIO-hosted. Trying to force every tool in the chain into a single posture usually fights how each tool actually works.
+Mixed postures across subsystems are normal. An NLE may be NLE-native, a conform/turnover service may be OTIO-oracled, and an editorial review/assembly tool may be OTIO-hosted. Trying to force every tool in the chain into a single posture usually fights how each tool actually works.
 
 ### 7.2 Taxonomy II: Kinds of State and Jurisdiction
 
 Editorial and conform pipelines break down when state is stored in the wrong place, such as saving ephemeral playback or UI state as canonical cut intent, or caching derived cut/timecode answers as if they were a competing source of truth.
 
-| State               | Jusridiction |
+| State               | Jurisdiction |
 |---------------------|--------------|
 | **Authored intent** | Edit decisions, trims, retimes, nested structure, markers, version intent. |
 | **Composed state**  | Flattened/resolved cut ranges, inherited/resolved media references, effective frame ranges across nested stacks—derived, not stored as a competing truth. |
@@ -812,10 +812,10 @@ An interchange oracle has no memory and answers strictly within a declared conte
 
 Every production system runs multiple clocks simultaneously: interactive or simulation frame ticks, procedural or timeline evaluation steps, artist/editor cut commits, and institutional or schema release cycles. Conflating these clocks asks a declarative model to behave as a transactional database. Avoid forcing emergent runtime or playback state into an interchange structure. Do not ignore version and schema shear across tools and specifications.
 
-Ultimately, adopting an interchange system like OpenUSD or OpenTimelineIO with intent is not an exercise in maximizing how much of an application is "native" to the interchange format. It is the discipline of deciding, for each class of data
+Ultimately, adopting an interchange system like OpenUSD or OpenTimelineIO with intent is not an exercise in maximizing how much of an application is "native" to the interchange format. It is the discipline of deciding, for each class of data:
 
-* where it sits on the eager–lazy spectrum, 
-* what invalidates it, and 
+* where it sits on the eager–lazy spectrum,
+* what invalidates it, and
 * who owns the boundary when the world evolves.
 
 The friction in interchange adoption is rarely a failure of syntax or schema; it is a question of jurisdiction. Integration into mature pipelines without clear boundaries invites hidden debt and brittle workarounds. The rubric in this monograph — **Reification**, **Oracle**, and **Evolution** — replaces dogmatic "make everything native" mandates with intentional, subsystem-level choices:
@@ -829,4 +829,4 @@ The friction in interchange adoption is rarely a failure of syntax or schema; it
 Whether an integration's ultimate *telos* is an animated film, a high-speed game engine, a virtual production stage, an editorial cut and conform pipeline, or a multi-decade archive, success comes from asking the right questions of your data, and understanding transformations at interchange boundaries. When we answer those questions with discipline, interchange ceases to be friction between tools and fulfills its purpose as a shared language for cooperative human intent.
 
 **Nick Porcino,** (c)2026
-written in california
+written in California
